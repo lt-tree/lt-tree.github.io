@@ -4,21 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>用python发邮件 | ltree98&#39;s blog</title>
+  <title>Leetcode_1  Two Sum | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="One Step
-用python来发邮件">
+  <meta name="description" content="Leetcode_1  Two Sum简单题, 映射数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用python发邮件">
-<meta property="og:url" content="http://yoursite.com/2016/11/04/用python发邮件/index.html">
+<meta property="og:title" content="Leetcode_1  Two Sum">
+<meta property="og:url" content="http://yoursite.com/2017/03/14/[Leetcode]_1  Two Sum/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="One Step
-用python来发邮件">
-<meta property="og:updated_time" content="2016-11-04T14:36:42.267Z">
+<meta property="og:description" content="Leetcode_1  Two Sum简单题, 映射数组">
+<meta property="og:updated_time" content="2017-03-14T14:51:25.649Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用python发邮件">
-<meta name="twitter:description" content="One Step
-用python来发邮件">
+<meta name="twitter:title" content="Leetcode_1  Two Sum">
+<meta name="twitter:description" content="Leetcode_1  Two Sum简单题, 映射数组">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -171,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-用python发邮件" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_1  Two Sum" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/11/04/用python发邮件/" class="article-date">
-  	<time datetime="2016-11-04T12:51:35.000Z" itemprop="datePublished">2016-11-04</time>
+      <a href="/2017/03/14/[Leetcode]_1  Two Sum/" class="article-date">
+  	<time datetime="2017-03-14T14:45:35.000Z" itemprop="datePublished">2017-03-14</time>
 </a>
     </div>
   
@@ -188,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      用python发邮件
+      Leetcode_1  Two Sum
     </h1>
   
 
@@ -197,7 +194,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 	</div>
 
         
@@ -208,81 +205,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>One Step</p>
-<p>用python来发邮件</p>
+        <p>Leetcode_1  Two Sum<br>简单题, 映射数组</p>
 <a id="more"></a>
-<p><br><br>恩，<br>学了python就不要浪费，<br>公司要求每天都要写工作日志，<br>每次都要:</p>
-<ol>
-<li>打开浏览器</li>
-<li>选择收藏夹里的邮箱</li>
-<li>输入账号密码登陆</li>
-<li>选择收件人</li>
-<li>填写邮件抬头</li>
-<li>填写当前日期，还要把鼠标移下去看看</li>
-<li>写工作日志</li>
-<li>点击发送</li>
-</ol>
-<p>很麻烦啊，<br>写个脚本，</p>
-<ol>
-<li>打开脚本</li>
-<li>写你的工作日志（注意，只需要写日志，不需要写时间，title，收件人等）</li>
-<li>编译</li>
-</ol>
-<p>惊！<br>这难道就是传说中的 —— One Step ？！！</p>
-<p><br><br>唠叨完了，该整干货了。</p>
-<pre><code>import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from datetime import datetime
+<p><br></p>
+<p>感觉，最近算法思维在退步。<br>是时候练一练了，不为进步，就为了恢复并维持之前的状态。</p>
+<p><br></p>
+<p>第一道题，<br>给一个数组与一个和，<br>求数组内哪两个数相加可以等于那个和，<br>同一个数无法用两次，输出两个数的次序。</p>
+<p>第一个方法，喜（fei）闻（chang）乐（low）见（bi）的穷举遍历。<br>时间复杂度O（n^2），或许是因为第一题，竟然没有超时…</p>
+<p><br></p>
+<p>第二个方法，<br>构造一个映射数组，默认置为-1，<br>给一个数（比如7），<br>立马知道它所对应的的另一个数（如果和是9，那么另一个数肯定是2），<br>在那个数下存储本数的次序（arr[2] = 7的次序），<br>每次读数组内的数，判断它在映射数组内的值（比如读到2，发现映射数组中值非-1），<br>那么求可以得出答案。<br>此方法复杂度为O(n)</p>
+<p><br></p>
+<pre><code>/**
+ *  Index:     1
+ *  Title:     Two Sum
+ *    Author:    ltree98
+ **/
 
-sender = &apos;&apos;                              # 此处填写发件人邮箱
-password = &apos;&apos;                            # 此处填写发件人邮箱密码       =&gt;注释1
-receiver = &apos;&apos;                            # 此处填写收件人邮箱
-smtp_server = &apos;&apos;                        # 此处填写smtp服务器地址
+// O(n^2)
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+        vector&lt;int&gt; ans;
+        for (int i = 0; i &lt; nums.size(); i++) {
+            for (int j = i + 1; j &lt; nums.size(); j++) {
+                if (nums[i] + nums[j] == target) {
+                    ans.push_back(i);
+                    ans.push_back(j);
+                    return ans;
+                }
+            }
+        }
+    }
+};
 
-DATE_FORMATE = &apos;%Y-%m-%d %A&apos;            # 日期的格式                =&gt; 注释2
-title = &apos;&apos;                                # 此处填写邮件标题
+// O(n)
+class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+        vector&lt;int&gt; ans;
+        int arr[100001];
+        memset(arr, -1, sizeof(arr));
+        for (int i = 0; i &lt; nums.size(); i++) {
+            if( arr[nums[i]] != -1 )    {
+                ans.push_back(arr[nums[i]]);
+                ans.push_back(i);
+                return ans;
+            }
 
-def initialContent():
-    now = datetime.now()
-    return now.strftime(DATE_FORMATE)
+            int temp = nums[i] - target;
+            if(temp &lt; 0){
+                temp = -temp;
+            }
 
-def sendEmail(cont):
-    content = initialContent() + &apos;\n&apos; + cont
-
-    try:
-        msg = MIMEText(content, &apos;plain&apos;, &apos;utf-8&apos;)                     
-        msg[&apos;Subject&apos;] = Header(title, &apos;utf-8&apos;)                # =&gt; 注释3
-        msg[&apos;From&apos;] = sender + &apos; &lt;&apos; + sender + &apos;&gt;&apos;            # =&gt; 注释3
-        msg[&apos;To&apos;] = receiver                                # =&gt; 注释3
-
-        server = smtplib.SMTP(smtp_server, 25)                 # 连接服务器，默认端口均为25
-        server.set_debuglevel(1)                              # 选择是否开启Debug，可以得到与服务端的反馈信息
-        server.login(sender, password)
-        server.sendmail(sender, [receiver], msg.as_string())
-        server.quit()
-
-        print(&apos;send email success&apos;)
-    except smtplib.SMTPException:
-        priint(&apos;send email fail&apos;)
-</code></pre><p>关于上述代码的一些注释：</p>
-<ul>
-<li>注释1:<br>关于邮箱密码，有些密码需要填写客户端授权码，比如163，当然，要用SMPT发邮件，需要将发信箱的SMTP服务打开。</li>
-<li>注释2:<br>日期的格式，更详细的可参考官方文档：<a href="http://python.usyiyi.cn/translate/python_352/library/datetime.html#datetime.datetime" target="_blank" rel="external">http://python.usyiyi.cn/translate/python_352/library/datetime.html#datetime.datetime</a></li>
-<li>注释3:<br>这里的From、To、Subject是非常必要的</li>
-</ul>
-<p><strong>还有，最好不要用163邮箱测试发邮件，会出现很多乱七八糟的问题（并非是你代码的问题）。</strong><br><br><br>上面代码是用来发邮件的核心代码，<br>写日志的地方加在里面是很不友好的行为，<br>所以，<br>再单独建一个新的友好的地方来写日志。</p>
-<pre><code>import imp 
-tool = imp.load_source(&apos;sendEmail&apos;, &apos;url&apos;)                # 导入核心模块，url 填写你上面核心代码的位置
-
-content = &quot;&quot;&quot;
-在这里来写你的工作日志，
-支持多行。
-&quot;&quot;&quot;
-
-tool.sendEmail(content.strip())                         # strip将首尾空白字符删除
-</code></pre><p><br><br>这样就方便很多了。<br>最后，<br>这个只是初步版本，<br>后期可以添加很多你想要的东西，<br>比如多个联系人，一些判断。<br>我因为自己用，所以没有加那些东西。</p>
-
+            arr[temp] = i;
+        }
+    }
+};
+</code></pre>
       
     </div>
     
@@ -291,18 +270,9 @@ tool.sendEmail(content.strip())                         # strip将首尾空白�
     
 <nav id="article-nav">
   
-    <a href="/2016/11/20/《REWORK》读记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          《REWORK》读记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/11/02/删除文件名中的空格/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">删除文件名中的空格</div>
+    <a href="/2017/03/14/《时间简史》读感/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《时间简史》读感</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -337,7 +307,7 @@ tool.sendEmail(content.strip())                         # strip将首尾空白�
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="用python发邮件" data-title="用python发邮件" data-url="http://yoursite.com/2016/11/04/用python发邮件/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_1  Two Sum" data-title="Leetcode_1  Two Sum" data-url="http://yoursite.com/2017/03/14/[Leetcode]_1  Two Sum/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
