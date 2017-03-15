@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2017 | ltree98&#39;s blog</title>
+  <title>Leetcode_2  Add Two Numbers | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="testing">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ltree98's blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="Leetcode_2  Add Two Numbers简单题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode_2  Add Two Numbers">
+<meta property="og:url" content="http://yoursite.com/2017/03/15/[Leetcode]_2  Add Two Numbers/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="testing">
+<meta property="og:description" content="Leetcode_2  Add Two Numbers简单题">
+<meta property="og:updated_time" content="2017-03-15T14:16:59.002Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ltree98's blog">
-<meta name="twitter:description" content="testing">
+<meta name="twitter:title" content="Leetcode_2  Add Two Numbers">
+<meta name="twitter:description" content="Leetcode_2  Add Two Numbers简单题">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -167,177 +168,172 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-[Leetcode]_2  Add Two Numbers" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/15/[Leetcode]_2  Add Two Numbers/" class="archive-article-date">
-  	<time datetime="2017-03-15T14:13:35.000Z" itemprop="datePublished">3月 15</time>
+    <div class="article-meta">
+      <a href="/2017/03/15/[Leetcode]_2  Add Two Numbers/" class="article-date">
+  	<time datetime="2017-03-15T14:13:35.000Z" itemprop="datePublished">2017-03-15</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/15/[Leetcode]_2  Add Two Numbers/">Leetcode_2  Add Two Numbers</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Leetcode_2  Add Two Numbers
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </div>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/14/[Leetcode]_1  Two Sum/" class="archive-article-date">
-  	<time datetime="2017-03-14T14:45:35.000Z" itemprop="datePublished">3月 14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/14/[Leetcode]_1  Two Sum/">Leetcode_1  Two Sum</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Leetcode_2  Add Two Numbers<br>简单题</p>
+<a id="more"></a>
+<p><br></p>
+<p>很基础..<br>合并l1 和 l2</p>
+<pre><code>class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {      
+        ListNode* lnTemp = new ListNode(0);
+        ListNode* ori = lnTemp;
+        int op = 0;
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+        while( l1 || l2 || op )   {
+            int sum = op;
+            if(l1)  {
+                sum += l1-&gt;val;
+                l1 = l1-&gt;next;
+            }
+            if(l2)  {
+                sum += l2-&gt;val;
+                l2 = l2-&gt;next;
+            }
+
+            op = sum/10;
+            lnTemp-&gt;next = new ListNode(sum%10);
+            lnTemp = lnTemp-&gt;next;
+        }
+        return ori-&gt;next;
+    }
+};
+</code></pre><p><br><br>用更少的空间，<br>一个记录初始地址结构体，一个进位值，一个补足进位结构体。<br>将所有的数都加在l1上，如果l2比l1长 =&gt; l1-&gt;next = l2-&gt;next 将l2后半部分并到l1</p>
+<pre><code>class Solution {
+public:
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        ListNode *ori = l1;
+        int op = 0;
+
+        while (true) {
+            l1-&gt;val += (l2-&gt;val + op);
+            op = l1-&gt;val/10;
+            l1-&gt;val %= 10;
+
+            if (!l1-&gt;next) {
+                l1-&gt;next = l2-&gt;next;
+                break;
+            }
+            else if (!l2-&gt;next)
+                break;
+
+            l1 = l1-&gt;next;
+            l2 = l2-&gt;next;
+      }
+
+       while (l1-&gt;next &amp;&amp; op) {
+              l1 = l1-&gt;next;
+            op = (l1-&gt;val += op)/10;
+            l1-&gt;val %= 10;
+        }
+
+        if (op)
+            l1-&gt;next = new ListNode(op);
+
+        return ori;
+    }
+};
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/14/[Leetcode]_1  Two Sum/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_1  Two Sum</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/14/《时间简史》读感/" class="archive-article-date">
-  	<time datetime="2017-03-14T13:37:35.000Z" itemprop="datePublished">3月 14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/14/《时间简史》读感/">《时间简史》读感</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/13/《三体》读感/" class="archive-article-date">
-  	<time datetime="2017-02-13T13:37:35.000Z" itemprop="datePublished">2月 13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/13/《三体》读感/">《三体》读感</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="[Leetcode]_2  Add Two Numbers" data-title="Leetcode_2  Add Two Numbers" data-url="http://yoursite.com/2017/03/15/[Leetcode]_2  Add Two Numbers/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/23/2016，没走偏/" class="archive-article-date">
-  	<time datetime="2017-01-23T14:41:35.000Z" itemprop="datePublished">1月 23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/23/2016，没走偏/">2016,没走偏</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 </div>
       <footer id="footer">
@@ -363,8 +359,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
