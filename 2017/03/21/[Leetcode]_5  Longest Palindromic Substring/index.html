@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>为什么要搞这个？ | ltree98&#39;s blog</title>
+  <title>Leetcode_5  Longest Palindromic Substring | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="折腾啥呀？！！">
+  <meta name="description" content="Leetcode_5  Longest Palindromic SubstringDP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么要搞这个？">
-<meta property="og:url" content="http://yoursite.com/2016/07/20/为什么要搞这个？/index.html">
+<meta property="og:title" content="Leetcode_5  Longest Palindromic Substring">
+<meta property="og:url" content="http://yoursite.com/2017/03/21/[Leetcode]_5  Longest Palindromic Substring/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="折腾啥呀？！！">
-<meta property="og:updated_time" content="2016-07-25T15:56:08.817Z">
+<meta property="og:description" content="Leetcode_5  Longest Palindromic SubstringDP">
+<meta property="og:updated_time" content="2017-03-21T14:42:53.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="为什么要搞这个？">
-<meta name="twitter:description" content="折腾啥呀？！！">
+<meta name="twitter:title" content="Leetcode_5  Longest Palindromic Substring">
+<meta name="twitter:description" content="Leetcode_5  Longest Palindromic SubstringDP">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-为什么要搞这个？" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_5  Longest Palindromic Substring" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/20/为什么要搞这个？/" class="article-date">
-  	<time datetime="2016-07-20T15:03:16.000Z" itemprop="datePublished">2016-07-20</time>
+      <a href="/2017/03/21/[Leetcode]_5  Longest Palindromic Substring/" class="article-date">
+  	<time datetime="2017-03-21T14:39:35.000Z" itemprop="datePublished">2017-03-21</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      为什么要搞这个？
+      Leetcode_5  Longest Palindromic Substring
     </h1>
   
 
@@ -194,7 +194,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 	</div>
 
         
@@ -205,10 +205,79 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>折腾啥呀？！！</p>
+        <p>Leetcode_5  Longest Palindromic Substring<br>DP</p>
 <a id="more"></a>
-<p>为什么要搞这个东西呢？<br>已经不写博文好长时间了，<br>起因是到了大四，离开学校，一人奔赴帝都找工作，没有多少时间，（一个字，懒）<br>之后，就是刚入职，要学习新的东西，没空出时间，（还是一个字，懒）<br>等可以应付了以后，懒癌开始犯了，（已经找不出借口了）<br>后来…后来就毕业了，又忙毕业…<br>拖着，拖着，到了现在。<br><br><br>想着，毕业了，<br>该有个新的开始了，<br>本来想做个个人网站，结果发现，好麻烦啊o(╯□╰)o…<br>精力实在有限（还是懒呗..）<br>忽然发现了这个，<br>简约的风格，便捷的部署，还不用我去维护它，<br>毅然，上了这辆车。<br><br><br>最重要的是，<br>搞这个东西，<br>看起来是屌屌的呀。<br>而且，年轻人，就是该多折腾折腾嘛。</p>
+<p><br></p>
+<p>如果，str 是一个回文串，那么去掉str的头和尾，它也是一个回文串：<br>比如 abcba -&gt; bcb -&gt; c<br>所以，这题可通过动态规划来解。<br><br></p>
+<pre><code>class Solution {
+public:
+    string longestPalindrome(string s) { 
+        int len = s.length();
+        bool temp[1001][1001] = {0};
 
+        int startSPos = 0;
+        int longestPaliLen = 1;
+
+        for(int i = len - 1 ; i &gt;= 0 ; i--)    {
+            temp[i][i] = true;
+            if( i &gt; 0 and s[i - 1] == s[i] )    {
+                temp[i-1][i] = true;
+                startSPos = i - 1;
+                longestPaliLen = 2;
+            }
+        }
+
+        for(int pLen = 3 ; pLen &lt;= len ; pLen++) {
+            for(int j = len - 1; j &gt;= 0 ; j--)  {
+                int i = j - pLen + 1;
+                if(i &lt; 0)
+                    break;
+
+                if( temp[i+1][j-1] == true and s[i] == s[j] )   {
+                    temp[i][j] = true;
+                    startSPos = i;
+                    longestPaliLen = pLen;
+                }
+            }
+        }
+
+        return s.substr(startSPos, longestPaliLen);
+    }
+};
+</code></pre><p><br><br>下面这种解法的亮点在于标记 key 的那部分；<br>它将重复的字母跳过（因为他们一定是回文），<br>并且能找到以这段重复字母为中心的的最长回文串，<br>之后，<br>还让下一个查找坐标直接拉到这段重复的回文串之后。</p>
+<p><br></p>
+<pre><code>class Solution {
+public:
+    string longestPalindrome(string s) { 
+        int len = s.length();
+        if(len == 1)    
+            return s;
+
+        int startPos = 0, longestPaliLen = 1;
+        for(int i = 0; i &lt; len; )    {
+            int sPos = i, ePos = i;
+
+            // key
+            while(ePos &lt; len-1 &amp;&amp; s[ePos+1] == s[ePos])
+                ePos++;
+
+            i = ePos+1;
+            while(ePos &lt; len-1 &amp;&amp; sPos &gt; 0 &amp;&amp; s[ePos+1] == s[sPos-1])   {
+                sPos--;
+                ePos++;
+            }
+
+            int newLen = ePos - sPos + 1;
+            if(newLen &gt; longestPaliLen) {
+                startPos = sPos;
+                longestPaliLen = newLen;
+            }
+        }
+
+        return s.substr(startPos, longestPaliLen);
+    }
+};
+</code></pre>
       
     </div>
     
@@ -217,15 +286,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/25/《生死疲劳》读感/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          《生死疲劳》读感
-        
-      </div>
-    </a>
   
+    <a href="/2017/03/20/[Leetcode]_4  Median of Two Sorted Arrays/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_4  Median of Two Sorted Arrays</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -258,7 +323,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="为什么要搞这个？" data-title="为什么要搞这个？" data-url="http://yoursite.com/2016/07/20/为什么要搞这个？/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_5  Longest Palindromic Substring" data-title="Leetcode_5  Longest Palindromic Substring" data-url="http://yoursite.com/2017/03/21/[Leetcode]_5  Longest Palindromic Substring/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
