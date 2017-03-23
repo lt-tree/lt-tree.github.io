@@ -4,18 +4,17 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_3  Longest Substring Without Repeating Characters | ltree98&#39;s blog</title>
+  <title>Tag: Go | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_3  Longest Substring Without Repeating Characters简单题">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_3  Longest Substring Without Repeating Characters">
-<meta property="og:url" content="http://yoursite.com/2017/03/16/[Leetcode]_3  Longest Substring Without Repeating Characters/index.html">
+  <meta name="description" content="testing">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ltree98's blog">
+<meta property="og:url" content="http://yoursite.com/tags/Go/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_3  Longest Substring Without Repeating Characters简单题">
-<meta property="og:updated_time" content="2017-03-16T13:45:51.927Z">
+<meta property="og:description" content="testing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_3  Longest Substring Without Repeating Characters">
-<meta name="twitter:description" content="Leetcode_3  Longest Substring Without Repeating Characters简单题">
+<meta name="twitter:title" content="ltree98's blog">
+<meta name="twitter:description" content="testing">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,160 +167,53 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_3  Longest Substring Without Repeating Characters" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2017/03/16/[Leetcode]_3  Longest Substring Without Repeating Characters/" class="article-date">
-  	<time datetime="2017-03-16T13:43:35.000Z" itemprop="datePublished">2017-03-16</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/03/23/Go环境搭建小记/" class="archive-article-date">
+  	<time datetime="2017-03-23T14:00:00.000Z" itemprop="datePublished">3月 23</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Leetcode_3  Longest Substring Without Repeating Characters
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/23/Go环境搭建小记/">Go环境搭建小记</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境搭建/">环境搭建</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Leetcode_3  Longest Substring Without Repeating Characters<br>简单题</p>
-<a id="more"></a>
-<p><br></p>
-<p>一个checkMap来存储某字符是否出现过<br>时间复杂度O(n^2), 空间复杂度O(n)</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-        if(s.length() &lt; 2)
-            return s.length();
-
-        int maxLen = 1;
-        for(int i = 0; i &lt; s.length(); i++) {
-            int checkMap[300] = {0};
-            checkMap[s[i] - &apos; &apos;] = 1;
-            for(int j = i + 1; j &lt; s.length(); j++) {
-                if(checkMap[s[j] - &apos; &apos;] != 0)    {
-                    maxLen = max(maxLen, j - i);
-                    break;
-                }
-                else if( j == s.length() - 1)
-                    maxLen = max(maxLen, j - i + 1);
-                checkMap[s[j] - &apos; &apos;] = 1;
-            }
-        }
-        return maxLen;
-    }
-};
-</code></pre><p><br><br>当然，还是要看一下大神们的解法。<br>时间复杂度O(n), 空间复杂度O(1)</p>
-<p>设置一个checkMap 来存储，每个字符出现的位置。<br>如果出现同一个字符，就重置子串启始位置。<br>不忍看自己的代码了….</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-        std::vector&lt;int&gt; checkMap(256, -1);
-        int maxLen = 0, start = -1;
-        for(int i = 0; i &lt; s.length(); i++)    {
-            if(checkMap[s[i]] &gt; start)
-                start = checkMap[s[i]];
-            checkMap[s[i]] = i;
-            maxLen = max(maxLen, i - start);
-        }
-        return maxLen;
-    }
-};
-</code></pre>
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/03/20/[Leetcode]_4  Median of Two Sorted Arrays/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_4  Median of Two Sorted Arrays
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/03/15/[Leetcode]_2  Add Two Numbers/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_2  Add Two Numbers</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">Share to: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_3  Longest Substring Without Repeating Characters" data-title="Leetcode_3  Longest Substring Without Repeating Characters" data-url="http://yoursite.com/2017/03/16/[Leetcode]_3  Longest Substring Without Repeating Characters/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -347,9 +239,9 @@ public:
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false
 	}
