@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>删除文件名中的空格 | ltree98&#39;s blog</title>
+  <title>Leetcode_6  ZigZag Conversion | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="用lua、python3来删除文件名中的空格。">
+  <meta name="description" content="Leetcode_6  ZigZag Conversion模拟法，找规律">
 <meta property="og:type" content="article">
-<meta property="og:title" content="删除文件名中的空格">
-<meta property="og:url" content="http://yoursite.com/2016/11/02/删除文件名中的空格/index.html">
+<meta property="og:title" content="Leetcode_6  ZigZag Conversion">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/[Leetcode]_6  ZigZag Conversion/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="用lua、python3来删除文件名中的空格。">
-<meta property="og:updated_time" content="2016-11-04T14:36:16.865Z">
+<meta property="og:description" content="Leetcode_6  ZigZag Conversion模拟法，找规律">
+<meta property="og:updated_time" content="2017-03-27T14:56:24.842Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="删除文件名中的空格">
-<meta name="twitter:description" content="用lua、python3来删除文件名中的空格。">
+<meta name="twitter:title" content="Leetcode_6  ZigZag Conversion">
+<meta name="twitter:description" content="Leetcode_6  ZigZag Conversion模拟法，找规律">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-删除文件名中的空格" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_6  ZigZag Conversion" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/11/02/删除文件名中的空格/" class="article-date">
-  	<time datetime="2016-11-02T15:07:16.000Z" itemprop="datePublished">2016-11-02</time>
+      <a href="/2017/03/27/[Leetcode]_6  ZigZag Conversion/" class="article-date">
+  	<time datetime="2017-03-27T14:48:00.000Z" itemprop="datePublished">2017-03-27</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      删除文件名中的空格
+      Leetcode_6  ZigZag Conversion
     </h1>
   
 
@@ -194,7 +194,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 	</div>
 
         
@@ -205,28 +205,79 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>用lua、python3来删除文件名中的空格。</p>
+        <p>Leetcode_6  ZigZag Conversion<br>模拟法，找规律</p>
 <a id="more"></a>
-<p><br><br>工作不认真，<br>目录下的文件名有空格，<br>遇到这种就很烦躁呀，<br>算了，<br>还是搞个脚本解决下吧。<br><br><br>做的很简单，<br>处理的是<strong>当前目录</strong>下所有文件的文件名，<br>通过<strong>替换字符串</strong>的方式将空格替换了。<br><br><br>环境：MAC<br><br></p>
-<ul>
-<li>lua方法</li>
-</ul>
-<pre><code>local files = {}
-local all = io.popen(&quot;ls &quot;)
-for filename in all:lines() do
-    if string.find(filename, &apos; &apos;) then
-        local newName = string.gsub(filename, &apos; &apos;, &apos;&apos;)
-        os.rename(filename, newName)
-    end
-end
+<p><br></p>
+<p>其实，这题本质上应该算是找规律的题目。<br>按特定的要求输出字符串。</p>
+<p><br></p>
+<h4 id="1-模拟法"><a href="#1-模拟法" class="headerlink" title="1.模拟法"></a>1.模拟法</h4><p>将一长串字符，分成n行，可以根据要求，把每行分别求出来，最后合并成一行输出。<br>也就是说 ABCDEFGHIJKLMN 分成4行。<br>模拟它的之字形走位，4行将分别为:</p>
+<pre><code>A   G     M
+B  F H   L N
+C E   I K
+D      J
+</code></pre><p>也就是:</p>
+<pre><code>AGM
+BFHLN
+CEIK
+DJ
+</code></pre><p>按照它的走位，可以定一个头部，到特定位置，让头部改变方向（此题方向只有两个，上和下），最后合并即可。</p>
+<pre><code>class Solution {
+public:
+    string convert(string s, int numRows) {
+        int len = s.length();
+        if( numRows == 1 or len &lt;= numRows )
+            return s;
+
+        string temp[10001];
+        int dir = 1;
+        int tIndex = 0;
+        int index = 0;
+
+        while( index &lt; len ) {
+            temp[tIndex] += s[index];
+            if( dir == 1 and tIndex &gt;= numRows-1 )    {
+                dir = -1;
+            }
+            else if( dir == -1 and tIndex &lt;= 0 ) {
+                dir = 1;
+            }
+            tIndex = tIndex + dir;
+            index++;
+        }
+
+        string ans = &quot;&quot;;
+        for(int i = 0; i &lt; numRows; i++)    {
+            ans += temp[i];
+        }
+
+        return ans;
+    }
+};
 </code></pre><p><br></p>
-<ul>
-<li>python3方法</li>
-</ul>
-<pre><code>import os
-for parent, dirnames, filenames in os.walk(os.getcwd()):
-    for filename in filenames:
-        os.rename(os.path.join(parent, filename), os.path.join(parent, filename.replace(&apos; &apos;, &apos;&apos;)))
+<h4 id="2-找规律"><a href="#2-找规律" class="headerlink" title="2.找规律"></a>2.找规律</h4><p>这种题，模拟法一般都能过，如果有更好的方法，那就是找规律。<br>这题，一看就觉得是有规律的，最简单的最上面和最下面一行，间隔数基本是固定的： 2*n-2(n 就是要求列的行数)<br>最主要的是第一行和最后一行中间部分的规律。<br>中间部分的规律是: 2*n-2-2*i<br>具体如何找规律?<br>其实我也没啥窍门，可以试试多划拉划拉，多找几个例子….</p>
+<pre><code>class Solution {
+public:
+    string convert(string s, int numRows) {
+        int len = s.length();
+        if( len == 0 || numRows &lt; 2 )
+            return s;
+
+        string ans = &quot;&quot;;
+        int rtrn = 2 * numRows - 2;
+        for(int tIndex = 0; tIndex &lt; numRows; tIndex++)    {
+            for(int index = tIndex; index &lt; len; index+=rtrn)   {
+                ans += s[index];
+
+                if(tIndex &gt; 0 &amp;&amp; tIndex &lt; numRows-1)    {
+                    int midIndex = index + rtrn - 2*tIndex;
+                    if(midIndex &lt; len)
+                        ans += s[midIndex];
+                }
+            }
+        }
+        return ans;
+    }
+};
 </code></pre>
       
     </div>
@@ -236,18 +287,9 @@ for parent, dirnames, filenames in os.walk(os.getcwd()):
     
 <nav id="article-nav">
   
-    <a href="/2016/11/04/用python发邮件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          用python发邮件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/13/《代码的整洁之道》读记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">《代码的整洁之道》读记</div>
+    <a href="/2017/03/23/[Leetcode]_7  Reverse Integer/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_7  Reverse Integer</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -282,7 +324,7 @@ for parent, dirnames, filenames in os.walk(os.getcwd()):
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="删除文件名中的空格" data-title="删除文件名中的空格" data-url="http://yoursite.com/2016/11/02/删除文件名中的空格/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_6  ZigZag Conversion" data-title="Leetcode_6  ZigZag Conversion" data-url="http://yoursite.com/2017/03/27/[Leetcode]_6  ZigZag Conversion/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
