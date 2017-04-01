@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>删除文件名中的空格 | ltree98&#39;s blog</title>
+  <title>Leetcode_10  Regular Expression Matching | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="用lua、python3来删除文件名中的空格。">
+  <meta name="description" content="Leetcode_10  Regular Expression Matching">
 <meta property="og:type" content="article">
-<meta property="og:title" content="删除文件名中的空格">
-<meta property="og:url" content="http://yoursite.com/2016/11/02/删除文件名中的空格/index.html">
+<meta property="og:title" content="Leetcode_10  Regular Expression Matching">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/[Leetcode]_10  Regular Expression Matching/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="用lua、python3来删除文件名中的空格。">
-<meta property="og:updated_time" content="2016-11-04T14:36:16.865Z">
+<meta property="og:description" content="Leetcode_10  Regular Expression Matching">
+<meta property="og:updated_time" content="2017-04-01T07:39:33.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="删除文件名中的空格">
-<meta name="twitter:description" content="用lua、python3来删除文件名中的空格。">
+<meta name="twitter:title" content="Leetcode_10  Regular Expression Matching">
+<meta name="twitter:description" content="Leetcode_10  Regular Expression Matching">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-删除文件名中的空格" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_10  Regular Expression Matching" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/11/02/删除文件名中的空格/" class="article-date">
-  	<time datetime="2016-11-02T15:07:16.000Z" itemprop="datePublished">2016-11-02</time>
+      <a href="/2017/04/01/[Leetcode]_10  Regular Expression Matching/" class="article-date">
+  	<time datetime="2017-04-01T07:00:35.011Z" itemprop="datePublished">2017-04-01</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      删除文件名中的空格
+      Leetcode_10  Regular Expression Matching
     </h1>
   
 
@@ -194,7 +194,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/脚本/">脚本</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 	</div>
 
         
@@ -205,28 +205,76 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>用lua、python3来删除文件名中的空格。</p>
+        <p>Leetcode_10  Regular Expression Matching</p>
 <a id="more"></a>
-<p><br><br>工作不认真，<br>目录下的文件名有空格，<br>遇到这种就很烦躁呀，<br>算了，<br>还是搞个脚本解决下吧。<br><br><br>做的很简单，<br>处理的是<strong>当前目录</strong>下所有文件的文件名，<br>通过<strong>替换字符串</strong>的方式将空格替换了。<br><br><br>环境：MAC<br><br></p>
-<ul>
-<li>lua方法</li>
-</ul>
-<pre><code>local files = {}
-local all = io.popen(&quot;ls &quot;)
-for filename in all:lines() do
-    if string.find(filename, &apos; &apos;) then
-        local newName = string.gsub(filename, &apos; &apos;, &apos;&apos;)
-        os.rename(filename, newName)
-    end
-end
+<p><br></p>
+<pre><code>/**
+*  Index: 10
+*  Title: Regular Expression Matching
+*  Author: ltree98
+**/
+</code></pre><p>注意: </p>
+<pre><code>ab &lt;==&gt; .*      true
+.* =&gt; .. =&gt; ab  
 </code></pre><p><br></p>
-<ul>
-<li>python3方法</li>
-</ul>
-<pre><code>import os
-for parent, dirnames, filenames in os.walk(os.getcwd()):
-    for filename in filenames:
-        os.rename(os.path.join(parent, filename), os.path.join(parent, filename.replace(&apos; &apos;, &apos;&apos;)))
+<h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><p><br></p>
+<pre><code>p.empty()   &amp;&amp;  s.empty() == true   =&gt;  true
+            &amp;&amp;  s.empty() == false  =&gt;  false 
+
+s:     p:       finally:
+a   =&gt; a*   =&gt;  s, p.substr(2) or s.substr(1), p
+    =&gt; .*   =&gt;  s, p.substr(2) or s.substr(1), p
+    =&gt; a    =&gt;  s.substr(1), p.substr(1)
+    =&gt; .    =&gt;  s.substr(1), p.substr(1)
+    =&gt; else =&gt;  false
+</code></pre><p><br></p>
+<pre><code>class Solution {
+public:
+    bool isMatch(string s, string p) {
+        if( p.empty() )
+            return s.empty();
+        else if( p.length() &gt; 1 &amp;&amp; p[1] == &apos;*&apos; ) {
+            if( (s[0] == p[0] or p[0] == &apos;.&apos;) and !s.empty() )
+                return (isMatch(s, p.substr(2)) or isMatch(s.substr(1), p));
+            return isMatch(s, p.substr(2));
+        }
+        else{
+            if( (s[0] == p[0] or p[0] == &apos;.&apos;) and !s.empty() )
+                return isMatch(s.substr(1), p.substr(1));
+        }
+        return false;
+    }
+};
+</code></pre><p><br></p>
+<h4 id="2-DP"><a href="#2-DP" class="headerlink" title="2.DP"></a>2.DP</h4><p><br></p>
+<pre><code>matchArray[i][j]: matchArray[i-1][j-1] 
+p[j-1] == &apos;*&apos;   =&gt;  matchArray[i][j] = matchArray[i][j-2] || (s[i-1] == p[j-2] || p[j-2] == &apos;.&apos;) &amp;&amp; matchArray[i-1][j];
+       else     =&gt;  matchArray[i][j] = matchArray[i-1][j-1] &amp;&amp; (s[i-1] == p[j-1] || p[j-1] == &apos;.&apos;);
+</code></pre><p><br></p>
+<pre><code>class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int sLen = s.length(), pLen = p.length();
+        bool matchArray[1001][1001];
+        matchArray[0][0] = true;
+
+        for(int i = 1; i &lt;= sLen; i++)
+            matchArray[i][0] = false;
+        for(int j = 1; j &lt;= pLen; j++)
+            matchArray[0][j] = j &gt; 1 &amp;&amp; p[j-1] == &apos;*&apos; &amp;&amp; matchArray[0][j-2];
+
+        for(int i = 1; i &lt;= sLen; i++)  {
+            for(int j = 1; j &lt;= pLen; j++)  {
+                if( p[j-1] == &apos;*&apos; )
+                    matchArray[i][j] = matchArray[i][j-2] || (s[i-1] == p[j-2] || p[j-2] == &apos;.&apos;) &amp;&amp; matchArray[i-1][j];
+                else 
+                    matchArray[i][j] = matchArray[i-1][j-1] &amp;&amp; (s[i-1] == p[j-1] || p[j-1] == &apos;.&apos;);
+            }
+        }
+
+        return matchArray[sLen][pLen];
+    }
+};
 </code></pre>
       
     </div>
@@ -236,18 +284,9 @@ for parent, dirnames, filenames in os.walk(os.getcwd()):
     
 <nav id="article-nav">
   
-    <a href="/2016/11/04/用python发邮件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          用python发邮件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/13/《代码的整洁之道》读记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">《代码的整洁之道》读记</div>
+    <a href="/2017/03/30/[Leetcode]_9  Palindrome Number/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_9  Palindrome Number</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -282,7 +321,7 @@ for parent, dirnames, filenames in os.walk(os.getcwd()):
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="删除文件名中的空格" data-title="删除文件名中的空格" data-url="http://yoursite.com/2016/11/02/删除文件名中的空格/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_10  Regular Expression Matching" data-title="Leetcode_10  Regular Expression Matching" data-url="http://yoursite.com/2017/04/01/[Leetcode]_10  Regular Expression Matching/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
