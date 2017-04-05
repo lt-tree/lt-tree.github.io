@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_10  Regular Expression Matching | ltree98&#39;s blog</title>
+  <title>Leetcode_12  Integer to Roman | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_10  Regular Expression Matching">
+  <meta name="description" content="Leetcode_12  Integer to Roman">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_10  Regular Expression Matching">
-<meta property="og:url" content="http://yoursite.com/2017/04/01/[Leetcode]_10  Regular Expression Matching/index.html">
+<meta property="og:title" content="Leetcode_12  Integer to Roman">
+<meta property="og:url" content="http://yoursite.com/2017/04/05/[Leetcode]_12  Integer to Roman/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_10  Regular Expression Matching">
-<meta property="og:updated_time" content="2017-04-05T14:12:20.654Z">
+<meta property="og:description" content="Leetcode_12  Integer to Roman">
+<meta property="og:updated_time" content="2017-04-05T14:22:20.134Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_10  Regular Expression Matching">
-<meta name="twitter:description" content="Leetcode_10  Regular Expression Matching">
+<meta name="twitter:title" content="Leetcode_12  Integer to Roman">
+<meta name="twitter:description" content="Leetcode_12  Integer to Roman">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_10  Regular Expression Matching" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_12  Integer to Roman" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/01/[Leetcode]_10  Regular Expression Matching/" class="article-date">
-  	<time datetime="2017-04-01T07:35:11.000Z" itemprop="datePublished">2017-04-01</time>
+      <a href="/2017/04/05/[Leetcode]_12  Integer to Roman/" class="article-date">
+  	<time datetime="2017-04-05T14:20:11.000Z" itemprop="datePublished">2017-04-05</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_10  Regular Expression Matching
+      Leetcode_12  Integer to Roman
     </h1>
   
 
@@ -205,74 +205,88 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_10  Regular Expression Matching</p>
+        <p>Leetcode_12  Integer to Roman</p>
 <a id="more"></a>
 <p><br></p>
 <pre><code>/**
-*  Index: 10
-*  Title: Regular Expression Matching
+*  Index: 12
+*  Title: Integer to Roman
 *  Author: ltree98
 **/
-</code></pre><p>注意: </p>
-<pre><code>ab &lt;==&gt; .*      true
-.* =&gt; .. =&gt; ab  
 </code></pre><p><br></p>
-<h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><p><br></p>
-<pre><code>p.empty()   &amp;&amp;  s.empty() == true   =&gt;  true
-            &amp;&amp;  s.empty() == false  =&gt;  false 
-
-s:     p:       finally:
-a   =&gt; a*   =&gt;  s, p.substr(2) or s.substr(1), p
-    =&gt; .*   =&gt;  s, p.substr(2) or s.substr(1), p
-    =&gt; a    =&gt;  s.substr(1), p.substr(1)
-    =&gt; .    =&gt;  s.substr(1), p.substr(1)
-    =&gt; else =&gt;  false
-</code></pre><p><br></p>
+<p>罗马数字是欧洲在阿拉伯数字传入之前使用的一种数码。<br>罗马数字采用七个罗马字母作数字,即Ⅰ(1)、X(10)、C (100)、M (1000),V (5)、L(50)、D (500)。<br>记数的方法:<br>(1)相同的数字连写,所表示的数等于这些数字相加得到的数,如, Ⅲ = 3；<br>(2)小的数字在大的数字的右边,所表示的数等于这些数字相加得到的数, 如,Ⅷ = 8,Ⅻ = 12；<br>(3)小的数字,(限于Ⅰ、X 和 C)在大的数字的左边,所表示的数等于大数减小数得到的数,如,Ⅳ = 4,Ⅸ = 9；<br>(4)在一个数的上面画一条横线,表示这个数增值 1 000 倍,如 Ⅻ = 12 000 。</p>
+<p>罗马数字的组数规则,有几条须注意掌握；<br>(1)基本数字Ⅰ、X 、C 中的任何一个,自身连用构成数目,或者放在大数的右边连用构成数目,都不能超过三个；放在大数的左边只能用一个。<br>(2)不能把基本数字 V 、L 、D 中的任何一个作为小数放在大数的左边采用相减的方法构成数目；放在大数的右边采用相加的方式构成数目,只能使用一个。<br>(3)V 和 X 左边的小数字只能用Ⅰ。<br>(4)L 和 C 左边的小数字只能用X。<br>(5)D 和 M 左边的小数字只能用C 。</p>
+<p><br></p>
+<h4 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h4><p>先找了找规律，<br>发现一个数可以拆分成下面这种形式：<br>2143 = 2<em>1000 + 1</em>100 + 4<em>10 + 3</em>1</p>
+<p>对于不同阶位的 1、5、10 所对应的罗马字符不同：</p>
+<pre><code>阶位  1       5       10
+个位  I       V       X
+十位  X       L       C
+百位  C       D       M
+千位  M
+</code></pre><p>综上所述，<br>做两张映射表，<br>第一个，1-9所对应的罗马数模板，<br>第二个，阶位的1，5，10所对应的字符，<br>然后进行字符串查找替换。</p>
+<p><br></p>
 <pre><code>class Solution {
+private:
+    string numTemplate[11] = {&quot;&quot;, &quot;F&quot;, &quot;FF&quot;, &quot;FFF&quot;, &quot;FS&quot;, &quot;S&quot;, &quot;SF&quot;, &quot;SFF&quot;, &quot;SFFF&quot;, &quot;FT&quot;};
+    char orderTemplate[4][3] = {&apos;I&apos;, &apos;V&apos;, &apos;X&apos;,
+                                &apos;X&apos;, &apos;L&apos;, &apos;C&apos;,
+                                &apos;C&apos;, &apos;D&apos;, &apos;M&apos;,
+                                &apos;M&apos;, &apos;M&apos;, &apos;M&apos;};
+
+
 public:
-    bool isMatch(string s, string p) {
-        if( p.empty() )
-            return s.empty();
-        else if( p.length() &gt; 1 &amp;&amp; p[1] == &apos;*&apos; ) {
-            if( (s[0] == p[0] or p[0] == &apos;.&apos;) and !s.empty() )
-                return (isMatch(s, p.substr(2)) or isMatch(s.substr(1), p));
-            return isMatch(s, p.substr(2));
+    string numByOther(int num, int order)   {
+        char fO = orderTemplate[order][0];
+        char sO = orderTemplate[order][1];
+        char tO = orderTemplate[order][2];
+
+        string temp = numTemplate[num];
+        for(int i = 0; i &lt; temp.length(); i++)  {
+            if(temp[i] == &apos;F&apos;)
+                temp[i] = fO;
+            else if(temp[i] == &apos;S&apos;)
+                temp[i] = sO;
+            else if(temp[i] == &apos;T&apos;)
+                temp[i] = tO;
         }
-        else{
-            if( (s[0] == p[0] or p[0] == &apos;.&apos;) and !s.empty() )
-                return isMatch(s.substr(1), p.substr(1));
+
+        return temp;
+    }
+
+    string intToRoman(int num) {
+        string ans = &quot;&quot;;
+        int order = 0;
+        while(num &gt; 0)  {
+            int temp = num%10;
+            string sTemp = numByOther(temp, order);
+            ans = sTemp + ans;
+            num /= 10;
+            ++order;
         }
-        return false;
+
+        return ans;
     }
 };
 </code></pre><p><br></p>
-<h4 id="2-DP"><a href="#2-DP" class="headerlink" title="2.DP"></a>2.DP</h4><p><br></p>
-<pre><code>matchArray[i][j]: matchArray[i-1][j-1] 
-p[j-1] == &apos;*&apos;   =&gt;  matchArray[i][j] = matchArray[i][j-2] || (s[i-1] == p[j-2] || p[j-2] == &apos;.&apos;) &amp;&amp; matchArray[i-1][j];
-       else     =&gt;  matchArray[i][j] = matchArray[i-1][j-1] &amp;&amp; (s[i-1] == p[j-1] || p[j-1] == &apos;.&apos;);
-</code></pre><p><br></p>
+<h4 id="解法2-贪心"><a href="#解法2-贪心" class="headerlink" title="解法2:贪心"></a>解法2:贪心</h4><p>从大数往后依次计算能不能替换，如果能替换，并减去所替换的数的值，再继续替换到最后。</p>
+<p>举个小例子，7<br>10 - X, 5 - V, 4 - IV, 1 - I<br>从最大的数10, 7无法用10来替换,<br>所以用后面的5, 5可以替换,         答案:V    数字:2(7-5)<br>2小于5, 小于4, 无法用5和4替换,<br>但可以用1来替换:   答案:VI       数字:1(2-1)<br>还可以用1来替换:   答案:VII  数字:0(1-1)<br>数字归0, 返回答案: VII</p>
+<p><br></p>
 <pre><code>class Solution {
 public:
-    bool isMatch(string s, string p) {
-        int sLen = s.length(), pLen = p.length();
-        bool matchArray[1001][1001];
-        matchArray[0][0] = true;
+    string intToRoman(int num) {
+        int values[13] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        string valueToRoman[13] = {&quot;M&quot;, &quot;CM&quot;, &quot;D&quot;, &quot;CD&quot;, &quot;C&quot;, &quot;XC&quot;, &quot;L&quot;, &quot;XL&quot;, &quot;X&quot;, &quot;IX&quot;, &quot;V&quot;, &quot;IV&quot;, &quot;I&quot;};
 
-        for(int i = 1; i &lt;= sLen; i++)
-            matchArray[i][0] = false;
-        for(int j = 1; j &lt;= pLen; j++)
-            matchArray[0][j] = j &gt; 1 &amp;&amp; p[j-1] == &apos;*&apos; &amp;&amp; matchArray[0][j-2];
-
-        for(int i = 1; i &lt;= sLen; i++)  {
-            for(int j = 1; j &lt;= pLen; j++)  {
-                if( p[j-1] == &apos;*&apos; )
-                    matchArray[i][j] = matchArray[i][j-2] || (s[i-1] == p[j-2] || p[j-2] == &apos;.&apos;) &amp;&amp; matchArray[i-1][j];
-                else 
-                    matchArray[i][j] = matchArray[i-1][j-1] &amp;&amp; (s[i-1] == p[j-1] || p[j-1] == &apos;.&apos;);
+        string ans = &quot;&quot;;
+        for(int i = 0; i &lt; 13; i++) {
+            while(num &gt;= values[i]) {
+                num -= values[i];
+                ans = ans + valueToRoman[i];
             }
         }
 
-        return matchArray[sLen][pLen];
+        return ans;
     }
 };
 </code></pre>
@@ -284,18 +298,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/04/05/[Leetcode]_11  Container With Most Water/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_11  Container With Most Water
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/30/[Leetcode]_9  Palindrome Number/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_9  Palindrome Number</div>
+    <a href="/2017/04/05/[Leetcode]_11  Container With Most Water/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_11  Container With Most Water</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -330,7 +335,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_10  Regular Expression Matching" data-title="Leetcode_10  Regular Expression Matching" data-url="http://yoursite.com/2017/04/01/[Leetcode]_10  Regular Expression Matching/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_12  Integer to Roman" data-title="Leetcode_12  Integer to Roman" data-url="http://yoursite.com/2017/04/05/[Leetcode]_12  Integer to Roman/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
