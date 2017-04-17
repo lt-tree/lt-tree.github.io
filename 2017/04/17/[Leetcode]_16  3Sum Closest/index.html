@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_14  Longest Common Prefix | ltree98&#39;s blog</title>
+  <title>Leetcode_16  3Sum Closest | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_14  Longest Common Prefix">
+  <meta name="description" content="Leetcode_16  3Sum Closest">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_14  Longest Common Prefix">
-<meta property="og:url" content="http://yoursite.com/2017/04/12/[Leetcode]_14  Longest Common Prefix/index.html">
+<meta property="og:title" content="Leetcode_16  3Sum Closest">
+<meta property="og:url" content="http://yoursite.com/2017/04/17/[Leetcode]_16  3Sum Closest/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_14  Longest Common Prefix">
-<meta property="og:updated_time" content="2017-04-12T15:10:13.472Z">
+<meta property="og:description" content="Leetcode_16  3Sum Closest">
+<meta property="og:updated_time" content="2017-04-17T15:48:12.931Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_14  Longest Common Prefix">
-<meta name="twitter:description" content="Leetcode_14  Longest Common Prefix">
+<meta name="twitter:title" content="Leetcode_16  3Sum Closest">
+<meta name="twitter:description" content="Leetcode_16  3Sum Closest">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_14  Longest Common Prefix" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_16  3Sum Closest" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/12/[Leetcode]_14  Longest Common Prefix/" class="article-date">
-  	<time datetime="2017-04-12T15:03:11.000Z" itemprop="datePublished">2017-04-12</time>
+      <a href="/2017/04/17/[Leetcode]_16  3Sum Closest/" class="article-date">
+  	<time datetime="2017-04-17T15:47:11.000Z" itemprop="datePublished">2017-04-17</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_14  Longest Common Prefix
+      Leetcode_16  3Sum Closest
     </h1>
   
 
@@ -205,27 +205,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_14  Longest Common Prefix</p>
+        <p>Leetcode_16  3Sum Closest</p>
 <a id="more"></a>
 <p><br></p>
 <pre><code>/**
-*  Index: 14
-*  Title: Longest Common Prefix
+*  Index: 16
+*  Title: 3Sum Closest
 *  Author: ltree98
 **/
 </code></pre><p><br></p>
-<p>题意就是在一个字符串集合中找出公共前缀。<br>其实就是遍历，<br>每个都进行比较，<br>当有不同的出现，直接返回即可。<br>没有什么难度。</p>
+<p>第15题的变种，<br>之前是三个数相加等于0，<br>这次让三个数相加等于给定的数，若相等，直接返回给定的数。<br>否则就一直算。</p>
+<p>注意：<br>此处ans初始值设置为INT_MAX,<br>但是ans类型不能是INT，<br>因为当target是负数时，INT_MAX-target 会溢出。</p>
 <p><br></p>
 <pre><code>class Solution {
 public:
-    string longestCommonPrefix(vector&lt;string&gt;&amp; strs) {
-        string ans = &quot;&quot;;
-        for(int index = 0; index &lt;= strs.size() &amp;&amp; strs.size(); index++)    {
-            for(int j = 0; j &lt; strs.size(); j++)
-                if(index &gt;= strs[j].size() ||(j &gt; 0 &amp;&amp; strs[j][index] != strs[j-1][index]))
-                    return ans;
-            ans += strs[0][index];
+    int threeSumClosest(vector&lt;int&gt;&amp; nums, int target) {
+        std::sort(nums.begin(), nums.end());
+        long ans = INT_MAX;
+
+        for(int i = 0; i &lt; nums.size(); )   {
+            int l = i+1, h = nums.size()-1;
+            while(l &lt; h)    {
+                int temp = nums[i] + nums[l] + nums[h];
+                if(temp == target)  {
+                    return target;
+                }
+                else if(temp &lt; target)   {
+                    if(abs(ans-target) &gt; abs(temp-target))
+                        ans = temp;
+                    l++;
+                }
+                else {
+                    if(abs(ans-target) &gt; abs(temp-target))
+                        ans = temp;
+                    h--;
+                }
+            }
+
+            i++;
+            while(i &lt; nums.size() &amp;&amp; nums[i] == nums[i-1])
+                i++;
         }
+
         return ans;
     }
 };
@@ -238,18 +259,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/04/17/[Leetcode]_15  3Sum/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_15  3Sum
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/10/[Leetcode]_13  Roman to Integer/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_13  Roman to Integer</div>
+    <a href="/2017/04/17/[Leetcode]_15  3Sum/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_15  3Sum</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -284,7 +296,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_14  Longest Common Prefix" data-title="Leetcode_14  Longest Common Prefix" data-url="http://yoursite.com/2017/04/12/[Leetcode]_14  Longest Common Prefix/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_16  3Sum Closest" data-title="Leetcode_16  3Sum Closest" data-url="http://yoursite.com/2017/04/17/[Leetcode]_16  3Sum Closest/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
