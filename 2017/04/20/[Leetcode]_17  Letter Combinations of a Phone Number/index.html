@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_3  Longest Substring Without Repeating Characters | ltree98&#39;s blog</title>
+  <title>Leetcode_17  Letter Combinations of a Phone Number | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_3  Longest Substring Without Repeating Characters简单题">
+  <meta name="description" content="Leetcode_17  Letter Combinations of a Phone Number递归">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_3  Longest Substring Without Repeating Characters">
-<meta property="og:url" content="http://yoursite.com/2017/03/16/[Leetcode]_3  Longest Substring Without Repeating Characters/index.html">
+<meta property="og:title" content="Leetcode_17  Letter Combinations of a Phone Number">
+<meta property="og:url" content="http://yoursite.com/2017/04/20/[Leetcode]_17  Letter Combinations of a Phone Number/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_3  Longest Substring Without Repeating Characters简单题">
-<meta property="og:updated_time" content="2017-03-16T13:45:51.927Z">
+<meta property="og:description" content="Leetcode_17  Letter Combinations of a Phone Number递归">
+<meta property="og:updated_time" content="2017-04-20T15:47:50.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_3  Longest Substring Without Repeating Characters">
-<meta name="twitter:description" content="Leetcode_3  Longest Substring Without Repeating Characters简单题">
+<meta name="twitter:title" content="Leetcode_17  Letter Combinations of a Phone Number">
+<meta name="twitter:description" content="Leetcode_17  Letter Combinations of a Phone Number递归">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_3  Longest Substring Without Repeating Characters" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_17  Letter Combinations of a Phone Number" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/16/[Leetcode]_3  Longest Substring Without Repeating Characters/" class="article-date">
-  	<time datetime="2017-03-16T13:43:35.000Z" itemprop="datePublished">2017-03-16</time>
+      <a href="/2017/04/20/[Leetcode]_17  Letter Combinations of a Phone Number/" class="article-date">
+  	<time datetime="2017-04-20T15:46:11.000Z" itemprop="datePublished">2017-04-20</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_3  Longest Substring Without Repeating Characters
+      Leetcode_17  Letter Combinations of a Phone Number
     </h1>
   
 
@@ -205,47 +205,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_3  Longest Substring Without Repeating Characters<br>简单题</p>
+        <p>Leetcode_17  Letter Combinations of a Phone Number<br>递归</p>
 <a id="more"></a>
 <p><br></p>
-<p>一个checkMap来存储某字符是否出现过<br>时间复杂度O(n^2), 空间复杂度O(n)</p>
+<pre><code>/**
+*  Index: 17
+*  Title: Letter Combinations of a Phone Number
+*  Author: ltree98
+**/
+</code></pre><p><br></p>
+<p>这道题应该是用递归来做</p>
+<pre><code>digits.length() &gt;   1  =&gt;   将 digits[0]对应的集合 与 digits.substr(1)返回的集合连接
+digits.length() ==  1  =&gt;   返回数字对应的字符串集合
+</code></pre><p>然后再处理一些无效值的情况:</p>
+<ul>
+<li>数字中 0, 1, *, # 等其他值。 —— 这里用他们 ASCII码的差值来判断。</li>
+<li>如果输入的数字中存在无效值，整个返回空。 —— 这里判断后面字符串的返回值是否为空，若为空，直接返回空。</li>
+</ul>
+<p><br></p>
 <pre><code>class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-        if(s.length() &lt; 2)
-            return s.length();
+private:
+    string map[10] = {&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;};
 
-        int maxLen = 1;
-        for(int i = 0; i &lt; s.length(); i++) {
-            int checkMap[300] = {0};
-            checkMap[s[i] - &apos; &apos;] = 1;
-            for(int j = i + 1; j &lt; s.length(); j++) {
-                if(checkMap[s[j] - &apos; &apos;] != 0)    {
-                    maxLen = max(maxLen, j - i);
-                    break;
+public:
+    vector&lt;string&gt; letterCombinations(string digits) {
+        if(digits.length() == 0)    return {};
+
+        int temp = digits[0] - &apos;0&apos;;
+        if( temp &lt; 2 || temp &gt; 9 )  return {};
+
+        vector&lt;string&gt; ans = {};
+        string mapStr = map[temp];
+        if(digits.length() &gt; 1) {
+            vector&lt;string&gt; preAns = letterCombinations(digits.substr(1, digits.length()-1));
+            if(preAns.size() == 0)  return {};
+
+            for(int i = 0; i &lt; mapStr.length(); i++)    {
+                for(int j = 0; j &lt; preAns.size(); j++)  {
+                    ans.push_back(mapStr[i]+preAns[j]);
                 }
-                else if( j == s.length() - 1)
-                    maxLen = max(maxLen, j - i + 1);
-                checkMap[s[j] - &apos; &apos;] = 1;
             }
         }
-        return maxLen;
-    }
-};
-</code></pre><p><br><br>当然，还是要看一下大神们的解法。<br>时间复杂度O(n), 空间复杂度O(1)</p>
-<p>设置一个checkMap 来存储，每个字符出现的位置。<br>如果出现同一个字符，就重置子串启始位置。<br>不忍看自己的代码了….</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-        std::vector&lt;int&gt; checkMap(256, -1);
-        int maxLen = 0, start = -1;
-        for(int i = 0; i &lt; s.length(); i++)    {
-            if(checkMap[s[i]] &gt; start)
-                start = checkMap[s[i]];
-            checkMap[s[i]] = i;
-            maxLen = max(maxLen, i - start);
+        else    {
+            for(int i = 0; i &lt; mapStr.length(); i++)    {
+                ans.push_back(mapStr.substr(i, 1));
+            }
         }
-        return maxLen;
+        return ans;
     }
 };
 </code></pre>
@@ -257,18 +263,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/03/20/[Leetcode]_4  Median of Two Sorted Arrays/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_4  Median of Two Sorted Arrays
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/15/[Leetcode]_2  Add Two Numbers/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_2  Add Two Numbers</div>
+    <a href="/2017/04/17/[Leetcode]_16  3Sum Closest/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_16  3Sum Closest</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -303,7 +300,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_3  Longest Substring Without Repeating Characters" data-title="Leetcode_3  Longest Substring Without Repeating Characters" data-url="http://yoursite.com/2017/03/16/[Leetcode]_3  Longest Substring Without Repeating Characters/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_17  Letter Combinations of a Phone Number" data-title="Leetcode_17  Letter Combinations of a Phone Number" data-url="http://yoursite.com/2017/04/20/[Leetcode]_17  Letter Combinations of a Phone Number/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
