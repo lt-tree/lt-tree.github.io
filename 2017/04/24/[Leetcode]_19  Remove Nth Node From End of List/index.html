@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_14  Longest Common Prefix | ltree98&#39;s blog</title>
+  <title>Leetcode_19  Remove Nth Node From End of List | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_14  Longest Common Prefix">
+  <meta name="description" content="Leetcode_19  Remove Nth Node From End of List">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_14  Longest Common Prefix">
-<meta property="og:url" content="http://yoursite.com/2017/04/12/[Leetcode]_14  Longest Common Prefix/index.html">
+<meta property="og:title" content="Leetcode_19  Remove Nth Node From End of List">
+<meta property="og:url" content="http://yoursite.com/2017/04/24/[Leetcode]_19  Remove Nth Node From End of List/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_14  Longest Common Prefix">
-<meta property="og:updated_time" content="2017-04-12T15:10:13.472Z">
+<meta property="og:description" content="Leetcode_19  Remove Nth Node From End of List">
+<meta property="og:updated_time" content="2017-04-24T14:54:19.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_14  Longest Common Prefix">
-<meta name="twitter:description" content="Leetcode_14  Longest Common Prefix">
+<meta name="twitter:title" content="Leetcode_19  Remove Nth Node From End of List">
+<meta name="twitter:description" content="Leetcode_19  Remove Nth Node From End of List">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_14  Longest Common Prefix" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_19  Remove Nth Node From End of List" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/12/[Leetcode]_14  Longest Common Prefix/" class="article-date">
-  	<time datetime="2017-04-12T15:03:11.000Z" itemprop="datePublished">2017-04-12</time>
+      <a href="/2017/04/24/[Leetcode]_19  Remove Nth Node From End of List/" class="article-date">
+  	<time datetime="2017-04-24T14:50:11.000Z" itemprop="datePublished">2017-04-24</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_14  Longest Common Prefix
+      Leetcode_19  Remove Nth Node From End of List
     </h1>
   
 
@@ -205,28 +205,54 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_14  Longest Common Prefix</p>
+        <p>Leetcode_19  Remove Nth Node From End of List</p>
 <a id="more"></a>
 <p><br></p>
 <pre><code>/**
-*  Index: 14
-*  Title: Longest Common Prefix
+*  Index: 19
+*  Title: Remove Nth Node From End of List
 *  Author: ltree98
 **/
 </code></pre><p><br></p>
-<p>题意就是在一个字符串集合中找出公共前缀。<br>其实就是遍历，<br>每个都进行比较，<br>当有不同的出现，直接返回即可。<br>没有什么难度。</p>
+<p>这道题关键在于一遍过。<br>我想法就是两个指针，相距n个位置，如果前面的指针到底了，那么后面的就是需要被排除的东西。<br>然后在将一些边界条件判断一下。</p>
 <p><br></p>
-<pre><code>class Solution {
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
 public:
-    string longestCommonPrefix(vector&lt;string&gt;&amp; strs) {
-        string ans = &quot;&quot;;
-        for(int index = 0; index &lt;= strs.size() &amp;&amp; strs.size(); index++)    {
-            for(int j = 0; j &lt; strs.size(); j++)
-                if(index &gt;= strs[j].size() ||(j &gt; 0 &amp;&amp; strs[j][index] != strs[j-1][index]))
-                    return ans;
-            ans += strs[0][index];
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(n &gt; 0)    {
+            if(fast)    {
+                fast = fast-&gt;next;
+                n--;                
+            }
+            else
+                return NULL;
         }
-        return ans;
+
+        if(fast == NULL)    {
+            slow = slow-&gt;next;
+            return slow;
+        }
+
+        while(fast-&gt;next) {
+            fast = fast-&gt;next;
+            slow = slow-&gt;next;
+        }
+
+        ListNode* temp = slow-&gt;next;
+        slow-&gt;next = temp-&gt;next;
+        temp = NULL;
+
+        return head;
     }
 };
 </code></pre>
@@ -238,18 +264,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/04/17/[Leetcode]_15  3Sum/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_15  3Sum
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/10/[Leetcode]_13  Roman to Integer/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_13  Roman to Integer</div>
+    <a href="/2017/04/24/[Leetcode]_18  4Sum/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_18  4Sum</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -284,7 +301,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_14  Longest Common Prefix" data-title="Leetcode_14  Longest Common Prefix" data-url="http://yoursite.com/2017/04/12/[Leetcode]_14  Longest Common Prefix/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_19  Remove Nth Node From End of List" data-title="Leetcode_19  Remove Nth Node From End of List" data-url="http://yoursite.com/2017/04/24/[Leetcode]_19  Remove Nth Node From End of List/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
