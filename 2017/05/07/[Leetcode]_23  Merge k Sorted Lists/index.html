@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_18  4Sum | ltree98&#39;s blog</title>
+  <title>Leetcode_23  Merge k Sorted Lists | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_18 4Sum">
+  <meta name="description" content="Leetcode_23  Merge k Sorted Lists">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_18  4Sum">
-<meta property="og:url" content="http://yoursite.com/2017/04/24/[Leetcode]_18  4Sum/index.html">
+<meta property="og:title" content="Leetcode_23  Merge k Sorted Lists">
+<meta property="og:url" content="http://yoursite.com/2017/05/07/[Leetcode]_23  Merge k Sorted Lists/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_18 4Sum">
-<meta property="og:updated_time" content="2017-04-24T14:49:10.481Z">
+<meta property="og:description" content="Leetcode_23  Merge k Sorted Lists">
+<meta property="og:updated_time" content="2017-05-07T04:12:09.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_18  4Sum">
-<meta name="twitter:description" content="Leetcode_18 4Sum">
+<meta name="twitter:title" content="Leetcode_23  Merge k Sorted Lists">
+<meta name="twitter:description" content="Leetcode_23  Merge k Sorted Lists">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_18  4Sum" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_23  Merge k Sorted Lists" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/04/24/[Leetcode]_18  4Sum/" class="article-date">
-  	<time datetime="2017-04-24T14:46:11.000Z" itemprop="datePublished">2017-04-24</time>
+      <a href="/2017/05/07/[Leetcode]_23  Merge k Sorted Lists/" class="article-date">
+  	<time datetime="2017-05-07T13:12:00.000Z" itemprop="datePublished">2017-05-07</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_18  4Sum
+      Leetcode_23  Merge k Sorted Lists
     </h1>
   
 
@@ -205,61 +205,150 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_18 4Sum</p>
+        <p>Leetcode_23  Merge k Sorted Lists</p>
 <a id="more"></a>
 <p><br></p>
 <pre><code>/**
-*  Index: 18
-*  Title: 4Sum
+*  Index: 23
+*  Title: Merge k Sorted Lists
 *  Author: ltree98
 **/
 </code></pre><p><br></p>
-<p>这道题和之前的 3Sum, 3Sum Closest 差不多。<br>用的同样的方法。</p>
-<p>值得一说的就是这里的一个小剪枝。<br>因为进行了排序，如果发现:</p>
-<ul>
-<li>从某个数开始连加都小于给定的目标值，那么 &gt;整个&lt; 就不需要查了，后面的数一定没有正确答案。</li>
-<li>某个数加上最大的三个数仍小于给定的目标值，那么 &gt;本数&lt; 就不需要查了，怎么加都比目标值小。</li>
-</ul>
+<h4 id="齐头并进的比较"><a href="#齐头并进的比较" class="headerlink" title="齐头并进的比较"></a>齐头并进的比较</h4><ol>
+<li>比较一轮，</li>
+<li>记录最小值及最小值的位置，</li>
+<li>创建新链加载最小值，</li>
+<li>将最小值位置的那条链后移一位，</li>
+<li>回到1开始重复</li>
+</ol>
 <p><br></p>
-<pre><code>class Solution {
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
 public:
-    vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;&amp; nums, int target) {
-        int len = nums.size();
-        if(len &lt; 4)
-            return {};
+    ListNode* mergeKLists(vector&lt;ListNode*&gt;&amp; lists) {
+        ListNode* master = new ListNode(0);
+        ListNode* head = master;
 
-        std::sort(nums.begin(), nums.end());
-        vector&lt;vector&lt;int&gt;&gt; ans;
+       while(true)  {
+            int min = INT_MAX;
+            int index = -1;
 
-        for(int i = 0; i &lt; len - 3; i++)    {
-            if(i &gt; 0 &amp;&amp; nums[i] == nums[i-1]) continue;
-
-            // 关键剪枝
-            if(nums[i]+nums[i+1]+nums[i+2]+nums[i+3] &gt; target) break;
-            if(nums[i]+nums[len-3]+nums[len-2]+nums[len-1] &lt; target) continue;
-
-            for(int j = i+1; j &lt; len - 2; ) {
-                int l = j+1, h = len - 1, s = target-nums[i]-nums[j];
-                while(l &lt; h)    {
-                    if(nums[l] + nums[h] == s)  {
-                        ans.push_back({nums[i], nums[j], nums[l], nums[h]});
-                        l++, h--;           
-                        while(l &lt; h &amp;&amp; nums[l] == nums[l-1])
-                            l++;
-                        while(l &lt; h &amp;&amp; nums[h] == nums[h+1])
-                            h--;
-                    }
-                    else if(nums[l] + nums[h] &lt; s)
-                        l++;
-                    else
-                        h--;
+            for(int i = 0; i &lt; lists.size(); i++)   {
+                if(lists[i] &amp;&amp; lists[i]-&gt;val &lt; min) {
+                    min = lists[i]-&gt;val;
+                    index = i;
                 }
+            }
 
-                j++;
-                while(j &lt; len-2 &amp;&amp; nums[j] == nums[j-1])    j++;
+            if(index != -1) {
+                master-&gt;next = new ListNode(min);
+                master = master-&gt;next;
+                lists[index] = lists[index]-&gt;next;
+            }
+            else
+                break;
+        }
+        return head-&gt;next;    
+    }
+};
+</code></pre><p><br></p>
+<h4 id="齐头并进的比较-amp-剪枝"><a href="#齐头并进的比较-amp-剪枝" class="headerlink" title="齐头并进的比较 &amp; 剪枝"></a>齐头并进的比较 &amp; 剪枝</h4><p>加了个剪枝，就是将vector中的空的链，直接移除，不再遍历。<br>然后，如果删除空链后只剩下一条链，那么新链直接连在这条链后面。</p>
+<p><br></p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeKLists(vector&lt;ListNode*&gt;&amp; lists) {
+        ListNode* master = new ListNode(0);
+        ListNode* head = master;
+
+       while(true)  {
+            int min = INT_MAX;
+            int index = -1;
+            int needRmvIndex = -1;
+            for(int i = 0; i &lt; lists.size(); i++)   {
+                if(lists[i])    {
+                    if(lists[i]-&gt;val &lt; min) {
+                        min = lists[i]-&gt;val;
+                        index = i;
+                    }
+                }
+                else    {
+                    needRmvIndex = i;
+                }
+            }
+
+            if(index != -1) {
+                master-&gt;next = new ListNode(min);
+                master = master-&gt;next;
+                lists[index] = lists[index]-&gt;next;
+            }
+            else
+                break;
+
+            if(needRmvIndex != -1)  {
+                vector&lt;ListNode*&gt;::iterator iter = lists.begin()+needRmvIndex;
+                lists.erase(iter);
+
+                if(lists.size() == 1 &amp;&amp; lists[0])   {
+                    master-&gt;next = lists[0];
+                    break;
+                }
             }
         }
-        return ans;
+        return head-&gt;next;     
+    }
+};
+</code></pre><p><br></p>
+<h4 id="两两合并"><a href="#两两合并" class="headerlink" title="两两合并"></a>两两合并</h4><p>不断将两条链合并，直至剩下一条链。</p>
+<pre><code>/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+private:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+        if(l1 == NULL)
+            return l2;
+        if(l2 == NULL)
+            return l1;
+        if(l1-&gt;val &lt;= l2-&gt;val){
+            l1-&gt;next = mergeTwoLists(l1-&gt;next, l2);
+            return l1;
+        }
+        else{
+            l2-&gt;next = mergeTwoLists(l1, l2-&gt;next);
+            return l2;
+        }
+    }
+public:
+    ListNode *mergeKLists(vector&lt;ListNode *&gt; &amp;lists) {
+        if(lists.empty())
+            return NULL;
+
+        while(lists.size() &gt; 1){
+            lists.push_back(mergeTwoLists(lists[0], lists[1]));
+            lists.erase(lists.begin());
+            lists.erase(lists.begin());
+        }
+        return lists.front();
     }
 };
 </code></pre>
@@ -271,18 +360,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/04/24/[Leetcode]_19  Remove Nth Node From End of List/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_19  Remove Nth Node From End of List
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/20/[Leetcode]_17  Letter Combinations of a Phone Number/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_17  Letter Combinations of a Phone Number</div>
+    <a href="/2017/05/04/[Leetcode]_22  Generate Parentheses/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_22  Generate Parentheses</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -317,7 +397,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_18  4Sum" data-title="Leetcode_18  4Sum" data-url="http://yoursite.com/2017/04/24/[Leetcode]_18  4Sum/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_23  Merge k Sorted Lists" data-title="Leetcode_23  Merge k Sorted Lists" data-url="http://yoursite.com/2017/05/07/[Leetcode]_23  Merge k Sorted Lists/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
