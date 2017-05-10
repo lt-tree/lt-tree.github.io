@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_24  Swap Nodes in Pairs | ltree98&#39;s blog</title>
+  <title>Leetcode_25  Reverse Nodes in k-Group | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_24  Swap Nodes in Pairs">
+  <meta name="description" content="Leetcode_25  Reverse Nodes in k-Group">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_24  Swap Nodes in Pairs">
-<meta property="og:url" content="http://yoursite.com/2017/05/08/[Leetcode]_24  Swap Nodes in Pairs/index.html">
+<meta property="og:title" content="Leetcode_25  Reverse Nodes in k-Group">
+<meta property="og:url" content="http://yoursite.com/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_24  Swap Nodes in Pairs">
-<meta property="og:updated_time" content="2017-05-08T13:45:18.496Z">
+<meta property="og:description" content="Leetcode_25  Reverse Nodes in k-Group">
+<meta property="og:updated_time" content="2017-05-10T15:02:15.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_24  Swap Nodes in Pairs">
-<meta name="twitter:description" content="Leetcode_24  Swap Nodes in Pairs">
+<meta name="twitter:title" content="Leetcode_25  Reverse Nodes in k-Group">
+<meta name="twitter:description" content="Leetcode_25  Reverse Nodes in k-Group">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_24  Swap Nodes in Pairs" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_25  Reverse Nodes in k-Group" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/08/[Leetcode]_24  Swap Nodes in Pairs/" class="article-date">
-  	<time datetime="2017-05-08T13:45:00.000Z" itemprop="datePublished">2017-05-08</time>
+      <a href="/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/" class="article-date">
+  	<time datetime="2017-05-10T15:00:00.000Z" itemprop="datePublished">2017-05-10</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_24  Swap Nodes in Pairs
+      Leetcode_25  Reverse Nodes in k-Group
     </h1>
   
 
@@ -205,16 +205,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_24  Swap Nodes in Pairs</p>
+        <p>Leetcode_25  Reverse Nodes in k-Group</p>
 <a id="more"></a>
 <p><br></p>
 <pre><code>/**
-*  Index: 24
-*  Title: Swap Nodes in Pairs
+*  Index: 25
+*  Title: Reverse Nodes in k-Group
 *  Author: ltree98
 **/
 </code></pre><p><br></p>
-<p>两个指针，一个前一个后，然后互换值，如果没有后面的就不换。</p>
+<p>题目要求，将一组链表根据给定的k值，进行部分逆序。<br>而且，最后不足k的部分，要按照原来的顺序。</p>
+<h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><p>以[1,2,3,4,5] k=3 为例</p>
+<p>解题方法：</p>
+<pre><code>    pre     cur     nxt
+1.  0   -   1   -   2   -   3   -   4   -   5
+
+    pre     nxt     cur     
+2.  0   -   2   -   1   -   3   -   4   -   5
+
+
+    pre             cur     nxt
+3.  0   -   2   -   1   -   3   -   4   -   5
+
+    pre     nxt             cur
+4.  0   -   3   -   2   -   1   -   4   -   5
+</code></pre><p>其实，步骤1、2 与 步骤3、4 是一样的，不断重复这些步骤。<br>每次进行一次步骤，计数一次，直到到k-1；则pre移到cur的位置，继续重复以上步骤。</p>
+<p>最后，到后面没有后续值后，如果计数器不到k-1，则再把后面的值翻过来一遍。</p>
 <p><br></p>
 <pre><code>/**
  * Definition for singly-linked list.
@@ -226,21 +242,77 @@
  */
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) {
-        ListNode* ans = head;
-        ListNode* pre = head;
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if(head == NULL || k == 1)
+            return head;
 
-        while(pre &amp;&amp; pre-&gt;next) {
-            ListNode* bck = pre-&gt;next;
+        ListNode *ori = new ListNode(0);
+        ori-&gt;next = head;
+        ListNode *cur, *nxt, *pre = ori;
 
-            pre-&gt;val += bck-&gt;val;
-            bck-&gt;val = pre-&gt;val - bck-&gt;val;
-            pre-&gt;val -= bck-&gt;val;
+        int counter;
+        while(true) {
+            counter = k;
+            cur = pre-&gt;next;
+            nxt = cur-&gt;next;
 
-            pre = bck-&gt;next;
+            while(cur-&gt;next and counter-- &gt; 1)  {
+                cur-&gt;next = nxt-&gt;next;
+                nxt-&gt;next = pre-&gt;next;
+                pre-&gt;next = nxt;
+                nxt = cur-&gt;next;
+            }
+
+            if(cur-&gt;next == NULL)
+                break;
+            pre = cur;
         }
 
-        return ans;
+        if(counter &gt; 1) {
+            counter = k - counter;
+            cur = pre-&gt;next;
+            nxt = cur-&gt;next;
+
+            while(counter--)    {
+                cur-&gt;next = nxt-&gt;next;
+                nxt-&gt;next = pre-&gt;next;
+                pre-&gt;next = nxt;
+                nxt = cur-&gt;next;
+            }
+        }
+
+        return ori-&gt;next;
+    }
+};
+</code></pre><p><br></p>
+<h4 id="2"><a href="#2" class="headerlink" title="2"></a>2</h4><p>这个方法是我看热门解题里的，通过遍历一遍链表，就不用把最后反过来的再翻回去了。<br>但是结果是缩短了代码行数。</p>
+<pre><code>class Solution {
+public:
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if(head == NULL || k == 1) 
+            return head;
+
+        int num = 0;
+        ListNode *ori = new ListNode(-1);
+        ori-&gt;next = head;
+        ListNode *cur = ori, *nxt, *pre = ori;
+
+        while(cur = cur-&gt;next) 
+            num++;
+
+        while(num &gt;= k) {
+            cur = pre-&gt;next;
+            nxt = cur-&gt;next;
+            for(int i = 1; i &lt; k ; ++i) {
+                cur-&gt;next = nxt-&gt;next;
+                nxt-&gt;next = pre-&gt;next;
+                pre-&gt;next = nxt;
+                nxt = cur-&gt;next;
+            }
+            pre = cur;
+            num -= k;
+        }
+        return ori-&gt;next;
     }
 };
 </code></pre>
@@ -252,18 +324,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_25  Reverse Nodes in k-Group
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/07/[Leetcode]_23  Merge k Sorted Lists/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_23  Merge k Sorted Lists</div>
+    <a href="/2017/05/08/[Leetcode]_24  Swap Nodes in Pairs/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_24  Swap Nodes in Pairs</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -298,7 +361,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_24  Swap Nodes in Pairs" data-title="Leetcode_24  Swap Nodes in Pairs" data-url="http://yoursite.com/2017/05/08/[Leetcode]_24  Swap Nodes in Pairs/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_25  Reverse Nodes in k-Group" data-title="Leetcode_25  Reverse Nodes in k-Group" data-url="http://yoursite.com/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
