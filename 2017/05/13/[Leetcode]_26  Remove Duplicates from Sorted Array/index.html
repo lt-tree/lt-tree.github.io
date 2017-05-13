@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Leetcode_25  Reverse Nodes in k-Group | ltree98&#39;s blog</title>
+  <title>Leetcode_26  Remove Duplicates from Sorted Array | ltree98&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Leetcode_25  Reverse Nodes in k-Group">
+  <meta name="description" content="Leetcode_26  Remove Duplicates from Sorted Array">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode_25  Reverse Nodes in k-Group">
-<meta property="og:url" content="http://yoursite.com/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/index.html">
+<meta property="og:title" content="Leetcode_26  Remove Duplicates from Sorted Array">
+<meta property="og:url" content="http://yoursite.com/2017/05/13/[Leetcode]_26  Remove Duplicates from Sorted Array/index.html">
 <meta property="og:site_name" content="ltree98's blog">
-<meta property="og:description" content="Leetcode_25  Reverse Nodes in k-Group">
-<meta property="og:updated_time" content="2017-05-10T15:02:15.312Z">
+<meta property="og:description" content="Leetcode_26  Remove Duplicates from Sorted Array">
+<meta property="og:updated_time" content="2017-05-13T13:13:54.283Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode_25  Reverse Nodes in k-Group">
-<meta name="twitter:description" content="Leetcode_25  Reverse Nodes in k-Group">
+<meta name="twitter:title" content="Leetcode_26  Remove Duplicates from Sorted Array">
+<meta name="twitter:description" content="Leetcode_26  Remove Duplicates from Sorted Array">
   
     <link rel="alternative" href="/atom.xml" title="ltree98&#39;s blog" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-[Leetcode]_25  Reverse Nodes in k-Group" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-[Leetcode]_26  Remove Duplicates from Sorted Array" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/" class="article-date">
-  	<time datetime="2017-05-10T15:00:00.000Z" itemprop="datePublished">2017-05-10</time>
+      <a href="/2017/05/13/[Leetcode]_26  Remove Duplicates from Sorted Array/" class="article-date">
+  	<time datetime="2017-05-13T13:12:00.000Z" itemprop="datePublished">2017-05-13</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Leetcode_25  Reverse Nodes in k-Group
+      Leetcode_26  Remove Duplicates from Sorted Array
     </h1>
   
 
@@ -205,114 +205,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leetcode_25  Reverse Nodes in k-Group</p>
+        <p>Leetcode_26  Remove Duplicates from Sorted Array</p>
 <a id="more"></a>
 <p><br></p>
 <pre><code>/**
-*  Index: 25
-*  Title: Reverse Nodes in k-Group
+*  Index: 26
+*  Title: Remove Duplicates from Sorted Array
 *  Author: ltree98
 **/
 </code></pre><p><br></p>
-<p>题目要求，将一组链表根据给定的k值，进行部分逆序。<br>而且，最后不足k的部分，要按照原来的顺序。</p>
-<h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><p>以[1,2,3,4,5] k=3 为例</p>
-<p>解题方法：</p>
-<pre><code>    pre     cur     nxt
-1.  0   -   1   -   2   -   3   -   4   -   5
-
-    pre     nxt     cur     
-2.  0   -   2   -   1   -   3   -   4   -   5
-
-
-    pre             cur     nxt
-3.  0   -   2   -   1   -   3   -   4   -   5
-
-    pre     nxt             cur
-4.  0   -   3   -   2   -   1   -   4   -   5
-</code></pre><p>其实，步骤1、2 与 步骤3、4 是一样的，不断重复这些步骤。<br>每次进行一次步骤，计数一次，直到到k-1；则pre移到cur的位置，继续重复以上步骤。</p>
-<p>最后，到后面没有后续值后，如果计数器不到k-1，则再把后面的值翻过来一遍。</p>
+<p>题目给出的几个注意点：</p>
+<ol>
+<li>所给的数组是排序的（很重要）</li>
+<li>其实答案是根据返回的数组长度而截取原数组所得的数组</li>
+<li>空间复杂度在O(1)</li>
+</ol>
+<h4 id="记录重复数量，不重复的序列号，当前比较的数值"><a href="#记录重复数量，不重复的序列号，当前比较的数值" class="headerlink" title="记录重复数量，不重复的序列号，当前比较的数值"></a>记录重复数量，不重复的序列号，当前比较的数值</h4><p>借助几个变量存储上述的值，在每次比较数值变化的时候，来改变序列号与比较数值，其他时候递增重复数值，即可。</p>
 <p><br></p>
-<pre><code>/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-class Solution {
+<pre><code>class Solution {
 public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        if(head == NULL || k == 1)
-            return head;
+    int removeDuplicates(vector&lt;int&gt;&amp; nums) {
+        int index = 0, cur = INT_MIN, repeat = 0, len = nums.size();
 
-        ListNode *ori = new ListNode(0);
-        ori-&gt;next = head;
-        ListNode *cur, *nxt, *pre = ori;
-
-        int counter;
-        while(true) {
-            counter = k;
-            cur = pre-&gt;next;
-            nxt = cur-&gt;next;
-
-            while(cur-&gt;next and counter-- &gt; 1)  {
-                cur-&gt;next = nxt-&gt;next;
-                nxt-&gt;next = pre-&gt;next;
-                pre-&gt;next = nxt;
-                nxt = cur-&gt;next;
+        for(int i = 0; i &lt; len; i++)    {
+            if(nums[i] &gt; cur)   {
+                cur = nums[i];
+                nums[index++] = cur;
             }
-
-            if(cur-&gt;next == NULL)
-                break;
-            pre = cur;
+            else
+                ++repeat;
         }
 
-        if(counter &gt; 1) {
-            counter = k - counter;
-            cur = pre-&gt;next;
-            nxt = cur-&gt;next;
-
-            while(counter--)    {
-                cur-&gt;next = nxt-&gt;next;
-                nxt-&gt;next = pre-&gt;next;
-                pre-&gt;next = nxt;
-                nxt = cur-&gt;next;
-            }
-        }
-
-        return ori-&gt;next;
+        return len - repeat;
     }
 };
 </code></pre><p><br></p>
-<h4 id="2"><a href="#2" class="headerlink" title="2"></a>2</h4><p>这个方法是我看热门解题里的，通过遍历一遍链表，就不用把最后反过来的再翻回去了。<br>但是结果是缩短了代码行数。</p>
+<h4 id="更为精简"><a href="#更为精简" class="headerlink" title="更为精简"></a>更为精简</h4><p>只用一个变量，来存储重复的数量，<br>如果连续的两个数值不等，就将之前重复的替换掉（根据重复的数量可以求出）。</p>
 <pre><code>class Solution {
 public:
-    ListNode *reverseKGroup(ListNode *head, int k) {
-        if(head == NULL || k == 1) 
-            return head;
-
-        int num = 0;
-        ListNode *ori = new ListNode(-1);
-        ori-&gt;next = head;
-        ListNode *cur = ori, *nxt, *pre = ori;
-
-        while(cur = cur-&gt;next) 
-            num++;
-
-        while(num &gt;= k) {
-            cur = pre-&gt;next;
-            nxt = cur-&gt;next;
-            for(int i = 1; i &lt; k ; ++i) {
-                cur-&gt;next = nxt-&gt;next;
-                nxt-&gt;next = pre-&gt;next;
-                pre-&gt;next = nxt;
-                nxt = cur-&gt;next;
-            }
-            pre = cur;
-            num -= k;
+    int removeDuplicates(vector&lt;int&gt;&amp; nums) {
+        int repeat = 0, len = nums.size();
+        for(int i = 1; i &lt; len; i++){
+            if(nums[i] == nums[i-1]) repeat++;
+            else nums[i-repeat] = nums[i];
         }
-        return ori-&gt;next;
+        return len-repeat;
     }
 };
 </code></pre>
@@ -324,18 +261,9 @@ public:
     
 <nav id="article-nav">
   
-    <a href="/2017/05/13/[Leetcode]_26  Remove Duplicates from Sorted Array/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Leetcode_26  Remove Duplicates from Sorted Array
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/08/[Leetcode]_24  Swap Nodes in Pairs/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Leetcode_24  Swap Nodes in Pairs</div>
+    <a href="/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Leetcode_25  Reverse Nodes in k-Group</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -370,7 +298,7 @@ public:
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="[Leetcode]_25  Reverse Nodes in k-Group" data-title="Leetcode_25  Reverse Nodes in k-Group" data-url="http://yoursite.com/2017/05/10/[Leetcode]_25  Reverse Nodes in k-Group/"></div>
+	<div class="ds-thread" data-thread-key="[Leetcode]_26  Remove Duplicates from Sorted Array" data-title="Leetcode_26  Remove Duplicates from Sorted Array" data-url="http://yoursite.com/2017/05/13/[Leetcode]_26  Remove Duplicates from Sorted Array/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
