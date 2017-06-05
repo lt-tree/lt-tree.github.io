@@ -614,7 +614,7 @@ a {
   border: 1px solid #aaf;
 }
 #header .header-nav .social a.weibo:hover {
-  border: 1px solid #aaf;
+  border: 5px solid #2c2c2c;
 }
 #header .header-nav .social a.rss {
   background: url("/img/rss.png") center no-repeat #ef7522;
@@ -628,21 +628,21 @@ a {
   border: 1px solid #afb6ca;
 }
 #header .header-nav .social a.github:hover {
-  border: 1px solid #909ab6;
+  border: 5px solid #2c2c2c;
 }
 #header .header-nav .social a.csdn {
-  background: url("/img/csdn.png") center no-repeat #afb6ca;
-  border: 1px solid #bfbfbf;
+  background: url("/img/csdn.png") center no-repeat #d81e06;
+  border: 1px solid #d81e06;
 }
 #header .header-nav .social a.csdn:hover {
-  border: 1px solid #2c2c2c;
+  border: 5px solid #2c2c2c;
 }
 #header .header-nav .social a.resume {
-  background: url("/img/resume.png") center no-repeat #afb6ca;
-  border: 1px solid #bfbfbf;
+  background: url("/img/resume.png") center no-repeat #909ab6;
+  border: 1px solid #909ab6;
 }
 #header .header-nav .social a.resume:hover {
-  border: 1px solid #2c2c2c;
+  border: 5px solid #2c2c2c;
 }
 #header .header-nav .social a.facebook {
   background: url("/img/facebook.png") center no-repeat #3b5998;
@@ -677,7 +677,7 @@ a {
   border: 1px solid #0078d8;
 }
 #header .header-nav .social a.zhihu:hover {
-  border: 1px solid #0078d8;
+  border: 5px solid #2c2c2c;
 }
 #header .header-nav .social a.douban {
   background: url("/img/douban.png") center no-repeat #06c611;
