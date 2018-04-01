@@ -1,7 +1,7 @@
 ---
 title: cocos2d-x 接入 GameCenter 排行榜与成就
 date: 2017-04-29 12:13:11
-tags: [cocos2d-x, GameCenter]
+tags: [cocos2d-x]
 ---
 
 cocos2d-x 接入 GameCenter 排行榜与成就
