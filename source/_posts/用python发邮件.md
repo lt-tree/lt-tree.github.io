@@ -1,7 +1,7 @@
 ---
 title: 用python发邮件
 date: 2016-11-04 20:51:35
-tags: [脚本, 小技巧]
+tags: 想就做
 ---
 
 One Step
