@@ -1,5 +1,5 @@
 ---
-title: cocos2d-lua scrollview重用item
+title: Cocos2d-lua ScrollView优化1
 date: 2018-05-21 23:44:35
 tags: [cocos2d, 想就做]
 ---
@@ -403,6 +403,20 @@ update:
 之前的方法有问题，就是因为直接将Node addChild到ScrollView，当触摸传递到Node，发现无法转成Widget对象，就放弃了向上传播事件。
 所以，需要将item包装成Widget来让它将事件传递给ScrollView。
 
+<br/>
+<br/>
+
+### 4. 总结
+怎么用这个呢？
+
+1. 调用 ScrollView:setItemViewModel(item, item总数, 创建item所需的额外参数)
+2. 所有的item要有方法 item:setIndex(index), 并且以 self.index 作为自己的index[这里可以写一个类来封装，让所有item都继承它]
+3. 在删除的时候，要将ScrollView的每帧更新方法移除 
+
+
+现在，ScrollView已经可以重用item了。
+但是，还是比较粗糙；做为一个控件，仅仅是这样可不行。
+之后，会对这个控件慢慢优化，让它支持更多的功能，更加得心应手。
 
 
 
