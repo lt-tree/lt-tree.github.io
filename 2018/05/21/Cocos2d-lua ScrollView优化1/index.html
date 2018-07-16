@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="cocos2d,想就做," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="cocos2d lua重用scrollview的item">
+<meta name="keywords" content="cocos2d,想就做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-lua ScrollView优化1">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/Cocos2d-lua ScrollView优化1/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="cocos2d lua重用scrollview的item">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-12T16:04:04.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d-lua ScrollView优化1">
+<meta name="twitter:description" content="cocos2d lua重用scrollview的item">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/Cocos2d-lua ScrollView优化1/"/>
+
+
+
+
+
+  <title>Cocos2d-lua ScrollView优化1 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/Cocos2d-lua ScrollView优化1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cocos2d-lua ScrollView优化1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T23:44:35+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/21/Cocos2d-lua ScrollView优化1/" class="leancloud_visitors" data-flag-title="Cocos2d-lua ScrollView优化1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>cocos2d lua<br>重用scrollview的item</p>
+<a id="more"></a>
+<p><br></p>
+<h3 id="1-做了什么"><a href="#1-做了什么" class="headerlink" title="1.做了什么"></a>1.做了什么</h3><p><br></p>
+<h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>在使用ListView的时候，有多少个数据就会创建多少个item，并不会重复利用或回收释放。<br>随着数据量的增加，会对性能造成很大的影响。</p>
+<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><ul>
+<li><p>clone 改成 create[据说是这样，我没有测试过 = =…]<br>我们在使用ListView的时候，创建一个item，是通过lua重写的pushBackCustomItemView，<br>它会先调用ListView的pushBackDefaultItem，通过clone创建一个csb，我们再把数据赋过去。<br>所以，我们完全可以create一个csb，相对于clone会快一些。</p>
+<p>缺点： 这个应该会有点效果，嗯，有点效果而已。</p>
+</li>
+<li><p>分帧加载（逐帧加载）<br>并不是在一帧全加载完，而是选择每帧加载一定个数，直到加载完成</p>
+<p>缺点： 通过lua现有的协程来实现，但是流畅度不是很好，刚进入界面的时候可能看到item是逐渐加载进来的。</p>
+</li>
+<li><p>异步加载<br>这个主要对一些图片多的item，我们如果需要切换图，可以通过异步加载，等图片加载完再换图，这样不影响之后item的加载。</p>
+<p>缺点： 会看到 默认图（csb创建的样子） -&gt; 真正效果的转换过程。</p>
+</li>
+<li><p>滑动到底加载<br>就是先加载一定数量，监听到底部了，再拉取后面的部分，直到全部加载完。</p>
+<p>缺点： 做一系列监听滑动等，没有根本解决问题。</p>
+</li>
+</ul>
+<ul>
+<li>重用item[本次实现的方法]<br>其实，上面的那些方法，都是优化的技巧，并没有从根本上解决问题。<br>我们要根本的解决问题，就是创建可视区域可容纳数量+1的item，然后不断重用这些item。<br>在ListView同一时刻，只能见到5个item，那我就创建6个item，然后不断重用这些item。</li>
+</ul>
+<p><br><br><br></p>
+<h3 id="2-怎么做的"><a href="#2-怎么做的" class="headerlink" title="2.怎么做的"></a>2.怎么做的</h3><h4 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h4><p>首先明确view与inner，<br>view像一个窗口，它的大小就是我们可以见到的大小（当然要设置裁切），<br>inner是我们创建的所有item添加的地方（item并不是加载ScrollView上，而是加在了inner上）<br>ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从而让我们看到item位置的变化。<br><strong>简而言之，item加载inner上，是inner动，不是view动。</strong></p>
+<h4 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h4><p>在ScrollView或者ListView中，正常情况是这样的：<br>(前面数字代表item位置，后面数字代表item， —-代表可视区域)</p>
+<pre><code>1   1                   1
+    ----
+2   2                   2
+3   3                   3
+                        ----
+4   4                   4
+    ----                
+5   5                   5
+6   6                   6
+                        ----
+7   7                   7
+8   8                   8
+</code></pre><p>可以发现，<br>前面的例子中, 只能看见2, 3, 4; 但是看不见的1, 5, 6, 7, 8 依旧存在<br>后面的例子中, 只能看见4, 5, 6; 但是看不见的1, 2, 3, 7, 8 依旧存在</p>
+<p>所以，我们改成下面的样子:</p>
+<pre><code>1                        
+    ----
+2   2                    
+3   3                    
+                        ----
+4   4                   4
+    ----                
+5                       5
+6                       6
+                        ----
+7                        
+8                        
+</code></pre><p>因为可视区域只有3个item，我们就创建3个item，然后不断重用它们。(当然实际操作中，需要多创建一个，否则有穿帮风险)<br>但是，位置，我们依旧留着（划重点，<strong> inner大小不变 </strong>，否则无法滑动），<br>在往下滑的时候，最上面的跑到下面去顶替下面的item；<br>往上滑的时候，最下面的跑到上面去顶替上面的item；</p>
+<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>实现方法，<br>可以通过监听ScrollView滑动，每当ScrollView滚动，我们可以知道当前inner位置，<br>然后知道item的位置，从而判断item需不需要移动位置。<br>这里，用的是编辑一个绘制方法，每隔一段时间，都看一下各个item位置，然后根据需求移动位置。<br>我们在加载csb的时候将ScrollView记录下来，在view的update中调用它。<br>（本来想重写update，但是遇到了一些问题，所以妥协用了它，具体可以看后面 遇到的问题）</p>
+<p>init:</p>
+<pre><code>--[[
+    name            :   item类名 
+    totalItemNum    :   item总数
+    ...             :   创建item时需要的参数
+--]]
+function ScrollView:setItemViewModel(name, totalItemNum, ...)
+</code></pre><p>主要代码：</p>
+<pre><code>-- 得到所需绘制item个数
+local count = math.ceil(self:getContentSize().height / self.tItemContentSize.height) + 1
+for i = 1, count do
+    -- 创建item
+    local view = CSBReaderLoad(name)
+    view:init(...)
+    if view.setIndex then
+        view:setIndex(i)
+    end
+
+    -- 将父节点转为widget类型（原因可见 遇到的问题）
+    local widget = quick.packageNodeToWidget(view.pLayer:getChildByName(&quot;LayerTouch&quot;))
+    view.pLayer = widget
+    -- widget随父节点透明度变化，默认是false
+    widget:setCascadeOpacityEnabled(true)
+    self:addChild(view.pLayer)
+
+    -- 总数小于所需绘制item个数，需要隐藏多创建的
+    view.pLayer:setVisible(i &gt; 0 and i &lt;= self.totalItemNum)
+    -- 设置位置，注意我们加item是从下往上加的
+    view.pLayer:setPositionY(self.tItemContentSize.height * (self.totalItemNum - i))
+    table.insert(self.tItemView, view)
+end
+</code></pre><p>update:</p>
+<pre><code>function ScrollView:updateView(dt)
+</code></pre><p>主要代码：</p>
+<pre><code>-- 控制刷新时间
+self.updateTimer = self.updateTimer + dt
+if (self.updateTimer &lt; self.updateInterval) then
+    return 
+end
+self.updateTimer = 0;
+
+...
+
+-- 遍历所有创建的item，如果它们需要移动位置，就移动它们的位置，并让它们重绘自己
+for i = 1, length do
+    local item = self:getItemView(i)
+    local viewPos = self:getPositionInView(item.pLayer);
+    if increaseVal &lt; 0 then
+        if viewPos.y &lt; minBoundary then
+            if item.index and item.setIndex then
+                item:setIndex(item.index - length)
+                item.pLayer:setVisible(item.index &gt; 0 and item.index &lt;= self.totalItemNum)
+            end
+
+            item.pLayer:setPositionY(item.pLayer:getPositionY() + offset)
+        end
+    elseif increaseVal &gt; 0 then
+        if (viewPos.y &gt; maxBoundary and item.pLayer:getPositionY() - offset &gt; -self.tContentSize.height) then
+            if item.index and item.setIndex then
+                item:setIndex(item.index + length)
+                item.pLayer:setVisible(item.index &gt; 0 and item.index &lt;= self.totalItemNum)
+            end
+
+            item.pLayer:setPositionY(item.pLayer:getPositionY() - offset)
+        end
+    end
+end
+</code></pre><p><br><br><br></p>
+<h3 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3. 遇到的问题"></a>3. 遇到的问题</h3><h4 id="关于update"><a href="#关于update" class="headerlink" title="关于update"></a>关于update</h4><p>在3.x中lua启用定时器有两种方法：</p>
+<p>第一种方法 scheduleUpdateWithPriorityLua</p>
+<pre><code>scheduleUpdateWithPriorityLua(update, priority)
+    update - 刷新函数，
+    priority - 优先级，
+</code></pre><p> 此方法在Node类中实现，所以它的子类都可以使用。<br>此方法默认为每帧都刷新因此，无法自定义刷新时间。<br>这里，没有用这个方法，是因为ScrollView自己已经实现了update方法。<br>所以，当我们重新注册给ScrollView一个update的时候，发现无法替换。<br>这里涉及到计时器存储刷新方法：<br>刷新方法通过哈希表存储，在主循环期间，不移除已有方法，而是将它暂停，且恢复时不加载新方法，而是将原有方法恢复。</p>
+<p>启用定时器的源码如下：</p>
+<pre><code>void Node::scheduleUpdateWithPriorityLua(int nHandler, int priority)
+{
+    unscheduleUpdate();
+
+#if CC_ENABLE_SCRIPT_BINDING
+    _updateScriptHandler = nHandler;
+#endif
+
+    _scheduler-&gt;scheduleUpdate(this, priority, !_running);
+}
+</code></pre><p> 执行： unscheduleUpdate();<br> 会先判断节点是否有update方法，在哈希表中查找，并执行移除方法：</p>
+<pre><code>tHashUpdateEntry *element = nullptr;
+HASH_FIND_PTR(_hashForUpdates, &amp;target, element);
+if (element)
+{
+    if (_updateHashLocked)
+    {
+        element-&gt;entry-&gt;markedForDeletion = true;
+    }
+    else
+    {
+        this-&gt;removeUpdateFromHash(element-&gt;entry);
+    }
+}
+</code></pre><p> 上面移除方法，会根据_updateHashLocked值来执行，<br>它为真时，<br>如果节点原来有update，就先废弃它，废弃的方法是，将它标记为已删除，并让它暂停。注意！这里并没有真正的删除，而是将他表示是否删除的字段改值。<br>它为假时，<br>直接从哈希表中移除update方法。</p>
+<p>执行：_scheduler-&gt;scheduleUpdate(this, priority, !_running);<br>加入update，也会先从哈希表中查找update，再执行添加方法。</p>
+<pre><code>tHashUpdateEntry *hashElement = nullptr;
+HASH_FIND_PTR(_hashForUpdates, &amp;target, hashElement);
+if (hashElement)
+{
+    // check if priority has changed
+    if ((*hashElement-&gt;list)-&gt;priority != priority)
+    {
+        if (_updateHashLocked)
+        {
+            CCLOG(&quot;warning: you CANNOT change update priority in scheduled function&quot;);
+            hashElement-&gt;entry-&gt;markedForDeletion = false;
+            hashElement-&gt;entry-&gt;paused = paused;
+            return;
+        }
+        else
+        {
+            // will be added again outside if (hashElement).
+            unscheduleUpdate(target);
+        }
+    }
+    else
+    {
+        hashElement-&gt;entry-&gt;markedForDeletion = false;
+        hashElement-&gt;entry-&gt;paused = paused;
+        return;
+    }
+}
+</code></pre><p>添加方法，会先判断优先级，如果优先级相同，那么就恢复原来的update。<br>否则，根据 _updateHashLocked 值执行接下来操作。</p>
+<p>从移除和添加可以发现，关键值在于 _updateHashLocked的值，<br>这个值在Scheduler::update中设置，开始的时候设置为true，最后结束设置为false。<br>所以，如果要修改，就很麻烦，就放弃用这个方法了。<br><em>道理同样适用于所有自己已经重写了update，想要更换update情形。</em></p>
+<p><br></p>
+<p>第二种方法，通过定时管理器调用<br>就是上面指的Scheduler,不过我们不调ScrollView的，而是创建一个新的。</p>
+<pre><code>scheduler:scheduleScriptFunc(update, inteval, isOnce)
+    scheduler - cc.Director:getInstance():getScheduler()
+    update - 更新方法
+    inteval - 刷新时间间隔
+    isOnce - 是否只执行一次
+</code></pre><p>注意，如果用这个方法，需要负责创建，也要负责移除。<br>上面方法会返回一个id，之后可以通过这个id来删除它。</p>
+<pre><code>cc.Director:getInstance():getScheduler():unscheduleScriptEntry(id)
+</code></pre><p><br></p>
+<h4 id="为什么要把item包装成Widget"><a href="#为什么要把item包装成Widget" class="headerlink" title="为什么要把item包装成Widget"></a>为什么要把item包装成Widget</h4><p>在刚开始往ScrollView加child时，方法是将item的Node直接往ScrollView addChild（ScrollView封装了它，其实就是往inner addChild）<br>但是当直接addChild时，会产生很多问题：比如按钮吞噬触摸，无法滑动等等。</p>
+<p>那就要问一下了，为什么ListView没事呢？<br>这其实是Cocos对继承自ccui.Widget的事件的处理。<br>所有的控件事件监听都是单点触摸，并且会吞噬事件。</p>
+<pre><code>_touchListener = EventListenerTouchOneByOne::create();
+CC_SAFE_RETAIN(_touchListener);
+_touchListener-&gt;setSwallowTouches(true);
+_touchListener-&gt;onTouchBegan = CC_CALLBACK_2(Widget::onTouchBegan, this);
+_touchListener-&gt;onTouchMoved = CC_CALLBACK_2(Widget::onTouchMoved, this);
+_touchListener-&gt;onTouchEnded = CC_CALLBACK_2(Widget::onTouchEnded, this);
+_touchListener-&gt;onTouchCancelled = CC_CALLBACK_2(Widget::onTouchCancelled, this);
+_eventDispatcher-&gt;addEventListenerWithSceneGraphPriority(_touchListener, this);
+</code></pre><p>在widget的onTouchBegan, onTouchMove, onTouchEnd中，都会调用 propagateTouchEvent,<br>这个方法是传播事件，每个子节点会吞噬事件，自己处理完，再向父节点传递，一般ScrollView、ListView、PageView会处理这些事件。</p>
+<pre><code>Widget* widgetParent = getWidgetParent();
+if (widgetParent)
+{
+    widgetParent-&gt;_hittedByCamera = _hittedByCamera;
+    widgetParent-&gt;interceptTouchEvent(event, sender, touch);
+    widgetParent-&gt;_hittedByCamera = nullptr;
+}
+</code></pre><p>可以看出，只有继承自Widget类的，才会接收到interceptTouchEvent,并进行处理。<br>而且，ScrollView的interceptTouchEvent 已经处理好了按钮的点击，取消等效果。</p>
+<pre><code>void ScrollView::interceptTouchEvent(Widget::TouchEventType event, Widget *sender,Touch* touch)
+{
+    if(!_touchEnabled)
+    {
+        Layout::interceptTouchEvent(event, sender, touch);
+        return;
+    }
+    if(_direction == Direction::NONE)
+        return;
+    Vec2 touchPoint = touch-&gt;getLocation();
+    switch (event)
+    {
+        case TouchEventType::BEGAN:
+        {
+            _isInterceptTouch = true;
+            _touchBeganPosition = touch-&gt;getLocation();
+            handlePressLogic(touch);
+        }
+        break;
+        case TouchEventType::MOVED:
+        {
+            _touchMovePosition = touch-&gt;getLocation();
+            // calculates move offset in points
+            float offsetInInch = 0;
+            switch (_direction)
+            {
+                case Direction::HORIZONTAL:
+                    offsetInInch = convertDistanceFromPointToInch(Vec2(std::abs(sender-&gt;getTouchBeganPosition().x - touchPoint.x), 0));
+                    break;
+                case Direction::VERTICAL:
+                    offsetInInch = convertDistanceFromPointToInch(Vec2(0, std::abs(sender-&gt;getTouchBeganPosition().y - touchPoint.y)));
+                    break;
+                case Direction::BOTH:
+                    offsetInInch = convertDistanceFromPointToInch(sender-&gt;getTouchBeganPosition() - touchPoint);
+                    break;
+                default:
+                    break;
+            }
+            if (offsetInInch &gt; _childFocusCancelOffsetInInch)
+            {
+                sender-&gt;setHighlighted(false);
+                handleMoveLogic(touch);
+            }
+        }
+        break;
+
+        case TouchEventType::CANCELED:
+        case TouchEventType::ENDED:
+        {
+            _touchEndPosition = touch-&gt;getLocation();
+            handleReleaseLogic(touch);
+            if (sender-&gt;isSwallowTouches())
+            {
+                _isInterceptTouch = false;
+            }
+        }
+        break;
+    }
+}
+</code></pre><p>之前的方法有问题，就是因为直接将Node addChild到ScrollView，当触摸传递到Node，发现无法转成Widget对象，就放弃了向上传播事件。<br>所以，需要将item包装成Widget来让它将事件传递给ScrollView。</p>
+<p><br><br><br></p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><p>怎么用这个呢？</p>
+<ol>
+<li>调用 ScrollView:setItemViewModel(item, item总数, 创建item所需的额外参数)</li>
+<li>所有的item要有方法 item:setIndex(index), 并且以 self.index 作为自己的index[这里可以写一个类来封装，让所有item都继承它]</li>
+<li>在删除的时候，要将ScrollView的每帧更新方法移除 </li>
+</ol>
+<p>现在，ScrollView已经可以重用item了。<br>但是，还是比较粗糙；做为一个控件，仅仅是这样可不行。<br>之后，会对这个控件慢慢优化，让它支持更多的功能，更加得心应手。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cocos2d/" rel="tag"># cocos2d</a>
+          
+            <a href="/tags/想就做/" rel="tag"># 想就做</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/2017,  迷不茫/" rel="next" title="2017, 迷不茫">
+                <i class="fa fa-chevron-left"></i> 2017, 迷不茫
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/28/python dictionary & lua table/" rel="prev" title="python dictionary & lua table">
+                python dictionary & lua table <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-做了什么"><span class="nav-number">1.</span> <span class="nav-text">1.做了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题："><span class="nav-number">1.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案："><span class="nav-number">1.2.</span> <span class="nav-text">解决方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-怎么做的"><span class="nav-number">2.</span> <span class="nav-text">2.怎么做的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#机制"><span class="nav-number">2.1.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#想法"><span class="nav-number">2.2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#做法"><span class="nav-number">2.3.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">3. 遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于update"><span class="nav-number">3.1.</span> <span class="nav-text">关于update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要把item包装成Widget"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要把item包装成Widget</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">4.</span> <span class="nav-text">4. 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

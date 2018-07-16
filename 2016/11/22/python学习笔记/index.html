@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="跟着学," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python脚本学习">
+<meta name="keywords" content="跟着学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/11/22/python学习笔记/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="python脚本学习">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-12T16:04:04.308Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python学习笔记">
+<meta name="twitter:description" content="python脚本学习">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/22/python学习笔记/"/>
+
+
+
+
+
+  <title>python学习笔记 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/22/python学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-22T21:00:00+08:00">
+                2016-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/22/python学习笔记/" class="leancloud_visitors" data-flag-title="python学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>python脚本学习</p>
+<a id="more"></a>
+<p><br><br><br></p>
+<p>动机：<br>脚本可以省很多事情，<br>开发游戏用了lua，<br>但是，<br>真正日常要做一些东西脚本的时候，<br>发现用lua还是比较麻烦些，<br>所以，<br>就瞄上了python，<br>恩，<br>说学就学。</p>
+<p>注意：</p>
+<ul>
+<li>用的是python3</li>
+<li>适合有一定脚本语言基础的人看（很多脚本语言的共性没有记录）</li>
+</ul>
+<p><br></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><br></h2><p>Round 1: 基础<br><br></p>
+<ul>
+<li>输出语句 print<br><strong> 注意多个参数的格式 </strong></li>
+</ul>
+<pre><code>print(&apos;hello python!&apos;)
+x = 100
+y = &apos;hello&apos;
+print(&apos;%s user, your score is %d&apos; % (y, x))
+print(r&apos;&apos;)                            # 在&apos;&apos;内的字符不转义
+</code></pre><ul>
+<li>list、tuple、dict、set</li>
+</ul>
+<ol>
+<li><p>list    列表，有序的集合，随时添加删除元素<br>L = []<br>常用方法:<br>访问元素 - L[index] - index支持负数<br>末尾加入元素 - L.append(val)<br>某位置插入元素 - L.insert(index, val)<br>删除末尾元素 - L.pop()<br>删除某位置元素 - del L[index]</p>
+</li>
+<li><p>tuple 元组，初始化后不可修改 <strong>[ 初始化一个元素的元组时，元素后要加, : t = (1, ) ]</strong><br>T = ()<br><strong>list 与 tuple 可相互嵌套，tuple中的list可以增删，因为存的是地址</strong></p>
+</li>
+<li><p>dict 字典（你也可以叫它map)<br>D = {‘key’: value, }</p>
+</li>
+<li><p>set 集合，无序不重复<br>S = set([])</p>
+</li>
+</ol>
+<ul>
+<li>条件 与 循环<br>python的语法很简单，通过缩进来显示。<br>最重要的是<strong>:</strong></li>
+</ul>
+<pre><code>if &lt;条件&gt;:
+    continue
+elif &lt;条件&gt;:
+    break
+else:
+    pass
+
+for &lt; &gt; in &lt;对象集合&gt;:
+    pass
+
+while &lt;条件&gt;:
+    pass
+</code></pre><ul>
+<li>函数</li>
+</ul>
+<pre><code># 定义
+def function_name(parameters):
+    pass                                # 一旦定义一个函数，不可以什么都不写，但可以像这样
+                                        # 用pass来占位，先让代码运行起来。
+</code></pre><p>当然，默认参数值，返回多个值，都是支持的<br>额外要注意的应该是 <strong>参数</strong> 部分，包括：必选参数、默认参数、可变参数、命名关键字参数、关键字参数。<br>可变参数允许传入0个或任意个参数，这些会被自动组装为一个tuple；<br>关键字参数允许传入0个或任意个含参数名的参数，这些被自动组装为1个dict。</p>
+<pre><code>def book(name, author, **kw):
+    if &apos;language&apos; in kw:                         # 判断关键字参数中是否有 language 字段
+        pass
+
+    print(&apos;name: &apos;, name, &apos;author: &apos;, author, &apos;other: &apos;, kw)
+
+# methon1
+book(&apos;From Grass To Tree&apos;, &apos;ltree98&apos;, language = &apos;CHN&apos;)
+book(&apos;How To Study Python&apos;, &apos;ltree98&apos;, language = &apos;ENG&apos;, pages = 100)
+
+# method2
+extra = {&apos;language&apos;: &apos;KOR&apos;, &apos;class&apos;: &apos;novel&apos;}
+book(&apos;lalala&apos;, &apos;tree&apos;, **extra)
+</code></pre><p>PS：如果参数中已经有了一个可变参数，那么后面的命名关键字参数就不需要特殊分隔符’*‘了。<br><strong>参数顺序： 必选参数、默认参数、可变参数、命名关键字参数、关键字参数。</strong></p>
+<pre><code>def f(a, b = 0, *args, **kw):        # 必选参数、默认参数、可变参数、关键字参数
+    pass
+def f2(a, b = 0, *, d, **kw):        # 必选参数、默认参数、可变参数、命名关键字参数、关键字参数
+    pass
+</code></pre><p><strong>对于任意函数，都可以通过func(*args, **kw)的形式来调用它，无论参数是如何定义的。</strong></p>
+<ul>
+<li>others:<ul>
+<li>range([start = 0,] stop, [, step = 1]]), 生成从start开始（默认为0）到stop（不等于stop）,步长为step（默认为1）的整数序列；<br>start 与 step都是可选参数。</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br></p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a><br></h2><p>Round 2: 进阶<br><br><br><br></p>
+<ol>
+<li>一些特性（切片、迭代、列表生成式、生成器）</li>
+</ol>
+<ul>
+<li>切片<br>针对截取操作<br>L[start: stop: step]<br>截取从start序号开始到stop序号，步长为step的值成一个list返回。</li>
+</ul>
+<pre><code>&gt;&gt;&gt; L = list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+&gt;&gt;&gt; L1 = L[:5]
+[0, 1, 2, 3, 4]
+
+&gt;&gt;&gt; L2 = L[2:7]
+[2, 3, 4, 5, 6]
+
+&gt;&gt;&gt; L3 = L[:-1:2]
+[0, 2, 4, 6, 8]
+
+&gt;&gt;&gt; L4 = L[:]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre><ul>
+<li>迭代<br>给定一个list或tuple，通过for循环来遍历它，这种遍历叫做 迭代（iteration）<br>很多语言的迭代是通过下标来进行的，但python里，并不是。<br>当然，顺序可能就不是你当初定义它时的顺序了。</li>
+</ul>
+<pre><code>weekday = {&apos;Mon&apos;: 1, &apos;Tue&apos;: 2, &apos;Wed&apos;: 3}
+
+if isinstance(weekday, Iterable):
+    for w in weekday:
+        print(w)
+</code></pre><p>isinstance(…, Iterable) 判断一个数据类型是否可迭代<br>一般可以可迭代对象是 集合数据类型（如 list、tuple、dict、set、str等），他们都是Iterable类型。</p>
+<ul>
+<li>列表生成式<br>顾名思义，就是一个创建list的方式，<br>通过这种方式创建list比较便捷</li>
+</ul>
+<pre><code>[x + y for x in &apos;ABC&apos; for y in &apos;XYZ&apos; if x != &apos;B&apos;]
+
+# 其实上面那个等价于下面
+
+L = []
+for x in &apos;ABC&apos;:
+    for y in &apos;XYZ&apos;:
+        if x != &apos;B&apos;:
+            L.append(x+y)
+</code></pre><ul>
+<li>生成器<br>针对于列表容量有限的缺陷，<br>生成器就是一边循环一边计算。<br>与列表生成式的区别是，列表生成时最外层是 []，而生成器最外层是 ()<br>而且，得到的generator，需要不停next得到下一个元素。（一般会通过for循环来迭代获取）</li>
+</ul>
+<pre><code>g = (x + y for x in &apos;ABC&apos; for y in &apos;XYZ&apos; if x != &apos;B&apos;)
+for v in g:
+    print(v)
+</code></pre><p>可以作用于next()函数的对象都是Iterator类型，它们表示一个惰性计算的序列。<br>Iterator类型主要就两种，一种就是这个生成器，还有就是含yield的generator function</p>
+<p><br></p>
+<ol start="2">
+<li>关于函数式编程 （ lambda、map、reduce、filter、 装饰器）</li>
+</ol>
+<ul>
+<li>lambda [arg1 [, arg2, arg3, …]]: expression<br>也叫匿名函数，通过它可以非常方便快捷的定义使用一个函数。<br>具体效果，下面会给出。</li>
+</ul>
+<ul>
+<li>map(func, seq1[, seq2…])<br>将func作用于seq中的每一个元素，并用一个列表给出返回值。</li>
+</ul>
+<pre><code>def f(x):
+    return x * x
+m = map(f, [1, 2, 3, 4, 5])
+# m 将会是一个列表 [1, 4, 9, 16, 25]
+</code></pre><p>其实，用lambda更方便简洁</p>
+<pre><code>m = map(lambda x: x*x, range(1, 6))
+</code></pre><ul>
+<li>reduce(func, seq[, init])<br>这是一个二元操作函数，它用来将一个集合中所有数据进行从前到后的二元操作。</li>
+</ul>
+<pre><code>from fuctools import reduce
+def specialAdd(x, y):
+    return x*10 + y
+val = reduce(specialAdd, [1, 2, 3, 4, 5])
+# val将会是一个数字 12345
+</code></pre><p>reduce要提前导入，<br>当然，也可以用lambda</p>
+<pre><code>val = reduce(lambda x, y: x*10 + y, range(1, 6))
+</code></pre><ul>
+<li>filter(func, seq)<br>可以当做过滤器，将集合中的每个数都传入函数，根据函数返回的bool变量来决定是否留下。</li>
+</ul>
+<pre><code>def bigger_than_five(n):
+    return n &gt; 5
+f = list(filter(bigger_than_five, [3, 4, 5, 6, 7, 8]))
+# f 将会是一个列表 [6, 7, 8]
+
+f2 = list(filter(lambda n: n &gt; 5, range(3, 9)))
+</code></pre><ul>
+<li>装饰器<br>装饰器的作用就像它名字一样，给函数以装饰，做一个更大一范围的修饰。<br>比如，有A、B、C三个果汁工厂，现在要在每瓶果汁上印一个小商标。<br>我们可以在每个工厂内建立一个流水线来印商标，<br>也可以专门建立一个工厂D来印商标。<br>装饰器，就像后者，工厂D。</li>
+</ul>
+<pre><code>def myLog(func):
+    def wrapper(*args, **kw):
+        print(&apos;--- this is my log&apos;)
+        return func(*args, **kw)
+    return wrapper
+
+@myLog
+def demo():
+    print(&apos;\n\ndemo is running\n\n&apos;)
+
+demo()
+</code></pre><p>注意要加语法糖 @装饰器函数<br>本装饰器的作用是在函数调用前输出一段log。</p>
+<p>如果想让装饰器函数带参数，那就要进行三层嵌套。</p>
+<pre><code>def myLog(logText):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print(logText)
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@myLog(&quot;hello log&quot;)
+def demo():
+    print(&apos;\n\ndemo is running\n\n&apos;)
+
+demo()
+</code></pre><p>但是，这里的函数名已经发生了更改，demo名称其实已经发生了更改，<br>demo.__name__ 是 wrapper<br>可以通过加<br>wrapper.__name__ = func.__name__<br>来改回来，<br>但是，过于繁琐，python提供了更好的方法</p>
+<pre><code>import functools
+
+def myLog(logText):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print(logText)
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@myLog(&quot;hello log&quot;)
+def demo():
+    print(&apos;\n\ndemo is running\n\n&apos;)
+
+demo()
+print(demo.__name__)
+</code></pre><p><br></p>
+<ol start="3">
+<li>关于面向对象编程</li>
+</ol>
+<p>python中是有类这个结构的。<br>还有一些命名规则：<br>变量名以 _  开头，代表私有变量（非强制）<br>变量名以 __ 开头，代表私有变量 （强制）<br>变量名以 __ 开头，并且以 __ 结尾，代表特殊变量</p>
+<pre><code>class Person(object):
+    def __init__(self, name, age):
+        self.__name = name
+        self.age = age
+    def eat(self):
+        print(&apos;Person Eating...&apos;)
+
+
+class Student(Person):
+    def eat(self):
+        print(&apos;Student Eating...&apos;)
+    def study(self):
+        print(&apos;Student Study...&apos;)
+</code></pre><p>也可以对实例进行一些属性的绑定，当然，不会对类造成影响。<br>当然也可以对类进行方法绑定，其所有的实例均受影响</p>
+<pre><code>def set_height(self, height):
+    self.height = height
+class Person(object):
+    name = &apos;tree&apos;
+
+p = Person()
+print(&apos;p name is: &apos;, p.name)
+print(&apos;person name is: &apos;, Person.name)
+
+p.age = 20
+print(&apos;p age is: &apos;, p.age)
+print(&apos;person age is: &apos;, Person.age
+
+Person.set_height = set_height
+p.set_height(180)
+print(p.height)
+</code></pre><p>最后，可以通过在类内设置一些函数来使类更加完善:</p>
+<ul>
+<li>__init__<br>初始化方法</li>
+<li>__slots__<br>设定允许绑定的变量名（子类会继承父类）</li>
+<li>__len__<br>让类可以作用于len函数，设定计算类大小的方法</li>
+<li>__str__ 与 __repr__<br>都是用来当 print实例对象时 显示出来的字符串。<br>__str__是给用户看的，__repr__是给开发者看的（但一般都一样）</li>
+<li>__iter__ 与 __next__<br>可以让类作用于 for…in 循环</li>
+<li>__getitem__<br>可以像list一样实现按照下标取元素</li>
+<li>__getattr__<br>预设某属性默认值</li>
+<li>__call__<br>实现在实例本身的调用方法。</li>
+<li>装饰器实现get/set方法        </li>
+</ul>
+<pre><code>class Person(object):
+    @property
+    def age(self):
+        return self._age
+    @age.setter
+    def age(self, value):
+        self._age = value
+</code></pre><p><br><br><br></p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><br></h2><p>Final : 归纳<br><br></p>
+<p>python的一些基础东西，基本就这些了。<br>接下来，就可以去做一些东西来边练手边加深理解。<br>最后，<br>工具是死的，<br>人是活得，<br>不要局限自己，<br>放飞思维，<br>大胆去做。</p>
+<p><br><br><br><br><br><br><br></p>
+<p>参考：<br>着重推荐： <a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000</a><br><a href="http://www.pythoner.com/46.html" target="_blank" rel="noopener">http://www.pythoner.com/46.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/跟着学/" rel="tag"># 跟着学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/20/《REWORK》读记/" rel="next" title="《REWORK》读记">
+                <i class="fa fa-chevron-left"></i> 《REWORK》读记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/23/2016，没走偏/" rel="prev" title="2016,没走偏">
+                2016,没走偏 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
