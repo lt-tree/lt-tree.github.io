@@ -2,6 +2,7 @@
 title: Cocos2d iPhone 边缘触屏延迟现象
 date: 2018-06-06 23:39:35
 tags: [cocos2d, 想就做]
+summary_img: /images/summary_image/touch_screen.jpg
 ---
 
 Cocos2d iPhone 边缘触屏延迟现象

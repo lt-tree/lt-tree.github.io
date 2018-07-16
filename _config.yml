@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: ltree98's blog
-subtitle: 重新起航！
-description: restart
+title: Tree House
+subtitle: 不如自挂东南枝
+description: 
 author: ltree98
-language: zh-CN
+language: zh-Hans
 timezone: Asia/Hong_Kong
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://github.com/litten/hexo-theme-yilia
-theme: yilia
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
