@@ -2,16 +2,17 @@
 title: python学习笔记
 date: 2016-11-22 21:00:00
 tags: 跟着学
+
 ---
 
-----------
-
-python脚本学习
+python脚本学习记录
 
 
 <!-- more -->
+
 <br/>
-<br/>
+
+---
 
 动机：
 脚本可以省很多事情，
@@ -28,15 +29,14 @@ python脚本学习
 - 用的是python3
 - 适合有一定脚本语言基础的人看（很多脚本语言的共性没有记录）
 
-<br/>
-<br/>
-----------
+---
 
-Round 1: 基础
 <br/>
 
-- 输出语句 print
-** 注意多个参数的格式 **
+# 基础
+
+## 输出语句 print
+**注意多个参数的格式**
 
 
 		print('hello python!')
@@ -46,7 +46,7 @@ Round 1: 基础
 		print(r'')							# 在''内的字符不转义
 
 
-- list、tuple、dict、set
+## list、tuple、dict、set
 1. list	列表，有序的集合，随时添加删除元素
 L = []
 常用方法:		
@@ -67,7 +67,7 @@ D = {'key': value, }
 S = set([])
 
 
-- 条件 与 循环
+## 条件 与 循环
 python的语法很简单，通过缩进来显示。
 最重要的是**:**
 
@@ -86,8 +86,8 @@ python的语法很简单，通过缩进来显示。
 			pass
 
 
-- 函数
-		
+## 函数
+
 
 		# 定义
 		def function_name(parameters):
@@ -129,23 +129,18 @@ PS：如果参数中已经有了一个可变参数，那么后面的命名关键
 **对于任意函数，都可以通过func(\*args, \*\*kw)的形式来调用它，无论参数是如何定义的。**
 
 
-- others:
+## others:
 	- range([start = 0,] stop, [, step = 1]]), 生成从start开始（默认为0）到stop（不等于stop）,步长为step（默认为1）的整数序列；
 	start 与 step都是可选参数。
 
 
 <br/>
-<br/>
-<br/>
-----------
 
-Round 2: 进阶
-<br/>
-<br/>
+# 进阶
 
-1.  一些特性（切片、迭代、列表生成式、生成器）
+## 一些特性（切片、迭代、列表生成式、生成器）
 
-- 切片
+### 切片
 针对截取操作
 L[start: stop: step]  
 截取从start序号开始到stop序号，步长为step的值成一个list返回。
@@ -167,7 +162,7 @@ L[start: stop: step]
 		[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 		
 
-- 迭代
+### 迭代
 给定一个list或tuple，通过for循环来遍历它，这种遍历叫做 迭代（iteration）
 很多语言的迭代是通过下标来进行的，但python里，并不是。
 当然，顺序可能就不是你当初定义它时的顺序了。
@@ -184,7 +179,7 @@ isinstance(..., Iterable) 判断一个数据类型是否可迭代
 一般可以可迭代对象是 集合数据类型（如 list、tuple、dict、set、str等），他们都是Iterable类型。
 
 
-- 列表生成式
+### 列表生成式
 顾名思义，就是一个创建list的方式，
 通过这种方式创建list比较便捷
 
@@ -200,7 +195,7 @@ isinstance(..., Iterable) 判断一个数据类型是否可迭代
 					L.append(x+y)
 
 
-- 生成器
+### 生成器
 针对于列表容量有限的缺陷，
 生成器就是一边循环一边计算。
 与列表生成式的区别是，列表生成时最外层是 []，而生成器最外层是 ()
@@ -216,17 +211,15 @@ isinstance(..., Iterable) 判断一个数据类型是否可迭代
 Iterator类型主要就两种，一种就是这个生成器，还有就是含yield的generator function
 
 
-<br/>
-
-2.  关于函数式编程 （ lambda、map、reduce、filter、 装饰器）
+## 关于函数式编程 （ lambda、map、reduce、filter、 装饰器）
 
 
-- lambda [arg1 [, arg2, arg3, ...]]: expression
+### lambda [arg1 [, arg2, arg3, ...]]: expression
 也叫匿名函数，通过它可以非常方便快捷的定义使用一个函数。
 具体效果，下面会给出。
 
 
-- map(func, seq1[, seq2...])
+### map(func, seq1[, seq2...])
 将func作用于seq中的每一个元素，并用一个列表给出返回值。
 
 	
@@ -241,7 +234,7 @@ Iterator类型主要就两种，一种就是这个生成器，还有就是含yie
 		m = map(lambda x: x*x, range(1, 6))
 
 
-- reduce(func, seq[, init])
+### reduce(func, seq[, init])
 这是一个二元操作函数，它用来将一个集合中所有数据进行从前到后的二元操作。
 
 
@@ -259,7 +252,7 @@ reduce要提前导入，
 		val = reduce(lambda x, y: x*10 + y, range(1, 6))
 
 
-- filter(func, seq)
+### filter(func, seq)
 可以当做过滤器，将集合中的每个数都传入函数，根据函数返回的bool变量来决定是否留下。
 
 	
@@ -271,7 +264,7 @@ reduce要提前导入，
 		f2 = list(filter(lambda n: n > 5, range(3, 9)))
 
 
-- 装饰器
+### 装饰器
 装饰器的作用就像它名字一样，给函数以装饰，做一个更大一范围的修饰。
 比如，有A、B、C三个果汁工厂，现在要在每瓶果汁上印一个小商标。
 我们可以在每个工厂内建立一个流水线来印商标，
@@ -338,9 +331,7 @@ wrapper.\_\_name\_\_ = func.\_\_name\_\_
 		print(demo.__name__)
 
 
-<br/>
-
-3.  关于面向对象编程
+## 关于面向对象编程
 
 python中是有类这个结构的。
 还有一些命名规则：
@@ -416,12 +407,8 @@ python中是有类这个结构的。
 
 
 <br/>
-<br/>
-<br/>
-----------
 
-Final : 归纳
-<br/>
+# 归纳
 
 python的一些基础东西，基本就这些了。
 接下来，就可以去做一些东西来边练手边加深理解。
@@ -436,10 +423,8 @@ python的一些基础东西，基本就这些了。
 <br/>
 <br/>
 <br/>
-<br/>
 
-
-
+---
 
 参考：
 着重推荐： http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000 

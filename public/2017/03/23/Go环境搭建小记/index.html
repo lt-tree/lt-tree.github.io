@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="Go环境搭建Mac + Go1.7 + VSCode1.8">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T16:04:04.307Z">
+<meta property="og:updated_time" content="2018-07-17T16:54:53.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go环境搭建小记">
 <meta name="twitter:description" content="Go环境搭建Mac + Go1.7 + VSCode1.8">
@@ -311,14 +311,17 @@
       
 
       
-        <hr>
-<p>Go环境搭建<br>Mac + Go1.7 + VSCode1.8</p>
+        <p>Go环境搭建<br>Mac + Go1.7 + VSCode1.8</p>
 <a id="more"></a>
 <p><br></p>
-<p>由于工作原因，需要学习一下Go。<br>其实，我一直就对这个语言挺感兴趣的。<br>虽说技多不压身，但贪多嚼不烂；本来想着嚼烂了客户端，再去学一学Go。<br>没关系，先提前了解一下吧。<br><br><br>这个语言，对新手真是不友好到极点。<br>搭环境废了很大功夫。</p>
-<p>先列一下我的环境：<br>Mac系统 - Go 1.7 - VSCode 1.8<br>（ IDE为什么选择VSCode？VSCode优点可以自行Google ）</p>
+<hr>
+<p>由于工作原因，需要学习一下Go。<br>其实，我一直就对这个语言挺感兴趣的。<br>虽说技多不压身，但贪多嚼不烂；本来想着嚼烂了客户端，再去学一学Go。<br>没关系，先提前了解一下吧。</p>
+<hr>
 <p><br></p>
-<h3 id="Go的设置"><a href="#Go的设置" class="headerlink" title="Go的设置"></a>Go的设置</h3><p>先把Go下载，然后安装到Mac。<br>然后需要配置一下环境变量</p>
+<p>这个语言，对新手真是不友好到极点。<br>搭环境废了很大功夫。</p>
+<p>先列一下我的环境：<br>Mac系统 - Go 1.7 - VSCode 1.8<br>（ IDE为什么选择VSCode？VSCode优点可以自行Google ）</p>
+<p><br><br><br></p>
+<h1 id="Go的设置"><a href="#Go的设置" class="headerlink" title="Go的设置"></a>Go的设置</h1><p>先把Go下载，然后安装到Mac。<br>然后需要配置一下环境变量</p>
 <ul>
 <li>GOROOT<br>这个是你Go安装到的位置，一般在  /usr/local/go</li>
 <li>GOPATH<br>这个是你工作区路径，一般在自建的文件夹下（这个自建的文件夹下要有3个子文件夹[src、pkg、bin]）</li>
@@ -334,23 +337,30 @@
 </ol>
 <p><em>PS: 关于GOBIN：go install编译存放路径。不允许设置多个路径。可以为空。为空时则遵循“约定优于配置”原则，可执行文件放在各自GOPATH目录的bin文件夹中（前提是：package main的main函数文件不能直接放到GOPATH的src下面。)</em></p>
 <p><br></p>
-<h3 id="VSCode的配置"><a href="#VSCode的配置" class="headerlink" title="VSCode的配置"></a>VSCode的配置</h3><p>下载VSCode，然后在左侧小图标的最下面那个扩展选项中，搜索Go，进行下载(一般会搜索到两个go 和 Go，我下载的是第二个Go)。<br>接下来，要下载一系列的依赖包。</p>
-<h5 id="1-打开命令行，分别输入以下命令进行下载："><a href="#1-打开命令行，分别输入以下命令进行下载：" class="headerlink" title="1. 打开命令行，分别输入以下命令进行下载："></a>1. 打开命令行，分别输入以下命令进行下载：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">go get -u -v github.com/nsf/gocode</span><br><span class="line">go get -u -v github.com/rogpeppe/godef</span><br><span class="line">go get -u -v github.com/golang/lint/golint</span><br><span class="line">go get -u -v github.com/lukehoban/go-outline</span><br><span class="line">go get -u -v sourcegraph.com/sqs/goreturns</span><br><span class="line">go get -u -v golang.org/x/tools/cmd/gorename</span><br><span class="line">go get -u -v github.com/tpng/gopkgs</span><br><span class="line">go get -u -v golang.org/x/tools/cmd/guru</span><br></pre></td></tr></table></figure>
-<p>这一步，需要  科学上网工具  的支持，而且有时候，你有科学上网工具的支持都不顶用。<br>本质上讲，以gocode为例，它将gocode相关文件下载到src，然后将它编译生成可执行文件，将可执行文件放到bin目录下。<br>所以，可以直接去github上下载下来，然后自己编译一下，将生成的可执行文件放到bin目录下。</p>
-<h5 id="2-配置VSCode相关"><a href="#2-配置VSCode相关" class="headerlink" title="2. 配置VSCode相关"></a>2. 配置VSCode相关</h5><p>主要是 settings.json 与 launch.json</p>
+<h1 id="VSCode的配置"><a href="#VSCode的配置" class="headerlink" title="VSCode的配置"></a>VSCode的配置</h1><p>下载VSCode，然后在左侧小图标的最下面那个扩展选项中，搜索Go，进行下载(一般会搜索到两个go 和 Go，我下载的是第二个Go)。<br>接下来，要下载一系列的依赖包。</p>
+<h2 id="打开命令行，分别输入以下命令进行下载："><a href="#打开命令行，分别输入以下命令进行下载：" class="headerlink" title="打开命令行，分别输入以下命令进行下载："></a>打开命令行，分别输入以下命令进行下载：</h2><pre><code>go get -u -v github.com/nsf/gocode
+go get -u -v github.com/rogpeppe/godef
+go get -u -v github.com/golang/lint/golint
+go get -u -v github.com/lukehoban/go-outline
+go get -u -v sourcegraph.com/sqs/goreturns
+go get -u -v golang.org/x/tools/cmd/gorename
+go get -u -v github.com/tpng/gopkgs
+go get -u -v golang.org/x/tools/cmd/guru
+</code></pre><p>这一步，需要  科学上网工具  的支持，而且有时候，你有科学上网工具的支持都不顶用。<br>本质上讲，以gocode为例，它将gocode相关文件下载到src，然后将它编译生成可执行文件，将可执行文件放到bin目录下。<br>所以，可以直接去github上下载下来，然后自己编译一下，将生成的可执行文件放到bin目录下。</p>
+<h2 id="配置VSCode相关"><a href="#配置VSCode相关" class="headerlink" title="配置VSCode相关"></a>配置VSCode相关</h2><p>主要是 settings.json 与 launch.json</p>
 <p>如果你配置了 GOPATH、GOROOT ，就不需要配置相应的setting.json。<br>（进入方法是 code -&gt; 首选项 -&gt; 用户设置）</p>
 <p>打开VSCode，选择你的工作区域文件夹，然后在编辑配置文件。（不选文件夹不能配置）<br>进入方法是 code -&gt; 首选项 -&gt; 工作区设置</p>
 <p>主要修改program字段: <code>program: &quot;${workspaceRoot}&quot;</code><br>如果你的文件，比如test.go 放在src下就： <code>program: &quot;${workspaceRoot}/src&quot;</code></p>
 <p><br></p>
-<h3 id="让Mac-支持-VSCode调试功能"><a href="#让Mac-支持-VSCode调试功能" class="headerlink" title="让Mac 支持 VSCode调试功能"></a>让Mac 支持 VSCode调试功能</h3><p>英语原文：  <a href="https://github.com/derekparker/delve/blob/master/Documentation/installation/osx/install.md" target="_blank" rel="noopener">&gt;这里&lt;</a></p>
-<p><br><br>简单翻译一下步骤：</p>
+<h1 id="让Mac-支持-VSCode调试功能"><a href="#让Mac-支持-VSCode调试功能" class="headerlink" title="让Mac 支持 VSCode调试功能"></a>让Mac 支持 VSCode调试功能</h1><p>英语原文：  <a href="https://github.com/derekparker/delve/blob/master/Documentation/installation/osx/install.md" target="_blank" rel="noopener">&gt;这里&lt;</a></p>
+<p>简单翻译一下步骤：</p>
 <ol>
-<li>创建一个自签名证书<br>找到钥匙串访问，（ 证书助理 -&gt; 创建证书（身份类型：自签名证书，证书类型：代码签名，勾选 覆盖这些默认值） -&gt; 继续到最后，指定用于该证书的位置: 系统 ）</li>
-<li>设定信任属性<br>重启系统后，找到自己创建的证书，在 （ 显示简介 -&gt; 信任 -&gt; 代码签名 ） 选择 （ 始终信任 ）</li>
-<li>重新编译dlv文件<br>打开命令行，进入依赖包所处的工作区: <code>src/github.com/derekparker/delve</code><br>如果你的Go版本是1.5，则运行： <code>GO15VENDOREXPERIMENT=1 CERT=你创建的证书名称 make install</code><br>其他版本就直接：<code>CERT=你创建的证书名称 make install</code></li>
+<li>创建一个自签名证书<br> 找到钥匙串访问，（ 证书助理 -&gt; 创建证书（身份类型：自签名证书，证书类型：代码签名，勾选 覆盖这些默认值） -&gt; 继续到最后，指定用于该证书的位置: 系统 ）</li>
+<li>设定信任属性<br> 重启系统后，找到自己创建的证书，在 （ 显示简介 -&gt; 信任 -&gt; 代码签名 ） 选择 （ 始终信任 ）</li>
+<li>重新编译dlv文件<br> 打开命令行，进入依赖包所处的工作区: <code>src/github.com/derekparker/delve</code><br> 如果你的Go版本是1.5，则运行： <code>GO15VENDOREXPERIMENT=1 CERT=你创建的证书名称 make install</code><br> 其他版本就直接：<code>CERT=你创建的证书名称 make install</code></li>
 </ol>
 <p><br></p>
-<h3 id="总结小记。"><a href="#总结小记。" class="headerlink" title="总结小记。"></a>总结小记。</h3><p>终于折腾完了。<br>花了好久时间，看了N多教程，但还是走了不少弯路。<br>在 GOPATH、GOROOT理解上，在GOBIN路径唯一上，在创建签名证书处等等。<br>所以，整理了一下这篇文章，希望对他人有所帮助。</p>
+<h1 id="总结小记。"><a href="#总结小记。" class="headerlink" title="总结小记。"></a>总结小记。</h1><p>终于折腾完了。<br>花了好久时间，看了N多教程，但还是走了不少弯路。<br>在 GOPATH、GOROOT理解上，在GOBIN路径唯一上，在创建签名证书处等等。<br>所以，整理了一下这篇文章，希望对他人有所帮助。</p>
 
       
     </div>
@@ -522,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Go的设置"><span class="nav-number">1.</span> <span class="nav-text">Go的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VSCode的配置"><span class="nav-number">2.</span> <span class="nav-text">VSCode的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-打开命令行，分别输入以下命令进行下载："><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 打开命令行，分别输入以下命令进行下载：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-配置VSCode相关"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 配置VSCode相关</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让Mac-支持-VSCode调试功能"><span class="nav-number">3.</span> <span class="nav-text">让Mac 支持 VSCode调试功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结小记。"><span class="nav-number">4.</span> <span class="nav-text">总结小记。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go的设置"><span class="nav-number">1.</span> <span class="nav-text">Go的设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VSCode的配置"><span class="nav-number">2.</span> <span class="nav-text">VSCode的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打开命令行，分别输入以下命令进行下载："><span class="nav-number">2.1.</span> <span class="nav-text">打开命令行，分别输入以下命令进行下载：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置VSCode相关"><span class="nav-number">2.2.</span> <span class="nav-text">配置VSCode相关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让Mac-支持-VSCode调试功能"><span class="nav-number">3.</span> <span class="nav-text">让Mac 支持 VSCode调试功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结小记。"><span class="nav-number">4.</span> <span class="nav-text">总结小记。</span></a></li></ol></div>
             
 
           </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="读这本书之前做了一些功课，很多人反映，书是一本好书，无奈作者废话太多。。。刚开始，我是不信的，但自己读下来才发现，古人诚不欺我啊。来划一下重点吧，写的这些或者是作者所描述的重点，或者是我感触比较深的东西。 Later equals never！稍后等于永不！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T16:04:04.309Z">
+<meta property="og:updated_time" content="2018-07-17T16:34:13.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《代码的整洁之道》读记">
 <meta name="twitter:description" content="读这本书之前做了一些功课，很多人反映，书是一本好书，无奈作者废话太多。。。刚开始，我是不信的，但自己读下来才发现，古人诚不欺我啊。来划一下重点吧，写的这些或者是作者所描述的重点，或者是我感触比较深的东西。 Later equals never！稍后等于永不！">
@@ -311,12 +311,11 @@
       
 
       
-        <hr>
-<p>读这本书之前做了一些功课，很多人反映，书是一本好书，无奈作者废话太多。。。<br>刚开始，我是不信的，但自己读下来才发现，古人诚不欺我啊。<br>来划一下重点吧，写的这些或者是作者所描述的重点，或者是我感触比较深的东西。</p>
+        <p>读这本书之前做了一些功课，很多人反映，书是一本好书，无奈作者废话太多。。。<br>刚开始，我是不信的，但自己读下来才发现，古人诚不欺我啊。<br>来划一下重点吧，写的这些或者是作者所描述的重点，或者是我感触比较深的东西。</p>
 <p><strong>Later equals never！</strong><br><strong>稍后等于永不！</strong></p>
 <a id="more"></a>
 <p><br></p>
-<h3 id="第一章、关于整洁的代码"><a href="#第一章、关于整洁的代码" class="headerlink" title="第一章、关于整洁的代码"></a>第一章、关于整洁的代码</h3><ul>
+<h1 id="章节小记"><a href="#章节小记" class="headerlink" title="章节小记"></a>章节小记</h1><h2 id="第一章、关于整洁的代码"><a href="#第一章、关于整洁的代码" class="headerlink" title="第一章、关于整洁的代码"></a>第一章、关于整洁的代码</h2><ul>
 <li>代码的逻辑应该直截了当，让缺陷难以隐藏；尽量去减少依赖关系，从而便于维护；依据某种分层战略完善错误处理代码；性能调到最优，避免他人污染。</li>
 <li>糟糕的代码会引发混乱，别人修改糟糕的代码时，往往会越改越烂。</li>
 <li>每个函数、每个类、每个模块 都全神贯注去解决一件事</li>
@@ -325,20 +324,22 @@
 <li>能通过所有测试        </li>
 <li>没有重复代码         </li>
 <li>体现系统中的全部设计理念         </li>
-<li>包括尽量少的实体<br><br></li>
+<li>包括尽量少的实体</li>
 </ul>
 </li>
 </ul>
-<h3 id="第二章、关于命名"><a href="#第二章、关于命名" class="headerlink" title="第二章、关于命名"></a>第二章、关于命名</h3><ul>
+<p><br></p>
+<h2 id="第二章、关于命名"><a href="#第二章、关于命名" class="headerlink" title="第二章、关于命名"></a>第二章、关于命名</h2><ul>
 <li>名副其实，见名知意</li>
 <li>使用可以读的出来的、可以被搜索的名称</li>
 <li>匈牙利命名法、去掉成员前缀</li>
 <li>类名、对象名 应该是名词或名词短语；    方法名应该是动词或动词短语</li>
 <li>不要抖机灵，每个概念对应一个词，不用双关语（add、insert）</li>
 <li>分离解决方案领域和问题领域的概念，与所涉问题领域更为贴近的代码，应当采用源自问题领域的名称</li>
-<li>添加有意义的语境<br><br></li>
+<li>添加有意义的语境</li>
 </ul>
-<h3 id="第三章、关于函数"><a href="#第三章、关于函数" class="headerlink" title="第三章、关于函数"></a>第三章、关于函数</h3><ul>
+<p><br></p>
+<h2 id="第三章、关于函数"><a href="#第三章、关于函数" class="headerlink" title="第三章、关于函数"></a>第三章、关于函数</h2><ul>
 <li>函数的第一规则是短小，第二条规则是更短小！</li>
 <li>第一章节有提到过的： 每个函数尽量只做一件事。</li>
 <li>自顶向下阅读代码，向下规则</li>
@@ -346,9 +347,10 @@
 <li>不要向函数传入bool，因为这叫要求该函数不止做一件事</li>
 <li>不要有副作用，比如让你洗个苹果，你别洗完了然后吃了它。</li>
 <li>普遍而言，应避免使用输出参数。</li>
-<li>分隔指令与询问，要么让它干什么，要么让它回答什么。<br><br></li>
+<li>分隔指令与询问，要么让它干什么，要么让它回答什么。</li>
 </ul>
-<h3 id="第四章、关于注释-（别给糟糕的代码加注释，重新写吧！）"><a href="#第四章、关于注释-（别给糟糕的代码加注释，重新写吧！）" class="headerlink" title="第四章、关于注释  （别给糟糕的代码加注释，重新写吧！）"></a>第四章、关于注释  （别给糟糕的代码加注释，重新写吧！）</h3><ul>
+<p><br></p>
+<h2 id="第四章、关于注释-（别给糟糕的代码加注释，重新写吧！）"><a href="#第四章、关于注释-（别给糟糕的代码加注释，重新写吧！）" class="headerlink" title="第四章、关于注释  （别给糟糕的代码加注释，重新写吧！）"></a>第四章、关于注释  （别给糟糕的代码加注释，重新写吧！）</h2><ul>
 <li>代码会一直被维护更新，但是注释不一定。</li>
 <li>注释不能改变根本问题，它不能优化糟糕的代码。</li>
 <li>值得写的注释：       <ul>
@@ -366,11 +368,12 @@
 <li>日志式注释（之前不是说光维护代码，不维护注释吗？现在我维护注释，而且把每次修改的时间、内容都加上。有那时间干啥不好，100行的文件，80行注释日志？）        </li>
 <li>归属与署名        </li>
 <li>注释掉的代码（除了注释的人，其他人都不敢删的东西）        </li>
-<li>信息过多，无条理<br><br></li>
+<li>信息过多，无条理</li>
 </ul>
 </li>
 </ul>
-<h3 id="第五章、关于格式-代码的格式是你代码的普通话，别让他说方言"><a href="#第五章、关于格式-代码的格式是你代码的普通话，别让他说方言" class="headerlink" title="第五章、关于格式    (代码的格式是你代码的普通话，别让他说方言)"></a>第五章、关于格式    (代码的格式是你代码的普通话，别让他说方言)</h3><ul>
+<p><br></p>
+<h2 id="第五章、关于格式-代码的格式是你代码的普通话，别让他说方言"><a href="#第五章、关于格式-代码的格式是你代码的普通话，别让他说方言" class="headerlink" title="第五章、关于格式    (代码的格式是你代码的普通话，别让他说方言)"></a>第五章、关于格式    (代码的格式是你代码的普通话，别让他说方言)</h2><ul>
 <li>用空白行来区分你的模块</li>
 <li>关系应该密切的东西：        <ul>
 <li>变量声明，应该尽可能的靠近其使用位置        </li>
@@ -384,11 +387,12 @@
 <li>赋值操作周围加上空格        </li>
 <li>不在函数名和左圆括号之间加空格        </li>
 <li>逗号后加空格       </li>
-<li>加减周围加空格，优先级高的乘除周围不加空格；当然，如果只有优先级相同的运算符，还是可以在周围加空格的<br><br></li>
+<li>加减周围加空格，优先级高的乘除周围不加空格；当然，如果只有优先级相同的运算符，还是可以在周围加空格的</li>
 </ul>
 </li>
 </ul>
-<h3 id="第六章、-关于对象与数据结构"><a href="#第六章、-关于对象与数据结构" class="headerlink" title="第六章、 关于对象与数据结构"></a>第六章、 关于对象与数据结构</h3><ul>
+<p><br></p>
+<h2 id="第六章、-关于对象与数据结构"><a href="#第六章、-关于对象与数据结构" class="headerlink" title="第六章、 关于对象与数据结构"></a>第六章、 关于对象与数据结构</h2><ul>
 <li>不要将类内变量设置为私有，然后又添加赋值器和取值器，将它公之于众</li>
 <li>对象与数据结构之间的二分原理：        <ul>
 <li>过程式代码（使用数据结构的代码）便于在不改动既有数据结构的前提下添加新函数，        </li>
@@ -398,20 +402,23 @@
 </ul>
 </li>
 <li>Demeter律，模块不应了解它所操作对象的内部情形</li>
-<li>最为精炼的数据结构，是一个只有公共变量、没有函数的类<br><br></li>
+<li>最为精炼的数据结构，是一个只有公共变量、没有函数的类</li>
 </ul>
-<h3 id="第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）"><a href="#第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）" class="headerlink" title="第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）"></a>第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）</h3><ul>
+<p><br></p>
+<h2 id="第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）"><a href="#第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）" class="headerlink" title="第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）"></a>第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）</h2><ul>
 <li>使用异常处理而非返回错误码</li>
 <li>先写出 try-catch-finally语句</li>
 <li>给出异常发生的环境说明，方便定位</li>
 <li>依调用者需要定义异常类</li>
-<li>不要返回、传递NULL值<br><br></li>
+<li>不要返回、传递NULL值</li>
 </ul>
-<h3 id="第八章、关于边界（将其他代码整合到自己代码中）"><a href="#第八章、关于边界（将其他代码整合到自己代码中）" class="headerlink" title="第八章、关于边界（将其他代码整合到自己代码中）"></a>第八章、关于边界（将其他代码整合到自己代码中）</h3><ul>
+<p><br></p>
+<h2 id="第八章、关于边界（将其他代码整合到自己代码中）"><a href="#第八章、关于边界（将其他代码整合到自己代码中）" class="headerlink" title="第八章、关于边界（将其他代码整合到自己代码中）"></a>第八章、关于边界（将其他代码整合到自己代码中）</h2><ul>
 <li>使用类似Map的边界接口，就把它保留在类或近亲类中；避免从公共API中返回边界接口，或将边界接口作为参数传递给公共API。</li>
-<li>学习性测试很有必要<br><br></li>
+<li>学习性测试很有必要</li>
 </ul>
-<h3 id="第九章、关于单元测试"><a href="#第九章、关于单元测试" class="headerlink" title="第九章、关于单元测试"></a>第九章、关于单元测试</h3><ul>
+<p><br></p>
+<h2 id="第九章、关于单元测试"><a href="#第九章、关于单元测试" class="headerlink" title="第九章、关于单元测试"></a>第九章、关于单元测试</h2><ul>
 <li>TDD（测试驱动开发）三定律：        <ul>
 <li>在编写不能通过的单元测试前，不可编写生产代码        </li>
 <li>只可编写刚好无法通过的单元测试，不能编译也算不通过        </li>
@@ -426,25 +433,28 @@
 <li>I：Independent，测试应该相互独立。        </li>
 <li>R：Repeatable，测试应该可以在任何环境中重复通过。        </li>
 <li>S：Self-Validating，测试应该有布尔值输出。        </li>
-<li>T：Timely，测试应及时编写。<br><br></li>
+<li>T：Timely，测试应及时编写。</li>
 </ul>
 </li>
 </ul>
-<h3 id="第十章、关于类"><a href="#第十章、关于类" class="headerlink" title="第十章、关于类"></a>第十章、关于类</h3><ul>
+<p><br></p>
+<h2 id="第十章、关于类"><a href="#第十章、关于类" class="headerlink" title="第十章、关于类"></a>第十章、关于类</h2><ul>
 <li>类应该由一组变量列表开始，公共静态常量优先于私有静态变量</li>
 <li>类应该通函数一样要短小</li>
 <li>类或模块应有且只有一条加以修改的理由</li>
 <li>单一全责：系统应该由许多短小的类而不是少量巨大的类组成。每个小类封装一个全责，只有一个修改的原因，并与少数其他类一起协同达成期望的系统行为</li>
 <li>内聚：类应该只有少量实体变量</li>
 <li>既然修改会一直持续，那么就更应该对类加以组织，以降低修改的风险</li>
-<li>类应当依赖于抽象而不是依赖于具体细节<br><br></li>
+<li>类应当依赖于抽象而不是依赖于具体细节</li>
 </ul>
-<h3 id="第十一章、关于系统"><a href="#第十一章、关于系统" class="headerlink" title="第十一章、关于系统"></a>第十一章、关于系统</h3><ul>
+<p><br></p>
+<h2 id="第十一章、关于系统"><a href="#第十一章、关于系统" class="headerlink" title="第十一章、关于系统"></a>第十一章、关于系统</h2><ul>
 <li>软件系统应将起始过程与之后的运行时逻辑分离开。    就比如我做一个玩家信息面板，在起始过程，需要创建很多Text、Image来存储玩家一些状态信息及玩家的形象。    但是，我用这个界面的时候，只需要改动里面的值、或者切换形象。<br>这时，就可以有两个函数，init来负责起始过程的创建；refresh来负责更新玩家的状态。（当然不能把所有具体实现都放在一个函数里，每个函数负责一个小模块是必要的）</li>
 <li>软件系统与物理系统可以类比，它们的架构都可以递增式地增长，只要我们持续将关注面恰当的切分。</li>
-<li>最佳的系统架构由模块化的关注面领域组成，每个关注面均用纯Java(或其他语言）对象实现。不同领域之间用最不具有亲还行的方面或类方面工具整合起来。<br><br></li>
+<li>最佳的系统架构由模块化的关注面领域组成，每个关注面均用纯Java(或其他语言）对象实现。不同领域之间用最不具有亲还行的方面或类方面工具整合起来。</li>
 </ul>
-<h3 id="第十二章、关于迭代"><a href="#第十二章、关于迭代" class="headerlink" title="第十二章、关于迭代"></a>第十二章、关于迭代</h3><ul>
+<p><br></p>
+<h2 id="第十二章、关于迭代"><a href="#第十二章、关于迭代" class="headerlink" title="第十二章、关于迭代"></a>第十二章、关于迭代</h2><ul>
 <li>Kent Beck关于简单设计的四条规则    <ul>
 <li>运行所有测试    </li>
 <li>不可重复    </li>
@@ -463,9 +473,10 @@
 <li>最重要的就是去尝试去做</li>
 </ul>
 </li>
-<li>尽可能减少类和方法的数量，这条规则优先级是最低的，要让步于测试、消除重复和增强表达力。<br><br></li>
+<li>尽可能减少类和方法的数量，这条规则优先级是最低的，要让步于测试、消除重复和增强表达力。</li>
 </ul>
-<h3 id="第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）"><a href="#第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）" class="headerlink" title="第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）"></a>第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）</h3><ul>
+<p><br></p>
+<h2 id="第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）"><a href="#第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）" class="headerlink" title="第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）"></a>第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）</h2><ul>
 <li>并发是一种解耦策略，它将<strong>目的</strong>和<strong>时机</strong>分解开，而在单线程中，两者紧密耦合。</li>
 <li>解耦目的与时机可以显著的改进程序的<strong>吞吐量</strong>和<strong>结构</strong></li>
 <li>一些迷思与误解    <ul>
@@ -516,16 +527,18 @@
 <li>编写可调整的线程代码    </li>
 <li>运行多于处理器数量的线程    </li>
 <li>在不同平台上运行    </li>
-<li>调整代码并强迫错误发生<br><br></li>
+<li>调整代码并强迫错误发生</li>
 </ul>
 </li>
 </ul>
-<h4 id="第十四章、关于逐步改进"><a href="#第十四章、关于逐步改进" class="headerlink" title="第十四章、关于逐步改进"></a>第十四章、关于逐步改进</h4><ul>
+<p><br></p>
+<h2 id="第十四章、关于逐步改进"><a href="#第十四章、关于逐步改进" class="headerlink" title="第十四章、关于逐步改进"></a>第十四章、关于逐步改进</h2><ul>
 <li>要编写整洁代码，必须先写肮脏代码，然后清理它。<br>所以，不要害怕写的肮脏，只要去清理，就可以写出整洁的代码。<br>但是，一定要去<strong>清理它</strong>！</li>
 <li>在改进程序过程中，要保持系统始终可以运行</li>
-<li>进度可以重订，需求可以重新定义，团队动态可以修正，但糟糕的代码只是一直腐败发酵，无情的拖后腿<br><br></li>
+<li>进度可以重订，需求可以重新定义，团队动态可以修正，但糟糕的代码只是一直腐败发酵，无情的拖后腿</li>
 </ul>
-<h4 id="第十七章、味道与启发"><a href="#第十七章、味道与启发" class="headerlink" title="第十七章、味道与启发"></a>第十七章、味道与启发</h4><ul>
+<p><br></p>
+<h2 id="第十七章、味道与启发"><a href="#第十七章、味道与启发" class="headerlink" title="第十七章、味道与启发"></a>第十七章、味道与启发</h2><ul>
 <li>注释    <ul>
 <li>不恰当的信息<br>让注释传达本该更好地在源代码控制系统、问题追踪系统或任何其他记录系统中保存的信息，是不恰当的。    </li>
 <li>废弃的注释<br>过时、无关或不正确的注释就是废弃的注释。    </li>
@@ -596,11 +609,12 @@
 <li>被忽略的测试就是对不确定事物的疑问    </li>
 <li>测试边界条件    </li>
 <li>全面测试相近的缺陷    </li>
-<li>测试应该快速<br><br><br><br></li>
+<li>测试应该快速</li>
 </ul>
 </li>
 </ul>
-<h4 id="本书总结"><a href="#本书总结" class="headerlink" title="本书总结"></a>本书总结</h4><p>终于把这本书啃完了。<br>虽然作者比较啰嗦点，但是收获还是很大的。<br>书中提到的，有些已经做到了；<br>但有些不仅没做到，还是反面教材。<br>多规范一下自己的代码，毕竟对于我们来说，代码的清晰度、整洁度还是很重要的。<br>代码总要给别人看的，不要让自己的代码羞以示人。</p>
+<p><br><br><br></p>
+<h1 id="本书总结"><a href="#本书总结" class="headerlink" title="本书总结"></a>本书总结</h1><p>终于把这本书啃完了。<br>虽然作者比较啰嗦点，但是收获还是很大的。<br>书中提到的，有些已经做到了；<br>但有些不仅没做到，还是反面教材。<br>多规范一下自己的代码，毕竟对于我们来说，代码的清晰度、整洁度还是很重要的。<br>代码总要给别人看的，不要让自己的代码羞以示人。</p>
 
       
     </div>
@@ -770,7 +784,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一章、关于整洁的代码"><span class="nav-number">1.</span> <span class="nav-text">第一章、关于整洁的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二章、关于命名"><span class="nav-number">2.</span> <span class="nav-text">第二章、关于命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三章、关于函数"><span class="nav-number">3.</span> <span class="nav-text">第三章、关于函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四章、关于注释-（别给糟糕的代码加注释，重新写吧！）"><span class="nav-number">4.</span> <span class="nav-text">第四章、关于注释  （别给糟糕的代码加注释，重新写吧！）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五章、关于格式-代码的格式是你代码的普通话，别让他说方言"><span class="nav-number">5.</span> <span class="nav-text">第五章、关于格式    (代码的格式是你代码的普通话，别让他说方言)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六章、-关于对象与数据结构"><span class="nav-number">6.</span> <span class="nav-text">第六章、 关于对象与数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）"><span class="nav-number">7.</span> <span class="nav-text">第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第八章、关于边界（将其他代码整合到自己代码中）"><span class="nav-number">8.</span> <span class="nav-text">第八章、关于边界（将其他代码整合到自己代码中）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第九章、关于单元测试"><span class="nav-number">9.</span> <span class="nav-text">第九章、关于单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十章、关于类"><span class="nav-number">10.</span> <span class="nav-text">第十章、关于类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十一章、关于系统"><span class="nav-number">11.</span> <span class="nav-text">第十一章、关于系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十二章、关于迭代"><span class="nav-number">12.</span> <span class="nav-text">第十二章、关于迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）"><span class="nav-number">13.</span> <span class="nav-text">第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第十四章、关于逐步改进"><span class="nav-number">13.1.</span> <span class="nav-text">第十四章、关于逐步改进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第十七章、味道与启发"><span class="nav-number">13.2.</span> <span class="nav-text">第十七章、味道与启发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本书总结"><span class="nav-number">13.3.</span> <span class="nav-text">本书总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#章节小记"><span class="nav-number">1.</span> <span class="nav-text">章节小记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章、关于整洁的代码"><span class="nav-number">1.1.</span> <span class="nav-text">第一章、关于整洁的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章、关于命名"><span class="nav-number">1.2.</span> <span class="nav-text">第二章、关于命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章、关于函数"><span class="nav-number">1.3.</span> <span class="nav-text">第三章、关于函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章、关于注释-（别给糟糕的代码加注释，重新写吧！）"><span class="nav-number">1.4.</span> <span class="nav-text">第四章、关于注释  （别给糟糕的代码加注释，重新写吧！）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章、关于格式-代码的格式是你代码的普通话，别让他说方言"><span class="nav-number">1.5.</span> <span class="nav-text">第五章、关于格式    (代码的格式是你代码的普通话，别让他说方言)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章、-关于对象与数据结构"><span class="nav-number">1.6.</span> <span class="nav-text">第六章、 关于对象与数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）"><span class="nav-number">1.7.</span> <span class="nav-text">第七章、关于错误处理（当错误发生时，程序员有责任确保代码照常工作）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八章、关于边界（将其他代码整合到自己代码中）"><span class="nav-number">1.8.</span> <span class="nav-text">第八章、关于边界（将其他代码整合到自己代码中）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九章、关于单元测试"><span class="nav-number">1.9.</span> <span class="nav-text">第九章、关于单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章、关于类"><span class="nav-number">1.10.</span> <span class="nav-text">第十章、关于类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十一章、关于系统"><span class="nav-number">1.11.</span> <span class="nav-text">第十一章、关于系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十二章、关于迭代"><span class="nav-number">1.12.</span> <span class="nav-text">第十二章、关于迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）"><span class="nav-number">1.13.</span> <span class="nav-text">第十三章、关于并发编程（对象是过程的抽象，线程是调度的抽象）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十四章、关于逐步改进"><span class="nav-number">1.14.</span> <span class="nav-text">第十四章、关于逐步改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十七章、味道与启发"><span class="nav-number">1.15.</span> <span class="nav-text">第十七章、味道与启发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本书总结"><span class="nav-number">2.</span> <span class="nav-text">本书总结</span></a></li></ol></div>
             
 
           </div>

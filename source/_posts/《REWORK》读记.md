@@ -2,14 +2,13 @@
 title: 《REWORK》读记
 date: 2016-11-20 21:00:00
 tags: 看着读
----
 
-----------
+---
 
 Jason Friend 与 David Heinemeier Hansson 的 《REWORK》
 
-
 <!-- more -->
+
 <br/>
 
 好喜欢这种结构的书籍，

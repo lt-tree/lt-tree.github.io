@@ -2,20 +2,23 @@
 title: Cocos2d-lua ScrollView优化1
 date: 2018-05-21 23:44:35
 tags: [cocos2d, 想就做]
+
 ---
 
 cocos2d lua 
-重用scrollview的item
+修改ScrollView第一弹: item
 
 <!-- more -->
+
 <br/>
-### 1.做了什么
-<br/>
-#### 问题：
+
+# 做了什么
+
+## 问题：
 在使用ListView的时候，有多少个数据就会创建多少个item，并不会重复利用或回收释放。
 随着数据量的增加，会对性能造成很大的影响。
 
-#### 解决方案：
+## 解决方案：
 * clone 改成 create[据说是这样，我没有测试过 = =...]
 我们在使用ListView的时候，创建一个item，是通过lua重写的pushBackCustomItemView，
 它会先调用ListView的pushBackDefaultItem，通过clone创建一个csb，我们再把数据赋过去。
@@ -46,18 +49,16 @@ cocos2d lua
 
 
 <br>
-<br/>
 
-
-### 2.怎么做的
-#### 机制
+# 2.怎么做的
+## 机制
 首先明确view与inner，
 view像一个窗口，它的大小就是我们可以见到的大小（当然要设置裁切），
 inner是我们创建的所有item添加的地方（item并不是加载ScrollView上，而是加在了inner上）
 ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从而让我们看到item位置的变化。
 **简而言之，item加载inner上，是inner动，不是view动。**
 
-#### 想法
+## 想法
 在ScrollView或者ListView中，正常情况是这样的：
 (前面数字代表item位置，后面数字代表item， ----代表可视区域)
 
@@ -98,11 +99,11 @@ ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从�
 
 
 因为可视区域只有3个item，我们就创建3个item，然后不断重用它们。(当然实际操作中，需要多创建一个，否则有穿帮风险)
-但是，位置，我们依旧留着（划重点，** inner大小不变 **，否则无法滑动），
+但是，位置，我们依旧留着（划重点，**inner大小不变**，否则无法滑动），
 在往下滑的时候，最上面的跑到下面去顶替下面的item；
 往上滑的时候，最下面的跑到上面去顶替上面的item；
 
-#### 做法
+## 做法
 实现方法，
 可以通过监听ScrollView滑动，每当ScrollView滚动，我们可以知道当前inner位置，
 然后知道item的位置，从而判断item需不需要移动位置。
@@ -187,11 +188,11 @@ update:
             end
         end
 
-<br/>
+
 <br/>
 
-### 3. 遇到的问题
-#### 关于update
+# 3. 遇到的问题
+## 关于update
 在3.x中lua启用定时器有两种方法：
 
 第一种方法 scheduleUpdateWithPriorityLua
@@ -200,7 +201,7 @@ update:
 			update - 刷新函数，
 			priority - 优先级，
 
- 此方法在Node类中实现，所以它的子类都可以使用。
+此方法在Node类中实现，所以它的子类都可以使用。
 此方法默认为每帧都刷新因此，无法自定义刷新时间。
 这里，没有用这个方法，是因为ScrollView自己已经实现了update方法。
 所以，当我们重新注册给ScrollView一个update的时候，发现无法替换。
@@ -220,8 +221,8 @@ update:
 		    _scheduler->scheduleUpdate(this, priority, !_running);
 		}
 
- 执行： unscheduleUpdate();
- 会先判断节点是否有update方法，在哈希表中查找，并执行移除方法：
+执行： unscheduleUpdate();
+会先判断节点是否有update方法，在哈希表中查找，并执行移除方法：
 
 
 		tHashUpdateEntry *element = nullptr;
@@ -239,7 +240,7 @@ update:
 		}
 
 
- 上面移除方法，会根据_updateHashLocked值来执行，
+上面移除方法，会根据_updateHashLocked值来执行，
 它为真时，
 如果节点原来有update，就先废弃它，废弃的方法是，将它标记为已删除，并让它暂停。注意！这里并没有真正的删除，而是将他表示是否删除的字段改值。
 它为假时，
@@ -282,9 +283,9 @@ update:
 从移除和添加可以发现，关键值在于 _updateHashLocked的值，
 这个值在Scheduler::update中设置，开始的时候设置为true，最后结束设置为false。
 所以，如果要修改，就很麻烦，就放弃用这个方法了。
-*道理同样适用于所有自己已经重写了update，想要更换update情形。*
+*道理同样适用于所有自己已经重写了update，想要更换update情形*
 
-<br/>
+
 
 第二种方法，通过定时管理器调用
 就是上面指的Scheduler,不过我们不调ScrollView的，而是创建一个新的。
@@ -302,9 +303,7 @@ update:
 		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(id)
 
 
-<br/>
-
-#### 为什么要把item包装成Widget
+## 为什么要把item包装成Widget
 在刚开始往ScrollView加child时，方法是将item的Node直接往ScrollView addChild（ScrollView封装了它，其实就是往inner addChild）
 但是当直接addChild时，会产生很多问题：比如按钮吞噬触摸，无法滑动等等。
 
@@ -404,9 +403,8 @@ update:
 所以，需要将item包装成Widget来让它将事件传递给ScrollView。
 
 <br/>
-<br/>
 
-### 4. 总结
+# 4. 总结
 怎么用这个呢？
 
 1. 调用 ScrollView:setItemViewModel(item, item总数, 创建item所需的额外参数)

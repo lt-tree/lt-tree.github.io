@@ -2,14 +2,17 @@
 title: cocos2d-x 接入 GameCenter 排行榜与成就
 date: 2017-04-29 12:13:11
 tags: [cocos2d, 想就做]
+
 ---
 
 cocos2d-x 接入 GameCenter 排行榜与成就
 [mac - XCode 8.3 - cocos2d-x lua]
 
-
 <!-- more -->
-### 前言
+
+<br/>
+
+# 前言
 
 要求接入GameCenter的排行榜和成就。
 
@@ -18,24 +21,18 @@ GameCenter 是苹果推出的一个社交平台，
 - 排行榜
 - 成就
 - 挑战
+
 而且，苹果同时提供了GameKit框架来让GameCenter更易集成。
-
-
 可能是因为GameCenter的热度过去了吧，相关的东西都比较早期。
 整理总结了一下，希望对他人有所帮助。
 
 我的环境：
-
 mac - XCode 8.3 - cocos2d-x lua
 
 <br/>
-<br/>
-<br/>
 
-### 1. 公共的处理
-<br/>
-
-##### 1.1 配置 iTunes Connect 排行榜与成就的位置。
+# 公共的处理
+## 配置 iTunes Connect 排行榜与成就的位置。
 登录iTunes Connect, 找到要处理的APP。
 选择 功能->GameCenter
 可以看到三个大项：
@@ -43,15 +40,11 @@ mac - XCode 8.3 - cocos2d-x lua
 - 排行榜
 - 成就
 
-<br/>
-
-##### 1.2 添加GameKit框架
+## 添加GameKit框架
 打开项目工程，将 Capabilities 的 GameCenter 打开。
 这样，XCode就会将GameKit框架加到我们的工程中。
 
-<br/>
-
-##### 1.3 登录GameCenter
+## 登录GameCenter
 登录GameCenter:  【这个步骤在我们加载完游戏时进行即可】
 
 
@@ -74,9 +67,7 @@ mac - XCode 8.3 - cocos2d-x lua
         }
 
 
-<br/>
-
-##### 1.4 关于lua调用object-c
+## 关于lua调用object-c
 因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。
 cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：
 
@@ -84,9 +75,7 @@ cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接
         LuaObjcBridge.callStaticMethod(methodName className,args)
 
 
-<br/>
-
-##### 1.5 GameKit辅助处理类
+## GameKit辅助处理类
 GameKitHelper.h:
 
 
@@ -112,6 +101,7 @@ GameKitHelper.h:
 
 
 GameKitHelper.mm
+
 
         #import "GameKitHelper.h"
         
@@ -178,20 +168,13 @@ GameKitHelper.mm
         @end
 
 
-
-<br/>
-
-##### 1.6 登录GameCenter时机
+## 登录GameCenter时机
 由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。
 
 <br/>
-<br/>
-<br/>
 
-### 2. 关于排行榜
-<br/>
-
-#### 2.1 配置 iTunes Connect
+# 关于排行榜
+## 配置 iTunes Connect
 
 在iTunes Connect 找到 排行榜。
 
@@ -207,14 +190,9 @@ GameKitHelper.mm
 
 接下来就看属性去配置它吧。
 
-<br/>
-<br/>
-
-#### 2.2 XCode工程配置
+## XCode工程配置
 
 模拟这个流程：登录GameCenter -> 提交排行榜数据 ( -> 如果需要，弹出GameCenter排行榜)
-
-
 提交排行榜数据:
 
 
@@ -238,14 +216,8 @@ GameKitHelper.mm
         }
 
 
-
-<br/>
-<br/>
-
-#### 2.3 实践使用
-
+## 实践使用
 在公用部分，已经添加了GameCenter的登录验证相关的东西了。
-
 * 将排行榜数据提交的函数
 
 GameKitHelper.h
@@ -300,16 +272,10 @@ GameKitHelper.mm
         LuaObjcBridge.callStaticMethod("GameKitHelper", "getScore", {id = 排行榜的ID, score = 分数值})
 
 
-
-<br/>
-<br/>
 <br/>
 
-### 3. 关于成就
-
-<br/>
-
-#### 3.1 配置 iTunes Connect
+# 关于成就
+## 配置 iTunes Connect
 
 还是老位置，之前看的排行榜，这次点成就。
 还是老样子，成就的ID，创建后不可修改，成就发布后不可删除。
@@ -319,12 +285,7 @@ GameKitHelper.mm
 
 其他相关参数，可参考本文末尾的关于。
 
-
-<br/>
-<br/>
-
-#### 3.2 XCode工程配置
-
+## XCode工程配置
 流程与排行榜的一样，但是这次提交的不是分数了，而是成就完成的百分比。
 
 
@@ -353,15 +314,8 @@ GameKitHelper.mm
         } 
 
 
-
-<br/>
-<br/>
-
-#### 3.3 实践使用
-
+## 实践使用
 同排行榜一样。
-
-
 * 将成就数据提交的函数
 
 GameKitHelper.h
@@ -419,12 +373,9 @@ GameKitHelper.mm
         LuaObjcBridge.callStaticMethod("GameKitHelper", "getAchievement", {id = 成就ID, percent = 成就百分比})
 
 
-
-<br/>
-<br/>
 <br/>
 
-### 4. 最后
+# 最后
 GameCenter还是挺好的一个东西。
 它还有一个好友挑战功能，但这个主要适合之前 Flappy Bird，别踩白块 那些游戏来弄。
 或许，这也是这个平台没落了的原因吧。
@@ -434,18 +385,17 @@ GameCenter还是挺好的一个东西。
 <br/>
 <br/>
 
-### 关于
+---
+
+1. 关于
 
 - [关于 LuaObjcBridge](http://www.cocos2d-x.org/reference/native-cpp/V3.5/d6/d59/classcocos2d_1_1_lua_objc_bridge.html)
 - [关于 iTunes Connect](https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide_zh_CN/Chapters/About.html#//apple_ref/doc/uid/TP40016325-CH1-SW1)
 - [中文版 排行榜及成就 配置属性](https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnectGameCenter_Guide_SCh/Chapters/Leaderboards.html#//apple_ref/doc/uid/TP40014490-CH2-SW1)
 
-
-<br/>
-<br/>
 <br/>
 
-### 参考
+2. 参考
 
 - https://www.raywenderlich.com/23189/whats-new-with-game-center-in-ios-6
 - http://www.jianshu.com/p/4279f84d8340
