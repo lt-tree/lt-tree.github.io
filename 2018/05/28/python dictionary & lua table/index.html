@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="python dictionary 与 lua table">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T16:16:13.878Z">
+<meta property="og:updated_time" content="2018-07-17T16:55:12.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python dictionary &amp; lua table">
 <meta name="twitter:description" content="python dictionary 与 lua table">
@@ -317,7 +317,7 @@
 <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>公司前端的技术栈是 C++ &amp; lua &amp; python, C++、lua做业务开发，python做工具。<br>lua特别好用的东西就是load, 将某些数据（一般是excel）转成lua的table存储，用的时候直接load进来。<br>但是，有些数据，并不是excel转过来的，通过多个excel来组成。</p>
 <p>例如：<br>描述: 一个卡牌游戏，肯定有一张卡牌表，在表中我可以知道每张卡牌属于哪个职业。</p>
 <p>Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?<br>我需要遍历这个卡牌表，然后把相应职业的卡牌筛选出来。<br>但是，这个方法随着卡牌库的增加，所花费的时间也不断增加，早晚会出事呀。<br>当然，可以通过各种人为规定，算法设计来加快速度。<br>可是，都没有根本去解决问题。<br>回过头来，可以发现，当我们有了这张卡牌表，我就可以知道某职业都有哪些牌。<br>这就是像卡牌表一样，不需要在游戏中动态去生成，直接可以本地存储静态的一个职业对应卡牌的表。<br>这样，即使生成这张表再慢，也不会消耗游戏运行中的时间和性能。</p>
-<p><br><br><br></p>
+<p><br></p>
 <h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>现在目标很明确了，我要把n个表，根据需求组合拼装成1个表。<br>麻烦的是，表的生成这些东西，我们都已经做成脚本，交给策划生成了。<br>这个东西，肯定也需要交给策划进行。<br>不可能让策划打完表以后，程序再去执行一遍lua脚本。<br>（PS：这种东西一定要规避掉，一定要学会自动化，工具化。不要把我们的时间浪费在这些可以自动化、工具化的东西上。）</p>
 <p>所以，目前状况是：<br>语言：python<br>输入：n张lua表<br>输出：1张lua表<br>逻辑：一系列插入、查找、遍历等</p>
 <p>中间的逻辑就不用多说了，python的dict 和 lua的table用法也挺像的。<br>主要处理两个问题：</p>
@@ -325,9 +325,7 @@
 <li>将lua table 转换成 python dict</li>
 <li>将python dict 转换成 lua table</li>
 </ol>
-<p><br></p>
 <h2 id="大概思路"><a href="#大概思路" class="headerlink" title="大概思路"></a>大概思路</h2><p>在动手前，肯定要看有没有好的现成的轮子。重复造轮子还是不要了吧，不一定造的比人家好呢。<br>经过一番查找，发现了 slpp[ <a href="https://github.com/SirAnthony/slpp" target="_blank" rel="noopener">https://github.com/SirAnthony/slpp</a> ]<br>它可以实现lua table 和 python dict之间的转换。<br>但是，它是python2.x版本。<br>然后，在推送请求上看到，有人已经做了python3.x版本。 slpp-23[ <a href="https://github.com/IlyaSkriblovsky/slpp-23" target="_blank" rel="noopener">https://github.com/IlyaSkriblovsky/slpp-23</a> ]</p>
-<p><br></p>
 <h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><p>大概的方向差不多了，剩下的就是符合我所需要的格式。<br>因为，我的文件格式是这样的:</p>
 <pre><code>local xx_xx = {
     [1] = {
@@ -557,7 +555,7 @@ def write_dict_lua(dict_tmp, table_name, file_path):
 
 return dict_portal_group
 </code></pre><p>嗯，大概就是这样了。</p>
-<p><br><br><br></p>
+<p><br></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，就要遵循一个思路，<strong>静态的数据结构尽量不要再游戏过程中动态生成</strong>。<br>然后，前端要负责的东西太多了，<strong>尽量要把这些东西工具化、脚本化</strong>。<br>最后，<strong>代码不止能用，还要能看</strong>。</p>
 
       

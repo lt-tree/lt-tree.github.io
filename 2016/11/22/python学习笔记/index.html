@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="python脚本学习记录">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T16:42:59.555Z">
+<meta property="og:updated_time" content="2018-07-17T16:55:53.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python学习笔记">
 <meta name="twitter:description" content="python脚本学习记录">
@@ -314,6 +314,7 @@
         <p>python脚本学习记录</p>
 <a id="more"></a>
 <p><br></p>
+<hr>
 <p>动机：<br>脚本可以省很多事情，<br>开发游戏用了lua，<br>但是，<br>真正日常要做一些东西脚本的时候，<br>发现用lua还是比较麻烦些，<br>所以，<br>就瞄上了python，<br>恩，<br>说学就学。</p>
 <p>注意：</p>
 <ul>
@@ -322,7 +323,7 @@
 </ul>
 <hr>
 <p><br></p>
-<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="输出语句-print"><a href="#输出语句-print" class="headerlink" title="输出语句 print"></a>输出语句 print</h2><p><strong> 注意多个参数的格式 </strong></p>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="输出语句-print"><a href="#输出语句-print" class="headerlink" title="输出语句 print"></a>输出语句 print</h2><p><strong>注意多个参数的格式</strong></p>
 <pre><code>print(&apos;hello python!&apos;)
 x = 100
 y = &apos;hello&apos;
@@ -377,7 +378,7 @@ def f2(a, b = 0, *, d, **kw):        # 必选参数、默认参数、可变参�
 </code></pre><p><strong>对于任意函数，都可以通过func(*args, **kw)的形式来调用它，无论参数是如何定义的。</strong></p>
 <h2 id="others"><a href="#others" class="headerlink" title="others:"></a>others:</h2><pre><code>- range([start = 0,] stop, [, step = 1]]), 生成从start开始（默认为0）到stop（不等于stop）,步长为step（默认为1）的整数序列；
 start 与 step都是可选参数。
-</code></pre><p><br><br><br></p>
+</code></pre><p><br></p>
 <h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><h2 id="一些特性（切片、迭代、列表生成式、生成器）"><a href="#一些特性（切片、迭代、列表生成式、生成器）" class="headerlink" title="一些特性（切片、迭代、列表生成式、生成器）"></a>一些特性（切片、迭代、列表生成式、生成器）</h2><h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>针对截取操作<br>L[start: stop: step]<br>截取从start序号开始到stop序号，步长为step的值成一个list返回。</p>
 <pre><code>&gt;&gt;&gt; L = list(range(10))
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -415,7 +416,6 @@ for x in &apos;ABC&apos;:
 for v in g:
     print(v)
 </code></pre><p>可以作用于next()函数的对象都是Iterator类型，它们表示一个惰性计算的序列。<br>Iterator类型主要就两种，一种就是这个生成器，还有就是含yield的generator function</p>
-<p><br></p>
 <h2 id="关于函数式编程-（-lambda、map、reduce、filter、-装饰器）"><a href="#关于函数式编程-（-lambda、map、reduce、filter、-装饰器）" class="headerlink" title="关于函数式编程 （ lambda、map、reduce、filter、 装饰器）"></a>关于函数式编程 （ lambda、map、reduce、filter、 装饰器）</h2><h3 id="lambda-arg1-arg2-arg3-…-expression"><a href="#lambda-arg1-arg2-arg3-…-expression" class="headerlink" title="lambda [arg1 [, arg2, arg3, …]]: expression"></a>lambda [arg1 [, arg2, arg3, …]]: expression</h3><p>也叫匿名函数，通过它可以非常方便快捷的定义使用一个函数。<br>具体效果，下面会给出。</p>
 <h3 id="map-func-seq1-seq2…"><a href="#map-func-seq1-seq2…" class="headerlink" title="map(func, seq1[, seq2…])"></a>map(func, seq1[, seq2…])</h3><p>将func作用于seq中的每一个元素，并用一个列表给出返回值。</p>
 <pre><code>def f(x):
@@ -484,8 +484,7 @@ def demo():
 
 demo()
 print(demo.__name__)
-</code></pre><p><br></p>
-<h2 id="关于面向对象编程"><a href="#关于面向对象编程" class="headerlink" title="关于面向对象编程"></a>关于面向对象编程</h2><p>python中是有类这个结构的。<br>还有一些命名规则：<br>变量名以 _  开头，代表私有变量（非强制）<br>变量名以 __ 开头，代表私有变量 （强制）<br>变量名以 __ 开头，并且以 __ 结尾，代表特殊变量</p>
+</code></pre><h2 id="关于面向对象编程"><a href="#关于面向对象编程" class="headerlink" title="关于面向对象编程"></a>关于面向对象编程</h2><p>python中是有类这个结构的。<br>还有一些命名规则：<br>变量名以 _  开头，代表私有变量（非强制）<br>变量名以 __ 开头，代表私有变量 （强制）<br>变量名以 __ 开头，并且以 __ 结尾，代表特殊变量</p>
 <pre><code>class Person(object):
     def __init__(self, name, age):
         self.__name = name
@@ -535,7 +534,7 @@ print(p.height)
     @age.setter
     def age(self, value):
         self._age = value
-</code></pre><p><br><br><br></p>
+</code></pre><p><br></p>
 <h1 id="归纳"><a href="#归纳" class="headerlink" title="归纳"></a>归纳</h1><p>python的一些基础东西，基本就这些了。<br>接下来，就可以去做一些东西来边练手边加深理解。<br>最后，<br>工具是死的，<br>人是活得，<br>不要局限自己，<br>放飞思维，<br>大胆去做。</p>
 <p><br><br><br><br><br></p>
 <hr>

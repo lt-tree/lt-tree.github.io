@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="Go环境搭建Mac + Go1.7 + VSCode1.8">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T16:42:35.790Z">
+<meta property="og:updated_time" content="2018-07-17T16:54:53.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go环境搭建小记">
 <meta name="twitter:description" content="Go环境搭建Mac + Go1.7 + VSCode1.8">
@@ -336,7 +336,7 @@
 <li>输入 go env 看看Go的环境变量</li>
 </ol>
 <p><em>PS: 关于GOBIN：go install编译存放路径。不允许设置多个路径。可以为空。为空时则遵循“约定优于配置”原则，可执行文件放在各自GOPATH目录的bin文件夹中（前提是：package main的main函数文件不能直接放到GOPATH的src下面。)</em></p>
-<p><br><br><br></p>
+<p><br></p>
 <h1 id="VSCode的配置"><a href="#VSCode的配置" class="headerlink" title="VSCode的配置"></a>VSCode的配置</h1><p>下载VSCode，然后在左侧小图标的最下面那个扩展选项中，搜索Go，进行下载(一般会搜索到两个go 和 Go，我下载的是第二个Go)。<br>接下来，要下载一系列的依赖包。</p>
 <h2 id="打开命令行，分别输入以下命令进行下载："><a href="#打开命令行，分别输入以下命令进行下载：" class="headerlink" title="打开命令行，分别输入以下命令进行下载："></a>打开命令行，分别输入以下命令进行下载：</h2><pre><code>go get -u -v github.com/nsf/gocode
 go get -u -v github.com/rogpeppe/godef
@@ -351,15 +351,15 @@ go get -u -v golang.org/x/tools/cmd/guru
 <p>如果你配置了 GOPATH、GOROOT ，就不需要配置相应的setting.json。<br>（进入方法是 code -&gt; 首选项 -&gt; 用户设置）</p>
 <p>打开VSCode，选择你的工作区域文件夹，然后在编辑配置文件。（不选文件夹不能配置）<br>进入方法是 code -&gt; 首选项 -&gt; 工作区设置</p>
 <p>主要修改program字段: <code>program: &quot;${workspaceRoot}&quot;</code><br>如果你的文件，比如test.go 放在src下就： <code>program: &quot;${workspaceRoot}/src&quot;</code></p>
-<p><br><br><br></p>
+<p><br></p>
 <h1 id="让Mac-支持-VSCode调试功能"><a href="#让Mac-支持-VSCode调试功能" class="headerlink" title="让Mac 支持 VSCode调试功能"></a>让Mac 支持 VSCode调试功能</h1><p>英语原文：  <a href="https://github.com/derekparker/delve/blob/master/Documentation/installation/osx/install.md" target="_blank" rel="noopener">&gt;这里&lt;</a></p>
-<p><br><br>简单翻译一下步骤：</p>
+<p>简单翻译一下步骤：</p>
 <ol>
 <li>创建一个自签名证书<br> 找到钥匙串访问，（ 证书助理 -&gt; 创建证书（身份类型：自签名证书，证书类型：代码签名，勾选 覆盖这些默认值） -&gt; 继续到最后，指定用于该证书的位置: 系统 ）</li>
 <li>设定信任属性<br> 重启系统后，找到自己创建的证书，在 （ 显示简介 -&gt; 信任 -&gt; 代码签名 ） 选择 （ 始终信任 ）</li>
 <li>重新编译dlv文件<br> 打开命令行，进入依赖包所处的工作区: <code>src/github.com/derekparker/delve</code><br> 如果你的Go版本是1.5，则运行： <code>GO15VENDOREXPERIMENT=1 CERT=你创建的证书名称 make install</code><br> 其他版本就直接：<code>CERT=你创建的证书名称 make install</code></li>
 </ol>
-<p><br><br><br></p>
+<p><br></p>
 <h1 id="总结小记。"><a href="#总结小记。" class="headerlink" title="总结小记。"></a>总结小记。</h1><p>终于折腾完了。<br>花了好久时间，看了N多教程，但还是走了不少弯路。<br>在 GOPATH、GOROOT理解上，在GOBIN路径唯一上，在创建签名证书处等等。<br>所以，整理了一下这篇文章，希望对他人有所帮助。</p>
 
       
