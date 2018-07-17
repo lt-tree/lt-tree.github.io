@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="One Step 用python来发邮件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T16:04:04.310Z">
+<meta property="og:updated_time" content="2018-07-17T16:43:09.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用python发邮件">
 <meta name="twitter:description" content="One Step 用python来发邮件">
@@ -314,7 +314,8 @@
         <p>One Step</p>
 <p>用python来发邮件</p>
 <a id="more"></a>
-<p><br><br>恩，<br>学了python就不要浪费，<br>公司要求每天都要写工作日志，<br>每次都要:</p>
+<p><br></p>
+<p>恩，<br>学了python就不要浪费，<br>公司要求每天都要写工作日志，<br>每次都要:</p>
 <ol>
 <li>打开浏览器</li>
 <li>选择收藏夹里的邮箱</li>
@@ -332,7 +333,8 @@
 <li>编译</li>
 </ol>
 <p>惊！<br>这难道就是传说中的 —— One Step ？！！</p>
-<p><br><br>唠叨完了，该整干货了。</p>
+<p><br></p>
+<p>唠叨完了，该整干货了。</p>
 <pre><code>import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
@@ -374,7 +376,9 @@ def sendEmail(cont):
 <li>注释2:<br>日期的格式，更详细的可参考官方文档：<a href="http://python.usyiyi.cn/translate/python_352/library/datetime.html#datetime.datetime" target="_blank" rel="noopener">http://python.usyiyi.cn/translate/python_352/library/datetime.html#datetime.datetime</a></li>
 <li>注释3:<br>这里的From、To、Subject是非常必要的</li>
 </ul>
-<p><strong>还有，最好不要用163邮箱测试发邮件，会出现很多乱七八糟的问题（并非是你代码的问题）。</strong><br><br><br>上面代码是用来发邮件的核心代码，<br>写日志的地方加在里面是很不友好的行为，<br>所以，<br>再单独建一个新的友好的地方来写日志。</p>
+<p><strong>还有，最好不要用163邮箱测试发邮件，会出现很多乱七八糟的问题（并非是你代码的问题）</strong></p>
+<p><br></p>
+<p>上面代码是用来发邮件的核心代码，<br>写日志的地方加在里面是很不友好的行为，<br>所以，<br>再单独建一个新的友好的地方来写日志。</p>
 <pre><code>import imp 
 tool = imp.load_source(&apos;sendEmail&apos;, &apos;url&apos;)                # 导入核心模块，url 填写你上面核心代码的位置
 
@@ -384,7 +388,8 @@ content = &quot;&quot;&quot;
 &quot;&quot;&quot;
 
 tool.sendEmail(content.strip())                         # strip将首尾空白字符删除
-</code></pre><p><br><br>这样就方便很多了。<br>最后，<br>这个只是初步版本，<br>后期可以添加很多你想要的东西，<br>比如多个联系人，一些判断。<br>我因为自己用，所以没有加那些东西。</p>
+</code></pre><p><br></p>
+<p>这样就方便很多了。<br>最后，<br>这个只是初步版本，<br>后期可以添加很多你想要的东西，<br>比如多个联系人，一些判断。<br>我因为自己用，所以没有加那些东西。</p>
 
       
     </div>

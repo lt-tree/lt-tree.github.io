@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="cocos2d lua重用scrollview的item">
+<meta name="description" content="cocos2d lua修改ScrollView第一弹: item">
 <meta name="keywords" content="cocos2d,想就做">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cocos2d-lua ScrollView优化1">
 <meta property="og:url" content="http://yoursite.com/2018/05/21/Cocos2d-lua ScrollView优化1/index.html">
 <meta property="og:site_name" content="Tree House">
-<meta property="og:description" content="cocos2d lua重用scrollview的item">
+<meta property="og:description" content="cocos2d lua修改ScrollView第一弹: item">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T16:04:04.304Z">
+<meta property="og:updated_time" content="2018-07-17T16:22:37.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cocos2d-lua ScrollView优化1">
-<meta name="twitter:description" content="cocos2d lua重用scrollview的item">
+<meta name="twitter:description" content="cocos2d lua修改ScrollView第一弹: item">
 
 
 
@@ -311,12 +311,11 @@
       
 
       
-        <p>cocos2d lua<br>重用scrollview的item</p>
+        <p>cocos2d lua<br>修改ScrollView第一弹: item</p>
 <a id="more"></a>
 <p><br></p>
-<h3 id="1-做了什么"><a href="#1-做了什么" class="headerlink" title="1.做了什么"></a>1.做了什么</h3><p><br></p>
-<h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>在使用ListView的时候，有多少个数据就会创建多少个item，并不会重复利用或回收释放。<br>随着数据量的增加，会对性能造成很大的影响。</p>
-<h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><ul>
+<h1 id="做了什么"><a href="#做了什么" class="headerlink" title="做了什么"></a>做了什么</h1><h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>在使用ListView的时候，有多少个数据就会创建多少个item，并不会重复利用或回收释放。<br>随着数据量的增加，会对性能造成很大的影响。</p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><ul>
 <li><p>clone 改成 create[据说是这样，我没有测试过 = =…]<br>我们在使用ListView的时候，创建一个item，是通过lua重写的pushBackCustomItemView，<br>它会先调用ListView的pushBackDefaultItem，通过clone创建一个csb，我们再把数据赋过去。<br>所以，我们完全可以create一个csb，相对于clone会快一些。</p>
 <p>缺点： 这个应该会有点效果，嗯，有点效果而已。</p>
 </li>
@@ -334,8 +333,8 @@
 <li>重用item[本次实现的方法]<br>其实，上面的那些方法，都是优化的技巧，并没有从根本上解决问题。<br>我们要根本的解决问题，就是创建可视区域可容纳数量+1的item，然后不断重用这些item。<br>在ListView同一时刻，只能见到5个item，那我就创建6个item，然后不断重用这些item。</li>
 </ul>
 <p><br><br><br></p>
-<h3 id="2-怎么做的"><a href="#2-怎么做的" class="headerlink" title="2.怎么做的"></a>2.怎么做的</h3><h4 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h4><p>首先明确view与inner，<br>view像一个窗口，它的大小就是我们可以见到的大小（当然要设置裁切），<br>inner是我们创建的所有item添加的地方（item并不是加载ScrollView上，而是加在了inner上）<br>ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从而让我们看到item位置的变化。<br><strong>简而言之，item加载inner上，是inner动，不是view动。</strong></p>
-<h4 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h4><p>在ScrollView或者ListView中，正常情况是这样的：<br>(前面数字代表item位置，后面数字代表item， —-代表可视区域)</p>
+<h1 id="2-怎么做的"><a href="#2-怎么做的" class="headerlink" title="2.怎么做的"></a>2.怎么做的</h1><h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><p>首先明确view与inner，<br>view像一个窗口，它的大小就是我们可以见到的大小（当然要设置裁切），<br>inner是我们创建的所有item添加的地方（item并不是加载ScrollView上，而是加在了inner上）<br>ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从而让我们看到item位置的变化。<br><strong>简而言之，item加载inner上，是inner动，不是view动。</strong></p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>在ScrollView或者ListView中，正常情况是这样的：<br>(前面数字代表item位置，后面数字代表item， —-代表可视区域)</p>
 <pre><code>1   1                   1
     ----
 2   2                   2
@@ -363,7 +362,7 @@
 7                        
 8                        
 </code></pre><p>因为可视区域只有3个item，我们就创建3个item，然后不断重用它们。(当然实际操作中，需要多创建一个，否则有穿帮风险)<br>但是，位置，我们依旧留着（划重点，<strong> inner大小不变 </strong>，否则无法滑动），<br>在往下滑的时候，最上面的跑到下面去顶替下面的item；<br>往上滑的时候，最下面的跑到上面去顶替上面的item；</p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>实现方法，<br>可以通过监听ScrollView滑动，每当ScrollView滚动，我们可以知道当前inner位置，<br>然后知道item的位置，从而判断item需不需要移动位置。<br>这里，用的是编辑一个绘制方法，每隔一段时间，都看一下各个item位置，然后根据需求移动位置。<br>我们在加载csb的时候将ScrollView记录下来，在view的update中调用它。<br>（本来想重写update，但是遇到了一些问题，所以妥协用了它，具体可以看后面 遇到的问题）</p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>实现方法，<br>可以通过监听ScrollView滑动，每当ScrollView滚动，我们可以知道当前inner位置，<br>然后知道item的位置，从而判断item需不需要移动位置。<br>这里，用的是编辑一个绘制方法，每隔一段时间，都看一下各个item位置，然后根据需求移动位置。<br>我们在加载csb的时候将ScrollView记录下来，在view的update中调用它。<br>（本来想重写update，但是遇到了一些问题，所以妥协用了它，具体可以看后面 遇到的问题）</p>
 <p>init:</p>
 <pre><code>--[[
     name            :   item类名 
@@ -432,7 +431,7 @@ for i = 1, length do
     end
 end
 </code></pre><p><br><br><br></p>
-<h3 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3. 遇到的问题"></a>3. 遇到的问题</h3><h4 id="关于update"><a href="#关于update" class="headerlink" title="关于update"></a>关于update</h4><p>在3.x中lua启用定时器有两种方法：</p>
+<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3. 遇到的问题"></a>3. 遇到的问题</h1><h2 id="关于update"><a href="#关于update" class="headerlink" title="关于update"></a>关于update</h2><p>在3.x中lua启用定时器有两种方法：</p>
 <p>第一种方法 scheduleUpdateWithPriorityLua</p>
 <pre><code>scheduleUpdateWithPriorityLua(update, priority)
     update - 刷新函数，
@@ -504,7 +503,7 @@ if (hashElement)
 </code></pre><p>注意，如果用这个方法，需要负责创建，也要负责移除。<br>上面方法会返回一个id，之后可以通过这个id来删除它。</p>
 <pre><code>cc.Director:getInstance():getScheduler():unscheduleScriptEntry(id)
 </code></pre><p><br></p>
-<h4 id="为什么要把item包装成Widget"><a href="#为什么要把item包装成Widget" class="headerlink" title="为什么要把item包装成Widget"></a>为什么要把item包装成Widget</h4><p>在刚开始往ScrollView加child时，方法是将item的Node直接往ScrollView addChild（ScrollView封装了它，其实就是往inner addChild）<br>但是当直接addChild时，会产生很多问题：比如按钮吞噬触摸，无法滑动等等。</p>
+<h2 id="为什么要把item包装成Widget"><a href="#为什么要把item包装成Widget" class="headerlink" title="为什么要把item包装成Widget"></a>为什么要把item包装成Widget</h2><p>在刚开始往ScrollView加child时，方法是将item的Node直接往ScrollView addChild（ScrollView封装了它，其实就是往inner addChild）<br>但是当直接addChild时，会产生很多问题：比如按钮吞噬触摸，无法滑动等等。</p>
 <p>那就要问一下了，为什么ListView没事呢？<br>这其实是Cocos对继承自ccui.Widget的事件的处理。<br>所有的控件事件监听都是单点触摸，并且会吞噬事件。</p>
 <pre><code>_touchListener = EventListenerTouchOneByOne::create();
 CC_SAFE_RETAIN(_touchListener);
@@ -584,7 +583,7 @@ if (widgetParent)
 }
 </code></pre><p>之前的方法有问题，就是因为直接将Node addChild到ScrollView，当触摸传递到Node，发现无法转成Widget对象，就放弃了向上传播事件。<br>所以，需要将item包装成Widget来让它将事件传递给ScrollView。</p>
 <p><br><br><br></p>
-<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><p>怎么用这个呢？</p>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>怎么用这个呢？</p>
 <ol>
 <li>调用 ScrollView:setItemViewModel(item, item总数, 创建item所需的额外参数)</li>
 <li>所有的item要有方法 item:setIndex(index), 并且以 self.index 作为自己的index[这里可以写一个类来封装，让所有item都继承它]</li>
@@ -762,7 +761,7 @@ if (widgetParent)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-做了什么"><span class="nav-number">1.</span> <span class="nav-text">1.做了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题："><span class="nav-number">1.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案："><span class="nav-number">1.2.</span> <span class="nav-text">解决方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-怎么做的"><span class="nav-number">2.</span> <span class="nav-text">2.怎么做的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#机制"><span class="nav-number">2.1.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#想法"><span class="nav-number">2.2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#做法"><span class="nav-number">2.3.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">3. 遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于update"><span class="nav-number">3.1.</span> <span class="nav-text">关于update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要把item包装成Widget"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要把item包装成Widget</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">4.</span> <span class="nav-text">4. 总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#做了什么"><span class="nav-number">1.</span> <span class="nav-text">做了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题："><span class="nav-number">1.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案："><span class="nav-number">1.2.</span> <span class="nav-text">解决方案：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-怎么做的"><span class="nav-number">2.</span> <span class="nav-text">2.怎么做的</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#机制"><span class="nav-number">2.1.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#想法"><span class="nav-number">2.2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做法"><span class="nav-number">2.3.</span> <span class="nav-text">做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">3. 遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于update"><span class="nav-number">3.1.</span> <span class="nav-text">关于update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要把item包装成Widget"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要把item包装成Widget</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-总结"><span class="nav-number">4.</span> <span class="nav-text">4. 总结</span></a></li></ol></div>
             
 
           </div>

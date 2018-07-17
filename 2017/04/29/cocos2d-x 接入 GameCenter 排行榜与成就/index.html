@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="cocos2d-x 接入 GameCenter 排行榜与成就[mac - XCode 8.3 - cocos2d-x lua]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-12T16:04:04.307Z">
+<meta property="og:updated_time" content="2018-07-17T16:24:52.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d-x 接入 GameCenter 排行榜与成就">
 <meta name="twitter:description" content="cocos2d-x 接入 GameCenter 排行榜与成就[mac - XCode 8.3 - cocos2d-x lua]">
@@ -313,7 +313,8 @@
       
         <p>cocos2d-x 接入 GameCenter 排行榜与成就<br>[mac - XCode 8.3 - cocos2d-x lua]</p>
 <a id="more"></a>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>要求接入GameCenter的排行榜和成就。</p>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>要求接入GameCenter的排行榜和成就。</p>
 <p>GameCenter 是苹果推出的一个社交平台，<br>它主要提供了以下几个功能：</p>
 <ul>
 <li>排行榜</li>
@@ -323,18 +324,18 @@
 <p>可能是因为GameCenter的热度过去了吧，相关的东西都比较早期。<br>整理总结了一下，希望对他人有所帮助。</p>
 <p>我的环境：</p>
 <p>mac - XCode 8.3 - cocos2d-x lua</p>
-<p><br><br><br><br><br></p>
-<h3 id="1-公共的处理"><a href="#1-公共的处理" class="headerlink" title="1. 公共的处理"></a>1. 公共的处理</h3><p><br></p>
-<h5 id="1-1-配置-iTunes-Connect-排行榜与成就的位置。"><a href="#1-1-配置-iTunes-Connect-排行榜与成就的位置。" class="headerlink" title="1.1 配置 iTunes Connect 排行榜与成就的位置。"></a>1.1 配置 iTunes Connect 排行榜与成就的位置。</h5><p>登录iTunes Connect, 找到要处理的APP。<br>选择 功能-&gt;GameCenter<br>可以看到三个大项：</p>
+<p><br><br><br></p>
+<h1 id="公共的处理"><a href="#公共的处理" class="headerlink" title="公共的处理"></a>公共的处理</h1><p><br></p>
+<h2 id="配置-iTunes-Connect-排行榜与成就的位置。"><a href="#配置-iTunes-Connect-排行榜与成就的位置。" class="headerlink" title="配置 iTunes Connect 排行榜与成就的位置。"></a>配置 iTunes Connect 排行榜与成就的位置。</h2><p>登录iTunes Connect, 找到要处理的APP。<br>选择 功能-&gt;GameCenter<br>可以看到三个大项：</p>
 <ul>
 <li>移动群组</li>
 <li>排行榜</li>
 <li>成就</li>
 </ul>
 <p><br></p>
-<h5 id="1-2-添加GameKit框架"><a href="#1-2-添加GameKit框架" class="headerlink" title="1.2 添加GameKit框架"></a>1.2 添加GameKit框架</h5><p>打开项目工程，将 Capabilities 的 GameCenter 打开。<br>这样，XCode就会将GameKit框架加到我们的工程中。</p>
+<h2 id="添加GameKit框架"><a href="#添加GameKit框架" class="headerlink" title="添加GameKit框架"></a>添加GameKit框架</h2><p>打开项目工程，将 Capabilities 的 GameCenter 打开。<br>这样，XCode就会将GameKit框架加到我们的工程中。</p>
 <p><br></p>
-<h5 id="1-3-登录GameCenter"><a href="#1-3-登录GameCenter" class="headerlink" title="1.3 登录GameCenter"></a>1.3 登录GameCenter</h5><p>登录GameCenter:  【这个步骤在我们加载完游戏时进行即可】</p>
+<h2 id="登录GameCenter"><a href="#登录GameCenter" class="headerlink" title="登录GameCenter"></a>登录GameCenter</h2><p>登录GameCenter:  【这个步骤在我们加载完游戏时进行即可】</p>
 <pre><code>-(void) authenticateLocalPlayer {
     // 获取本地用户
     GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
@@ -353,10 +354,10 @@
     };
 }
 </code></pre><p><br></p>
-<h5 id="1-4-关于lua调用object-c"><a href="#1-4-关于lua调用object-c" class="headerlink" title="1.4 关于lua调用object-c"></a>1.4 关于lua调用object-c</h5><p>因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。<br>cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：</p>
+<h2 id="关于lua调用object-c"><a href="#关于lua调用object-c" class="headerlink" title="关于lua调用object-c"></a>关于lua调用object-c</h2><p>因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。<br>cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：</p>
 <pre><code>LuaObjcBridge.callStaticMethod(methodName className,args)
 </code></pre><p><br></p>
-<h5 id="1-5-GameKit辅助处理类"><a href="#1-5-GameKit辅助处理类" class="headerlink" title="1.5 GameKit辅助处理类"></a>1.5 GameKit辅助处理类</h5><p>GameKitHelper.h:</p>
+<h2 id="GameKit辅助处理类"><a href="#GameKit辅助处理类" class="headerlink" title="GameKit辅助处理类"></a>GameKit辅助处理类</h2><p>GameKitHelper.h:</p>
 <pre><code>#import &lt;GameKit/GameKit.h&gt;
 #import &quot;cocos2d.h&quot;
 
@@ -439,10 +440,10 @@
 
 @end
 </code></pre><p><br></p>
-<h5 id="1-6-登录GameCenter时机"><a href="#1-6-登录GameCenter时机" class="headerlink" title="1.6 登录GameCenter时机"></a>1.6 登录GameCenter时机</h5><p>由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。</p>
-<p><br><br><br><br><br></p>
-<h3 id="2-关于排行榜"><a href="#2-关于排行榜" class="headerlink" title="2. 关于排行榜"></a>2. 关于排行榜</h3><p><br></p>
-<h4 id="2-1-配置-iTunes-Connect"><a href="#2-1-配置-iTunes-Connect" class="headerlink" title="2.1 配置 iTunes Connect"></a>2.1 配置 iTunes Connect</h4><p>在iTunes Connect 找到 排行榜。</p>
+<h2 id="登录GameCenter时机"><a href="#登录GameCenter时机" class="headerlink" title="登录GameCenter时机"></a>登录GameCenter时机</h2><p>由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。</p>
+<p><br><br><br></p>
+<h1 id="关于排行榜"><a href="#关于排行榜" class="headerlink" title="关于排行榜"></a>关于排行榜</h1><p><br></p>
+<h2 id="配置-iTunes-Connect"><a href="#配置-iTunes-Connect" class="headerlink" title="配置 iTunes Connect"></a>配置 iTunes Connect</h2><p>在iTunes Connect 找到 排行榜。</p>
 <p>简单说一下流程吧：<br>配置排行榜的结构，然后我们在游戏中将数据上传到这个结构，最后显示到GameCenter中。</p>
 <p>排行榜分为 单个排行榜 与 组合排行榜。(顾名思义，区别就不需要解释了吧？)<br>里面需要配置的相应属性，可参考本文末尾的关于。</p>
 <p>要注意两点：</p>
@@ -451,8 +452,8 @@
 <li>排行榜只要发布了（经过审批发布），就无法删除了。</li>
 </ol>
 <p>接下来就看属性去配置它吧。</p>
-<p><br><br><br></p>
-<h4 id="2-2-XCode工程配置"><a href="#2-2-XCode工程配置" class="headerlink" title="2.2 XCode工程配置"></a>2.2 XCode工程配置</h4><p>模拟这个流程：登录GameCenter -&gt; 提交排行榜数据 ( -&gt; 如果需要，弹出GameCenter排行榜)</p>
+<p><br></p>
+<h2 id="XCode工程配置"><a href="#XCode工程配置" class="headerlink" title="XCode工程配置"></a>XCode工程配置</h2><p>模拟这个流程：登录GameCenter -&gt; 提交排行榜数据 ( -&gt; 如果需要，弹出GameCenter排行榜)</p>
 <p>提交排行榜数据:</p>
 <pre><code>-(void) submitScore:(int64_t)score category:(NSString*)category {       // 这里两个参数 score是数据， category是ID，就是我们创建排行榜以后，不可更改的那个ID。
     // 检查是否在登录状态
@@ -472,8 +473,8 @@
         [self setLastError:error];
     }];
 }
-</code></pre><p><br><br><br></p>
-<h4 id="2-3-实践使用"><a href="#2-3-实践使用" class="headerlink" title="2.3 实践使用"></a>2.3 实践使用</h4><p>在公用部分，已经添加了GameCenter的登录验证相关的东西了。</p>
+</code></pre><p><br></p>
+<h2 id="实践使用"><a href="#实践使用" class="headerlink" title="实践使用"></a>实践使用</h2><p>在公用部分，已经添加了GameCenter的登录验证相关的东西了。</p>
 <ul>
 <li>将排行榜数据提交的函数</li>
 </ul>
@@ -511,12 +512,11 @@
 <li>lua调用</li>
 </ul>
 <pre><code>LuaObjcBridge.callStaticMethod(&quot;GameKitHelper&quot;, &quot;getScore&quot;, {id = 排行榜的ID, score = 分数值})
-</code></pre><p><br><br><br><br><br></p>
-<h3 id="3-关于成就"><a href="#3-关于成就" class="headerlink" title="3. 关于成就"></a>3. 关于成就</h3><p><br></p>
-<h4 id="3-1-配置-iTunes-Connect"><a href="#3-1-配置-iTunes-Connect" class="headerlink" title="3.1 配置 iTunes Connect"></a>3.1 配置 iTunes Connect</h4><p>还是老位置，之前看的排行榜，这次点成就。<br>还是老样子，成就的ID，创建后不可修改，成就发布后不可删除。<br>但是，成就还要多一点，就是每个游戏总共有2000点成就分（为什么是2000？你问老乔去。。），你可以给每个成就分配一些成就分。<br>成就还有是否隐藏的选项，但是它的隐藏并不是看不到这个成就了，而是有一个成就名称为隐藏的成就显示在列表中。<br>还有，它的进度是一个顺时针扇形来表示，就是你的图标刚开始是被遮掩的，随着进度的增加，会逐渐显现出图标，方向是顺时针扇形。</p>
+</code></pre><p><br><br><br></p>
+<h1 id="关于成就"><a href="#关于成就" class="headerlink" title="关于成就"></a>关于成就</h1><h2 id="配置-iTunes-Connect-1"><a href="#配置-iTunes-Connect-1" class="headerlink" title="配置 iTunes Connect"></a>配置 iTunes Connect</h2><p>还是老位置，之前看的排行榜，这次点成就。<br>还是老样子，成就的ID，创建后不可修改，成就发布后不可删除。<br>但是，成就还要多一点，就是每个游戏总共有2000点成就分（为什么是2000？你问老乔去。。），你可以给每个成就分配一些成就分。<br>成就还有是否隐藏的选项，但是它的隐藏并不是看不到这个成就了，而是有一个成就名称为隐藏的成就显示在列表中。<br>还有，它的进度是一个顺时针扇形来表示，就是你的图标刚开始是被遮掩的，随着进度的增加，会逐渐显现出图标，方向是顺时针扇形。</p>
 <p>其他相关参数，可参考本文末尾的关于。</p>
-<p><br><br><br></p>
-<h4 id="3-2-XCode工程配置"><a href="#3-2-XCode工程配置" class="headerlink" title="3.2 XCode工程配置"></a>3.2 XCode工程配置</h4><p>流程与排行榜的一样，但是这次提交的不是分数了，而是成就完成的百分比。</p>
+<p><br></p>
+<h2 id="XCode工程配置-1"><a href="#XCode工程配置-1" class="headerlink" title="XCode工程配置"></a>XCode工程配置</h2><p>流程与排行榜的一样，但是这次提交的不是分数了，而是成就完成的百分比。</p>
 <pre><code>// 提交成就数据
 -(void) submitAchievment:(NSString *)identifier percent:(double) percentComplete {          // identifier 成就ID, percentComplete: 成就完成百分比
     // 判断登录认证
@@ -540,8 +540,8 @@
         }  
     }];  
 } 
-</code></pre><p><br><br><br></p>
-<h4 id="3-3-实践使用"><a href="#3-3-实践使用" class="headerlink" title="3.3 实践使用"></a>3.3 实践使用</h4><p>同排行榜一样。</p>
+</code></pre><p><br></p>
+<h2 id="实践使用-1"><a href="#实践使用-1" class="headerlink" title="实践使用"></a>实践使用</h2><p>同排行榜一样。</p>
 <ul>
 <li>将成就数据提交的函数</li>
 </ul>
@@ -582,16 +582,23 @@
 <li>lua调用</li>
 </ul>
 <pre><code>LuaObjcBridge.callStaticMethod(&quot;GameKitHelper&quot;, &quot;getAchievement&quot;, {id = 成就ID, percent = 成就百分比})
-</code></pre><p><br><br><br><br><br></p>
-<h3 id="4-最后"><a href="#4-最后" class="headerlink" title="4. 最后"></a>4. 最后</h3><p>GameCenter还是挺好的一个东西。<br>它还有一个好友挑战功能，但这个主要适合之前 Flappy Bird，别踩白块 那些游戏来弄。<br>或许，这也是这个平台没落了的原因吧。</p>
+</code></pre><p><br><br><br></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>GameCenter还是挺好的一个东西。<br>它还有一个好友挑战功能，但这个主要适合之前 Flappy Bird，别踩白块 那些游戏来弄。<br>或许，这也是这个平台没落了的原因吧。</p>
 <p><br><br><br><br><br></p>
-<h3 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h3><ul>
+<hr>
+<ol>
+<li>关于</li>
+</ol>
+<ul>
 <li><a href="http://www.cocos2d-x.org/reference/native-cpp/V3.5/d6/d59/classcocos2d_1_1_lua_objc_bridge.html" target="_blank" rel="noopener">关于 LuaObjcBridge</a></li>
 <li><a href="https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide_zh_CN/Chapters/About.html#//apple_ref/doc/uid/TP40016325-CH1-SW1" target="_blank" rel="noopener">关于 iTunes Connect</a></li>
 <li><a href="https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnectGameCenter_Guide_SCh/Chapters/Leaderboards.html#//apple_ref/doc/uid/TP40014490-CH2-SW1" target="_blank" rel="noopener">中文版 排行榜及成就 配置属性</a></li>
 </ul>
-<p><br><br><br><br><br></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<p><br></p>
+<ol start="2">
+<li>参考</li>
+</ol>
+<ul>
 <li><a href="https://www.raywenderlich.com/23189/whats-new-with-game-center-in-ios-6" target="_blank" rel="noopener">https://www.raywenderlich.com/23189/whats-new-with-game-center-in-ios-6</a></li>
 <li><a href="http://www.jianshu.com/p/4279f84d8340" target="_blank" rel="noopener">http://www.jianshu.com/p/4279f84d8340</a></li>
 <li><a href="http://blog.csdn.net/shenjie12345678/article/details/45025403/" target="_blank" rel="noopener">http://blog.csdn.net/shenjie12345678/article/details/45025403/</a></li>
@@ -767,7 +774,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-公共的处理"><span class="nav-number">2.</span> <span class="nav-text">1. 公共的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-配置-iTunes-Connect-排行榜与成就的位置。"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.1 配置 iTunes Connect 排行榜与成就的位置。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-添加GameKit框架"><span class="nav-number">2.0.2.</span> <span class="nav-text">1.2 添加GameKit框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-登录GameCenter"><span class="nav-number">2.0.3.</span> <span class="nav-text">1.3 登录GameCenter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-关于lua调用object-c"><span class="nav-number">2.0.4.</span> <span class="nav-text">1.4 关于lua调用object-c</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-GameKit辅助处理类"><span class="nav-number">2.0.5.</span> <span class="nav-text">1.5 GameKit辅助处理类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-登录GameCenter时机"><span class="nav-number">2.0.6.</span> <span class="nav-text">1.6 登录GameCenter时机</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-关于排行榜"><span class="nav-number">3.</span> <span class="nav-text">2. 关于排行榜</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-配置-iTunes-Connect"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 配置 iTunes Connect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-XCode工程配置"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 XCode工程配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-实践使用"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 实践使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-关于成就"><span class="nav-number">4.</span> <span class="nav-text">3. 关于成就</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-配置-iTunes-Connect"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 配置 iTunes Connect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-XCode工程配置"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 XCode工程配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-实践使用"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 实践使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-最后"><span class="nav-number">5.</span> <span class="nav-text">4. 最后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于"><span class="nav-number">6.</span> <span class="nav-text">关于</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公共的处理"><span class="nav-number">2.</span> <span class="nav-text">公共的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-iTunes-Connect-排行榜与成就的位置。"><span class="nav-number">2.1.</span> <span class="nav-text">配置 iTunes Connect 排行榜与成就的位置。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加GameKit框架"><span class="nav-number">2.2.</span> <span class="nav-text">添加GameKit框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录GameCenter"><span class="nav-number">2.3.</span> <span class="nav-text">登录GameCenter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于lua调用object-c"><span class="nav-number">2.4.</span> <span class="nav-text">关于lua调用object-c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GameKit辅助处理类"><span class="nav-number">2.5.</span> <span class="nav-text">GameKit辅助处理类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录GameCenter时机"><span class="nav-number">2.6.</span> <span class="nav-text">登录GameCenter时机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于排行榜"><span class="nav-number">3.</span> <span class="nav-text">关于排行榜</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-iTunes-Connect"><span class="nav-number">3.1.</span> <span class="nav-text">配置 iTunes Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode工程配置"><span class="nav-number">3.2.</span> <span class="nav-text">XCode工程配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践使用"><span class="nav-number">3.3.</span> <span class="nav-text">实践使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于成就"><span class="nav-number">4.</span> <span class="nav-text">关于成就</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-iTunes-Connect-1"><span class="nav-number">4.1.</span> <span class="nav-text">配置 iTunes Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode工程配置-1"><span class="nav-number">4.2.</span> <span class="nav-text">XCode工程配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践使用-1"><span class="nav-number">4.3.</span> <span class="nav-text">实践使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
             
 
           </div>
