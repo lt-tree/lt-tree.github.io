@@ -43,27 +43,27 @@ cocos2d lua
 由于ScrollView锚点在(0, 0), 要针对这个做一些处理。
 否则, 显示的是如下的样子：
 
-
+```
         ...
         5
         4
         3
         2
         1
-
+```
 
 从下往上排列, 而且滑动是从下往上滑。
 显然, 这并不符合常规操作。
 正常应该是, 从上往下滑, 且:
 
-
+```
         1
         2
         3
         4
         5
         ...
-
+```
 
 所以, 需要对它的坐标进行小处理。
 这里有两个坐标需要被处理：
@@ -80,9 +80,9 @@ cocos2d lua
 ### 横向
 横向就没有那么多问题了, 很符合常规的动作。
 
-
+```
         1 	2 	3 	4 	5 	...
-
+```
 
 它的两个坐标就不需要处理:
 
@@ -95,7 +95,7 @@ cocos2d lua
 
 ### 主要代码
     
-
+```lua
         local ScrollViewDirection = {
             DIR_VERTICAL = 1,
             DIR_HORIZONTAL = 2,
@@ -169,7 +169,7 @@ cocos2d lua
             self:getInnerContainer():setPositionY(self.fLastContentPos)
             self:setTouchEnabled(self.tContentSize.height > self:getContentSize().height)
         end
-
+```
 
 ## 适配item
 根据ScrollView显示区域大小及方向, 适当调整item大小。
@@ -182,21 +182,21 @@ cocos2d lua
 
 - ScrollView inner 大小
 
-
+```lua
         local scale = ScrollViewSize.width / (ItemSize.width * multiNum)
-
+```
 
 - 需要绘制item的总个数
 
-
+```lua
         local totalRow = cond(totalItemNum % multiNum == 0, 
             totalItemNum / multiNum,
             math.ceil(totalItemNum / multiNum))
-
+```
 
 - item的位置
 
-
+```lua
         self.iCount = math.min(totalRow, math.ceil(ScrollViewSize.height / ItemSize.height) + 1)
         for i = 1, self.iCount do
             for j = 1, self.iMultiNum do
@@ -205,7 +205,7 @@ cocos2d lua
                 item:setPosition(ItemSize.width * (j - 1), ItemSize.height * (totalRow - i))
             end 
         end
-
+```
 
 ## 多行多列
 重用item, 这么棒的东西, 肯定要多用用呀。
@@ -216,21 +216,21 @@ cocos2d lua
 
 * 放缩值
     
-
+```lua
     	scale = innerSize.width / (itemSize.width * multiNum)
-
+```
 
 * inner size
 
-
+```lua
     	-- 根据总共需要的行数来计算高度
     	totalRow = (totalItemNum % multiNum == 0) and (totalItemNum / multiNum) or (math.ceil(totalItemNum / multiNum))
     	innerSize.height = totalRow * itemSize.height
-
+```
 
 * item position
 
-
+```lua
     	-- 获得需要重用的行数
     	showRow = math.min(totalRow, math.ceil(viewSize.height / itemSize.height) + 1)
     	for i = 1, showRow do
@@ -240,13 +240,13 @@ cocos2d lua
     			view:setPosition(itemSize.width * (j - 1), itemSize.height * (totalRow - i))
     		end
     	end
-
+```
 
 ## item数量不够时的居中
 主要是有个需求，希望item没有填满view的时候，所有的item居中显示。
 其实，item还是按照原来的方式放置，只需要移动inner的位置即可。
 
-
+```lua
         --[[
             描述:
                 ScrollView内Item是否居中显示
@@ -278,14 +278,14 @@ cocos2d lua
                 end
             end
         end
-
+```
 
 ## 刷新数据
 创建完ScrollView，除非item变动自己的位置，否则是不会刷新数据的。
 所以需要一个手动刷新的方法。
 这里充分利用了lua的变长参数，在配合人为默认规定。ie
 
-
+```lua
         --[[
             描述:
                 刷新ScrollView中指定索引的item
@@ -320,7 +320,7 @@ cocos2d lua
                 end
             end
         end
-
+```
 
 这里我用了一个映射表。
 否则需要嵌套两层循环，复杂度 m * n
@@ -333,37 +333,42 @@ cocos2d lua
 
 ### 主要步骤:（也是以垂直滑动方向为例）
 
-	1. 计算所需跳转的index在最上方位置是第几行
-	2. 计算inner需要滑动多少距离
-	3. 计算从当前到目标，index需要变动多少
-	4. 按照移动后的index，重新布局item
+1. 计算所需跳转的index在最上方位置是第几行
+2. 计算inner需要滑动多少距离
+3. 计算从当前到目标，index需要变动多少
+4. 按照移动后的index，重新布局item
 
 
 ### 主要代码：
+* 步骤1
+```lua
+local line = (index % self.iMultiNum == 0) and
+    (index / self.iMultiNum) or
+    (math.ceil(index / self.iMultiNum))
+```
 
+* 步骤2
+```lua
+local posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - 1)
+-- 要考虑到滑动到底部，无法继续向上滑的情况
+posY = (posY > 0) and 0 or posY
+```
 
-        -- -- 步骤1
-        local line = (index % self.iMultiNum == 0) and
-            (index / self.iMultiNum) or
-            (math.ceil(index / self.iMultiNum))
+* 步骤3
+```lua
+local changeIndex = math.ceil((posY - self:getInnerContainer():getPositionY()) / self.tItemContentSize.height)
+-- inner跳到指定位置
+self:jumpToDestination(cc.p(0, posY))
+```
 
-        -- -- 步骤2
-        local posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - 1)
-        -- 要考虑到滑动到底部，无法继续向上滑的情况
-        posY = (posY > 0) and 0 or posY
-
-        -- -- 步骤3
-        local changeIndex = math.ceil((posY - self:getInnerContainer():getPositionY()) / self.tItemContentSize.height)
-        -- inner跳到指定位置
-        self:jumpToDestination(cc.p(0, posY))
-
-        -- -- 步骤4
-        self:updateViewByChangeIndex(changeIndex * self.iMultiNum)
-
+* 步骤4
+```lua
+self:updateViewByChangeIndex(changeIndex * self.iMultiNum)
+```
 
 ### 根据index，重新布局item
 	
-
+```lua
         --[[
             描述:
                 根据index，重新布局item
@@ -390,7 +395,7 @@ cocos2d lua
                 v.pLayer:setPosition(self.tItemContentSize.width * (j - 1), self.tItemContentSize.height * (totalBlock - i))
             end
         end
-
+```
 
 ### 跳转的item在ScrollView中的位置
 需要跳转到的item在可视区域的 上、中、下 显示
@@ -400,7 +405,7 @@ cocos2d lua
 如果在底部显示，则需要减去（向下移动） ScrollViewSize.height , 同理，需要再加回来一个item的高度 ItemSize.height。
 最后，依然要判定滑动到底部，无法滑动的情况。
 
-
+```lua
         SCROLLVIEW_ALIGNMENT = {
             FIRST = 1,
             MID = 2,
@@ -414,7 +419,7 @@ cocos2d lua
             posY = posY - self:getContentSize().height + self.tItemContentSize.height
         end
         posY = (posY > 0) and 0 or posY
-
+```
 
 ## 飞入动画
 额外再加一个飞入动画的支持吧。
@@ -423,7 +428,7 @@ cocos2d lua
 方法也很简单，就是在开始的时候，让所有的item在ScrollView外部；再一个个飞入到自己本应在的位置。
 依旧是以垂直向为例。
 
-
+```lua
         -- 遍历所有item
         for k, v in pairs(self.tItemView) do
         	-- 记录它本来所在的位置
@@ -439,12 +444,12 @@ cocos2d lua
                     )
                 )
         end
-
+```
 
 当然，也要支持多方向ScrollView，并且要支持从前端飞入还是从后端飞入。
 这些都是通过改动初始位置及回弹值来实现。
 
-
+```lua
         --[[
             描述:
                 ScrollView内item的从外部飞入动画, 有回弹效果
@@ -491,7 +496,7 @@ cocos2d lua
                 end
             end
         end
-
+```
 
 <br/>
 

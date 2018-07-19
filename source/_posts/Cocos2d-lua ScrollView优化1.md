@@ -63,6 +63,7 @@ ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从�
 (前面数字代表item位置，后面数字代表item， ----代表可视区域)
 
 
+```lua
 		1   1                   1
 		    ----
 		2   2                   2
@@ -75,7 +76,7 @@ ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从�
 		                        ----
 		7   7                   7
 		8   8                   8
-
+```
 
 可以发现，
 前面的例子中, 只能看见2, 3, 4; 但是看不见的1, 5, 6, 7, 8 依旧存在
@@ -83,7 +84,7 @@ ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从�
 
 所以，我们改成下面的样子:
 
-
+```lua
 		1                        
 		    ----
 		2   2                    
@@ -96,7 +97,7 @@ ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从�
 		                        ----
 		7                        
 		8                        
-
+```
 
 因为可视区域只有3个item，我们就创建3个item，然后不断重用它们。(当然实际操作中，需要多创建一个，否则有穿帮风险)
 但是，位置，我们依旧留着（划重点，**inner大小不变**，否则无法滑动），
@@ -114,15 +115,19 @@ ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从�
 
 init:
 
+```lua
 	    --[[
 	        name            :   item类名 
 	        totalItemNum    :   item总数
 	        ...             :   创建item时需要的参数
 	    --]]
 	    function ScrollView:setItemViewModel(name, totalItemNum, ...)
+```
 
 主要代码：
 
+
+```lua
         -- 得到所需绘制item个数
         local count = math.ceil(self:getContentSize().height / self.tItemContentSize.height) + 1
         for i = 1, count do
@@ -146,14 +151,17 @@ init:
             view.pLayer:setPositionY(self.tItemContentSize.height * (self.totalItemNum - i))
             table.insert(self.tItemView, view)
         end
-
+```
 
 update:
 
+```lua
 	    function ScrollView:updateView(dt)
+```
 
 主要代码：
 
+```lua
         -- 控制刷新时间
         self.updateTimer = self.updateTimer + dt
         if (self.updateTimer < self.updateInterval) then
@@ -187,7 +195,7 @@ update:
                 end
             end
         end
-
+```
 
 <br/>
 
@@ -197,9 +205,11 @@ update:
 
 第一种方法 scheduleUpdateWithPriorityLua
 
+```C++
 		scheduleUpdateWithPriorityLua(update, priority)
 			update - 刷新函数，
 			priority - 优先级，
+```
 
 此方法在Node类中实现，所以它的子类都可以使用。
 此方法默认为每帧都刷新因此，无法自定义刷新时间。
@@ -210,21 +220,23 @@ update:
 
 启用定时器的源码如下：
 
-		void Node::scheduleUpdateWithPriorityLua(int nHandler, int priority)
-		{
-		    unscheduleUpdate();
-		    
-		#if CC_ENABLE_SCRIPT_BINDING
-		    _updateScriptHandler = nHandler;
-		#endif
-		    
-		    _scheduler->scheduleUpdate(this, priority, !_running);
-		}
+```C++
+void Node::scheduleUpdateWithPriorityLua(int nHandler, int priority)
+{
+    unscheduleUpdate();
+    
+#if CC_ENABLE_SCRIPT_BINDING
+    _updateScriptHandler = nHandler;
+#endif
+    
+    _scheduler->scheduleUpdate(this, priority, !_running);
+}
+```
 
 执行： unscheduleUpdate();
 会先判断节点是否有update方法，在哈希表中查找，并执行移除方法：
 
-
+```C++
 		tHashUpdateEntry *element = nullptr;
 		HASH_FIND_PTR(_hashForUpdates, &target, element);
 		if (element)
@@ -238,7 +250,7 @@ update:
 		        this->removeUpdateFromHash(element->entry);
 		    }
 		}
-
+```
 
 上面移除方法，会根据_updateHashLocked值来执行，
 它为真时，
@@ -246,9 +258,14 @@ update:
 它为假时，
 直接从哈希表中移除update方法。
 
-执行：_scheduler->scheduleUpdate(this, priority, !_running);
+执行： 
+```C++
+	_scheduler->scheduleUpdate(this, priority, !_running);
+```
+
 加入update，也会先从哈希表中查找update，再执行添加方法。
 
+```C++
 		tHashUpdateEntry *hashElement = nullptr;
 		HASH_FIND_PTR(_hashForUpdates, &target, hashElement);
 		if (hashElement)
@@ -276,11 +293,12 @@ update:
 		        return;
 		    }
 		}
+```
 
 添加方法，会先判断优先级，如果优先级相同，那么就恢复原来的update。
-否则，根据 _updateHashLocked 值执行接下来操作。
+否则，根据 \_updateHashLocked 值执行接下来操作。
 
-从移除和添加可以发现，关键值在于 _updateHashLocked的值，
+从移除和添加可以发现，关键值在于 \_updateHashLocked的值，
 这个值在Scheduler::update中设置，开始的时候设置为true，最后结束设置为false。
 所以，如果要修改，就很麻烦，就放弃用这个方法了。
 *道理同样适用于所有自己已经重写了update，想要更换update情形*
@@ -289,19 +307,21 @@ update:
 
 第二种方法，通过定时管理器调用
 就是上面指的Scheduler,不过我们不调ScrollView的，而是创建一个新的。
-    
-	    scheduler:scheduleScriptFunc(update, inteval, isOnce)
-			scheduler - cc.Director:getInstance():getScheduler()
-			update - 更新方法
-			inteval - 刷新时间间隔
-			isOnce - 是否只执行一次
+
+```lua    
+scheduler:scheduleScriptFunc(update, inteval, isOnce)
+	scheduler - cc.Director:getInstance():getScheduler()
+	update - 更新方法
+	inteval - 刷新时间间隔
+	isOnce - 是否只执行一次
+```
 
 注意，如果用这个方法，需要负责创建，也要负责移除。
 上面方法会返回一个id，之后可以通过这个id来删除它。
 
-
+```lua
 		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(id)
-
+```
 
 ## 为什么要把item包装成Widget
 在刚开始往ScrollView加child时，方法是将item的Node直接往ScrollView addChild（ScrollView封装了它，其实就是往inner addChild）
@@ -311,7 +331,7 @@ update:
 这其实是Cocos对继承自ccui.Widget的事件的处理。
 所有的控件事件监听都是单点触摸，并且会吞噬事件。
 
-
+```C++
 		_touchListener = EventListenerTouchOneByOne::create();
 		CC_SAFE_RETAIN(_touchListener);
 		_touchListener->setSwallowTouches(true);
@@ -320,12 +340,12 @@ update:
 		_touchListener->onTouchEnded = CC_CALLBACK_2(Widget::onTouchEnded, this);
 		_touchListener->onTouchCancelled = CC_CALLBACK_2(Widget::onTouchCancelled, this);
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(_touchListener, this);
-
+```
 
 在widget的onTouchBegan, onTouchMove, onTouchEnd中，都会调用 propagateTouchEvent,
 这个方法是传播事件，每个子节点会吞噬事件，自己处理完，再向父节点传递，一般ScrollView、ListView、PageView会处理这些事件。
 
-
+```C++
 		Widget* widgetParent = getWidgetParent();
 		if (widgetParent)
 		{
@@ -333,11 +353,12 @@ update:
 		    widgetParent->interceptTouchEvent(event, sender, touch);
 		    widgetParent->_hittedByCamera = nullptr;
 		}
+```
 
 可以看出，只有继承自Widget类的，才会接收到interceptTouchEvent,并进行处理。
 而且，ScrollView的interceptTouchEvent 已经处理好了按钮的点击，取消等效果。
 
-
+```C++
 		void ScrollView::interceptTouchEvent(Widget::TouchEventType event, Widget *sender,Touch* touch)
 		{
 		    if(!_touchEnabled)
@@ -397,7 +418,7 @@ update:
 		        break;
 		    }
 		}
-
+```
 
 之前的方法有问题，就是因为直接将Node addChild到ScrollView，当触摸传递到Node，发现无法转成Widget对象，就放弃了向上传播事件。
 所以，需要将item包装成Widget来让它将事件传递给ScrollView。

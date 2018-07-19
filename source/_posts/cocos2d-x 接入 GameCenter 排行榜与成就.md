@@ -47,7 +47,7 @@ mac - XCode 8.3 - cocos2d-x lua
 ## 登录GameCenter
 登录GameCenter:  【这个步骤在我们加载完游戏时进行即可】
 
-
+```objectivec
         -(void) authenticateLocalPlayer {
             // 获取本地用户
             GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
@@ -65,21 +65,21 @@ mac - XCode 8.3 - cocos2d-x lua
                 }
             };
         }
-
+```
 
 ## 关于lua调用object-c
 因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。
 cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：
 
-
+```lua
         LuaObjcBridge.callStaticMethod(methodName className,args)
-
+```
 
 ## GameKit辅助处理类
 GameKitHelper.h:
 
 
-
+```objectivec
         #import <GameKit/GameKit.h>
         #import "cocos2d.h"
         
@@ -97,12 +97,12 @@ GameKitHelper.h:
         // Player authentication, info
         -(void) authenticateLocalPlayer;
         @end
-
+```
 
 
 GameKitHelper.mm
 
-
+```objectivec
         #import "GameKitHelper.h"
         
         @interface GameKitHelper ()
@@ -166,7 +166,7 @@ GameKitHelper.mm
         }
         
         @end
-
+```
 
 ## 登录GameCenter时机
 由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。
@@ -195,7 +195,7 @@ GameKitHelper.mm
 模拟这个流程：登录GameCenter -> 提交排行榜数据 ( -> 如果需要，弹出GameCenter排行榜)
 提交排行榜数据:
 
-
+```objectivec
         -(void) submitScore:(int64_t)score category:(NSString*)category {       // 这里两个参数 score是数据， category是ID，就是我们创建排行榜以后，不可更改的那个ID。
             // 检查是否在登录状态
             if (!_gameCenterFeaturesEnabled)    {
@@ -214,7 +214,7 @@ GameKitHelper.mm
                 [self setLastError:error];
             }];
         }
-
+```
 
 ## 实践使用
 在公用部分，已经添加了GameCenter的登录验证相关的东西了。
@@ -222,13 +222,13 @@ GameKitHelper.mm
 
 GameKitHelper.h
 
-
+```objectivec
         -(void) submitScore:(int64_t)score category:(NSString*)category;
-
+```
 
 GameKitHelper.mm
 
-
+```objectivec
         -(void) submitScore:(int64_t)score category:(NSString*)category {
         
             if (!_gameCenterFeaturesEnabled)    {
@@ -244,33 +244,33 @@ GameKitHelper.mm
                 [self setLastError:error];
             }];
         }
-
+```
 
 * 给lua调用的函数
 
 GameKitHelper.h
 
-
+```objectivec
         +(void) getScore:(NSDictionary *)dict;
-
+```
 
 GameKitHelper.mm
 
-
+```objectivec
         +(void) getScore:(NSDictionary *)dict {
             NSString* rID = [dict objectForKey:@"id"];
             int score = [[dict objectForKey:@"score"] intValue];
             
             [[GameKitHelper sharedGameKitHelper] submitScore:(int64_t)score category:rID];
         }
-
+```
 
 
 * lua调用
 
-
+```lua
         LuaObjcBridge.callStaticMethod("GameKitHelper", "getScore", {id = 排行榜的ID, score = 分数值})
-
+```
 
 <br/>
 
@@ -288,7 +288,7 @@ GameKitHelper.mm
 ## XCode工程配置
 流程与排行榜的一样，但是这次提交的不是分数了，而是成就完成的百分比。
 
-
+```objectivec
         // 提交成就数据
         -(void) submitAchievment:(NSString *)identifier percent:(double) percentComplete {          // identifier 成就ID, percentComplete: 成就完成百分比
             // 判断登录认证
@@ -312,7 +312,7 @@ GameKitHelper.mm
                 }  
             }];  
         } 
-
+```
 
 ## 实践使用
 同排行榜一样。
@@ -320,13 +320,13 @@ GameKitHelper.mm
 
 GameKitHelper.h
 
-
+```objectivec
         - (void)submitAchievment:(NSString *)identifier percent:(double)percentComplete;
-
+```
 
 GameKitHelper.mm
 
-
+```objectivec
         -(void) submitAchievment:(NSString *)identifier percent:(double) percentComplete {
             if (!_gameCenterFeaturesEnabled)    {
                 NSLog(@"GameCenter -- submitAchievment -- Player not authenticated");
@@ -345,33 +345,33 @@ GameKitHelper.mm
                 }  
             }];  
         } 
-
+```
 
 * 给lua调用的函数
 
 GameKitHelper.h
 
-
+```objectivec
         +(void) getAchievement:(NSDictionary *)dict;
-
+```
 
 GameKitHelper.mm
 
-
+```objectivec
         +(void) getAchievement:(NSDictionary *)dict {
             NSString* aID = [dict objectForKey:@"id"];
             double percent = [[dict objectForKey:@"percent"] doubleValue];
             
             [[GameKitHelper sharedGameKitHelper] submitAchievment:(NSString *)aID percent:percent];
         }
-
+```
 
 
 * lua调用
 
-        
+```lua        
         LuaObjcBridge.callStaticMethod("GameKitHelper", "getAchievement", {id = 成就ID, percent = 成就百分比})
-
+```
 
 <br/>
 

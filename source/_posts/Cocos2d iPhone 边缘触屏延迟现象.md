@@ -63,18 +63,18 @@ Cocos2d iPhone 边缘触屏延迟现象
 
 在 AppController.mm 文件内，
         
-
+```objectivec
         [window makeKeyAndVisible]; 
-
+```
 
 之后加入:
 
-
+```objectivec
         for(UIGestureRecognizer* gesture in window.gestureRecognizers)
         {
             gesture.delaysTouchesBegan=NO;
         }
-
+```
 
 完美解决问题。
 真是查问题5小时，解决问题5秒钟。

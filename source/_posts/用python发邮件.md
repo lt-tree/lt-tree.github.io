@@ -40,7 +40,7 @@ One Step
 
 唠叨完了，该整干货了。
 
-
+```python
 		import smtplib
 		from email.header import Header
 		from email.mime.text import MIMEText
@@ -76,7 +76,7 @@ One Step
 				print('send email success')
 			except smtplib.SMTPException:
 				priint('send email fail')
-
+```
 
 关于上述代码的一些注释：
 - 注释1:
@@ -95,7 +95,7 @@ One Step
 所以，
 再单独建一个新的友好的地方来写日志。
 
-
+```python
 		import imp 
 		tool = imp.load_source('sendEmail', 'url')				# 导入核心模块，url 填写你上面核心代码的位置
 
@@ -105,6 +105,7 @@ One Step
 		"""
 
 		tool.sendEmail(content.strip()) 						# strip将首尾空白字符删除
+```
 
 <br/>
 

@@ -64,7 +64,7 @@ Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?
 大概的方向差不多了，剩下的就是符合我所需要的格式。
 因为，我的文件格式是这样的:
 
-
+```lua
 		local xx_xx = {
 			[1] = {
 				...
@@ -75,11 +75,11 @@ Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?
 			...
 		}
 		return xx_xx
-
+```
 
 对于输入要求，还简单一些：
 		
-
+```python
 		"""
 		    描述:
 		        将lua的table转成python的dict
@@ -100,11 +100,11 @@ Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?
 		    content = lua.decode(content)
 
 		    return content
-
+```
 
 但是输出，就不能用 lua.encode 了，因为它输出东西是这样子的：
 	
-		
+```lua	
 		{
 		{
 			{
@@ -178,14 +178,14 @@ Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?
 				id = "12345"
 			}
 		}
-
+```
 
 没错，它的格式就是这样的，包括对齐。
 只能说能用。
 我想了一下，发现我需要的输出格式其实很简单，递归的输出就行。
 我也懒得改它的源码了，直接手撸了一个。
 
-
+```python
 		# 根据递归深度输出 制表符
 		def outPutTab(depth, outputHandler):
 		    for i in range(0, depth):
@@ -231,11 +231,11 @@ Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?
 		    outputHandler.write('}\n')
 		    outputHandler.write('\nreturn %s\n\n' % table_name)
 		    outputHandler.close()
-
+```
 
 我的输出：
 
-
+```lua
 		local dict_portal_group = {
 			[1] = {
 				[1] = {
@@ -311,7 +311,7 @@ Question: 在游戏中，我想知道某职业所有卡牌，怎么办呢?
 		}
 
 		return dict_portal_group
-
+```
 
 嗯，大概就是这样了。
 
