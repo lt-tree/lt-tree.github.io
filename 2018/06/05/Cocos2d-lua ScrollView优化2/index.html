@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="cocos2d lua修改ScrollView第二弹: 功能扩展">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.622Z">
+<meta property="og:updated_time" content="2018-07-19T16:40:31.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cocos2d-lua ScrollView优化2">
 <meta name="twitter:description" content="cocos2d lua修改ScrollView第二弹: 功能扩展">
@@ -331,20 +331,10 @@
 <p><br></p>
 <h2 id="多方向"><a href="#多方向" class="headerlink" title="多方向"></a>多方向</h2><p>之前的版本仅仅是纵向而已, 当然要支持横向的滑动了。<br>横向滑动其实与纵向不同。</p>
 <h3 id="纵向"><a href="#纵向" class="headerlink" title="纵向"></a>纵向</h3><p>由于ScrollView锚点在(0, 0), 要针对这个做一些处理。<br>否则, 显示的是如下的样子：</p>
-<pre><code>...
-5
-4
-3
-2
-1
-</code></pre><p>从下往上排列, 而且滑动是从下往上滑。<br>显然, 这并不符合常规操作。<br>正常应该是, 从上往下滑, 且:</p>
-<pre><code>1
-2
-3
-4
-5
-...
-</code></pre><p>所以, 需要对它的坐标进行小处理。<br>这里有两个坐标需要被处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>从下往上排列, 而且滑动是从下往上滑。<br>显然, 这并不符合常规操作。<br>正常应该是, 从上往下滑, 且:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>所以, 需要对它的坐标进行小处理。<br>这里有两个坐标需要被处理：</p>
 <ul>
 <li><p>item（要求锚点为(0, 0))<br>  它正常坐标是从(0, 0)开始, 然后随着索引增加变为: (0, itemSize.height <em> index)<br>  修改后的坐标应该是从(0, innerSize.height - itemSize.height)开始, 随着索引增加变为:(0, innerSize.height - itemSize.height </em> index)</p>
 </li>
@@ -352,327 +342,76 @@
 </li>
 </ul>
 <h3 id="横向"><a href="#横向" class="headerlink" title="横向"></a>横向</h3><p>横向就没有那么多问题了, 很符合常规的动作。</p>
-<pre><code>1     2     3     4     5     ...
-</code></pre><p>它的两个坐标就不需要处理:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 	2 	3 	4 	5 	...</span><br></pre></td></tr></table></figure>
+<p>它的两个坐标就不需要处理:</p>
 <ul>
 <li><p>item(要求锚点为(0, 0))<br>  坐标从(0, 0)开始, 随着索引增加变为: (itemSize.width * index, 0)</p>
 </li>
 <li><p>inner<br>  坐标从(0, 0)开始, 随着滑动x坐标增加</p>
 </li>
 </ul>
-<h3 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h3><pre><code>local ScrollViewDirection = {
-    DIR_VERTICAL = 1,
-    DIR_HORIZONTAL = 2,
-    DIR_BOTH = 3,
-}
-
--- ScrollView 的大小
-self.tContentSize
--- Item 的大小
-self.tItemContentSize
--- item总数
-self.iTotalItemNum 
--- 重用的item的集合
-self.tItemView
-
-if ScrollViewDirection.DIR_HORIZONTAL == self:getDirection() then
-    self.tContentSize.width = self.tItemContentSize.width * self.iTotalItemNum
-    self:getInnerContainer():setContentSize(self.tContentSize)
-    self.fLastContentPos = self:getContentSize().width - self.tContentSize.width
-
-    local count = math.min(self.iTotalItemNum, math.ceil(self:getContentSize().width / self.tItemContentSize.width) + 1)
-    for i = 1, count do
-        local view = CSBReaderLoad(name)
-        view:init(...)
-        if view.setIndex then
-            view:setIndex(i)
-        end
-
-        -- 将父节点转为widget类型（原因可见 上一篇文章）
-        local widget = quick.packageNodeToWidget(view.pLayer:getChildByName(&quot;LayerTouch&quot;))
-        view.pLayer = widget
-        -- widget随父节点透明度变化，默认是false
-        widget:setCascadeOpacityEnabled(true)
-        self:addChild(view.pLayer)
-
-        view.pLayer:setVisible(i &gt; 0 and i &lt;= self.iTotalItemNum)
-        view.pLayer:setPosition(self.tItemContentSize.width * (i - 1), 0)
-        table.insert(self.tItemView, view)
-    end
-
-    self:jumpToLeft()
-    self:getInnerContainer():setPositionX(self.fLastContentPos)
-    self:setTouchEnabled(self.tContentSize.width &gt; self:getContentSize().width)
-
-elseif ScrollViewDirection.DIR_VERTICAL == self:getDirection() then
-    self.tContentSize.height = self.tItemContentSize.height * self.iTotalItemNum
-    self:getInnerContainer():setContentSize(self.tContentSize)
-    self.fLastContentPos = self:getContentSize().height - self.tContentSize.height
-
-    local count = math.min(self.iTotalItemNum, math.ceil(self:getContentSize().height / self.tItemContentSize.height) + 1)
-    for i = 1, count do
-        local view = CSBReaderLoad(name)
-        view:init(...)
-        if view.setIndex then
-            view:setIndex(i)
-        end
-
-        -- 将父节点转为widget类型（原因可见 上一篇文章）
-        local widget = quick.packageNodeToWidget(view.pLayer:getChildByName(&quot;LayerTouch&quot;))
-        view.pLayer = widget
-        -- widget随父节点透明度变化，默认是false
-        widget:setCascadeOpacityEnabled(true)
-        self:addChild(view.pLayer)
-
-        view.pLayer:setVisible(i &gt; 0 and i &lt;= self.iTotalItemNum)
-        view.pLayer:setPositionY(self.tItemContentSize.height * (self.iTotalItemNum - i))
-        table.insert(self.tItemView, view)
-    end
-
-    self:jumpToTop()
-    self:getInnerContainer():setPositionY(self.fLastContentPos)
-    self:setTouchEnabled(self.tContentSize.height &gt; self:getContentSize().height)
-end
-</code></pre><h2 id="适配item"><a href="#适配item" class="headerlink" title="适配item"></a>适配item</h2><p>根据ScrollView显示区域大小及方向, 适当调整item大小。<br>更充分重用item, 适应多尺寸item。<br>如果是纵向的ScrollView, 根据width的值, 来决定放缩值。<br>如果是横向的ScrollView, 根据height的值, 来决定放缩值。<br>然后根据放缩值再修改一下item size的值。</p>
+<h3 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ScrollViewDirection = &#123;</span><br><span class="line">    DIR_VERTICAL = <span class="number">1</span>,</span><br><span class="line">    DIR_HORIZONTAL = <span class="number">2</span>,</span><br><span class="line">    DIR_BOTH = <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ScrollView 的大小</span></span><br><span class="line">self.tContentSize</span><br><span class="line"><span class="comment">-- Item 的大小</span></span><br><span class="line">self.tItemContentSize</span><br><span class="line"><span class="comment">-- item总数</span></span><br><span class="line">self.iTotalItemNum </span><br><span class="line"><span class="comment">-- 重用的item的集合</span></span><br><span class="line">self.tItemView</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ScrollViewDirection.DIR_HORIZONTAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">    self.tContentSize.width = self.tItemContentSize.width * self.iTotalItemNum</span><br><span class="line">    self:getInnerContainer():setContentSize(self.tContentSize)</span><br><span class="line">    self.fLastContentPos = self:getContentSize().width - self.tContentSize.width</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> count = <span class="built_in">math</span>.<span class="built_in">min</span>(self.iTotalItemNum, <span class="built_in">math</span>.<span class="built_in">ceil</span>(self:getContentSize().width / self.tItemContentSize.width) + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, count <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> view = CSBReaderLoad(name)</span><br><span class="line">        view:init(...)</span><br><span class="line">        <span class="keyword">if</span> view.setIndex <span class="keyword">then</span></span><br><span class="line">            view:setIndex(i)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">-- 将父节点转为widget类型（原因可见 上一篇文章）</span></span><br><span class="line">        <span class="keyword">local</span> widget = quick.packageNodeToWidget(view.pLayer:getChildByName(<span class="string">"LayerTouch"</span>))</span><br><span class="line">        view.pLayer = widget</span><br><span class="line">        <span class="comment">-- widget随父节点透明度变化，默认是false</span></span><br><span class="line">        widget:setCascadeOpacityEnabled(<span class="literal">true</span>)</span><br><span class="line">        self:addChild(view.pLayer)</span><br><span class="line"></span><br><span class="line">        view.pLayer:setVisible(i &gt; <span class="number">0</span> <span class="keyword">and</span> i &lt;= self.iTotalItemNum)</span><br><span class="line">        view.pLayer:setPosition(self.tItemContentSize.width * (i - <span class="number">1</span>), <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">insert</span>(self.tItemView, view)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    self:jumpToLeft()</span><br><span class="line">    self:getInnerContainer():setPositionX(self.fLastContentPos)</span><br><span class="line">    self:setTouchEnabled(self.tContentSize.width &gt; self:getContentSize().width)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elseif</span> ScrollViewDirection.DIR_VERTICAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">    self.tContentSize.height = self.tItemContentSize.height * self.iTotalItemNum</span><br><span class="line">    self:getInnerContainer():setContentSize(self.tContentSize)</span><br><span class="line">    self.fLastContentPos = self:getContentSize().height - self.tContentSize.height</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> count = <span class="built_in">math</span>.<span class="built_in">min</span>(self.iTotalItemNum, <span class="built_in">math</span>.<span class="built_in">ceil</span>(self:getContentSize().height / self.tItemContentSize.height) + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, count <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> view = CSBReaderLoad(name)</span><br><span class="line">        view:init(...)</span><br><span class="line">        <span class="keyword">if</span> view.setIndex <span class="keyword">then</span></span><br><span class="line">            view:setIndex(i)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">-- 将父节点转为widget类型（原因可见 上一篇文章）</span></span><br><span class="line">        <span class="keyword">local</span> widget = quick.packageNodeToWidget(view.pLayer:getChildByName(<span class="string">"LayerTouch"</span>))</span><br><span class="line">        view.pLayer = widget</span><br><span class="line">        <span class="comment">-- widget随父节点透明度变化，默认是false</span></span><br><span class="line">        widget:setCascadeOpacityEnabled(<span class="literal">true</span>)</span><br><span class="line">        self:addChild(view.pLayer)</span><br><span class="line"></span><br><span class="line">        view.pLayer:setVisible(i &gt; <span class="number">0</span> <span class="keyword">and</span> i &lt;= self.iTotalItemNum)</span><br><span class="line">        view.pLayer:setPositionY(self.tItemContentSize.height * (self.iTotalItemNum - i))</span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">insert</span>(self.tItemView, view)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    self:jumpToTop()</span><br><span class="line">    self:getInnerContainer():setPositionY(self.fLastContentPos)</span><br><span class="line">    self:setTouchEnabled(self.tContentSize.height &gt; self:getContentSize().height)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="适配item"><a href="#适配item" class="headerlink" title="适配item"></a>适配item</h2><p>根据ScrollView显示区域大小及方向, 适当调整item大小。<br>更充分重用item, 适应多尺寸item。<br>如果是纵向的ScrollView, 根据width的值, 来决定放缩值。<br>如果是横向的ScrollView, 根据height的值, 来决定放缩值。<br>然后根据放缩值再修改一下item size的值。</p>
 <h3 id="修改的东西-以纵向滑动ScrollView为例"><a href="#修改的东西-以纵向滑动ScrollView为例" class="headerlink" title="修改的东西(以纵向滑动ScrollView为例)"></a>修改的东西(以纵向滑动ScrollView为例)</h3><ul>
 <li>ScrollView inner 大小</li>
 </ul>
-<pre><code>local scale = ScrollViewSize.width / (ItemSize.width * multiNum)
-</code></pre><ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> scale = ScrollViewSize.width / (ItemSize.width * multiNum)</span><br></pre></td></tr></table></figure>
+<ul>
 <li>需要绘制item的总个数</li>
 </ul>
-<pre><code>local totalRow = cond(totalItemNum % multiNum == 0, 
-    totalItemNum / multiNum,
-    math.ceil(totalItemNum / multiNum))
-</code></pre><ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> totalRow = cond(totalItemNum % multiNum == <span class="number">0</span>, </span><br><span class="line">    totalItemNum / multiNum,</span><br><span class="line">    <span class="built_in">math</span>.<span class="built_in">ceil</span>(totalItemNum / multiNum))</span><br></pre></td></tr></table></figure>
+<ul>
 <li>item的位置</li>
 </ul>
-<pre><code>self.iCount = math.min(totalRow, math.ceil(ScrollViewSize.height / ItemSize.height) + 1)
-for i = 1, self.iCount do
-    for j = 1, self.iMultiNum do
-        ...
-
-        item:setPosition(ItemSize.width * (j - 1), ItemSize.height * (totalRow - i))
-    end 
-end
-</code></pre><h2 id="多行多列"><a href="#多行多列" class="headerlink" title="多行多列"></a>多行多列</h2><p>重用item, 这么棒的东西, 肯定要多用用呀。<br>支持多行多列，是根据ScrollView的滚动方向，再根据传入的行/列值进行设置。<br>需要重新计算一些数值。(下面均以纵向滑动的ScrollView为例)</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">self.iCount = <span class="built_in">math</span>.<span class="built_in">min</span>(totalRow, <span class="built_in">math</span>.<span class="built_in">ceil</span>(ScrollViewSize.height / ItemSize.height) + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, self.iCount <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> j = <span class="number">1</span>, self.iMultiNum <span class="keyword">do</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        item:setPosition(ItemSize.width * (j - <span class="number">1</span>), ItemSize.height * (totalRow - i))</span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="多行多列"><a href="#多行多列" class="headerlink" title="多行多列"></a>多行多列</h2><p>重用item, 这么棒的东西, 肯定要多用用呀。<br>支持多行多列，是根据ScrollView的滚动方向，再根据传入的行/列值进行设置。<br>需要重新计算一些数值。(下面均以纵向滑动的ScrollView为例)</p>
 <h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><ul>
 <li>放缩值</li>
 </ul>
-<pre><code>scale = innerSize.width / (itemSize.width * multiNum)
-</code></pre><ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scale = innerSize.width / (itemSize.width * multiNum)</span><br></pre></td></tr></table></figure>
+<ul>
 <li>inner size</li>
 </ul>
-<pre><code>-- 根据总共需要的行数来计算高度
-totalRow = (totalItemNum % multiNum == 0) and (totalItemNum / multiNum) or (math.ceil(totalItemNum / multiNum))
-innerSize.height = totalRow * itemSize.height
-</code></pre><ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 根据总共需要的行数来计算高度</span></span><br><span class="line">totalRow = (totalItemNum % multiNum == <span class="number">0</span>) <span class="keyword">and</span> (totalItemNum / multiNum) <span class="keyword">or</span> (<span class="built_in">math</span>.<span class="built_in">ceil</span>(totalItemNum / multiNum))</span><br><span class="line">innerSize.height = totalRow * itemSize.height</span><br></pre></td></tr></table></figure>
+<ul>
 <li>item position</li>
 </ul>
-<pre><code>-- 获得需要重用的行数
-showRow = math.min(totalRow, math.ceil(viewSize.height / itemSize.height) + 1)
-for i = 1, showRow do
-    for j = 1, multiNum do
-        ...
-
-        view:setPosition(itemSize.width * (j - 1), itemSize.height * (totalRow - i))
-    end
-end
-</code></pre><h2 id="item数量不够时的居中"><a href="#item数量不够时的居中" class="headerlink" title="item数量不够时的居中"></a>item数量不够时的居中</h2><p>主要是有个需求，希望item没有填满view的时候，所有的item居中显示。<br>其实，item还是按照原来的方式放置，只需要移动inner的位置即可。</p>
-<pre><code>--[[
-    描述:
-        ScrollView内Item是否居中显示
-    参数:
-        isCenter - boolean
-            是否居中显示
-    返回:
-        无
---]]
-function ScrollView:setShowCenter(isCenter)
-    local viewSize = self:getContentSize()
-    if ScrollViewDirection.DIR_HORIZONTAL == self:getDirection() then
-        local dertaValue = viewSize.width - self.tContentSize.width
-        if isCenter then
-            if dertaValue &gt; 0 then
-                self:getInnerContainer():setPositionX(dertaValue/2)
-            end
-        else
-            self:getInnerContainer():setPositionX(dertaValue)
-        end
-    elseif ScrollViewDirection.DIR_VERTICAL == self:getDirection() then
-        local dertaValue = viewSize.height - self.tContentSize.height
-        if isCenter then
-            if dertaValue &gt; 0 then
-                self:getInnerContainer():setPositionY(dertaValue/2)
-            end
-        else
-            self:getInnerContainer():setPositionY(dertaValue)
-        end
-    end
-end
-</code></pre><h2 id="刷新数据"><a href="#刷新数据" class="headerlink" title="刷新数据"></a>刷新数据</h2><p>创建完ScrollView，除非item变动自己的位置，否则是不会刷新数据的。<br>所以需要一个手动刷新的方法。<br>这里充分利用了lua的变长参数，在配合人为默认规定。ie</p>
-<pre><code>--[[
-    描述:
-        刷新ScrollView中指定索引的item
-    参数:
-        ... - 传入一堆int
-            item的索引, -1代表全部刷新
-    返回:
-        无
---]]
-function ScrollView:refreshItems(...)
-    local args = {...}
-
-    if #args &gt; 0 then
-        if args[1] == -1 then
-            local items = self:getAllItemView()
-            for k, v in pairs(items) do
-                v:setIndex(v.iIndex)
-            end
-        else
-            -- 先做一个映射表，便于查找是否需要更新
-            local tempTable = {}
-            for k, v in pairs(args) do
-                tempTable[v] = 1
-            end
-
-            local items = self:getAllItemView()
-            for k, v in pairs(items) do
-                if v.iIndex and tempTable[v.iIndex] == 1 then
-                    v:setIndex(v.iIndex)
-                end
-            end
-        end
-    end
-end
-</code></pre><p>这里我用了一个映射表。<br>否则需要嵌套两层循环，复杂度 m * n<br>做一个映射，只需要 n + m<br>用空间来换取时间</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获得需要重用的行数</span></span><br><span class="line">showRow = <span class="built_in">math</span>.<span class="built_in">min</span>(totalRow, <span class="built_in">math</span>.<span class="built_in">ceil</span>(viewSize.height / itemSize.height) + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, showRow <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">for</span> j = <span class="number">1</span>, multiNum <span class="keyword">do</span></span><br><span class="line">		...</span><br><span class="line"></span><br><span class="line">		view:setPosition(itemSize.width * (j - <span class="number">1</span>), itemSize.height * (totalRow - i))</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="item数量不够时的居中"><a href="#item数量不够时的居中" class="headerlink" title="item数量不够时的居中"></a>item数量不够时的居中</h2><p>主要是有个需求，希望item没有填满view的时候，所有的item居中显示。<br>其实，item还是按照原来的方式放置，只需要移动inner的位置即可。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        ScrollView内Item是否居中显示</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        isCenter - boolean</span></span><br><span class="line"><span class="comment">            是否居中显示</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">--]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:setShowCenter</span><span class="params">(isCenter)</span></span></span><br><span class="line">    <span class="keyword">local</span> viewSize = self:getContentSize()</span><br><span class="line">    <span class="keyword">if</span> ScrollViewDirection.DIR_HORIZONTAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> dertaValue = viewSize.width - self.tContentSize.width</span><br><span class="line">        <span class="keyword">if</span> isCenter <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> dertaValue &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">                self:getInnerContainer():setPositionX(dertaValue/<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            self:getInnerContainer():setPositionX(dertaValue)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">elseif</span> ScrollViewDirection.DIR_VERTICAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> dertaValue = viewSize.height - self.tContentSize.height</span><br><span class="line">        <span class="keyword">if</span> isCenter <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> dertaValue &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">                self:getInnerContainer():setPositionY(dertaValue/<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            self:getInnerContainer():setPositionY(dertaValue)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="刷新数据"><a href="#刷新数据" class="headerlink" title="刷新数据"></a>刷新数据</h2><p>创建完ScrollView，除非item变动自己的位置，否则是不会刷新数据的。<br>所以需要一个手动刷新的方法。<br>这里充分利用了lua的变长参数，在配合人为默认规定。ie</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        刷新ScrollView中指定索引的item</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        ... - 传入一堆int</span></span><br><span class="line"><span class="comment">            item的索引, -1代表全部刷新</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">--]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:refreshItems</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> args = &#123;...&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> #args &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> args[<span class="number">1</span>] == <span class="number">-1</span> <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">local</span> items = self:getAllItemView()</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(items) <span class="keyword">do</span></span><br><span class="line">                v:setIndex(v.iIndex)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="comment">-- 先做一个映射表，便于查找是否需要更新</span></span><br><span class="line">            <span class="keyword">local</span> tempTable = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(args) <span class="keyword">do</span></span><br><span class="line">                tempTable[v] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">local</span> items = self:getAllItemView()</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(items) <span class="keyword">do</span></span><br><span class="line">                <span class="keyword">if</span> v.iIndex <span class="keyword">and</span> tempTable[v.iIndex] == <span class="number">1</span> <span class="keyword">then</span></span><br><span class="line">                    v:setIndex(v.iIndex)</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>这里我用了一个映射表。<br>否则需要嵌套两层循环，复杂度 m * n<br>做一个映射，只需要 n + m<br>用空间来换取时间</p>
 <h2 id="跳转到指定item"><a href="#跳转到指定item" class="headerlink" title="跳转到指定item"></a>跳转到指定item</h2><p>这个功能ListView是支持的，觉得ScrollView也有必要支持一下。<br>方法是先计算出inner需要移动多少距离，从而知道了index需要变化多少。</p>
-<h3 id="主要步骤-（也是以垂直滑动方向为例）"><a href="#主要步骤-（也是以垂直滑动方向为例）" class="headerlink" title="主要步骤:（也是以垂直滑动方向为例）"></a>主要步骤:（也是以垂直滑动方向为例）</h3><pre><code>1. 计算所需跳转的index在最上方位置是第几行
-2. 计算inner需要滑动多少距离
-3. 计算从当前到目标，index需要变动多少
-4. 按照移动后的index，重新布局item
-</code></pre><h3 id="主要代码："><a href="#主要代码：" class="headerlink" title="主要代码："></a>主要代码：</h3><pre><code>-- -- 步骤1
-local line = (index % self.iMultiNum == 0) and
-    (index / self.iMultiNum) or
-    (math.ceil(index / self.iMultiNum))
-
--- -- 步骤2
-local posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - 1)
--- 要考虑到滑动到底部，无法继续向上滑的情况
-posY = (posY &gt; 0) and 0 or posY
-
--- -- 步骤3
-local changeIndex = math.ceil((posY - self:getInnerContainer():getPositionY()) / self.tItemContentSize.height)
--- inner跳到指定位置
-self:jumpToDestination(cc.p(0, posY))
-
--- -- 步骤4
-self:updateViewByChangeIndex(changeIndex * self.iMultiNum)
-</code></pre><h3 id="根据index，重新布局item"><a href="#根据index，重新布局item" class="headerlink" title="根据index，重新布局item"></a>根据index，重新布局item</h3><pre><code>--[[
-    描述:
-        根据index，重新布局item
-    参数:
-        changeIndex:   int
-            改变的index值
-    返回:
-        无
-]]
-function ScrollView:updateViewByChangeIndex(changeIndex)
-    local totalBlock = (self.iTotalItemNum % self.iMultiNum == 0) and
-        (self.iTotalItemNum / self.iMultiNum) or
-        (math.ceil(self.iTotalItemNum / self.iMultiNum))
-
-    local items = self:getAllItemView()
-    for k, v in pairs(items) do
-        local idx = v.iIndex + changeIndex
-
-        v:setIndex(idx)
-        v.pLayer:setVisible(idx &gt; 0 and idx &lt;= self.iTotalItemNum)
-
-        local i = (idx % self.iMultiNum == 0) and (idx / self.iMultiNum) or (math.ceil(idx / self.iMultiNum))
-        local j = self.iMultiNum - (idx % self.iMultiNum)
-        v.pLayer:setPosition(self.tItemContentSize.width * (j - 1), self.tItemContentSize.height * (totalBlock - i))
-    end
-end
-</code></pre><h3 id="跳转的item在ScrollView中的位置"><a href="#跳转的item在ScrollView中的位置" class="headerlink" title="跳转的item在ScrollView中的位置"></a>跳转的item在ScrollView中的位置</h3><p>需要跳转到的item在可视区域的 上、中、下 显示<br>首先，一定要让使用者传入出现的位置枚举，<br>然后在计算inner移动的位置上加上偏移量。<br>如果要在中间显示，需要减去（向下移动） ScrollViewSize.height/2 , 因为初始的位置是按照item在最上面计算的，减去一半高度后，还需要再加上item本身高度的一半 ItemSize.height/2。<br>如果在底部显示，则需要减去（向下移动） ScrollViewSize.height , 同理，需要再加回来一个item的高度 ItemSize.height。<br>最后，依然要判定滑动到底部，无法滑动的情况。</p>
-<pre><code>SCROLLVIEW_ALIGNMENT = {
-    FIRST = 1,
-    MID = 2,
-    LAST = 3,
-}
-
-local posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - 1)
-if alignment == SCROLLVIEW_ALIGNMENT.MID then
-    posY = posY - self:getContentSize().height / 2 + self.tItemContentSize.height / 2
-elseif alignment == SCROLLVIEW_ALIGNMENT.LAST then
-    posY = posY - self:getContentSize().height + self.tItemContentSize.height
-end
-posY = (posY &gt; 0) and 0 or posY
-</code></pre><h2 id="飞入动画"><a href="#飞入动画" class="headerlink" title="飞入动画"></a>飞入动画</h2><p>额外再加一个飞入动画的支持吧。<br>就是从外部飞入到ScrollView的效果。</p>
+<h3 id="主要步骤-（也是以垂直滑动方向为例）"><a href="#主要步骤-（也是以垂直滑动方向为例）" class="headerlink" title="主要步骤:（也是以垂直滑动方向为例）"></a>主要步骤:（也是以垂直滑动方向为例）</h3><ol>
+<li>计算所需跳转的index在最上方位置是第几行</li>
+<li>计算inner需要滑动多少距离</li>
+<li>计算从当前到目标，index需要变动多少</li>
+<li>按照移动后的index，重新布局item</li>
+</ol>
+<h3 id="主要代码："><a href="#主要代码：" class="headerlink" title="主要代码："></a>主要代码：</h3><ul>
+<li><p>步骤1</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> line = (index % self.iMultiNum == <span class="number">0</span>) <span class="keyword">and</span></span><br><span class="line">    (index / self.iMultiNum) <span class="keyword">or</span></span><br><span class="line">    (<span class="built_in">math</span>.<span class="built_in">ceil</span>(index / self.iMultiNum))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤2</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - <span class="number">1</span>)</span><br><span class="line"><span class="comment">-- 要考虑到滑动到底部，无法继续向上滑的情况</span></span><br><span class="line">posY = (posY &gt; <span class="number">0</span>) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> posY</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤3</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> changeIndex = <span class="built_in">math</span>.<span class="built_in">ceil</span>((posY - self:getInnerContainer():getPositionY()) / self.tItemContentSize.height)</span><br><span class="line"><span class="comment">-- inner跳到指定位置</span></span><br><span class="line">self:jumpToDestination(cc.p(<span class="number">0</span>, posY))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤4</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self:updateViewByChangeIndex(changeIndex * self.iMultiNum)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="根据index，重新布局item"><a href="#根据index，重新布局item" class="headerlink" title="根据index，重新布局item"></a>根据index，重新布局item</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        根据index，重新布局item</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        changeIndex:   int</span></span><br><span class="line"><span class="comment">            改变的index值</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:updateViewByChangeIndex</span><span class="params">(changeIndex)</span></span></span><br><span class="line">    <span class="keyword">local</span> totalBlock = (self.iTotalItemNum % self.iMultiNum == <span class="number">0</span>) <span class="keyword">and</span></span><br><span class="line">        (self.iTotalItemNum / self.iMultiNum) <span class="keyword">or</span></span><br><span class="line">        (<span class="built_in">math</span>.<span class="built_in">ceil</span>(self.iTotalItemNum / self.iMultiNum))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> items = self:getAllItemView()</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(items) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> idx = v.iIndex + changeIndex</span><br><span class="line"></span><br><span class="line">        v:setIndex(idx)</span><br><span class="line">        v.pLayer:setVisible(idx &gt; <span class="number">0</span> <span class="keyword">and</span> idx &lt;= self.iTotalItemNum)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">local</span> i = (idx % self.iMultiNum == <span class="number">0</span>) <span class="keyword">and</span> (idx / self.iMultiNum) <span class="keyword">or</span> (<span class="built_in">math</span>.<span class="built_in">ceil</span>(idx / self.iMultiNum))</span><br><span class="line">        <span class="keyword">local</span> j = self.iMultiNum - (idx % self.iMultiNum)</span><br><span class="line">        v.pLayer:setPosition(self.tItemContentSize.width * (j - <span class="number">1</span>), self.tItemContentSize.height * (totalBlock - i))</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="跳转的item在ScrollView中的位置"><a href="#跳转的item在ScrollView中的位置" class="headerlink" title="跳转的item在ScrollView中的位置"></a>跳转的item在ScrollView中的位置</h3><p>需要跳转到的item在可视区域的 上、中、下 显示<br>首先，一定要让使用者传入出现的位置枚举，<br>然后在计算inner移动的位置上加上偏移量。<br>如果要在中间显示，需要减去（向下移动） ScrollViewSize.height/2 , 因为初始的位置是按照item在最上面计算的，减去一半高度后，还需要再加上item本身高度的一半 ItemSize.height/2。<br>如果在底部显示，则需要减去（向下移动） ScrollViewSize.height , 同理，需要再加回来一个item的高度 ItemSize.height。<br>最后，依然要判定滑动到底部，无法滑动的情况。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SCROLLVIEW_ALIGNMENT = &#123;</span><br><span class="line">    FIRST = <span class="number">1</span>,</span><br><span class="line">    MID = <span class="number">2</span>,</span><br><span class="line">    LAST = <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - <span class="number">1</span>)</span><br><span class="line"><span class="keyword">if</span> alignment == SCROLLVIEW_ALIGNMENT.MID <span class="keyword">then</span></span><br><span class="line">    posY = posY - self:getContentSize().height / <span class="number">2</span> + self.tItemContentSize.height / <span class="number">2</span></span><br><span class="line"><span class="keyword">elseif</span> alignment == SCROLLVIEW_ALIGNMENT.LAST <span class="keyword">then</span></span><br><span class="line">    posY = posY - self:getContentSize().height + self.tItemContentSize.height</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">posY = (posY &gt; <span class="number">0</span>) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> posY</span><br></pre></td></tr></table></figure>
+<h2 id="飞入动画"><a href="#飞入动画" class="headerlink" title="飞入动画"></a>飞入动画</h2><p>额外再加一个飞入动画的支持吧。<br>就是从外部飞入到ScrollView的效果。</p>
 <p>方法也很简单，就是在开始的时候，让所有的item在ScrollView外部；再一个个飞入到自己本应在的位置。<br>依旧是以垂直向为例。</p>
-<pre><code>-- 遍历所有item
-for k, v in pairs(self.tItemView) do
-    -- 记录它本来所在的位置
-    local aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())
-
-    -- 把它放在区域外
-    v.pLayer:setPositionY(-self:getContentSize().height - self.tItemContentSize.height)
-    v.pLayer:runAction(
-        act.seq(
-            -- 一个个飞入
-            act.delay((k - 1) * [delay_time]),
-            act.movto([move_time], aimPos)
-            )
-        )
-end
-</code></pre><p>当然，也要支持多方向ScrollView，并且要支持从前端飞入还是从后端飞入。<br>这些都是通过改动初始位置及回弹值来实现。</p>
-<pre><code>--[[
-    描述:
-        ScrollView内item的从外部飞入动画, 有回弹效果
-    参数:
-        fromBack:   boolean
-            对于垂直方向, true代表自下而上; 对于水平方向, true代表自右向左
-    返回:
-        无
-]]
-function ScrollView:playFlyInAction(fromBack)
-    fromBack = fromBack == nil and true    
-    self.tItemView = self.tItemView or {}
-
-       local moveTime = 0.2
-       local delayTime = 0.1
-
-    if self:getDirection() == ScrollViewDirection.DIR_HORIZONTAL then
-        local initPos = fromBack and (self:getContentSize().width + self.tItemContentSize.width) or (-self:getContentSize().width - self.tItemContentSize.width)
-
-        for k, v in pairs(self.tItemView) do
-            local aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())
-
-            v.pLayer:setPositionX(initPos)
-            v.pLayer:runAction(
-                act.seq(
-                    act.delay((k - 1) * delayTime),
-                    act.movto(moveTime, aimPos)
-                    )
-                )
-        end
-    elseif self:getDirection() == ScrollViewDirection.DIR_VERTICAL then
-        local initPos = fromBack and (-self:getContentSize().height - self.tItemContentSize.height) or (self:getContentSize().height + self.tItemContentSize.height)
-
-        for k, v in pairs(self.tItemView) do
-            local aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())
-
-            v.pLayer:setPositionY(initPos)
-            v.pLayer:runAction(
-                act.seq(
-                    act.delay((k - 1) * delayTime),
-                    act.movto(moveTime, aimPos)
-                    )
-                )
-        end
-    end
-end
-</code></pre><p><br></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 遍历所有item</span></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self.tItemView) <span class="keyword">do</span></span><br><span class="line">	<span class="comment">-- 记录它本来所在的位置</span></span><br><span class="line">    <span class="keyword">local</span> aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 把它放在区域外</span></span><br><span class="line">    v.pLayer:setPositionY(-self:getContentSize().height - self.tItemContentSize.height)</span><br><span class="line">    v.pLayer:runAction(</span><br><span class="line">        act.seq(</span><br><span class="line">        	<span class="comment">-- 一个个飞入</span></span><br><span class="line">            act.delay((k - <span class="number">1</span>) * [delay_time]),</span><br><span class="line">            act.movto([move_time], aimPos)</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>当然，也要支持多方向ScrollView，并且要支持从前端飞入还是从后端飞入。<br>这些都是通过改动初始位置及回弹值来实现。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        ScrollView内item的从外部飞入动画, 有回弹效果</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        fromBack:   boolean</span></span><br><span class="line"><span class="comment">            对于垂直方向, true代表自下而上; 对于水平方向, true代表自右向左</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:playFlyInAction</span><span class="params">(fromBack)</span></span></span><br><span class="line">    fromBack = fromBack == <span class="literal">nil</span> <span class="keyword">and</span> <span class="literal">true</span>    </span><br><span class="line">    self.tItemView = self.tItemView <span class="keyword">or</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">   	<span class="keyword">local</span> moveTime = <span class="number">0.2</span></span><br><span class="line">   	<span class="keyword">local</span> delayTime = <span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self:getDirection() == ScrollViewDirection.DIR_HORIZONTAL <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> initPos = fromBack <span class="keyword">and</span> (self:getContentSize().width + self.tItemContentSize.width) <span class="keyword">or</span> (-self:getContentSize().width - self.tItemContentSize.width)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self.tItemView) <span class="keyword">do</span></span><br><span class="line">            <span class="keyword">local</span> aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())</span><br><span class="line"></span><br><span class="line">            v.pLayer:setPositionX(initPos)</span><br><span class="line">            v.pLayer:runAction(</span><br><span class="line">                act.seq(</span><br><span class="line">                    act.delay((k - <span class="number">1</span>) * delayTime),</span><br><span class="line">                    act.movto(moveTime, aimPos)</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">elseif</span> self:getDirection() == ScrollViewDirection.DIR_VERTICAL <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> initPos = fromBack <span class="keyword">and</span> (-self:getContentSize().height - self.tItemContentSize.height) <span class="keyword">or</span> (self:getContentSize().height + self.tItemContentSize.height)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self.tItemView) <span class="keyword">do</span></span><br><span class="line">            <span class="keyword">local</span> aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())</span><br><span class="line"></span><br><span class="line">            v.pLayer:setPositionY(initPos)</span><br><span class="line">            v.pLayer:runAction(</span><br><span class="line">                act.seq(</span><br><span class="line">                    act.delay((k - <span class="number">1</span>) * delayTime),</span><br><span class="line">                    act.movto(moveTime, aimPos)</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>公司用ScrollView主要是用来替代ListView，虽然主要是用ScrollView的重用item的特性。<br>但是还是要平滑的过渡过来，要支持ListView常用的一些接口。让这个组件更完善更好用。<br>当然功能扩展还没有停止，之后也会陆陆续续的更新。</p>
 
       

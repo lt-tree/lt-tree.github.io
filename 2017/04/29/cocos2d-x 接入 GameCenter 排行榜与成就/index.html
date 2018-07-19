@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="cocos2d-x 接入 GameCenter 排行榜与成就[mac - XCode 8.3 - cocos2d-x lua]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.623Z">
+<meta property="og:updated_time" content="2018-07-19T17:26:29.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocos2d-x 接入 GameCenter 排行榜与成就">
 <meta name="twitter:description" content="cocos2d-x 接入 GameCenter 排行榜与成就[mac - XCode 8.3 - cocos2d-x lua]">
@@ -332,108 +332,14 @@
 </ul>
 <h2 id="添加GameKit框架"><a href="#添加GameKit框架" class="headerlink" title="添加GameKit框架"></a>添加GameKit框架</h2><p>打开项目工程，将 Capabilities 的 GameCenter 打开。<br>这样，XCode就会将GameKit框架加到我们的工程中。</p>
 <h2 id="登录GameCenter"><a href="#登录GameCenter" class="headerlink" title="登录GameCenter"></a>登录GameCenter</h2><p>登录GameCenter:  【这个步骤在我们加载完游戏时进行即可】</p>
-<pre><code>-(void) authenticateLocalPlayer {
-    // 获取本地用户
-    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
-
-    // 认证登录
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error) {
-        [self setLastError:error];
-
-        if (localPlayer.authenticated) {                        // 本地用户已经登录
-            _gameCenterFeaturesEnabled = YES;                   // 此变量是判断是否已经登录上GameCenter
-        } else if(viewController) {                             // 没有用户，弹出登录界面
-            [self presentViewController:viewController];        
-        } else {                                                // 没有用户，并且没有登录界面
-            _gameCenterFeaturesEnabled = NO;
-        }
-    };
-}
-</code></pre><h2 id="关于lua调用object-c"><a href="#关于lua调用object-c" class="headerlink" title="关于lua调用object-c"></a>关于lua调用object-c</h2><p>因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。<br>cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：</p>
-<pre><code>LuaObjcBridge.callStaticMethod(methodName className,args)
-</code></pre><h2 id="GameKit辅助处理类"><a href="#GameKit辅助处理类" class="headerlink" title="GameKit辅助处理类"></a>GameKit辅助处理类</h2><p>GameKitHelper.h:</p>
-<pre><code>#import &lt;GameKit/GameKit.h&gt;
-#import &quot;cocos2d.h&quot;
-
-// 方便lua调用
-#include &quot;CCLuaEngine.h&quot;
-#include &quot;CCLuaBridge.h&quot;
-
-@interface GameKitHelper : NSObject
-// 处理错误
-@property (nonatomic, readonly) NSError* lastError;
-
-// 初始化
-+ (id) sharedGameKitHelper;
-
-// Player authentication, info
--(void) authenticateLocalPlayer;
-@end
-</code></pre><p>GameKitHelper.mm</p>
-<pre><code>#import &quot;GameKitHelper.h&quot;
-
-@interface GameKitHelper ()
-        &lt;GKGameCenterControllerDelegate&gt; {
-    BOOL _gameCenterFeaturesEnabled;
-}
-@end
-
-@implementation GameKitHelper
-
-#pragma mark Singleton stuff
-
-+(id) sharedGameKitHelper {
-    static GameKitHelper *sharedGameKitHelper;
-    static dispatch_once_t onceToken;
-    dispatch_once(&amp;onceToken, ^{
-        sharedGameKitHelper =
-                [[GameKitHelper alloc] init];
-    });
-    return sharedGameKitHelper;
-}
-
-#pragma mark Player Authentication
-
--(void) authenticateLocalPlayer {
-    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
-
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error) {
-        [self setLastError:error];
-        if (localPlayer.authenticated) {
-            _gameCenterFeaturesEnabled = YES;
-        } else if(viewController) {
-            [self presentViewController:viewController];
-        } else {
-            _gameCenterFeaturesEnabled = NO;
-        }
-    };
-}
-
-#pragma mark Property setters
-
--(void) setLastError:(NSError*)error {
-    _lastError = [error copy];
-    if (_lastError) {
-        NSLog(@&quot;GameCenter -- setLastError -- ERROR: %@&quot;, [[_lastError userInfo] 
-          description]);
-    }
-}
-
-#pragma mark UIViewController stuff
-
--(UIViewController*) getRootViewController {
-    return [UIApplication 
-      sharedApplication].keyWindow.rootViewController;
-}
-
--(void)presentViewController:(UIViewController*)vc {
-    UIViewController* rootVC = [self getRootViewController];
-    [rootVC presentViewController:vc animated:YES 
-      completion:nil];
-}
-
-@end
-</code></pre><h2 id="登录GameCenter时机"><a href="#登录GameCenter时机" class="headerlink" title="登录GameCenter时机"></a>登录GameCenter时机</h2><p>由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) authenticateLocalPlayer &#123;</span><br><span class="line">    <span class="comment">// 获取本地用户</span></span><br><span class="line">    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 认证登录</span></span><br><span class="line">    localPlayer.authenticateHandler = ^(<span class="built_in">UIViewController</span> *viewController, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (localPlayer.authenticated) &#123;                        <span class="comment">// 本地用户已经登录</span></span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">YES</span>;                   <span class="comment">// 此变量是判断是否已经登录上GameCenter</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(viewController) &#123;                             <span class="comment">// 没有用户，弹出登录界面</span></span><br><span class="line">            [<span class="keyword">self</span> presentViewController:viewController];        </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;                                                <span class="comment">// 没有用户，并且没有登录界面</span></span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">NO</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关于lua调用object-c"><a href="#关于lua调用object-c" class="headerlink" title="关于lua调用object-c"></a>关于lua调用object-c</h2><p>因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。<br>cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LuaObjcBridge.callStaticMethod(methodName className,args)</span><br></pre></td></tr></table></figure>
+<h2 id="GameKit辅助处理类"><a href="#GameKit辅助处理类" class="headerlink" title="GameKit辅助处理类"></a>GameKit辅助处理类</h2><p>GameKitHelper.h:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;GameKit/GameKit.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方便lua调用</span></span><br><span class="line"><span class="meta">#include <span class="meta-string">"CCLuaEngine.h"</span></span></span><br><span class="line"><span class="meta">#include <span class="meta-string">"CCLuaBridge.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">GameKitHelper</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="comment">// 处理错误</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSError</span>* lastError;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">+ (<span class="keyword">id</span>) sharedGameKitHelper;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Player authentication, info</span></span><br><span class="line">-(<span class="keyword">void</span>) authenticateLocalPlayer;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"GameKitHelper.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">GameKitHelper</span> ()</span></span><br><span class="line">        &lt;GKGameCenterControllerDelegate&gt; &#123;</span><br><span class="line">    <span class="built_in">BOOL</span> _gameCenterFeaturesEnabled;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">GameKitHelper</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark Singleton stuff</span></span><br><span class="line"></span><br><span class="line">+(<span class="keyword">id</span>) sharedGameKitHelper &#123;</span><br><span class="line">    <span class="keyword">static</span> GameKitHelper *sharedGameKitHelper;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        sharedGameKitHelper =</span><br><span class="line">                [[GameKitHelper alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> sharedGameKitHelper;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark Player Authentication</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) authenticateLocalPlayer &#123;</span><br><span class="line">    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];</span><br><span class="line"></span><br><span class="line">    localPlayer.authenticateHandler = ^(<span class="built_in">UIViewController</span> *viewController, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line">        <span class="keyword">if</span> (localPlayer.authenticated) &#123;</span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">YES</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(viewController) &#123;</span><br><span class="line">            [<span class="keyword">self</span> presentViewController:viewController];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">NO</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark Property setters</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) setLastError:(<span class="built_in">NSError</span>*)error &#123;</span><br><span class="line">    _lastError = [error <span class="keyword">copy</span>];</span><br><span class="line">    <span class="keyword">if</span> (_lastError) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- setLastError -- ERROR: %@"</span>, [[_lastError userInfo] </span><br><span class="line">          description]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark UIViewController stuff</span></span><br><span class="line"></span><br><span class="line">-(<span class="built_in">UIViewController</span>*) getRootViewController &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">UIApplication</span> </span><br><span class="line">      sharedApplication].keyWindow.rootViewController;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span>*)vc &#123;</span><br><span class="line">    <span class="built_in">UIViewController</span>* rootVC = [<span class="keyword">self</span> getRootViewController];</span><br><span class="line">    [rootVC presentViewController:vc animated:<span class="literal">YES</span> </span><br><span class="line">      completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h2 id="登录GameCenter时机"><a href="#登录GameCenter时机" class="headerlink" title="登录GameCenter时机"></a>登录GameCenter时机</h2><p>由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。</p>
 <p><br></p>
 <h1 id="关于排行榜"><a href="#关于排行榜" class="headerlink" title="关于排行榜"></a>关于排行榜</h1><h2 id="配置-iTunes-Connect"><a href="#配置-iTunes-Connect" class="headerlink" title="配置 iTunes Connect"></a>配置 iTunes Connect</h2><p>在iTunes Connect 找到 排行榜。</p>
 <p>简单说一下流程吧：<br>配置排行榜的结构，然后我们在游戏中将数据上传到这个结构，最后显示到GameCenter中。</p>
@@ -445,131 +351,51 @@
 </ol>
 <p>接下来就看属性去配置它吧。</p>
 <h2 id="XCode工程配置"><a href="#XCode工程配置" class="headerlink" title="XCode工程配置"></a>XCode工程配置</h2><p>模拟这个流程：登录GameCenter -&gt; 提交排行榜数据 ( -&gt; 如果需要，弹出GameCenter排行榜)<br>提交排行榜数据:</p>
-<pre><code>-(void) submitScore:(int64_t)score category:(NSString*)category {       // 这里两个参数 score是数据， category是ID，就是我们创建排行榜以后，不可更改的那个ID。
-    // 检查是否在登录状态
-    if (!_gameCenterFeaturesEnabled)    {
-        NSLog(@&quot;GameCenter -- submitScore -- Player not authenticated&quot;);
-        return;
-    }
-
-    // 创建一个分数对象
-    GKScore* gkScore = [[GKScore alloc] initWithCategory:category];
-
-    // 设置分数对象的值
-    gkScore.value = score;
-
-    // 向GameCenter提交数据
-    [gkScore reportScoreWithCompletionHandler: ^(NSError* error)    {
-        [self setLastError:error];
-    }];
-}
-</code></pre><h2 id="实践使用"><a href="#实践使用" class="headerlink" title="实践使用"></a>实践使用</h2><p>在公用部分，已经添加了GameCenter的登录验证相关的东西了。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitScore:(int64_t)score category:(<span class="built_in">NSString</span>*)category &#123;       <span class="comment">// 这里两个参数 score是数据， category是ID，就是我们创建排行榜以后，不可更改的那个ID。</span></span><br><span class="line">    <span class="comment">// 检查是否在登录状态</span></span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitScore -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个分数对象</span></span><br><span class="line">    GKScore* gkScore = [[GKScore alloc] initWithCategory:category];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置分数对象的值</span></span><br><span class="line">    gkScore.value = score;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向GameCenter提交数据</span></span><br><span class="line">    [gkScore reportScoreWithCompletionHandler: ^(<span class="built_in">NSError</span>* error)    &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实践使用"><a href="#实践使用" class="headerlink" title="实践使用"></a>实践使用</h2><p>在公用部分，已经添加了GameCenter的登录验证相关的东西了。</p>
 <ul>
 <li>将排行榜数据提交的函数</li>
 </ul>
 <p>GameKitHelper.h</p>
-<pre><code>-(void) submitScore:(int64_t)score category:(NSString*)category;
-</code></pre><p>GameKitHelper.mm</p>
-<pre><code>-(void) submitScore:(int64_t)score category:(NSString*)category {
-
-    if (!_gameCenterFeaturesEnabled)    {
-        NSLog(@&quot;GameCenter -- submitScore -- Player not authenticated&quot;);
-        return;
-    }
-
-    GKScore* gkScore = [[GKScore alloc] initWithCategory:category];
-
-    gkScore.value = score;
-
-    [gkScore reportScoreWithCompletionHandler: ^(NSError* error)    {
-        [self setLastError:error];
-    }];
-}
-</code></pre><ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitScore:(int64_t)score category:(<span class="built_in">NSString</span>*)category;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitScore:(int64_t)score category:(<span class="built_in">NSString</span>*)category &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitScore -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    GKScore* gkScore = [[GKScore alloc] initWithCategory:category];</span><br><span class="line"></span><br><span class="line">    gkScore.value = score;</span><br><span class="line"></span><br><span class="line">    [gkScore reportScoreWithCompletionHandler: ^(<span class="built_in">NSError</span>* error)    &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>给lua调用的函数</li>
 </ul>
 <p>GameKitHelper.h</p>
-<pre><code>+(void) getScore:(NSDictionary *)dict;
-</code></pre><p>GameKitHelper.mm</p>
-<pre><code>+(void) getScore:(NSDictionary *)dict {
-    NSString* rID = [dict objectForKey:@&quot;id&quot;];
-    int score = [[dict objectForKey:@&quot;score&quot;] intValue];
-
-    [[GameKitHelper sharedGameKitHelper] submitScore:(int64_t)score category:rID];
-}
-</code></pre><ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getScore:(<span class="built_in">NSDictionary</span> *)dict;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getScore:(<span class="built_in">NSDictionary</span> *)dict &#123;</span><br><span class="line">    <span class="built_in">NSString</span>* rID = [dict objectForKey:<span class="string">@"id"</span>];</span><br><span class="line">    <span class="keyword">int</span> score = [[dict objectForKey:<span class="string">@"score"</span>] intValue];</span><br><span class="line">    </span><br><span class="line">    [[GameKitHelper sharedGameKitHelper] submitScore:(int64_t)score category:rID];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>lua调用</li>
 </ul>
-<pre><code>LuaObjcBridge.callStaticMethod(&quot;GameKitHelper&quot;, &quot;getScore&quot;, {id = 排行榜的ID, score = 分数值})
-</code></pre><p><br></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LuaObjcBridge.callStaticMethod(<span class="string">"GameKitHelper"</span>, <span class="string">"getScore"</span>, &#123;id = 排行榜的ID, score = 分数值&#125;)</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <h1 id="关于成就"><a href="#关于成就" class="headerlink" title="关于成就"></a>关于成就</h1><h2 id="配置-iTunes-Connect-1"><a href="#配置-iTunes-Connect-1" class="headerlink" title="配置 iTunes Connect"></a>配置 iTunes Connect</h2><p>还是老位置，之前看的排行榜，这次点成就。<br>还是老样子，成就的ID，创建后不可修改，成就发布后不可删除。<br>但是，成就还要多一点，就是每个游戏总共有2000点成就分（为什么是2000？你问老乔去。。），你可以给每个成就分配一些成就分。<br>成就还有是否隐藏的选项，但是它的隐藏并不是看不到这个成就了，而是有一个成就名称为隐藏的成就显示在列表中。<br>还有，它的进度是一个顺时针扇形来表示，就是你的图标刚开始是被遮掩的，随着进度的增加，会逐渐显现出图标，方向是顺时针扇形。</p>
 <p>其他相关参数，可参考本文末尾的关于。</p>
 <h2 id="XCode工程配置-1"><a href="#XCode工程配置-1" class="headerlink" title="XCode工程配置"></a>XCode工程配置</h2><p>流程与排行榜的一样，但是这次提交的不是分数了，而是成就完成的百分比。</p>
-<pre><code>// 提交成就数据
--(void) submitAchievment:(NSString *)identifier percent:(double) percentComplete {          // identifier 成就ID, percentComplete: 成就完成百分比
-    // 判断登录认证
-    if (!_gameCenterFeaturesEnabled)    {
-        NSLog(@&quot;GameCenter -- submitAchievment -- Player not authenticated&quot;);
-        return;
-    }
-
-    // 创建成就结构，注入成就ID
-    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];  
-
-    // 设置成就百分比
-    [achievement setPercentComplete:percentComplete];  
-
-    // 提交成就数据
-    [achievement reportAchievementWithCompletionHandler:^(NSError *error) {  
-        if(error != nil){  
-            NSLog(@&quot;GameCenter -- submitAchievment --  error:%@&quot;, [error localizedDescription]);  
-        }else{  
-            NSLog(@&quot;GameCenter -- submitAchievment --  提交成就成功&quot;);  
-        }  
-    }];  
-} 
-</code></pre><h2 id="实践使用-1"><a href="#实践使用-1" class="headerlink" title="实践使用"></a>实践使用</h2><p>同排行榜一样。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 提交成就数据</span></span><br><span class="line">-(<span class="keyword">void</span>) submitAchievment:(<span class="built_in">NSString</span> *)identifier percent:(<span class="keyword">double</span>) percentComplete &#123;          <span class="comment">// identifier 成就ID, percentComplete: 成就完成百分比</span></span><br><span class="line">    <span class="comment">// 判断登录认证</span></span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建成就结构，注入成就ID</span></span><br><span class="line">    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 设置成就百分比</span></span><br><span class="line">    [achievement setPercentComplete:percentComplete];  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 提交成就数据</span></span><br><span class="line">    [achievement reportAchievementWithCompletionHandler:^(<span class="built_in">NSError</span> *error) &#123;  </span><br><span class="line">        <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  error:%@"</span>, [error localizedDescription]);  </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  提交成就成功"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实践使用-1"><a href="#实践使用-1" class="headerlink" title="实践使用"></a>实践使用</h2><p>同排行榜一样。</p>
 <ul>
 <li>将成就数据提交的函数</li>
 </ul>
 <p>GameKitHelper.h</p>
-<pre><code>- (void)submitAchievment:(NSString *)identifier percent:(double)percentComplete;
-</code></pre><p>GameKitHelper.mm</p>
-<pre><code>-(void) submitAchievment:(NSString *)identifier percent:(double) percentComplete {
-    if (!_gameCenterFeaturesEnabled)    {
-        NSLog(@&quot;GameCenter -- submitAchievment -- Player not authenticated&quot;);
-        return;
-    }
-
-    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];  
-
-    [achievement setPercentComplete:percentComplete];  
-
-    [achievement reportAchievementWithCompletionHandler:^(NSError *error) {  
-        if(error != nil){  
-            NSLog(@&quot;GameCenter -- submitAchievment --  error:%@&quot;, [error localizedDescription]);  
-        }else{  
-            NSLog(@&quot;GameCenter -- submitAchievment --  提交成就成功&quot;);  
-        }  
-    }];  
-} 
-</code></pre><ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)submitAchievment:(<span class="built_in">NSString</span> *)identifier percent:(<span class="keyword">double</span>)percentComplete;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitAchievment:(<span class="built_in">NSString</span> *)identifier percent:(<span class="keyword">double</span>) percentComplete &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];  </span><br><span class="line">      </span><br><span class="line">    [achievement setPercentComplete:percentComplete];  </span><br><span class="line">      </span><br><span class="line">    [achievement reportAchievementWithCompletionHandler:^(<span class="built_in">NSError</span> *error) &#123;  </span><br><span class="line">        <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  error:%@"</span>, [error localizedDescription]);  </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  提交成就成功"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>给lua调用的函数</li>
 </ul>
 <p>GameKitHelper.h</p>
-<pre><code>+(void) getAchievement:(NSDictionary *)dict;
-</code></pre><p>GameKitHelper.mm</p>
-<pre><code>+(void) getAchievement:(NSDictionary *)dict {
-    NSString* aID = [dict objectForKey:@&quot;id&quot;];
-    double percent = [[dict objectForKey:@&quot;percent&quot;] doubleValue];
-
-    [[GameKitHelper sharedGameKitHelper] submitAchievment:(NSString *)aID percent:percent];
-}
-</code></pre><ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getAchievement:(<span class="built_in">NSDictionary</span> *)dict;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getAchievement:(<span class="built_in">NSDictionary</span> *)dict &#123;</span><br><span class="line">    <span class="built_in">NSString</span>* aID = [dict objectForKey:<span class="string">@"id"</span>];</span><br><span class="line">    <span class="keyword">double</span> percent = [[dict objectForKey:<span class="string">@"percent"</span>] doubleValue];</span><br><span class="line">    </span><br><span class="line">    [[GameKitHelper sharedGameKitHelper] submitAchievment:(<span class="built_in">NSString</span> *)aID percent:percent];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>lua调用</li>
 </ul>
-<pre><code>LuaObjcBridge.callStaticMethod(&quot;GameKitHelper&quot;, &quot;getAchievement&quot;, {id = 成就ID, percent = 成就百分比})
-</code></pre><p><br></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LuaObjcBridge.callStaticMethod(<span class="string">"GameKitHelper"</span>, <span class="string">"getAchievement"</span>, &#123;id = 成就ID, percent = 成就百分比&#125;)</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>GameCenter还是挺好的一个东西。<br>它还有一个好友挑战功能，但这个主要适合之前 Flappy Bird，别踩白块 那些游戏来弄。<br>或许，这也是这个平台没落了的原因吧。</p>
 <p><br><br><br><br><br></p>
 <hr>

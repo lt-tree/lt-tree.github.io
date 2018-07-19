@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="Cocos2d iPhone 边缘触屏延迟现象发现并解决问题全历程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.620Z">
+<meta property="og:updated_time" content="2018-07-19T17:26:50.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cocos2d iPhone 边缘触屏延迟现象">
 <meta name="twitter:description" content="Cocos2d iPhone 边缘触屏延迟现象发现并解决问题全历程">
@@ -335,13 +335,10 @@
 <h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>既然发现3D touch有关，那就关闭3D touch看看效果。<br>关闭以后发现，左右两边没有问题了，但是底边还是有问题。<br>又了解到苹果按住边缘滑动，会滑出任务管理器，这个好像没办法关掉…</p>
 <p>然后，就去cocos2d的github的issues看有没有遇到同样的问题的。<br>发现也有人遇到了同样的问题，已经解决好了。 [ <a href="https://github.com/cocos2d/cocos2d-x/issues/18479" target="_blank" rel="noopener">https://github.com/cocos2d/cocos2d-x/issues/18479</a> ]<br>解决方法就是将手势识别的触摸开始的延迟关掉。</p>
 <p>在 AppController.mm 文件内，</p>
-<pre><code>[window makeKeyAndVisible]; 
-</code></pre><p>之后加入:</p>
-<pre><code>for(UIGestureRecognizer* gesture in window.gestureRecognizers)
-{
-    gesture.delaysTouchesBegan=NO;
-}
-</code></pre><p>完美解决问题。<br>真是查问题5小时，解决问题5秒钟。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[window makeKeyAndVisible];</span><br></pre></td></tr></table></figure>
+<p>之后加入:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="built_in">UIGestureRecognizer</span>* gesture <span class="keyword">in</span> window.gestureRecognizers)</span><br><span class="line">&#123;</span><br><span class="line">    gesture.delaysTouchesBegan=<span class="literal">NO</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完美解决问题。<br>真是查问题5小时，解决问题5秒钟。</p>
 <p><br></p>
 <h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>一般到这里，解决完问题就结束了。<br>BUG是无穷尽的，但是它们是有共性的。<br>我们遇到一个问题，通过分析它能解决一类问题，这才是进步。</p>
 <p>UIGestureRecognizer 是手势识别器的基类。<br>它用于识别触摸序列（或其他输入）的逻辑进行解耦，并对该识别进行操作，负责发送操作消息或转发触摸消息等。<br>它主要有以下的手势：</p>

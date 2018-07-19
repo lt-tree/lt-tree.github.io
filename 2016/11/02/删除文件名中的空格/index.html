@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="用lua、python3来删除文件名中的空格">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.630Z">
+<meta property="og:updated_time" content="2018-07-19T16:46:45.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="删除文件名中的空格">
 <meta name="twitter:description" content="用lua、python3来删除文件名中的空格">
@@ -322,23 +322,13 @@
 <ul>
 <li>lua方法</li>
 </ul>
-<pre><code>local files = {}
-local all = io.popen(&quot;ls &quot;)
-for filename in all:lines() do
-    if string.find(filename, &apos; &apos;) then
-        local newName = string.gsub(filename, &apos; &apos;, &apos;&apos;)
-        os.rename(filename, newName)
-    end
-end
-</code></pre><p><br></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> files = &#123;&#125;</span><br><span class="line"><span class="keyword">local</span> all = <span class="built_in">io</span>.<span class="built_in">popen</span>(<span class="string">"ls "</span>)</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> all:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">string</span>.<span class="built_in">find</span>(filename, <span class="string">' '</span>) <span class="keyword">then</span></span><br><span class="line">		<span class="keyword">local</span> newName = <span class="built_in">string</span>.<span class="built_in">gsub</span>(filename, <span class="string">' '</span>, <span class="string">''</span>)</span><br><span class="line">		<span class="built_in">os</span>.<span class="built_in">rename</span>(filename, newName)</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
 <ul>
 <li>python3方法</li>
 </ul>
-<pre><code>import os
-for parent, dirnames, filenames in os.walk(os.getcwd()):
-    for filename in filenames:
-        os.rename(os.path.join(parent, filename), os.path.join(parent, filename.replace(&apos; &apos;, &apos;&apos;)))
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">for</span> parent, dirnames, filenames <span class="keyword">in</span> os.walk(os.getcwd()):</span><br><span class="line">	<span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">		os.rename(os.path.join(parent, filename), os.path.join(parent, filename.replace(<span class="string">' '</span>, <span class="string">''</span>)))</span><br></pre></td></tr></table></figure>
+
       
     </div>
     

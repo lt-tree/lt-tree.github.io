@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="One Step 用python来发邮件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.630Z">
+<meta property="og:updated_time" content="2018-07-19T16:47:02.552Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用python发邮件">
 <meta name="twitter:description" content="One Step 用python来发邮件">
@@ -335,42 +335,8 @@
 <p>惊！<br>这难道就是传说中的 —— One Step ？！！</p>
 <p><br></p>
 <p>唠叨完了，该整干货了。</p>
-<pre><code>import smtplib
-from email.header import Header
-from email.mime.text import MIMEText
-from datetime import datetime
-
-sender = &apos;&apos;                              # 此处填写发件人邮箱
-password = &apos;&apos;                            # 此处填写发件人邮箱密码       =&gt;注释1
-receiver = &apos;&apos;                            # 此处填写收件人邮箱
-smtp_server = &apos;&apos;                        # 此处填写smtp服务器地址
-
-DATE_FORMATE = &apos;%Y-%m-%d %A&apos;            # 日期的格式                =&gt; 注释2
-title = &apos;&apos;                                # 此处填写邮件标题
-
-def initialContent():
-    now = datetime.now()
-    return now.strftime(DATE_FORMATE)
-
-def sendEmail(cont):
-    content = initialContent() + &apos;\n&apos; + cont
-
-    try:
-        msg = MIMEText(content, &apos;plain&apos;, &apos;utf-8&apos;)                     
-        msg[&apos;Subject&apos;] = Header(title, &apos;utf-8&apos;)                # =&gt; 注释3
-        msg[&apos;From&apos;] = sender + &apos; &lt;&apos; + sender + &apos;&gt;&apos;            # =&gt; 注释3
-        msg[&apos;To&apos;] = receiver                                # =&gt; 注释3
-
-        server = smtplib.SMTP(smtp_server, 25)                 # 连接服务器，默认端口均为25
-        server.set_debuglevel(1)                              # 选择是否开启Debug，可以得到与服务端的反馈信息
-        server.login(sender, password)
-        server.sendmail(sender, [receiver], msg.as_string())
-        server.quit()
-
-        print(&apos;send email success&apos;)
-    except smtplib.SMTPException:
-        priint(&apos;send email fail&apos;)
-</code></pre><p>关于上述代码的一些注释：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">sender = <span class="string">''</span>  							<span class="comment"># 此处填写发件人邮箱</span></span><br><span class="line">password = <span class="string">''</span>							<span class="comment"># 此处填写发件人邮箱密码   	=&gt;注释1</span></span><br><span class="line">receiver = <span class="string">''</span>							<span class="comment"># 此处填写收件人邮箱</span></span><br><span class="line">smtp_server = <span class="string">''</span>						<span class="comment"># 此处填写smtp服务器地址</span></span><br><span class="line"></span><br><span class="line">DATE_FORMATE = <span class="string">'%Y-%m-%d %A'</span>			<span class="comment"># 日期的格式				=&gt; 注释2</span></span><br><span class="line">title = <span class="string">''</span>								<span class="comment"># 此处填写邮件标题</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialContent</span><span class="params">()</span>:</span></span><br><span class="line">	now = datetime.now()</span><br><span class="line">	<span class="keyword">return</span> now.strftime(DATE_FORMATE)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sendEmail</span><span class="params">(cont)</span>:</span></span><br><span class="line">	content = initialContent() + <span class="string">'\n'</span> + cont</span><br><span class="line"></span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		msg = MIMEText(content, <span class="string">'plain'</span>, <span class="string">'utf-8'</span>) 					</span><br><span class="line">		msg[<span class="string">'Subject'</span>] = Header(title, <span class="string">'utf-8'</span>)				<span class="comment"># =&gt; 注释3</span></span><br><span class="line">		msg[<span class="string">'From'</span>] = sender + <span class="string">' &lt;'</span> + sender + <span class="string">'&gt;'</span>			<span class="comment"># =&gt; 注释3</span></span><br><span class="line">		msg[<span class="string">'To'</span>] = receiver								<span class="comment"># =&gt; 注释3</span></span><br><span class="line"></span><br><span class="line">		server = smtplib.SMTP(smtp_server, <span class="number">25</span>) 				<span class="comment"># 连接服务器，默认端口均为25</span></span><br><span class="line">		server.set_debuglevel(<span class="number">1</span>)  							<span class="comment"># 选择是否开启Debug，可以得到与服务端的反馈信息</span></span><br><span class="line">		server.login(sender, password)</span><br><span class="line">		server.sendmail(sender, [receiver], msg.as_string())</span><br><span class="line">		server.quit()</span><br><span class="line"></span><br><span class="line">		print(<span class="string">'send email success'</span>)</span><br><span class="line">	<span class="keyword">except</span> smtplib.SMTPException:</span><br><span class="line">		priint(<span class="string">'send email fail'</span>)</span><br></pre></td></tr></table></figure>
+<p>关于上述代码的一些注释：</p>
 <ul>
 <li>注释1:<br>关于邮箱密码，有些密码需要填写客户端授权码，比如163，当然，要用SMPT发邮件，需要将发信箱的SMTP服务打开。</li>
 <li>注释2:<br>日期的格式，更详细的可参考官方文档：<a href="http://python.usyiyi.cn/translate/python_352/library/datetime.html#datetime.datetime" target="_blank" rel="noopener">http://python.usyiyi.cn/translate/python_352/library/datetime.html#datetime.datetime</a></li>
@@ -379,16 +345,8 @@ def sendEmail(cont):
 <p><strong>还有，最好不要用163邮箱测试发邮件，会出现很多乱七八糟的问题（并非是你代码的问题）</strong></p>
 <p><br></p>
 <p>上面代码是用来发邮件的核心代码，<br>写日志的地方加在里面是很不友好的行为，<br>所以，<br>再单独建一个新的友好的地方来写日志。</p>
-<pre><code>import imp 
-tool = imp.load_source(&apos;sendEmail&apos;, &apos;url&apos;)                # 导入核心模块，url 填写你上面核心代码的位置
-
-content = &quot;&quot;&quot;
-在这里来写你的工作日志，
-支持多行。
-&quot;&quot;&quot;
-
-tool.sendEmail(content.strip())                         # strip将首尾空白字符删除
-</code></pre><p><br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> imp </span><br><span class="line">tool = imp.load_source(<span class="string">'sendEmail'</span>, <span class="string">'url'</span>)				<span class="comment"># 导入核心模块，url 填写你上面核心代码的位置</span></span><br><span class="line"></span><br><span class="line">content = <span class="string">"""</span></span><br><span class="line"><span class="string">在这里来写你的工作日志，</span></span><br><span class="line"><span class="string">支持多行。</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">tool.sendEmail(content.strip()) 						<span class="comment"># strip将首尾空白字符删除</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>这样就方便很多了。<br>最后，<br>这个只是初步版本，<br>后期可以添加很多你想要的东西，<br>比如多个联系人，一些判断。<br>我因为自己用，所以没有加那些东西。</p>
 
       
