@@ -128,8 +128,8 @@ UIGestureRecognizer 是手势识别器的基类。
 
 参考资料:
 
-1. stackoverflow - TouchesBegan delay on left hand side of the display
-[https://stackoverflow.com/questions/39998489/touchesbegan-delay-on-left-hand-side-of-the-display]
-2. stackoverflow - Swift SpriteKit 3D Touch and touches moved
- [https://stackoverflow.com/questions/36060423/swift-spritekit-3d-touch-and-touches-moved]
-3. 苹果开发者 UIGestureRecognizer [https://developer.apple.com/documentation/uikit/uigesturerecognizer?changes=_4&language=objc]
+- stackoverflow - TouchesBegan delay on left hand side of the display
+[ https://stackoverflow.com/questions/39998489/touchesbegan-delay-on-left-hand-side-of-the-display ]
+- stackoverflow - Swift SpriteKit 3D Touch and touches moved
+ [ https://stackoverflow.com/questions/36060423/swift-spritekit-3d-touch-and-touches-moved ]
+- 苹果开发者 UIGestureRecognizer [ https://developer.apple.com/documentation/uikit/uigesturerecognizer?changes=_4&language=objc ]
