@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="看着读," />
+  <meta name="keywords" content="跟着学," />
 
 
 
@@ -77,18 +77,18 @@
 
 
 
-<meta name="description" content="莫言的《生死疲劳》读感">
-<meta name="keywords" content="看着读">
+<meta name="description" content="stirng.gsub &amp;amp; 正则千分位格式化数字">
+<meta name="keywords" content="跟着学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《生死疲劳》读感">
-<meta property="og:url" content="http://yoursite.com/2016/07/25/《生死疲劳》读感/index.html">
+<meta property="og:title" content="千分位格式化数字">
+<meta property="og:url" content="http://yoursite.com/2018/09/02/千分位格式化数字/index.html">
 <meta property="og:site_name" content="Tree House">
-<meta property="og:description" content="莫言的《生死疲劳》读感">
+<meta property="og:description" content="stirng.gsub &amp;amp; 正则千分位格式化数字">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.629Z">
+<meta property="og:updated_time" content="2018-09-03T15:31:00.086Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《生死疲劳》读感">
-<meta name="twitter:description" content="莫言的《生死疲劳》读感">
+<meta name="twitter:title" content="千分位格式化数字">
+<meta name="twitter:description" content="stirng.gsub &amp;amp; 正则千分位格式化数字">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/25/《生死疲劳》读感/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/02/千分位格式化数字/"/>
 
 
 
 
 
-  <title>《生死疲劳》读感 | Tree House</title>
+  <title>千分位格式化数字 | Tree House</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/《生死疲劳》读感/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/千分位格式化数字/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ltree98">
@@ -258,7 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《生死疲劳》读感</h1>
+          <h1 class="post-title" itemprop="name headline">千分位格式化数字</h1>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T22:22:05+08:00">
-                2016-07-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T23:00:00+08:00">
+                2018-09-02
               </time>
             
 
@@ -288,7 +288,7 @@
 
           
           
-             <span id="/2016/07/25/《生死疲劳》读感/" class="leancloud_visitors" data-flag-title="《生死疲劳》读感">
+             <span id="/2018/09/02/千分位格式化数字/" class="leancloud_visitors" data-flag-title="千分位格式化数字">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -313,7 +313,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  723 字
+                  1,562 字
                 </span>
               
 
@@ -329,7 +329,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -350,19 +350,42 @@
       
 
       
-        <p>莫言的《生死疲劳》读感</p>
+        <p>stirng.gsub &amp; 正则<br>千分位格式化数字</p>
 <a id="more"></a>
-<p>经同事推荐，<br>拜读了一下莫言的《生死疲劳》，<br>按他的话：莫言获得诺贝尔文学奖，还是有他独到之处的，应该读一下他的文章。</p>
 <p><br></p>
-<p>这本书，一是从大局上，中国农村从1950年到2000年间50年的变化，每一次的转世都是代表每个时代的特点，非常有标志性。<br>二是从个人上，带着怨恨的人是无法转世为人的，西门闹那么深的仇怨，也被这一次次的转世磨没了脾性，从刚转世为驴的驴折腾，到最后为蓝千岁时，平静的叙述这一切。<br>其实，不光是主人公西门闹，读者也饱受煎熬，读者也随着西门闹一起，一次次转世，一次次的经历着他所经历的一切。</p>
+<h1 id="1-聊聊"><a href="#1-聊聊" class="headerlink" title="1.聊聊"></a>1.聊聊</h1><p>接到了个需求：<br>    千分位格式化数字，可能有小数点。<br>比如：<br>    1234567 -&gt; 1,234,567<br>    1234567.8901 -&gt; 1,234,567.8901</p>
+<p>最后效果就是小数点左边的部分，每三个数字加一个逗号。</p>
+<p>实现：</p>
+<ul>
+<li>最直接的肯定就是用字符串截取，先找到小数点，分割成两部分；再把前半部分3个为一组分开，再重新带上逗号拼接。</li>
+<li>也可以用 正则 + 字符串替换。通过模式匹配，从头开始每三个数字后加一个逗号，不断替换直到最后或小数点位置。<br>第一种方法通俗易懂简单明了，但是麻烦；第二种代码相对简(xiu)洁(ji)一些。</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="2-用到的东西"><a href="#2-用到的东西" class="headerlink" title="2.用到的东西"></a>2.用到的东西</h1><h2 id="character-class"><a href="#character-class" class="headerlink" title="character class"></a>character class</h2><p>字符类，用于表示字符的集合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">x: （这里 x 不能是 魔法字符 ^$()%.[]*+-? 中的一员） 表示字符 x 自身。</span><br><span class="line">.: （一个点）可表示任何字符。</span><br><span class="line">%a: 表示任何字母。</span><br><span class="line">%c: 表示任何控制字符。</span><br><span class="line">%d: 表示任何数字。</span><br><span class="line">%g: 表示任何除空白符外的可打印字符。</span><br><span class="line">%l: 表示所有小写字母。</span><br><span class="line">%p: 表示所有标点符号。</span><br><span class="line">%s: 表示所有空白字符。</span><br><span class="line">%u: 表示所有大写字母。</span><br><span class="line">%w: 表示所有字母及数字。</span><br><span class="line">%x: 表示所有 16 进制数字符号。</span><br><span class="line">%x: （这里的 x 是任意非字母或数字的字符） 表示字符 x。 这是对魔法字符转义的标准方法。 所有非字母或数字的字符 （包括所有标点，也包括非魔法字符） 都可以用前置一个 &apos;%&apos; 放在模式串中表示自身。</span><br><span class="line">[set]: 表示 set　中所有字符的联合。 可以以 &apos;-&apos; 连接，升序书写范围两端的字符来表示一个范围的字符集。 上面提到的 %x 形式也可以在 set 中使用 表示其中的一个元素。 其它出现在 set 中的字符则代表它们自己。 例如，[%w_] （或 [_%w]） 表示所有的字母数字加下划线）， [0-7] 表示 8 进制数字， [0-7%l%-]　表示 8 进制数字加小写字母与 &apos;-&apos; 字符。</span><br><span class="line">交叉使用类和范围的行为未定义。 因此，像 [%a-z] 或 [a-%%] 这样的模式串没有意义。</span><br><span class="line">[^set]: 表示 set 的补集， 其中 set 如上面的解释。</span><br><span class="line">所有单个字母表示的类别（%a，%c，等）， 若将其字母改为大写，均表示对应的补集。 例如，%S 表示所有非空格的字符。</span><br></pre></td></tr></table></figure>
 <p><br></p>
-<p>驴、牛、猪、狗 这四个中（猴 和 蓝千岁 的部分太少，主要是这四个），最不甘而且有人性的要属驴，<br>正如其名——驴折腾，可是真能折腾，<br>作为第一个顺序的动物，西门闹的怨恨还是很强的，<br>不爽于自己为驴，不爽于蓝脸为己主，不爽于蓝脸与迎春的结合，等等。<br>但，到了牛这里，牛犟劲，<br>这犟劲的态度，不单指西门闹的不妥协，不服从，<br>也配着蓝脸的单干行为的犟，即使到最后，<br>被一鞭一鞭抽死，也不妥协。<br>转世为猪这部分，则开始天马行空，这部分我读着最费力的部分，<br>一是本书读到这里，已经经历两世，有些疲劳了，<br>二是，这部分有些太扯了，总让我跳戏。<br>转世为狗，已经是一个新的开始了，<br>无论是西门闹，还是读者也快到极限了，<br>所以，狗精神这部分，西门闹已经完全适应了为动物，<br>不像为驴时，还有着人性，其实，在为猪时，他就已经有些忘却自己的人性了。</p>
+<h2 id="pattern-item（模式条目）"><a href="#pattern-item（模式条目）" class="headerlink" title="pattern item（模式条目）"></a>pattern item（模式条目）</h2><p>模式条目可以是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">单个字符类匹配该类别中任意单个字符</span><br><span class="line">单个字符类跟一个 &apos;*&apos;， 将匹配零或多个该类的字符。 这个条目总是匹配尽可能长的串；</span><br><span class="line">单个字符类跟一个 &apos;+&apos;， 将匹配一或更多个该类的字符。 这个条目总是匹配尽可能长的串；</span><br><span class="line">单个字符类跟一个 &apos;-&apos;， 将匹配零或更多个该类的字符。 和 &apos;*&apos; 不同，这个条目总是匹配尽可能短的串；</span><br><span class="line">单个字符类跟一个 &apos;?&apos;， 将匹配零或一个该类的字符。 只要有可能，它会匹配一个；</span><br><span class="line">%n， 这里的 n 可以从 1 到 9； 这个条目匹配一个等于 n 号捕获物（后面有描述）的子串。</span><br><span class="line">%bxy， 这里的 x 和 y 是两个明确的字符； 这个条目匹配以 x 开始 y 结束， 且其中 x 和 y 保持 平衡 的字符串。 意思是，如果从左到右读这个字符串，对每次读到一个 x 就 +1 ，读到一个 y 就 -1， 最终结束处的那个 y 是第一个记数到 0 的 y。 举个例子，条目 %b() 可以匹配到括号平衡的表达式。</span><br><span class="line">%f[set]， 指 边境模式； 这个条目会匹配到一个位于 set 内某个字符之前的一个空串， 且这个位置的前一个字符不属于 set 。 集合 set 的含义如前面所述。 匹配出的那个空串之开始和结束点的计算就看成该处有个字符 &apos;\0&apos; 一样。</span><br></pre></td></tr></table></figure></p>
 <p><br></p>
-<p>遗憾的是，这本书，有些虎头蛇尾。<br>后面很多东西，都能感觉的出来很仓促，<br>尤其是到猴子和蓝千岁这两部分，跟前面比都少的贫瘠了。<br>还有，最后，这些人死的…<br>让我感觉回到了余华的《活着》的最后部分，<br>只不过，《活着》中，一人一牛，在那田野中耕种着；<br>而《生死疲劳》里，是那蓝千岁在一排长满杂草的墓前唏嘘着。</p>
+<h2 id="pattern（模式）"><a href="#pattern（模式）" class="headerlink" title="pattern（模式）"></a>pattern（模式）</h2><p>指一个模式条目的序列。<br>在模式最前面加上符号 ‘^’ 表示从字符串的开始处做匹配。<br>在模式最后加上符号 ‘$’ 表示匹配到字符串的结尾。<br>如果 ‘^’ 和 ‘$’ 出现在其它位置，它们均没有特殊含义，只表示自身。</p>
 <p><br></p>
-<p>噢，还有一点。<br>本书中，男女关系，有些乱的我头晕…</p>
+<h2 id="capture（捕获）"><a href="#capture（捕获）" class="headerlink" title="capture（捕获）"></a>capture（捕获）</h2><p>模式可以在内部用小括号括起来（表示一个子模式），这些子模式称为 捕获物。<br>当匹配成功时，由捕获物匹配到的字符串中的子串被保存起来用于之后用途。<br>捕获物由它们左括号的次序来编号。<br>ext: 空的捕获() 将捕获到当前字符串的位置（一个数字）；例如，”()%a%d()” 作用到 “ltree98” 上，将产生两个捕获物: 5和7。</p>
 <p><br></p>
-<p>总之，莫先生的文笔还是很强的，那些细节的描写，都不需要多想，就能有幅画面在眼前。<br>有很多，让我想拍大腿叫好的语句。<br>对了，还有，本书内的莫言，是最让我跳戏的东西。</p>
+<h2 id="string-gsub"><a href="#string-gsub" class="headerlink" title="string.gsub"></a>string.gsub</h2><p>string.gsub (目标串, 匹配串, 替换串 [, 替换次数])</p>
+<p>返回一个经过替换串替换后的目标串的副本及替换次数。<br>如果替换串是string则直接用替换串替换匹配串即可。当里面字符存在’%’时，则代表调用捕获子串，捕获子串序列在1-9，0代表全部，%%代表%字符。<br>如果替换串是table类型，在每次匹配调用，并用第一个捕获子串来作为table的key值查询。<br>如果替换串是function类型，在每次匹配调用，并将所有子串按顺序作为函数参数。<br>任何情况下，如果匹配串没有捕获子串，那么整个匹配串作为捕获子串继续执行。<br>如果table或者function返回的是</p>
+<ul>
+<li>string类型，直接用</li>
+<li>number类型，直接用</li>
+<li>false，不替换</li>
+<li>nil，不替换</li>
+<li>其他，报错</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatnumberthousands</span><span class="params">(num)</span></span></span><br><span class="line">    <span class="keyword">local</span> formatted = <span class="built_in">tostring</span>(num)</span><br><span class="line">    <span class="keyword">local</span> k</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">        formatted, k = <span class="built_in">string</span>.<span class="built_in">gsub</span>(formatted, <span class="string">"^(-?%d+)(%d%d%d)"</span>, <span class="string">'%1,%2'</span>)</span><br><span class="line">        <span class="keyword">if</span> k == <span class="number">0</span> <span class="keyword">then</span> <span class="keyword">break</span> <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> formatted</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br><br><br><br><br></p>
+<hr>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li>Lua5.3官方文档 <a href="https://www.lua.org/manual/5.3/manual.html" target="_blank" rel="noopener">https://www.lua.org/manual/5.3/manual.html</a></li>
+</ul>
 
       
     </div>
@@ -385,7 +408,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.lt-tree.com/2016/07/25/《生死疲劳》读感/" title="《生死疲劳》读感">http://www.lt-tree.com/2016/07/25/《生死疲劳》读感/</a>
+    <a href="http://www.lt-tree.com/2018/09/02/千分位格式化数字/" title="千分位格式化数字">http://www.lt-tree.com/2018/09/02/千分位格式化数字/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -400,7 +423,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/看着读/" rel="tag"><i class="fa fa-tag"></i> 看着读</a>
+            <a href="/tags/跟着学/" rel="tag"><i class="fa fa-tag"></i> 跟着学</a>
           
         </div>
       
@@ -413,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/20/为什么要搞这个？/" rel="next" title="为什么要搞这个？">
-                <i class="fa fa-chevron-left"></i> 为什么要搞这个？
+              <a href="/2018/07/17/TreeHouse装修指南之工具/" rel="next" title="TreeHouse装修指南之工具">
+                <i class="fa fa-chevron-left"></i> TreeHouse装修指南之工具
               </a>
             
           </div>
@@ -422,10 +445,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/13/《代码的整洁之道》读记/" rel="prev" title="《代码的整洁之道》读记">
-                《代码的整洁之道》读记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -477,8 +496,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -579,6 +607,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-聊聊"><span class="nav-number">1.</span> <span class="nav-text">1.聊聊</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-用到的东西"><span class="nav-number">2.</span> <span class="nav-text">2.用到的东西</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#character-class"><span class="nav-number">2.1.</span> <span class="nav-text">character class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pattern-item（模式条目）"><span class="nav-number">2.2.</span> <span class="nav-text">pattern item（模式条目）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pattern（模式）"><span class="nav-number">2.3.</span> <span class="nav-text">pattern（模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capture（捕获）"><span class="nav-number">2.4.</span> <span class="nav-text">capture（捕获）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string-gsub"><span class="nav-number">2.5.</span> <span class="nav-text">string.gsub</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实操"><span class="nav-number">3.</span> <span class="nav-text">实操</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
