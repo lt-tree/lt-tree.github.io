@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="看着读," />
+  <meta name="keywords" content="跟着学," />
 
 
 
@@ -77,18 +77,18 @@
 
 
 
-<meta name="description" content="莫言的《生死疲劳》读感">
-<meta name="keywords" content="看着读">
+<meta name="description" content="Cocos2d之颜色混合BlendFunc、Sprite、ImageView">
+<meta name="keywords" content="跟着学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《生死疲劳》读感">
-<meta property="og:url" content="http://yoursite.com/2016/07/25/《生死疲劳》读感/index.html">
+<meta property="og:title" content="Cocos2d之颜色混合">
+<meta property="og:url" content="http://yoursite.com/2018/09/09/Cocos2d之颜色混合/index.html">
 <meta property="og:site_name" content="Tree House">
-<meta property="og:description" content="莫言的《生死疲劳》读感">
+<meta property="og:description" content="Cocos2d之颜色混合BlendFunc、Sprite、ImageView">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-17T17:05:10.629Z">
+<meta property="og:updated_time" content="2018-09-09T14:00:29.959Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《生死疲劳》读感">
-<meta name="twitter:description" content="莫言的《生死疲劳》读感">
+<meta name="twitter:title" content="Cocos2d之颜色混合">
+<meta name="twitter:description" content="Cocos2d之颜色混合BlendFunc、Sprite、ImageView">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/25/《生死疲劳》读感/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/09/Cocos2d之颜色混合/"/>
 
 
 
 
 
-  <title>《生死疲劳》读感 | Tree House</title>
+  <title>Cocos2d之颜色混合 | Tree House</title>
   
 
 
@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/《生死疲劳》读感/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/Cocos2d之颜色混合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ltree98">
@@ -278,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《生死疲劳》读感</h1>
+          <h1 class="post-title" itemprop="name headline">Cocos2d之颜色混合</h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T22:22:05+08:00">
-                2016-07-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T21:55:00+08:00">
+                2018-09-09
               </time>
             
 
@@ -308,7 +308,7 @@
 
           
           
-             <span id="/2016/07/25/《生死疲劳》读感/" class="leancloud_visitors" data-flag-title="《生死疲劳》读感">
+             <span id="/2018/09/09/Cocos2d之颜色混合/" class="leancloud_visitors" data-flag-title="Cocos2d之颜色混合">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  723 字
+                  777 字
                 </span>
               
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -370,19 +370,99 @@
       
 
       
-        <p>莫言的《生死疲劳》读感</p>
+        <p>Cocos2d之颜色混合<br>BlendFunc、Sprite、ImageView</p>
 <a id="more"></a>
-<p>经同事推荐，<br>拜读了一下莫言的《生死疲劳》，<br>按他的话：莫言获得诺贝尔文学奖，还是有他独到之处的，应该读一下他的文章。</p>
 <p><br></p>
-<p>这本书，一是从大局上，中国农村从1950年到2000年间50年的变化，每一次的转世都是代表每个时代的特点，非常有标志性。<br>二是从个人上，带着怨恨的人是无法转世为人的，西门闹那么深的仇怨，也被这一次次的转世磨没了脾性，从刚转世为驴的驴折腾，到最后为蓝千岁时，平静的叙述这一切。<br>其实，不光是主人公西门闹，读者也饱受煎熬，读者也随着西门闹一起，一次次转世，一次次的经历着他所经历的一切。</p>
+<h1 id="颜色混合"><a href="#颜色混合" class="headerlink" title="颜色混合"></a>颜色混合</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>混合：指两种颜色的叠加方式</li>
+<li>颜色：包括RGBA（红、绿、蓝、透明度）信息</li>
+<li>源颜色：后加入点的颜色</li>
+<li>目标颜色：先加入点的颜色</li>
+<li>源因子：后加入点的颜色乘以的系数</li>
+<li>目标因子：先加入点的颜色乘以的系数。</li>
+</ul>
+<p>每个图片都可以看作是点的集合，此处只关注点的颜色信息。两张图片重合在一起时，就是部分点重合在一起，OpenGL在绘制时，会根据各自混合因子计算（源颜色<em>源因子 + 目标颜色</em>目标因子），最终得出表现颜色。</p>
 <p><br></p>
-<p>驴、牛、猪、狗 这四个中（猴 和 蓝千岁 的部分太少，主要是这四个），最不甘而且有人性的要属驴，<br>正如其名——驴折腾，可是真能折腾，<br>作为第一个顺序的动物，西门闹的怨恨还是很强的，<br>不爽于自己为驴，不爽于蓝脸为己主，不爽于蓝脸与迎春的结合，等等。<br>但，到了牛这里，牛犟劲，<br>这犟劲的态度，不单指西门闹的不妥协，不服从，<br>也配着蓝脸的单干行为的犟，即使到最后，<br>被一鞭一鞭抽死，也不妥协。<br>转世为猪这部分，则开始天马行空，这部分我读着最费力的部分，<br>一是本书读到这里，已经经历两世，有些疲劳了，<br>二是，这部分有些太扯了，总让我跳戏。<br>转世为狗，已经是一个新的开始了，<br>无论是西门闹，还是读者也快到极限了，<br>所以，狗精神这部分，西门闹已经完全适应了为动物，<br>不像为驴时，还有着人性，其实，在为猪时，他就已经有些忘却自己的人性了。</p>
+<h2 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h2><p>PS: 颜色分量最大值为1.0, 计算时不会按照超过1.0的值计算。</p>
+<ul>
+<li>源颜色 (Rs, Gs, Bs, As)</li>
+<li>目标颜色 (Rd, Gd, Bd, Ad)</li>
+<li>源因子 (Sr, Sg, Sb, Sa)</li>
+<li>目标因子 (Dr, Dg, Db, Da)</li>
+</ul>
+<p>表达式: (Rs<em>Sr + Rd</em>Dr, Gs<em>Sg + Gd</em>Dg, Bs<em>Sb + Bd</em>Db, As<em>Sa + Ad</em>Da)</p>
 <p><br></p>
-<p>遗憾的是，这本书，有些虎头蛇尾。<br>后面很多东西，都能感觉的出来很仓促，<br>尤其是到猴子和蓝千岁这两部分，跟前面比都少的贫瘠了。<br>还有，最后，这些人死的…<br>让我感觉回到了余华的《活着》的最后部分，<br>只不过，《活着》中，一人一牛，在那田野中耕种着；<br>而《生死疲劳》里，是那蓝千岁在一排长满杂草的墓前唏嘘着。</p>
+<h2 id="混合因子"><a href="#混合因子" class="headerlink" title="混合因子"></a>混合因子</h2><table>
+<thead>
+<tr>
+<th>混合方式</th>
+<th>因子值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GL_ZERO</td>
+<td>(0, 0, 0, 0)</td>
+<td>该颜色不参与颜色混合（因为系数为0，乘多少都是0）</td>
+</tr>
+<tr>
+<td>GL_ONE</td>
+<td>(1, 1, 1, 1)</td>
+<td>该颜色完整参与颜色混合（1是1，2是2，不打折扣）</td>
+</tr>
+<tr>
+<td>GL_SRC_COLOR</td>
+<td>(Rs, Gs, Bs, As)</td>
+<td>使用源颜色的各项数值做系数</td>
+</tr>
+<tr>
+<td>GL_DST_COLOR</td>
+<td>(Rd, Gd, Bd, Ad)</td>
+<td>使用目标颜色的各项数值做系数</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_SRC_COLOR</td>
+<td>(1-Rs, 1-Gs, 1-Bs, 1-As)</td>
+<td>满值(1.0)减去源颜色的各项数值做系数</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_DST_COLOR</td>
+<td>(1-Rd, 1-Gd, 1-Bd, 1-Ad)</td>
+<td>满值(1.0)减去目标颜色的各项数值做系数</td>
+</tr>
+<tr>
+<td>GL_SRC_ALPHA</td>
+<td>(As, As, As, As)</td>
+<td>使用源颜色的透明度做颜色的各项系数</td>
+</tr>
+<tr>
+<td>GL_DST_ALPHA</td>
+<td>(Ad, Ad, Ad, Ad)</td>
+<td>使用目标颜色的透明度做颜色的各项系数</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_SRC_ALPHA</td>
+<td>(1-As, 1-As, 1-As, 1-As)</td>
+<td>满值(1.0)减去源颜色的透明度做颜色的各项系数</td>
+</tr>
+<tr>
+<td>GL_ONE_MINUS_DST_ALPHA</td>
+<td>(1-Ad, 1-Ad, 1-Ad, 1-Ad)</td>
+<td>满值(1.0)减去目标颜色的透明度做颜色的各项系数</td>
+</tr>
+</tbody>
+</table>
+<p><br><br><br></p>
+<h1 id="Cocos2d相关基础"><a href="#Cocos2d相关基础" class="headerlink" title="Cocos2d相关基础"></a>Cocos2d相关基础</h1><h2 id="BlendFunc"><a href="#BlendFunc" class="headerlink" title="BlendFunc"></a>BlendFunc</h2><p>定义在 ccTypes.h 中，是一个存储源因子和目标因子的结构体。</p>
+<p>内部定义了一些常用混合因子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Blending disabled. Uses &#123;GL_ONE, GL_ZERO&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc DISABLE;</span><br><span class="line"><span class="comment">/** Blending enabled for textures with Alpha premultiplied. Uses &#123;GL_ONE, GL_ONE_MINUS_SRC_ALPHA&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc ALPHA_PREMULTIPLIED;</span><br><span class="line"><span class="comment">/** Blending enabled for textures with Alpha NON premultiplied. Uses &#123;GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc ALPHA_NON_PREMULTIPLIED;</span><br><span class="line"><span class="comment">/** Enables Additive blending. Uses &#123;GL_SRC_ALPHA, GL_ONE&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc ADDITIVE;</span><br></pre></td></tr></table></figure></p>
+<h2 id="BlendProtocol-amp-TextureProtocol"><a href="#BlendProtocol-amp-TextureProtocol" class="headerlink" title="BlendProtocol &amp; TextureProtocol"></a>BlendProtocol &amp; TextureProtocol</h2><p>均定义在协议基类 CCProtocols.h 中，<br>BlendProtocol类是用来设置/获取当前使用的BlendFunc（混合因子）的。<br>TextureProtocol继承了BlendProtocol类，同时提供了对当前纹理的操作支持。</p>
+<p><br><br><br></p>
+<h1 id="Sprite-amp-ImageView"><a href="#Sprite-amp-ImageView" class="headerlink" title="Sprite &amp; ImageView"></a>Sprite &amp; ImageView</h1><p>在Cocos2d中主要是会对图片进行颜色混合的设置，图片类主要就是Sprite和ImageView。</p>
+<h2 id="Sprite"><a href="#Sprite" class="headerlink" title="Sprite"></a>Sprite</h2><p>因为Sprite继承了TextureProtocol类，所以相应继承了对BlendFunc的操作。<br>直接使用 setBlendFunc/getBlendFunc 即可。</p>
 <p><br></p>
-<p>噢，还有一点。<br>本书中，男女关系，有些乱的我头晕…</p>
-<p><br></p>
-<p>总之，莫先生的文笔还是很强的，那些细节的描写，都不需要多想，就能有幅画面在眼前。<br>有很多，让我想拍大腿叫好的语句。<br>对了，还有，本书内的莫言，是最让我跳戏的东西。</p>
+<h2 id="ImageView"><a href="#ImageView" class="headerlink" title="ImageView"></a>ImageView</h2><p>虽然ImageView没有继承相关类，但是所有继承Widget的类都有获取绘制节点的方法 getVirtualRenderer。<br>ImageView重写了这个方法，会返回一个 Scale9Sprite，它是继承Sprite的，然后可以用对Sprite方法了。</p>
+<p><br><br><br></p>
 
       
     </div>
@@ -405,7 +485,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.lt-tree.com/2016/07/25/《生死疲劳》读感/" title="《生死疲劳》读感">http://www.lt-tree.com/2016/07/25/《生死疲劳》读感/</a>
+    <a href="http://www.lt-tree.com/2018/09/09/Cocos2d之颜色混合/" title="Cocos2d之颜色混合">http://www.lt-tree.com/2018/09/09/Cocos2d之颜色混合/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -420,7 +500,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/看着读/" rel="tag"><i class="fa fa-tag"></i> 看着读</a>
+            <a href="/tags/跟着学/" rel="tag"><i class="fa fa-tag"></i> 跟着学</a>
           
         </div>
       
@@ -433,8 +513,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/20/为什么要搞这个？/" rel="next" title="为什么要搞这个？">
-                <i class="fa fa-chevron-left"></i> 为什么要搞这个？
+              <a href="/2018/09/02/千分位格式化数字/" rel="next" title="千分位格式化数字">
+                <i class="fa fa-chevron-left"></i> 千分位格式化数字
               </a>
             
           </div>
@@ -442,10 +522,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/13/《代码的整洁之道》读记/" rel="prev" title="《代码的整洁之道》读记">
-                《代码的整洁之道》读记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,8 +573,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -599,6 +684,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#颜色混合"><span class="nav-number">1.</span> <span class="nav-text">颜色混合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算公式"><span class="nav-number">1.2.</span> <span class="nav-text">计算公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合因子"><span class="nav-number">1.3.</span> <span class="nav-text">混合因子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cocos2d相关基础"><span class="nav-number">2.</span> <span class="nav-text">Cocos2d相关基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BlendFunc"><span class="nav-number">2.1.</span> <span class="nav-text">BlendFunc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BlendProtocol-amp-TextureProtocol"><span class="nav-number">2.2.</span> <span class="nav-text">BlendProtocol &amp; TextureProtocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sprite-amp-ImageView"><span class="nav-number">3.</span> <span class="nav-text">Sprite &amp; ImageView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sprite"><span class="nav-number">3.1.</span> <span class="nav-text">Sprite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageView"><span class="nav-number">3.2.</span> <span class="nav-text">ImageView</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
