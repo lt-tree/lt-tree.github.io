@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 文章相关">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T15:42:47.474Z">
+<meta property="og:updated_time" content="2018-09-18T15:50:39.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TreeHouse装修指南之文章">
 <meta name="twitter:description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 文章相关">
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  839 字
+                  967 字
                 </span>
               
 
@@ -374,20 +374,19 @@
 <p>文章相关</p>
 <a id="more"></a>
 <p><br></p>
-<h1 id="添加摘要图片-在正文不显示"><a href="#添加摘要图片-在正文不显示" class="headerlink" title="添加摘要图片, 在正文不显示"></a>添加摘要图片, 在正文不显示</h1><p>首先加入相关配置设定<br>在 </p>
+<h1 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h1><h2 id="在正文不显示，只在摘要-首页显示"><a href="#在正文不显示，只在摘要-首页显示" class="headerlink" title="在正文不显示，只在摘要/首页显示"></a>在正文不显示，只在摘要/首页显示</h2><p>首先加入相关配置设定<br>在 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\themes\next\layout\_macro\post.swing</span><br></pre></td></tr></table></figure>
 <p>中加入配置代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if post.summary_img  %&#125;</span><br><span class="line">  &lt;div class=&quot;out-img-topic&quot;&gt;</span><br><span class="line">    &lt;img src=&#123;&#123; post.summary_img &#125;&#125; class=&quot;img-topic&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
 <p>添加位置是:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if is_index %&#125;</span><br><span class="line">    在这里插入代码</span><br><span class="line">    &#123;% if post.description and theme.excerpt_description %&#125;</span><br><span class="line">      &#123;&#123; post.description &#125;&#125;</span><br><span class="line">      &lt;!--noindex--&gt;</span><br><span class="line">      &lt;div class=&quot;post-button text-center&quot;&gt;</span><br><span class="line">        &lt;a class=&quot;btn&quot; href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&quot;&gt;</span><br><span class="line">          &#123;&#123; __(&apos;post.read_more&apos;) &#125;&#125; &amp;raquo;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;!--/noindex--&gt;</span><br><span class="line">    &#123;% elif post.excerpt  %&#125;</span><br><span class="line">      &#123;&#123; post.excerpt &#125;&#125;</span><br><span class="line">      &lt;!--noindex--&gt;</span><br><span class="line">      &lt;div class=&quot;post-button text-center&quot;&gt;</span><br><span class="line">        &lt;a class=&quot;btn&quot; href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&#123;% if theme.scroll_to_more %&#125;#&#123;&#123; __(&apos;post.more&apos;) &#125;&#125;&#123;% endif %&#125;&quot; rel=&quot;contents&quot;&gt;</span><br><span class="line">          &#123;&#123; __(&apos;post.read_more&apos;) &#125;&#125; &amp;raquo;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;!--/noindex--&gt;</span><br><span class="line">    &#123;% elif theme.auto_excerpt.enable %&#125;</span><br><span class="line">      &#123;% set content = post.content | striptags %&#125;</span><br><span class="line">      &#123;&#123; content.substring(0, theme.auto_excerpt.length) &#125;&#125;</span><br><span class="line">      &#123;% if content.length &gt; theme.auto_excerpt.length %&#125;...&#123;% endif %&#125;</span><br><span class="line">      &lt;!--noindex--&gt;</span><br><span class="line">      &lt;div class=&quot;post-button text-center&quot;&gt;</span><br><span class="line">        &lt;a class=&quot;btn&quot; href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&#123;% if theme.scroll_to_more %&#125;#&#123;&#123; __(&apos;post.more&apos;) &#125;&#125;&#123;% endif %&#125;&quot; rel=&quot;contents&quot;&gt;</span><br><span class="line">          &#123;&#123; __(&apos;post.read_more&apos;) &#125;&#125; &amp;raquo;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;!--/noindex--&gt;</span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">      &#123;% if post.type === &apos;picture&apos; %&#125;</span><br><span class="line">        &lt;a href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&quot;&gt;&#123;&#123; post.content &#125;&#125;&lt;/a&gt;</span><br><span class="line">      &#123;% else %&#125;</span><br><span class="line">        &#123;&#123; post.content &#125;&#125;</span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% else %&#125;</span><br><span class="line">    &#123;&#123; post.content &#125;&#125;</span><br><span class="line">&#123;% endif  %&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在文章那部分加字段及图片位置名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary_img: image_url</span><br></pre></td></tr></table></figure>
+<p>然后在文章那部分加字段及图片位置名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary_img: image_url</span><br></pre></td></tr></table></figure></p>
 <p>image_url 是public文件夹下的相对路径</p>
-<p><br></p>
-<h1 id="添加摘要图片-在正文显示"><a href="#添加摘要图片-在正文显示" class="headerlink" title="添加摘要图片, 在正文显示"></a>添加摘要图片, 在正文显示</h1><p>直接在相应位置加入图片即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src= image_url&gt;</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](image_url)</span><br></pre></td></tr></table></figure></p>
+<h2 id="正文、摘要-首页均显示"><a href="#正文、摘要-首页均显示" class="headerlink" title="正文、摘要/首页均显示"></a>正文、摘要/首页均显示</h2><h3 id="url图片"><a href="#url图片" class="headerlink" title="url图片"></a>url图片</h3><p>可以将图片上传到一些免费的CDN中，然后将生成的URL地址直接拿来引用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src= &quot;image_url&quot;&gt;</span><br><span class="line">![](image_url)</span><br></pre></td></tr></table></figure></p>
+<h3 id="本地缓存"><a href="#本地缓存" class="headerlink" title="本地缓存"></a>本地缓存</h3><p>以在public目录下创建文件夹，专门存储图片，然后调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](image_url)</span><br></pre></td></tr></table></figure></p>
 <p>image_url 可以是public文件夹下的相对路径，也可以是网络地址。</p>
+<h2 id="只在文章内显示"><a href="#只在文章内显示" class="headerlink" title="只在文章内显示"></a>只在文章内显示</h2><p>可以与文章同目录创建与文章同名的文件夹，将图片放在里面，比如 a.png，然后直接在文章内调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](a.png)</span><br></pre></td></tr></table></figure></p>
+<p>可以在_config中将 post_asset_folder 设置为true，<br>便于在 hexo new 的时候，创建md同时也创建同名folder</p>
 <p><br></p>
 <h1 id="代码块相关设置"><a href="#代码块相关设置" class="headerlink" title="代码块相关设置"></a>代码块相关设置</h1><p>主题配置文件: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\themes\next\_config.yml</span><br></pre></td></tr></table></figure>
@@ -471,8 +470,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/TreeHouse装修指南之菜单/" rel="prev" title="TreeHouse装修指南之菜单">
-                TreeHouse装修指南之菜单 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/02/千分位格式化数字/" rel="prev" title="千分位格式化数字">
+                千分位格式化数字 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -554,7 +553,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -567,7 +566,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -646,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#添加摘要图片-在正文不显示"><span class="nav-number">1.</span> <span class="nav-text">添加摘要图片, 在正文不显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加摘要图片-在正文显示"><span class="nav-number">2.</span> <span class="nav-text">添加摘要图片, 在正文显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码块相关设置"><span class="nav-number">3.</span> <span class="nav-text">代码块相关设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章tag显示修改"><span class="nav-number">4.</span> <span class="nav-text">文章tag显示修改</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超链接样式"><span class="nav-number">5.</span> <span class="nav-text">超链接样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加文章版权信息"><span class="nav-number">6.</span> <span class="nav-text">添加文章版权信息</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#添加图片"><span class="nav-number">1.</span> <span class="nav-text">添加图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在正文不显示，只在摘要-首页显示"><span class="nav-number">1.1.</span> <span class="nav-text">在正文不显示，只在摘要/首页显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文、摘要-首页均显示"><span class="nav-number">1.2.</span> <span class="nav-text">正文、摘要/首页均显示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url图片"><span class="nav-number">1.2.1.</span> <span class="nav-text">url图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地缓存"><span class="nav-number">1.2.2.</span> <span class="nav-text">本地缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只在文章内显示"><span class="nav-number">1.3.</span> <span class="nav-text">只在文章内显示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码块相关设置"><span class="nav-number">2.</span> <span class="nav-text">代码块相关设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章tag显示修改"><span class="nav-number">3.</span> <span class="nav-text">文章tag显示修改</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超链接样式"><span class="nav-number">4.</span> <span class="nav-text">超链接样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加文章版权信息"><span class="nav-number">5.</span> <span class="nav-text">添加文章版权信息</span></a></li></ol></div>
             
 
           </div>
