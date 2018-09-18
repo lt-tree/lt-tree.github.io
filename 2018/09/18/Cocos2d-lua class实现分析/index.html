@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="想就做," />
+  <meta name="keywords" content="瞎分析," />
 
 
 
@@ -77,18 +77,20 @@
 
 
 
-<meta name="description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 菜单相关">
-<meta name="keywords" content="想就做">
+<meta name="description" content="Cocos2d-lua class实现分析">
+<meta name="keywords" content="瞎分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TreeHouse装修指南之菜单">
-<meta property="og:url" content="http://yoursite.com/2018/07/17/TreeHouse装修指南之菜单/index.html">
+<meta property="og:title" content="Cocos2d-lua class实现分析">
+<meta property="og:url" content="http://yoursite.com/2018/09/18/Cocos2d-lua class实现分析/index.html">
 <meta property="og:site_name" content="Tree House">
-<meta property="og:description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 菜单相关">
+<meta property="og:description" content="Cocos2d-lua class实现分析">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T15:40:44.864Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/18/Cocos2d-lua%20class实现分析/lua表查找键值对流程.jpg">
+<meta property="og:updated_time" content="2018-09-18T15:56:10.517Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TreeHouse装修指南之菜单">
-<meta name="twitter:description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 菜单相关">
+<meta name="twitter:title" content="Cocos2d-lua class实现分析">
+<meta name="twitter:description" content="Cocos2d-lua class实现分析">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/18/Cocos2d-lua%20class实现分析/lua表查找键值对流程.jpg">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/17/TreeHouse装修指南之菜单/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/18/Cocos2d-lua class实现分析/"/>
 
 
 
 
 
-  <title>TreeHouse装修指南之菜单 | Tree House</title>
+  <title>Cocos2d-lua class实现分析 | Tree House</title>
   
 
 
@@ -261,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/TreeHouse装修指南之菜单/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/Cocos2d-lua class实现分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ltree98">
@@ -278,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TreeHouse装修指南之菜单</h1>
+          <h1 class="post-title" itemprop="name headline">Cocos2d-lua class实现分析</h1>
         
 
         <div class="post-meta">
@@ -290,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T22:43:00+08:00">
-                2018-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T22:30:00+08:00">
+                2018-09-18
               </time>
             
 
@@ -308,7 +310,7 @@
 
           
           
-             <span id="/2018/07/17/TreeHouse装修指南之菜单/" class="leancloud_visitors" data-flag-title="TreeHouse装修指南之菜单">
+             <span id="/2018/09/18/Cocos2d-lua class实现分析/" class="leancloud_visitors" data-flag-title="Cocos2d-lua class实现分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -333,7 +335,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  707 字
+                  763 字
                 </span>
               
 
@@ -370,25 +372,69 @@
       
 
       
-        <p>本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。<br>（通俗点说，就是hexo的相关搭建及应用的各效果的实现）</p>
-<p>菜单相关</p>
+        <p>Cocos2d-lua class实现分析</p>
 <a id="more"></a>
 <p><br></p>
-<h1 id="公益404"><a href="#公益404" class="headerlink" title="公益404"></a>公益404</h1><p>腾讯公益404页面，寻找丢失儿童，做一些力所能及的事情。<br>需要新建 404.html 页面，放到主题的 source 目录下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8;&quot;/&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot; /&gt;</span><br><span class="line">  &lt;meta name=&quot;robots&quot; content=&quot;all&quot; /&gt;</span><br><span class="line">  &lt;meta name=&quot;robots&quot; content=&quot;index,follow&quot;/&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://qzone.qq.com/gy/404/style/404style.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;script type=&quot;text/plain&quot; src=&quot;http://www.qq.com/404/search_children.js&quot;</span><br><span class="line">          charset=&quot;utf-8&quot; homePageUrl=&quot;/&quot;</span><br><span class="line">          homePageName=&quot;回到我的主页&quot;&gt;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;https://qzone.qq.com/gy/404/data.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;https://qzone.qq.com/gy/404/page.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lua中的类"><a href="#lua中的类" class="headerlink" title="lua中的类"></a>lua中的类</h3><p>lua语言中实际上来说是没有类这个概念的，但是它也可以用自己的各种机制来实现类的效果。<br>从概念上来说，类有三大特性：封装性、继承性、多态性。lua有元表机制。<br>从结构上来说，类其实就是一个键值对的集合。lua有table可以满足。</p>
+<p>lua的表查找键值对流程如下图所示：</p>
+<p><img src="lua表查找键值对流程.jpg" alt="lua表查找键值对流程"></p>
+<p>所以，我们通过lua的table及它的元表机制，可以在lua中实现类。</p>
 <p><br></p>
-<h1 id="友链"><a href="#友链" class="headerlink" title="友链"></a>友链</h1><p>修改文件： \themes\next\_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Blog rolls</span><br><span class="line">links_icon: link 					icon名字</span><br><span class="line">links_title: Links 					标题名字</span><br><span class="line">links_layout: block 				排版：竖排，一个链接一行</span><br><span class="line"># links_layout: inline  			排版：横排，n个链接一行</span><br><span class="line">links:</span><br><span class="line">  #Title: http://example.com/		名称（可以是中文）：网址</span><br></pre></td></tr></table></figure>
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>在cocos2d中，自己做了一个class方法，来作为类的机制。 文件位置: [cocos\scripting\lua-bindings\script\cocos2d\functions.lua]</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">class</span><span class="params">(classname, ...)</span></span></span><br><span class="line">    <span class="keyword">local</span> cls = &#123;__cname = classname&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> supers = &#123;...&#125;</span><br><span class="line">    <span class="keyword">for</span> _, super <span class="keyword">in</span> <span class="built_in">ipairs</span>(supers) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> superType = <span class="built_in">type</span>(super)</span><br><span class="line">        <span class="built_in">assert</span>(superType == <span class="string">"nil"</span> <span class="keyword">or</span> superType == <span class="string">"table"</span> <span class="keyword">or</span> superType == <span class="string">"function"</span>,</span><br><span class="line">            <span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">"class() - create class \"%s\" with invalid super class type \"%s\""</span>,</span><br><span class="line">                classname, superType))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> superType == <span class="string">"function"</span> <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">assert</span>(cls.__create == <span class="literal">nil</span>,</span><br><span class="line">                <span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">"class() - create class \"%s\" with more than one creating function"</span>,</span><br><span class="line">                    classname));</span><br><span class="line">            <span class="comment">-- if super is function, set it to __create</span></span><br><span class="line">            cls.__create = super</span><br><span class="line">        <span class="keyword">elseif</span> superType == <span class="string">"table"</span> <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> super[<span class="string">".isclass"</span>] <span class="keyword">then</span></span><br><span class="line">                <span class="comment">-- super is native class</span></span><br><span class="line">                <span class="built_in">assert</span>(cls.__create == <span class="literal">nil</span>,</span><br><span class="line">                    <span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">"class() - create class \"%s\" with more than one creating function or native class"</span>,</span><br><span class="line">                        classname));</span><br><span class="line">                cls.__create = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="keyword">return</span> super:<span class="built_in">create</span>() <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="comment">-- super is pure lua class</span></span><br><span class="line">                cls.__supers = cls.__supers <span class="keyword">or</span> &#123;&#125;</span><br><span class="line">                cls.__supers[#cls.__supers + <span class="number">1</span>] = super</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> cls.super <span class="keyword">then</span></span><br><span class="line">                    <span class="comment">-- set first super pure lua class as class.super</span></span><br><span class="line">                    cls.super = super</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">error</span>(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">"class() - create class \"%s\" with invalid super type"</span>,</span><br><span class="line">                        classname), <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    cls.<span class="built_in">__index</span> = cls</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cls.__supers <span class="keyword">or</span> #cls.__supers == <span class="number">1</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">setmetatable</span>(cls, &#123;<span class="built_in">__index</span> = cls.super&#125;)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">setmetatable</span>(cls, &#123;<span class="built_in">__index</span> = <span class="function"><span class="keyword">function</span><span class="params">(_, key)</span></span></span><br><span class="line">            <span class="keyword">local</span> supers = cls.__supers</span><br><span class="line">            <span class="keyword">for</span> i = <span class="number">1</span>, #supers <span class="keyword">do</span></span><br><span class="line">                <span class="keyword">local</span> super = supers[i]</span><br><span class="line">                <span class="keyword">if</span> super[key] <span class="keyword">then</span> <span class="keyword">return</span> super[key] <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span>&#125;)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cls.ctor <span class="keyword">then</span></span><br><span class="line">        <span class="comment">-- add default constructor</span></span><br><span class="line">        cls.ctor = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    cls.new = <span class="function"><span class="keyword">function</span><span class="params">(...)</span></span></span><br><span class="line">        <span class="keyword">local</span> instance</span><br><span class="line">        <span class="keyword">if</span> cls.__create <span class="keyword">then</span></span><br><span class="line">            instance = cls.__create(...)</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            instance = &#123;&#125;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        setmetatableindex(instance, cls)</span><br><span class="line">        instance.class = cls</span><br><span class="line">        instance:ctor(...)</span><br><span class="line">        <span class="keyword">return</span> instance</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    cls.<span class="built_in">create</span> = <span class="function"><span class="keyword">function</span><span class="params">(_, ...)</span></span></span><br><span class="line">        <span class="keyword">return</span> cls.new(...)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cls</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>有几个设定键：</p>
+<ul>
+<li>__cname : 类名</li>
+<li>__create : 初始化方法</li>
+<li>__supers : 父类集合</li>
+</ul>
+<p>有几个函数：</p>
+<ul>
+<li>ctor : 构造函数</li>
+<li>new : 初始化函数</li>
+<li>create : 初始化函数（对new的一个封装，为了使用方法同C++部分一致）</li>
+</ul>
 <p><br></p>
-<h1 id="添加个人头像-amp-头像旋转"><a href="#添加个人头像-amp-头像旋转" class="headerlink" title="添加个人头像&amp;头像旋转"></a>添加个人头像&amp;头像旋转</h1><h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><p>修改next主题配置文件 _config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avatar: image_url</span><br></pre></td></tr></table></figure>
-<p>image_url 可以是public文件夹下的相对路径，也可以是网络地址。</p>
-<h2 id="头像旋转"><a href="#头像旋转" class="headerlink" title="头像旋转"></a>头像旋转</h2><p>修改文件： \themes\next\source\css\_common\components\sidebar\sidebar-author.styl</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.site-author-image</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="variable">$site</span>-author-image-padding;</span><br><span class="line">  <span class="attribute">max-width</span>: <span class="variable">$site</span>-author-image-width;</span><br><span class="line">  <span class="attribute">height</span>: <span class="variable">$site</span>-author-image-height;</span><br><span class="line">  <span class="attribute">border</span>: <span class="variable">$site</span>-author-image-border-width solid <span class="variable">$site</span>-author-image-border-color;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 设置圆形头像 */</span></span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">58px</span>;</span><br><span class="line">  -webkit-<span class="attribute">border-radius</span>: <span class="number">58px</span>;</span><br><span class="line">  -moz-<span class="attribute">border-radius</span>: <span class="number">58px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> -<span class="number">1px</span> <span class="number">0</span> <span class="number">#333</span>sf;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 鼠标经过头像旋转360度 */</span></span><br><span class="line">  -webkit-<span class="attribute">transition</span>: -webkit-transform <span class="number">1.0s</span> ease-out;</span><br><span class="line">  -moz-<span class="attribute">transition</span>: -moz-transform <span class="number">1.0s</span> ease-out;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">1.0s</span> ease-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">img</span>:hover &#123;</span><br><span class="line">  <span class="comment">/* 鼠标经过头像旋转360度 */</span></span><br><span class="line">  -webkit-<span class="attribute">transform</span>: rotateY(<span class="number">360deg</span>);</span><br><span class="line">  -moz-<span class="attribute">transform</span>: rotateY(<span class="number">360deg</span>);</span><br><span class="line">  <span class="attribute">transform</span>: rotateY(<span class="number">360deg</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Z 轴旋转动画 */</span></span><br><span class="line">@-webkit-keyframes play &#123;</span><br><span class="line">  <span class="number">0%</span> &#123;</span><br><span class="line">    -webkit-<span class="attribute">transform</span>: rotateY(<span class="number">0deg</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    -webkit-<span class="attribute">transform</span>: rotateY(-<span class="number">360deg</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@-moz-keyframes play &#123;</span><br><span class="line">  <span class="number">0%</span> &#123;</span><br><span class="line">    -moz-<span class="attribute">transform</span>: rotateY(<span class="number">0deg</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    -moz-<span class="attribute">transform</span>: rotateY(-<span class="number">360deg</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes play &#123;</span><br><span class="line">  <span class="number">0%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: rotateY(<span class="number">0deg</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: rotateY(-<span class="number">360deg</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-author-name</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="variable">$site</span>-author-name-margin;</span><br><span class="line">  <span class="attribute">text-align</span>: <span class="variable">$site</span>-author-name-align;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$site</span>-author-name-color;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="variable">$site</span>-author-name-weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-description</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="variable">$site</span>-description-margin-top;</span><br><span class="line">  <span class="attribute">text-align</span>: <span class="variable">$site</span>-description-align;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="variable">$site</span>-description-font-size;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">$site</span>-description-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><br></p>
-<h1 id="社交小图标相关"><a href="#社交小图标相关" class="headerlink" title="社交小图标相关"></a>社交小图标相关</h1><p>修改文件： \themes\next\_config.yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">social:</span><br><span class="line">  GitHub: github_address || github</span><br><span class="line">  CSDN: csdn_address || copyright</span><br><span class="line">  E-Mail: mailto:email_address || envelope</span><br><span class="line">  微博: weibo_address || weibo</span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line">  GitHub: github</span><br><span class="line">  CSDN: copyright</span><br><span class="line">  E-Mail: envelope</span><br><span class="line">  微博: weibo</span><br><span class="line"></span><br><span class="line">  icons_only: false</span><br><span class="line">  transition: false</span><br></pre></td></tr></table></figure>
-<p>social每行||后为图标名称，具体名称可以在 <a href="https://fontawesome.com/icons?d=gallery" target="_blank" rel="noopener">https://fontawesome.com/icons?d=gallery</a> 中查到。</p>
+<p>class方法：</p>
+<ol>
+<li>设置类名</li>
+<li>遍历传入的构造方法</li>
+</ol>
+<ul>
+<li>若是 function类型，则设置为初始化方法</li>
+<li>若是 table类型<ul>
+<li>若是 C++的类，设置初始化方法为调用原生类的create方法</li>
+<li>若是 纯lua类，将自己添加到基类中</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>处理自己的元表</li>
+</ol>
+<ul>
+<li>ctor：必须要有</li>
+<li>new<ul>
+<li>获取instance值</li>
+<li>设置instance元表index<ul>
+<li>若是 C++类，设置peer<br>（<em>PS：peer是 tolua++提供的存储C++对象在Lua中的扩展</em>）</li>
+<li>若是 纯lua类，设置元表</li>
+</ul>
+</li>
+<li>执行构造方法</li>
+<li>返回instance</li>
+</ul>
+</li>
+<li>create：对new的一个封装，为了使用方法同C++部分一致</li>
+</ul>
+<ol start="4">
+<li>处理构造函数、初始化函数的创建与封装</li>
+</ol>
+<p><br><br><br></p>
+<hr>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="http://blog.justbilt.com/2017/03/04/quick-x-oop/" target="_blank" rel="noopener">Quick-Cocos2d-x 中的面向对象</a></li>
+<li><a href="https://github.com/zfengzhen/Blog/blob/master/article/tolua%2B%2B%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90.md" target="_blank" rel="noopener">tolua++实现分析</a></li>
+</ul>
 
       
     </div>
@@ -411,7 +457,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.lt-tree.com/2018/07/17/TreeHouse装修指南之菜单/" title="TreeHouse装修指南之菜单">http://www.lt-tree.com/2018/07/17/TreeHouse装修指南之菜单/</a>
+    <a href="http://www.lt-tree.com/2018/09/18/Cocos2d-lua class实现分析/" title="Cocos2d-lua class实现分析">http://www.lt-tree.com/2018/09/18/Cocos2d-lua class实现分析/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -426,7 +472,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/想就做/" rel="tag"><i class="fa fa-tag"></i> 想就做</a>
+            <a href="/tags/瞎分析/" rel="tag"><i class="fa fa-tag"></i> 瞎分析</a>
           
         </div>
       
@@ -439,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/06/Cocos2d iPhone 边缘触屏延迟现象/" rel="next" title="Cocos2d iPhone 边缘触屏延迟现象">
-                <i class="fa fa-chevron-left"></i> Cocos2d iPhone 边缘触屏延迟现象
+              <a href="/2018/09/09/Cocos2d之颜色混合/" rel="next" title="Cocos2d之颜色混合">
+                <i class="fa fa-chevron-left"></i> Cocos2d之颜色混合
               </a>
             
           </div>
@@ -448,10 +494,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/17/TreeHouse装修指南之文章/" rel="prev" title="TreeHouse装修指南之文章">
-                TreeHouse装修指南之文章 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -624,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#公益404"><span class="nav-number">1.</span> <span class="nav-text">公益404</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#友链"><span class="nav-number">2.</span> <span class="nav-text">友链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加个人头像-amp-头像旋转"><span class="nav-number">3.</span> <span class="nav-text">添加个人头像&amp;头像旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加"><span class="nav-number">3.1.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#头像旋转"><span class="nav-number">3.2.</span> <span class="nav-text">头像旋转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#社交小图标相关"><span class="nav-number">4.</span> <span class="nav-text">社交小图标相关</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#lua中的类"><span class="nav-number">1.</span> <span class="nav-text">lua中的类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class"><span class="nav-number">2.</span> <span class="nav-text">class</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">2.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
 
           </div>
