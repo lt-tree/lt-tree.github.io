@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="想就做," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在公司整理了一份Lua语言的代码规范，分享一下。">
+<meta name="keywords" content="想就做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua代码规范">
+<meta property="og:url" content="http://yoursite.com/2018/12/26/Lua代码规范/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="在公司整理了一份Lua语言的代码规范，分享一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-26T15:49:29.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lua代码规范">
+<meta name="twitter:description" content="在公司整理了一份Lua语言的代码规范，分享一下。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/26/Lua代码规范/"/>
+
+
+
+
+
+  <title>Lua代码规范 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/26/Lua代码规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lua代码规范</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T23:03:16+08:00">
+                2018-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/26/Lua代码规范/" class="leancloud_visitors" data-flag-title="Lua代码规范">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,103 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在公司整理了一份Lua语言的代码规范，分享一下。</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写代码如同写文章，每个人或多或少都有自己的风格。我们在进行产品开发的过程中，更多的是团队上的协作与交流而非单打独斗。所以，为了 <strong>提高开发效率，降低维护成本，促进团队合作</strong>，代码的审查，整理出这篇文章。</p>
+<p>借助于《Python风格指南》中的警告词，在此处引用一下：代码的阅读频率比编写的要高得多，本风格指南旨在通过一致性提高代码的可读性。一致性在不断增加的度量中，与其他项目、项目内以及单个模块或功能内是重要的。但是最重要的是:知道什么时候不一致，并运用你最好的判断——有时风格指南并不适用。当应用规则会降低代码的可读性时，最好打破规则。</p>
+<p>最后，一句话送给大家：</p>
+<blockquote>
+<p>Programming style is an art.</p>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="1-版式"><a href="#1-版式" class="headerlink" title="1. 版式"></a>1. 版式</h1><h2 id="1-1-基础"><a href="#1-1-基础" class="headerlink" title="1.1 基础"></a>1.1 基础</h2><ul>
+<li><p>所有文件均采用: <strong>UTF-8 无 BOM 格式</strong></p>
+</li>
+<li><p>程序块要采用 <strong>缩进风格</strong> 编写，缩进的空格数为 <strong>4个</strong> ，对齐使用 <strong>空格键</strong>，<strong>禁用TAB键</strong> </p>
+<ul>
+<li>避免使用不同编辑器阅读程序时，因TAB键设置的空格数不同而造成程序布局不整齐。</li>
+</ul>
+</li>
+<li><p>函数内代码不超过 <strong>50行</strong> , 单行代码不超过 <strong>80列</strong></p>
+<ul>
+<li><p>长表达式要在 <strong>低优先级操作符</strong> 处拆分成新行，<strong>操作符放在新行之首</strong></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bad style</span></span><br><span class="line"><span class="keyword">local</span> monsterModel = &#123;id = monsterData.id, index = <span class="number">0</span>, entityData = monsterData, <span class="built_in">type</span> = monsterData.role_type, state = EnumMonsterStatus.Alive, level = <span class="number">0</span>, coordinate = &#123;toward = EnumEntityToward.None, x = <span class="number">0</span>, z = <span class="number">0</span>&#125;, dropModels = &#123; &#125;, hpMedicineDropRate = <span class="number">0</span>, epMedicineDropRate = <span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- good style</span></span><br><span class="line"><span class="keyword">local</span> monsterModel = &#123;</span><br><span class="line">    id = monsterData.id,</span><br><span class="line">    index = <span class="number">0</span>,</span><br><span class="line">    entityData = monsterData,</span><br><span class="line">    <span class="built_in">type</span> = monsterData.role_type,</span><br><span class="line">    state = EnumMonsterStatus.Alive,</span><br><span class="line">    level = <span class="number">0</span>,</span><br><span class="line">    coordinate = &#123;toward = EnumEntityToward.None, x = <span class="number">0</span>, z = <span class="number">0</span>&#125;,</span><br><span class="line">    dropModels = &#123;&#125;,</span><br><span class="line">    hpMedicineDropRate = <span class="number">0</span>,</span><br><span class="line">    epMedicineDropRate = <span class="number">0</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- bad style</span></span><br><span class="line"><span class="keyword">if</span> self.pEntity:isAttackStatus() <span class="keyword">or</span> self.pEntity:isWakeStatus() <span class="keyword">or</span> self.pEntity:isTobeHitStatus() <span class="keyword">or</span> self.pEntity:isMoveStatus() <span class="keyword">or</span> self.pEntity:isJostledStatus() <span class="keyword">then</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- good style</span></span><br><span class="line"><span class="keyword">if</span> self.pEntity:isAttackStatus() </span><br><span class="line">    <span class="keyword">or</span> self.pEntity:isWakeStatus() </span><br><span class="line">    <span class="keyword">or</span> self.pEntity:isTobeHitStatus() </span><br><span class="line">    <span class="keyword">or</span> self.pEntity:isMoveStatus() </span><br><span class="line">    <span class="keyword">or</span> self.pEntity:isJostledStatus() <span class="keyword">then</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若函数或过程中的参数较长，则要进行适当的划分</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.pQualitity = CREATESPINE(</span><br><span class="line">    RES.QUALITYEFFECT_SPINE[_type].ID, </span><br><span class="line">    self.LayerQuality,</span><br><span class="line">    RES.QUALITYEFFECT_SPINE[_type].NAME, </span><br><span class="line">    <span class="literal">true</span>, <span class="literal">nil</span>, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="1-2-代码"><a href="#1-2-代码" class="headerlink" title="1.2 代码"></a>1.2 代码</h2><h3 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h3><ul>
+<li>代码概念与逻辑之间，逻辑段落小节之间，用 <strong>单个空行</strong> 分割</li>
+<li>函数之间用 <strong>单个空行</strong> 分割</li>
+<li>在注释之前增加 <strong>单个或多个空行</strong></li>
+</ul>
+<p><br></p>
+<h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><ul>
+<li><p>双目运算符，<strong>前后</strong> 都要有一个空格</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">110</span> + <span class="number">50</span> * i, <span class="number">110</span> + <span class="number">50</span> / (i + <span class="number">1</span>), <span class="built_in">time</span> + i - <span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>逗号 <strong>前无空格，后跟空格</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cond</span><span class="params">(c, a, b)</span></span></span><br><span class="line">	<span class="keyword">if</span> c <span class="keyword">then</span></span><br><span class="line">		<span class="keyword">return</span> a</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> b</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(<span class="built_in">table</span>) <span class="keyword">do</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>做为 函数参数部分 或 函数调用 的小括号 <strong>前后无空格 </strong> </p>
+<ul>
+<li><p>原因：</p>
+<ul>
+<li><p>lua解析语法时是采用空格等分割来解析的，某些情况下，不小心加空格会导致非预期的结果</p>
+</li>
+<li><p>容易忘记相关空格，导致风格不统一，因此不如都不加</p>
+</li>
+</ul>
+</li>
+<li><p>样例:</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">totable</span><span class="params">(val)</span></span></span><br><span class="line">    <span class="keyword">local</span> tab = &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"table"</span> == <span class="built_in">type</span>(val) <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">return</span> val</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    tab[<span class="number">1</span>] = val</span><br><span class="line">    <span class="keyword">return</span> tab</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> clientTable = totable(serverTable)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>大括号 <strong>前后无空格</strong>，后跟运算符看情况</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">package</span>.<span class="built_in">loaded</span>[<span class="built_in">path</span>] = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>每行代码结束时，<strong>禁止使用分号</strong></li>
+<li>单字符使用 <strong>单引号</strong> , 字符串使用 <strong>双引号</strong></li>
+<li>使用 <strong>小括号</strong> 来强行规定运算顺序</li>
+</ul>
+<p><br></p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><h4 id="本规范的代码目标是自说明代码。"><a href="#本规范的代码目标是自说明代码。" class="headerlink" title="本规范的代码目标是自说明代码。"></a>本规范的代码目标是自说明代码。</h4><p>相对于代码的维护，注释的维护往往是非常差的，所以切忌乱用注释，尽量只在下列地方添加注释。</p>
+<ul>
+<li>代码比较晦涩，用了不同于常人的方法（显然这种方法肯定要比常人方法更高效）</li>
+<li>对外的接口部分，描述清楚作用及参数返回</li>
+<li>不同于正常逻辑的部分，一般是策划强制要求，要予以说明</li>
+<li>所有含有物理含义的变量、常量，如果其命名不是充分自说明的，在声明时必须加以注释，说明其物理含义</li>
+<li>数据结构声明，不能充分自说明的，必须加以注释，说明</li>
+</ul>
+<h4 id="注释的规范"><a href="#注释的规范" class="headerlink" title="注释的规范"></a>注释的规范</h4><ul>
+<li><p>单行注释，注意 <strong>空格</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 这是单行注释</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>多行注释，注意缩进。</p>
+<p>最后 ]] 前加一个缩进，是为了让某些编辑器（Sublime、VSCode）折叠时简洁一些</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">	这是多行注释</span></span><br><span class="line"><span class="comment">	这是多行注释</span></span><br><span class="line"><span class="comment">	]]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>函数注释格式，位于函数上一行，采用多行注释，三个字段：描述、参数（可缺省）、返回（可缺省）</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[describe:</span></span><br><span class="line"><span class="comment">		这是函数描述</span></span><br><span class="line"><span class="comment">	param1:参数类型</span></span><br><span class="line"><span class="comment">		参数描述</span></span><br><span class="line"><span class="comment">	param2:参数类型</span></span><br><span class="line"><span class="comment">		参数描述</span></span><br><span class="line"><span class="comment">	[param3]:参数类型（[]代表可选参数）</span></span><br><span class="line"><span class="comment">		参数描述</span></span><br><span class="line"><span class="comment">	return:返回值类型，返回值类型</span></span><br><span class="line"><span class="comment">		返回值类型 - 描述</span></span><br><span class="line"><span class="comment">		返回值类型 - 描述</span></span><br><span class="line"><span class="comment">	]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funcName</span><span class="params">(param1, param2, param3)</span></span></span><br><span class="line">	...</span><br><span class="line">    <span class="keyword">return</span> return1, return2</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>文件注释</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">	author: author1</span></span><br><span class="line"><span class="comment">	partner: partner1, partner2</span></span><br><span class="line"><span class="comment">	XMind: XMind名称</span></span><br><span class="line"><span class="comment">	describe: 这是一个测试的类，主要负责的功能是啦啦啦啦啦啦啦啦啦啦啦啦</span></span><br><span class="line"><span class="comment">	]]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="2-命名规范"><a href="#2-命名规范" class="headerlink" title="2. 命名规范"></a>2. 命名规范</h1><h2 id="2-1-谨记"><a href="#2-1-谨记" class="headerlink" title="2.1 谨记"></a>2.1 谨记</h2><ul>
+<li>最好的代码应该是 <strong>自说明代码</strong>，这种代码不需要多余的注释，本身便具备了作者意图的信息。</li>
+<li>采用英文单词或单词组合，单词首先要准确，其次要简单。 <strong>注意单词拼写，切忌使用拼音！</strong></li>
+<li>不要为了避免命名过长而随意截取单词，丢失可读性</li>
+<li>所有命名不要与Cocos2d-x引擎或其他第三方工具已有的命名风格冲突</li>
+<li>作用域越大的名称应该越详细越能表述自己<ul>
+<li>i 做为小局部变量相对来说很妥当，但是做为全局变量会很糟糕。</li>
+</ul>
+</li>
+<li>尽量不要用 _ 开头的名称，这些一般是lua内部所使用</li>
+<li>除非必要，不要用数字或者奇怪的字符来命名</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="2-2-类的命名规范"><a href="#2-2-类的命名规范" class="headerlink" title="2.2 类的命名规范"></a>2.2 类的命名规范</h2><ul>
+<li><p>所有 <strong>类的定义</strong> 均采用 <strong>大驼峰命名法（Pascal命名法）</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Example = class(<span class="string">"Example"</span>, <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>所有 <strong>类的函数</strong> 均采用 <strong>小驼峰命名法</strong></p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function Example:exampleFunction()</span><br><span class="line">	...</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>所有 <strong>类的成员</strong> 均采用 self.（类型）（名称），类型均为小写，名称开头大写（整体是 <strong>小驼峰命名法</strong>）</p>
+<ul>
+<li>类型对照表</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>缩写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>i</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>float</td>
+<td>f</td>
+<td>浮点数（不分float or double）</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>b</td>
+<td>布尔</td>
+</tr>
+<tr>
+<td>string</td>
+<td>s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>enum</td>
+<td>e</td>
+<td>枚举</td>
+</tr>
+<tr>
+<td>ptr</td>
+<td>p</td>
+<td>userdata</td>
+</tr>
+<tr>
+<td>function</td>
+<td>func</td>
+<td>函数</td>
+</tr>
+<tr>
+<td>table</td>
+<td>t</td>
+<td>table，<strong>后缀为Array代表数组，后缀为Map代表字典</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>如果是传入的回调函数，则采用 self.pXXXHandler 来命名</p>
+</li>
+<li><p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.iExample</span><br><span class="line">self.bExampleExample</span><br><span class="line">self.sExampleExampleExample</span><br><span class="line">self.tExampleArray</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>一般由 <strong>名词</strong> 或者 <strong>多名词 </strong> 组成，不要随意简写</p>
+</li>
+<li><p>根据类的特性和使用场景，加上相关的后缀或者前缀</p>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="2-3-变量命名"><a href="#2-3-变量命名" class="headerlink" title="2.3 变量命名"></a>2.3 变量命名</h2><ul>
+<li><p>采用 <strong>小驼峰命名法</strong> </p>
+</li>
+<li><p>使用 <strong>名词</strong> 或者是 <strong>形容词+名词</strong> 命名</p>
+</li>
+<li><p>尽量避免出现 <strong>仅靠部分字母大小写区分</strong> 的相似的变量</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> posx, posX</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="2-4-常量命名"><a href="#2-4-常量命名" class="headerlink" title="2.4 常量命名"></a>2.4 常量命名</h2><ul>
+<li><p><strong>配置常量</strong> ，<strong>均用大写，单词间以下划线相连</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--幻影设置</span></span><br><span class="line">GHOST_STATE = &#123;     </span><br><span class="line">    INTERVAL_TIME = <span class="number">80</span>,     <span class="comment">--出现间隔时间（毫秒）</span></span><br><span class="line">    FADE_TIME = <span class="number">500</span>,        <span class="comment">--fade时间（毫秒）</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>类内配置常量，local引用，<strong>均用大写，单词间以下划线相连</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> LOCAL_CONST = &#123;</span><br><span class="line">    SPINE_ID = <span class="number">1</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> GHOST = ConstUI.GHOST_STATE</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>所有枚举，均采用 <strong>大驼峰命名法</strong>，并必须加Enum前缀，枚举值采用 <strong>大驼峰命名法</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EnumExample = &#123;</span><br><span class="line">    Example = <span class="number">1</span>,</span><br><span class="line">    ExampleExample = <span class="number">2</span>,</span><br><span class="line">    ExampleExampleExample = <span class="number">3</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局枚举值，应该在 global_enum中分模块定义；禁止在Ui或Cache中定义全局枚举值。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>全局函数，需要根据功能，分table调用，比如 table.insert, table.remove 这种。除了必要main.lua内函数，禁止没有范围，直接命名使用全局函数</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="3-使用规则及技巧"><a href="#3-使用规则及技巧" class="headerlink" title="3. 使用规则及技巧"></a>3. 使用规则及技巧</h1><h2 id="3-1-变量"><a href="#3-1-变量" class="headerlink" title="3.1 变量"></a>3.1 变量</h2><ul>
+<li><p>尽量使用local变量而非global变量</p>
+</li>
+<li><p>同一行变量赋值不要超过 <strong>3</strong> 个，且无值时用nil显式赋值</p>
+</li>
+<li><p>常量避免使用 magic number</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bad style</span></span><br><span class="line"><span class="comment">-- 9.8就是 magic number</span></span><br><span class="line"><span class="keyword">local</span> speed = <span class="built_in">time</span> * <span class="number">9.8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- good style</span></span><br><span class="line"><span class="built_in">_G</span>.ACCELERATION = <span class="number">9.8</span></span><br><span class="line"><span class="keyword">local</span> speed = <span class="built_in">time</span> * ACCELERATION</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>禁止使用三元操作 <strong>and or </strong></p>
+<ul>
+<li>and 后值若为boolean类型，会不符预期，给后期查错造成困扰。</li>
+</ul>
+</li>
+<li><p>默认参数</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funcMethod</span><span class="params">(param)</span></span></span><br><span class="line">	param = param <span class="keyword">or</span> defalutValue</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 默认值为true</span></span><br><span class="line">param = param ~= <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 默认值为false</span></span><br><span class="line">param = param <span class="keyword">or</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>_ 做为想忽略的变量</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="built_in">pairs</span>(tab) <span class="keyword">do</span></span><br><span class="line">   ... </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>针对上面情况，即使for循环，尽量不要用 i, k, v，而采用更为详细一些的变量名称</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="3-2-table"><a href="#3-2-table" class="headerlink" title="3.2 table"></a>3.2 table</h2><ul>
+<li><p>表的拷贝  <strong>此方法在表内条目大于2000时会失效</strong></p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">toTable = &#123;<span class="built_in">unpack</span>(fromTable)&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>判断空表</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#t == <span class="number">0</span> 不能判断表为空</span><br><span class="line"></span><br><span class="line">应该使用: <span class="built_in">next</span>(t) == <span class="literal">nil</span></span><br><span class="line">PS：<span class="built_in">next</span>(t) 返回的是第一个找到的键的值，对于存储布尔类型值的表，可能返回<span class="literal">false</span>，因此必须与<span class="literal">nil</span>比较。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>更快的插入值</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 慢，不推荐</span></span><br><span class="line"><span class="built_in">table</span>.<span class="built_in">insert</span>(t, value)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 更快！推荐</span></span><br><span class="line">t[#t + <span class="number">1</span>] = value</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="3-3-函数"><a href="#3-3-函数" class="headerlink" title="3.3 函数"></a>3.3 函数</h2><ul>
+<li><p>明确函数的功能，精确（而不是近似）地实现函数设计</p>
+</li>
+<li><p>接口函数参数的合法性检查，明确由<strong>调用者</strong>负责，而非函数设计者</p>
+</li>
+<li><p>防止将函数的参数作为工作变量，有可能误改参数内容</p>
+</li>
+<li><p>为简单的功能编写函数</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">value = (a &gt; b) <span class="keyword">and</span> a <span class="keyword">or</span> b</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">max</span><span class="params">(a, b)</span></span></span><br><span class="line">	<span class="keyword">return</span> (a &gt; b) <span class="keyword">and</span> a <span class="keyword">or</span> b    </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要设计多用途而面面俱到的函数</p>
+<ul>
+<li>多功能集于一身的函数，很可能使函数的理解、测试、维护变得困难</li>
+</ul>
+</li>
+<li><p>功能不明确较小的函数，特别使仅有一个上级函数调用它时，应考虑把它合并到上级函数中，而不必单独存在。</p>
+</li>
+<li><p>设计高扇入、合理扇出（小于7，一般3-5）的函数</p>
+<ul>
+<li>说明：扇入指有多少上级函数调用它；扇出是指一个函数直接调用其他函数的数目。</li>
+<li>扇入过大，表明使用此函数的上级函数越多，这样的函数使用效率高，但不能违背函数间的独立性而单纯地追求高扇入。</li>
+<li>扇出过大，表明函数过分复杂，需要控制和协调过多的下级函数；而扇出过小，表明函数的调用层次可能过多，不利于程序的阅读和函数结构的分析，并且程序运行时会对系统资源（如堆栈空间等）造成压力。</li>
+<li>良好的软件结构通常是顶层函数的扇出较高，中层函数的扇出较少，而底层函数则扇入到公共模块中。</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="3-4-其他"><a href="#3-4-其他" class="headerlink" title="3.4 其他"></a>3.4 其他</h2><h3 id="对于大数据量的特殊优化"><a href="#对于大数据量的特殊优化" class="headerlink" title="对于大数据量的特殊优化"></a>对于大数据量的特殊优化</h3><ul>
+<li><p><strong>多次</strong> 重复使用的全局接口，可以用局部变量保存下再使用</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- example1</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10000000</span> <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">local</span> x = <span class="built_in">math</span>.<span class="built_in">sin</span>(i)    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- example2</span></span><br><span class="line"><span class="keyword">local</span> <span class="built_in">sin</span> = <span class="built_in">math</span>.<span class="built_in">sin</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10000000</span> <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">local</span> x = <span class="built_in">sin</span>(i) </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">example2 效率会高于 example1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>创建 <strong>非常多</strong> 的小size表时，应预先填充好表的大小</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- example1</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10000000</span> <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">local</span> tab = &#123;&#125;</span><br><span class="line">    tab[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">    tab[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">    tab[<span class="number">3</span>] = <span class="number">3</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- example2</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10000000</span> <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">local</span> tab = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>&#125;</span><br><span class="line">    tab[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">    tab[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">    tab[<span class="number">3</span>] = <span class="number">3</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">example2 效率高于 example1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>很多个</strong> 字符串连接，使用 table.concat 而非 ..</p>
+<ul>
+<li><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- example1</span></span><br><span class="line"><span class="keyword">local</span> str1 = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">100000</span> <span class="keyword">do</span></span><br><span class="line">	str1 = str1 .. <span class="string">'a'</span> </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- example2</span></span><br><span class="line"><span class="keyword">local</span> str2 = <span class="string">''</span></span><br><span class="line"><span class="keyword">local</span> tab = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">100000</span> <span class="keyword">do</span></span><br><span class="line">    tab[#tab + <span class="number">1</span>] = <span class="string">'a'</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">str2 = <span class="built_in">table</span>.<span class="built_in">concat</span>(tab, <span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">example2 效率高于 example1，效果十分显著</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>有时候，用 do .. end 可以明确限定局部变量的作用域  <em>（顺带一提，未理解禁用）</em></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> v</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> x = <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span> <span class="comment">-- x作用域结束，被系统清理</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<hr>
+<p>想更进一步？</p>
+<p>推荐阅读:</p>
+<ul>
+<li><p><a href="http://lua-users.org/wiki/LuaStyleGuide" target="_blank" rel="noopener">Lua Style Guide</a></p>
+</li>
+<li><p><strong>《代码大全》</strong></p>
+</li>
+<li><p>《程序员修炼之道》</p>
+</li>
+<li><p>《高效程序员的45个习惯》</p>
+</li>
+<li><p>《重构》</p>
+</li>
+</ul>
+<p>​                </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2018/12/26/Lua代码规范/" title="Lua代码规范">http://www.lt-tree.com/2018/12/26/Lua代码规范/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/想就做/" rel="tag"><i class="fa fa-tag"></i> 想就做</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/23/《追风筝的人》读感/" rel="next" title="《追风筝的人》 读记">
+                <i class="fa fa-chevron-left"></i> 《追风筝的人》 读记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-版式"><span class="nav-number">2.</span> <span class="nav-text">1. 版式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-基础"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-代码"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空行"><span class="nav-number">2.2.1.</span> <span class="nav-text">空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空格"><span class="nav-number">2.2.2.</span> <span class="nav-text">空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.2.3.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.2.4.</span> <span class="nav-text">注释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本规范的代码目标是自说明代码。"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">本规范的代码目标是自说明代码。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释的规范"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">注释的规范</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-命名规范"><span class="nav-number">3.</span> <span class="nav-text">2. 命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-谨记"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 谨记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-类的命名规范"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 类的命名规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-变量命名"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 变量命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-常量命名"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 常量命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-使用规则及技巧"><span class="nav-number">4.</span> <span class="nav-text">3. 使用规则及技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-变量"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-table"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-函数"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-其他"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对于大数据量的特殊优化"><span class="nav-number">4.4.1.</span> <span class="nav-text">对于大数据量的特殊优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.4.2.</span> <span class="nav-text">作用域</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
