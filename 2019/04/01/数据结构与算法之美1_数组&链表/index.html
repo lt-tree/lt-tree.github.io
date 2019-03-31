@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="跟着学," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据结构与算法之美1_数组&amp;amp;链表">
+<meta name="keywords" content="跟着学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组&amp;链表">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/数据结构与算法之美1_数组&链表/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="数据结构与算法之美1_数组&amp;amp;链表">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-31T16:14:22.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数组&amp;链表">
+<meta name="twitter:description" content="数据结构与算法之美1_数组&amp;amp;链表">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/01/数据结构与算法之美1_数组&链表/"/>
+
+
+
+
+
+  <title>数组&链表 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/数据结构与算法之美1_数组&链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数组&链表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-01T00:04:00+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/01/数据结构与算法之美1_数组&链表/" class="leancloud_visitors" data-flag-title="数组&链表">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,922 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据结构与算法之美1_数组&amp;链表</p>
+<a id="more"></a>
+<p>本系列文章，算是《极客时间》的《数据结构与算法之美》专栏的读书笔记。</p>
+<p>只是一些个人心得与练习，想要得到更详细更好更系统的学习，请去 极客时间APP订阅专栏。</p>
+<p>跟着专栏学了好久，也该有点成果不是；</p>
+<p>正好趁着最后的几篇练习章节，把之前学到的，做个笔记总结一下。</p>
+<hr>
+<p>笔记列表：</p>
+<ul>
+<li>数组&amp;链表</li>
+</ul>
+<hr>
+<h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>数组是一种线性表数据结构。它用一组连续的内存空间，来存储一组具有相同类型的数据。</p>
+<ul>
+<li>线性表 &amp; 非线性表<ul>
+<li>线性表：数组、链表、队列、栈等</li>
+<li>非线性表：二叉树、堆、图等</li>
+</ul>
+</li>
+<li>连续的内存空间</li>
+<li>相同的数据类型</li>
+</ul>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>快速的随机访问与低效的插入删除。</p>
+<ul>
+<li>快速的随机访问：根据下标随机访问  a[i](地址) = base(首地址) + i(下标) * data_type_size(数组每个元素大小) <ul>
+<li><em>随机访问复杂度为O(1)，查找的复杂度大于等于O(logn)  (在排好序情况下，用二分查找的复杂度)</em></li>
+</ul>
+</li>
+<li>低效的插入与删除<ul>
+<li>插入：数组大小为n，将一个数据插入到第k个位置，需要将k~n位置数据均向后移动一位，平均时间复杂度为O(n)。<ul>
+<li><em>对于无序数组，可以将第k位置数据放到最后，然后将数据放到第k位置，来避免大规模的数据搬移</em></li>
+</ul>
+</li>
+<li>删除：数组大小为n，将第k个位置数据删除，需要将k~n位置数据均向前移动一位，平均时间复杂度为O(n)。<ul>
+<li><em>对于数据连续性要求低的情况，可以将多个删除操作集中到一次进行，被删除的数据标记删除，新数据从数组尾部扩展，直到数组没有空间，将标记删除的数据一次性清除，其余数据一次性前移相应位数</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><h4 id="数组越界问题"><a href="#数组越界问题" class="headerlink" title="数组越界问题"></a>数组越界问题</h4><p>访问数组其实就是访问连续的内存，只要所访问的内存地址是可用的，那么这个访问就成立。因此，对于没有规定数组越界时编译器应该如何处理的语言中，会出现难以排查的BUG。但是，也有很多语言，自己会做一些越界检查，并抛出错误或异常。</p>
+<h4 id="容器与数组的选择"><a href="#容器与数组的选择" class="headerlink" title="容器与数组的选择"></a>容器与数组的选择</h4><ul>
+<li><p>一些容器</p>
+<ul>
+<li>对于Java的ArrayList，它的优势是将很多数组操作细节进行了封装，并且支持了<strong>动态扩容</strong>（动态扩容：在超出给数组分配的空间上限时，会重新申请1.5倍数组空间，并将数据迁移过去）。但是，由于扩容比较耗时，最好还是在创建ArrayList时指定数据大小。</li>
+<li>对于C++ STL的 vector，可以获取长度，可以在末尾增加元素，可以确定长度节省空间，支持了动态扩容（扩容倍数与编译器相关，为1.5倍或2倍，具体为什么是成倍扩容而非固定步长扩容，为什么是1.5倍/2倍，而不是其他倍数，可参考资料[<a href="https://blog.csdn.net/yangshiziping/article/details/52550291]]）" target="_blank" rel="noopener">https://blog.csdn.net/yangshiziping/article/details/52550291]]）</a></li>
+<li>对于C++11新增的 std::array，它介于内置的array与vector之间。对于内置array，它提供更好的数据访问机制，可以自动释放内存，更安全，提供更好的遍历机制，提供判空、初始化所有成员方法、swap机制等，更容易使用；对于vector而言，它使用了静态存储区，效率高，但不支持改变容器大小操作即不支持动态扩容；使用std:array必须指定元素类型，指定容器大小。</li>
+</ul>
+</li>
+<li><p>如何选择</p>
+<ul>
+<li>对于业务开发，直接使用容器，省时省力。</li>
+<li>对于底层开发，需要将性能优化到极致，此时使用数组优于容器。</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。</p>
+<ul>
+<li>链表由一系列结点组成，结点可以在运行时动态生成</li>
+<li>每个结点包含两部分：<ul>
+<li>存储数据元素的数据域</li>
+<li>存储下一个结点地址的指针域</li>
+</ul>
+</li>
+</ul>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><p>链表中，有两个特殊节点：头结点、尾结点。</p>
+<p>头结点记录链表的基地址，通过头结点可以遍历整条链表。</p>
+<p>尾结点指针域指向空地址NULL，表示这是链表上最后一个结点。</p>
+<h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><p>单链表和循环链表中，任意结点的指针域只有一个，就是指向下一个结点。但是在双向链表中，指针域有两个，一个指向前一个结点，可以找到前驱节点，一个指向下一个结点，可以找到后继节点。</p>
+<p>正因为两个指针域，使得双向链表操作更加灵活，在插入、删除等操作更加简单、高效。</p>
+<h4 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h4><p>一个特殊的单链表，区别在于循环链表的尾结点指针域不指向空地址，而是指向链表的头结点，从而首尾相连。</p>
+<p>循环链表在处理环形结构特点数据时，会更好更简洁。</p>
+<h3 id="特性-1"><a href="#特性-1" class="headerlink" title="特性"></a>特性</h3><p>与数组相反，高效的插入删除、低效的随机访问。</p>
+<ul>
+<li>但是在实际的软件开发中，不能仅仅利用复杂度分析就决定使用哪个数据结构来存储数据。</li>
+<li>数组简单易用，在实现上使用的是连续的内存空间，借助于CPU的缓存机制，预读数组数据，可以使得访问效率更高。</li>
+<li>链表在内存中并不是连续存储，无法充分利用CPU的缓存机制，无法做到有效的预读数据。</li>
+<li>数组的缺点是大小固定。一旦声明，就需要占用整块连续内存空间，声明数组过大，容易导致内存不足；但是声明数组过小，当需要拷贝迁移数据，又很耗时。链表相对于此的优势就显现出来了。</li>
+<li>链表的缺点还有：相对于数据，还需要额外存储指针域，多耗费一些存储空间；如果进行频繁的插入、删除操作，将会导致频繁内存申请、释放，容易造成内存碎片。</li>
+</ul>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><h4 id="理解指针、引用的含义"><a href="#理解指针、引用的含义" class="headerlink" title="理解指针、引用的含义"></a>理解指针、引用的含义</h4><p>将某个变量赋值给指针，实际上是将该变量的地址赋值给指针，反过来说，指针中存储了这个变量的内存地址，该地址指向这个变量，通过指针可以找到这个变量。</p>
+<h4 id="警惕指针丢失和内存泄漏"><a href="#警惕指针丢失和内存泄漏" class="headerlink" title="警惕指针丢失和内存泄漏"></a>警惕指针丢失和内存泄漏</h4><ul>
+<li><p>插入结点时，一定要注意操作顺序</p>
+<ul>
+<li>链表结构为 a-&gt;b-&gt;c-&gt;d，将z插入到b与c之间<ol>
+<li>将z的后继指针指向c</li>
+<li>将b的后继指针指向z</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>删除链表结点时，记得手动释放内存空间</p>
+<ul>
+<li>对于自动管理内存的语言就无需顾虑了</li>
+</ul>
+</li>
+</ul>
+<h4 id="利用哨兵简化实现难度"><a href="#利用哨兵简化实现难度" class="headerlink" title="利用哨兵简化实现难度"></a>利用哨兵简化实现难度</h4><p>针对链表的插入第一个结点和删除最后一个结点情况特殊处理，会使得代码繁琐、易出错。</p>
+<p>可以引入一个不带数据的哨兵结点，在头部，指向链表的第一个结点。</p>
+<h4 id="重点留意边界条件处理"><a href="#重点留意边界条件处理" class="headerlink" title="重点留意边界条件处理"></a>重点留意边界条件处理</h4><p>注意下列情况，代码能否正常工作</p>
+<ul>
+<li>链表为空</li>
+<li>链表只含一个结点</li>
+<li>链表只包含两个结点</li>
+<li>处理头结点和尾结点</li>
+</ul>
+<h4 id="举例-amp-画图"><a href="#举例-amp-画图" class="headerlink" title="举例&amp;画图"></a>举例&amp;画图</h4><p>好记性不如烂笔头，多举例、多画图，加深印象，充分理解。</p>
+<h4 id="多写多练，没有捷径"><a href="#多写多练，没有捷径" class="headerlink" title="多写多练，没有捷径"></a>多写多练，没有捷径</h4><p>常见链表操作</p>
+<ul>
+<li>单链表反转</li>
+<li>链表中环的检测</li>
+<li>两个有序的链表合并</li>
+<li>删除链表倒数第n个结点</li>
+<li>求链表的中间结点</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><h2 id="数组-1"><a href="#数组-1" class="headerlink" title="数组"></a>数组</h2><h3 id="必知必会"><a href="#必知必会" class="headerlink" title="必知必会"></a>必知必会</h3><ul>
+<li><p>实现一个支持动态扩容的数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyArray</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (size &lt; total) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = size; i &gt; index; i--) &#123;</span><br><span class="line">				data[i] = data[i - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			data[index] = value;</span><br><span class="line">			++size;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>  &#123;</span><br><span class="line">			<span class="comment">// 扩容</span></span><br><span class="line">			<span class="keyword">int</span> *temp = <span class="keyword">new</span> <span class="keyword">int</span>[total * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">				temp[i] = data[i];</span><br><span class="line">			&#125;</span><br><span class="line">			temp[index] = value;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = index + <span class="number">1</span>; i &lt;= total + <span class="number">1</span>; i++) &#123;</span><br><span class="line">				temp[i] = data[i - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">delete</span>[] data;</span><br><span class="line">			data = temp;</span><br><span class="line">			total *= <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> *<span class="title">getData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> size;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">5</span>;</span><br><span class="line">	<span class="keyword">int</span> *data = <span class="keyword">new</span> <span class="keyword">int</span>[total + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现一个大小固定的有序数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SortArray</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (size &gt;= total)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">		++size;</span><br><span class="line">		<span class="keyword">int</span> i = size;</span><br><span class="line">		<span class="keyword">for</span> ( ; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">			<span class="keyword">if</span> (data[i<span class="number">-1</span>] &lt;= value)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			data[i] = data[i - <span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		data[i] = value;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> *<span class="title">getData</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> size;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">5</span>;</span><br><span class="line">	<span class="keyword">int</span> *data = <span class="keyword">new</span> <span class="keyword">int</span>[total + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现两个有序数组合并为一个有序数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeArray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> aLen, <span class="keyword">int</span> b[], <span class="keyword">int</span> bLen)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> totalLen = aLen + bLen;</span><br><span class="line">    --aLen;</span><br><span class="line">    --bLen;</span><br><span class="line">    --totalLen;</span><br><span class="line">    <span class="keyword">while</span>(aLen &gt;= <span class="number">0</span> &amp;&amp; bLen &gt;= <span class="number">0</span>)	&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[aLen] &gt;= b[bLen])	&#123;</span><br><span class="line">            a[totalLen--] = a[aLen--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>	&#123;</span><br><span class="line">            a[totalLen--] = b[bLen--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(bLen &gt;= <span class="number">0</span>)	&#123;</span><br><span class="line">        a[totalLen--] = b[bLen--];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="LeetCode"><a href="#LeetCode" class="headerlink" title="LeetCode"></a>LeetCode</h3><ul>
+<li><p><a href="https://blog.csdn.net/lttree/article/details/70217538" target="_blank" rel="noopener">15_3Sum</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/lttree/article/details/77826724" target="_blank" rel="noopener">41_First Missing Positive</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/lttree/article/details/88652834" target="_blank" rel="noopener">169_Majority Element</a></p>
+</li>
+</ul>
+<p><br></p>
+<h2 id="链表-1"><a href="#链表-1" class="headerlink" title="链表"></a>链表</h2><h3 id="必知必会-1"><a href="#必知必会-1" class="headerlink" title="必知必会"></a>必知必会</h3><h4 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h4><ul>
+<li><p>单链表结点</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	ListNode* next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双向链表结点</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DoubleSideListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    ListNode* pre;</span><br><span class="line">    ListNode* next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="单链表的反转"><a href="#单链表的反转" class="headerlink" title="单链表的反转"></a>单链表的反转</h4><ul>
+<li><p>三个哨兵</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">reverseSingleList</span><span class="params">(ListNode* <span class="built_in">list</span>)</span>	</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ListNode* head = <span class="built_in">list</span>;</span><br><span class="line">    ListNode* temp1 = <span class="built_in">list</span>;</span><br><span class="line">    ListNode* temp2;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">while</span>(temp1 != <span class="literal">nullptr</span> &amp;&amp; temp1-&gt;next != <span class="literal">nullptr</span>)	&#123;</span><br><span class="line">    	temp2 = temp1-&gt;next;</span><br><span class="line">    	temp1-&gt;next = temp2-&gt;next;</span><br><span class="line">    	temp2-&gt;next = head;</span><br><span class="line">    	head = temp2;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="链表中环的检测"><a href="#链表中环的检测" class="headerlink" title="链表中环的检测"></a>链表中环的检测</h4><ul>
+<li><p>快慢指针</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">haveLoop</span><span class="params">(ListNode* <span class="built_in">list</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ListNode* slow = <span class="built_in">list</span>;</span><br><span class="line">    ListNode* fast = <span class="built_in">list</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(fast != <span class="literal">nullptr</span> &amp;&amp; fast-&gt;next != <span class="literal">nullptr</span>)	&#123;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(slow == fast)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="两个有序的链表合并"><a href="#两个有序的链表合并" class="headerlink" title="两个有序的链表合并"></a>两个有序的链表合并</h4><ul>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">mergeSortedLists</span><span class="params">(ListNode* list1, ListNode* list2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ListNode* <span class="built_in">list</span> = <span class="keyword">new</span> ListNode();</span><br><span class="line">	ListNode* head = <span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (list1 != <span class="literal">nullptr</span> <span class="keyword">or</span> list2 != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			<span class="built_in">list</span>-&gt;next = list2;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			<span class="built_in">list</span>-&gt;next = list1;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (list1-&gt;data &lt; list2-&gt;data) &#123;</span><br><span class="line">				<span class="built_in">list</span>-&gt;next = list1;</span><br><span class="line">				list1 = list1-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>  &#123;</span><br><span class="line">				<span class="built_in">list</span>-&gt;next = list2;</span><br><span class="line">				list2 = list2-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">list</span> = <span class="built_in">list</span>-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> head-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="删除链表中倒数第n个结点"><a href="#删除链表中倒数第n个结点" class="headerlink" title="删除链表中倒数第n个结点"></a>删除链表中倒数第n个结点</h4><ul>
+<li><p>和快慢指针差不多，相聚n个结点距离，快指针到尾部就代表慢指针是第n个节点</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">deleteReciprocalNode</span><span class="params">(ListNode* <span class="built_in">list</span>, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line">	ListNode* aimNode = <span class="built_in">list</span>;</span><br><span class="line">	ListNode* afterNode = <span class="built_in">list</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(afterNode-&gt;next != <span class="literal">nullptr</span>)	&#123;</span><br><span class="line">		<span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			afterNode = afterNode-&gt;next;</span><br><span class="line">			--n;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			aimNode = aimNode-&gt;next;</span><br><span class="line">			afterNode = afterNode-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">		ListNode* deleteNode = aimNode-&gt;next;</span><br><span class="line">		aimNode-&gt;next = deleteNode-&gt;next;</span><br><span class="line">		<span class="keyword">delete</span>(deleteNode);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="求链表的中间结点"><a href="#求链表的中间结点" class="headerlink" title="求链表的中间结点"></a>求链表的中间结点</h4><ul>
+<li><p>依旧是快慢指针，慢指针一次移1，快指针一次移2</p>
+</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">middleNode</span><span class="params">(ListNode* <span class="built_in">list</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ListNode* slow = <span class="built_in">list</span>;</span><br><span class="line">	ListNode* fast = <span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (fast != <span class="literal">nullptr</span> &amp;&amp; fast-&gt;next != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">		slow = slow-&gt;next;</span><br><span class="line">		fast = fast-&gt;next-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="单链表、循环链表、双向链表的增删操作"><a href="#单链表、循环链表、双向链表的增删操作" class="headerlink" title="单链表、循环链表、双向链表的增删操作"></a>单链表、循环链表、双向链表的增删操作</h4><ul>
+<li><p>单链表</p>
+</li>
+<li><p>循环链表</p>
+</li>
+<li><p>双向链表</p>
+</li>
+</ul>
+<h3 id="LeetCode练习题"><a href="#LeetCode练习题" class="headerlink" title="LeetCode练习题"></a>LeetCode练习题</h3><ul>
+<li><p><a href="https://blog.csdn.net/lttree/article/details/71313665" target="_blank" rel="noopener">23_Merge k Sorted Lists</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/lttree/article/details/88652868" target="_blank" rel="noopener">141_Linked List Cycle</a></p>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2019/04/01/数据结构与算法之美1_数组&链表/" title="数组&链表">http://www.lt-tree.com/2019/04/01/数据结构与算法之美1_数组&链表/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/跟着学/" rel="tag"><i class="fa fa-tag"></i> 跟着学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/10/2018，稳中进/" rel="next" title="2018, 稳中进">
+                <i class="fa fa-chevron-left"></i> 2018, 稳中进
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">1.1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特性"><span class="nav-number">1.1.2.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.1.3.</span> <span class="nav-text">注意</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组越界问题"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">数组越界问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器与数组的选择"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">容器与数组的选择</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表"><span class="nav-number">1.2.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.2.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单链表"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">单链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双向链表"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">双向链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环链表"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">循环链表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特性-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技巧"><span class="nav-number">1.2.4.</span> <span class="nav-text">技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解指针、引用的含义"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">理解指针、引用的含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#警惕指针丢失和内存泄漏"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">警惕指针丢失和内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用哨兵简化实现难度"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">利用哨兵简化实现难度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点留意边界条件处理"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">重点留意边界条件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举例-amp-画图"><span class="nav-number">1.2.4.5.</span> <span class="nav-text">举例&amp;画图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多写多练，没有捷径"><span class="nav-number">1.2.4.6.</span> <span class="nav-text">多写多练，没有捷径</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组-1"><span class="nav-number">2.1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#必知必会"><span class="nav-number">2.1.1.</span> <span class="nav-text">必知必会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeetCode"><span class="nav-number">2.1.2.</span> <span class="nav-text">LeetCode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表-1"><span class="nav-number">2.2.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#必知必会-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">必知必会</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结构体"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单链表的反转"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">单链表的反转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表中环的检测"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">链表中环的检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个有序的链表合并"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">两个有序的链表合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除链表中倒数第n个结点"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">删除链表中倒数第n个结点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求链表的中间结点"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">求链表的中间结点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单链表、循环链表、双向链表的增删操作"><span class="nav-number">2.2.1.7.</span> <span class="nav-text">单链表、循环链表、双向链表的增删操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeetCode练习题"><span class="nav-number">2.2.2.</span> <span class="nav-text">LeetCode练习题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
