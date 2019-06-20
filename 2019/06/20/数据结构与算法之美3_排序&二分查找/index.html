@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="跟着学," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据结构与算法之美3_排序&amp;amp;二分查找">
+<meta name="keywords" content="跟着学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之美3_排序&amp;二分查找">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/数据结构与算法之美3_排序&二分查找/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="数据结构与算法之美3_排序&amp;amp;二分查找">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-20T15:25:31.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之美3_排序&amp;二分查找">
+<meta name="twitter:description" content="数据结构与算法之美3_排序&amp;amp;二分查找">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/20/数据结构与算法之美3_排序&二分查找/"/>
+
+
+
+
+
+  <title>数据结构与算法之美3_排序&二分查找 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/数据结构与算法之美3_排序&二分查找/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法之美3_排序&二分查找</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T23:19:35+08:00">
+                2019-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/20/数据结构与算法之美3_排序&二分查找/" class="leancloud_visitors" data-flag-title="数据结构与算法之美3_排序&二分查找">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,461 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  23 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据结构与算法之美3_排序&amp;二分查找</p>
+<a id="more"></a>
+<p><br></p>
+<hr>
+<p>本系列文章，算是《极客时间》的《数据结构与算法之美》专栏的读书笔记。</p>
+<p>只是一些个人心得与练习，想要得到更详细更好更系统的学习，请去 极客时间APP订阅专栏。</p>
+<p>跟着专栏学了好久，也该有点成果不是；</p>
+<p>正好趁着最后的几篇练习章节，把之前学到的，做个笔记总结一下。</p>
+<hr>
+<p>笔记列表</p>
+<ul>
+<li>数组&amp;链表</li>
+<li>栈&amp;队列&amp;递归</li>
+<li>排序&amp;二分查找</li>
+</ul>
+<hr>
+<p><br></p>
+<p><br></p>
+<h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="分析标准"><a href="#分析标准" class="headerlink" title="分析标准"></a>分析标准</h3><h4 id="执行效率（时间复杂度）"><a href="#执行效率（时间复杂度）" class="headerlink" title="执行效率（时间复杂度）"></a>执行效率（时间复杂度）</h4><ul>
+<li>最好情况、最坏情况、平均情况的 时间复杂度</li>
+<li>时间复杂度的 系数、常数、低阶</li>
+<li>比较次数 与 交换（或移动）次数</li>
+</ul>
+<h4 id="内存消耗（空间复杂度）"><a href="#内存消耗（空间复杂度）" class="headerlink" title="内存消耗（空间复杂度）"></a>内存消耗（空间复杂度）</h4><ul>
+<li>是否原地排序（空间复杂度O(1)）</li>
+</ul>
+<h4 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h4><ul>
+<li>稳定排序算法可以保持两个相同数值的对象，在排序之后的前后顺序不变。</li>
+</ul>
+<h4 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h4><p>在计算 执行效率 的时候，如果用概率论的方法定量分析平均时间复杂度，设计的数学推理和计算会比较复杂，专栏作者使用了一些概念来辅助分析</p>
+<h5 id="有序度"><a href="#有序度" class="headerlink" title="有序度"></a>有序度</h5><p>有序度指数组中具有有序关系的元素对个数。</p>
+<p>比如 4,7,2,1,9,3 数据中，有序度为 7，有序元素对为 (4, 7), (4, 9), (7, 9), (2, 9), (2, 3), (1, 9), (1, 3)</p>
+<h5 id="逆序度"><a href="#逆序度" class="headerlink" title="逆序度"></a>逆序度</h5><p>逆序度指数组中具有逆序关系的元素对个数</p>
+<p>比如 4, 7, 2, 1, 9, 3 数据中，逆序度为 8, 逆序元素对为 (4, 2), (4, 1), (4, 3), (7, 2), (7, 1), (7, 3), (2, 1), (9, 3)</p>
+<p><br></p>
+<h3 id="经典排序算法"><a href="#经典排序算法" class="headerlink" title="经典排序算法"></a>经典排序算法</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>不断遍历被排序数列，每次只操作相邻的两个元素，将两者比较，按照大小关系决定是否交换位置。</p>
+<p>冒泡排序有两种操作，元素的比较 与 元素的交换。</p>
+<h5 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组；n 待排序数组长度*/</span><br><span class="line">for i:=0 to n-1 do</span><br><span class="line">    isFinish := true</span><br><span class="line">    for j:=0 to n-i do</span><br><span class="line">        if arr[j] &lt; arr[j+1] then </span><br><span class="line">        	swap arr[j] with arr[j+1]</span><br><span class="line">            isFinish := false</span><br><span class="line">    end</span><br><span class="line">            </span><br><span class="line">    if isFinish then exit</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率"><a href="#执行效率" class="headerlink" title="执行效率"></a>执行效率</h6><ul>
+<li><p>最好的情况，数组为顺序排列。需要执行 1 次冒泡操作，时间复杂度为 O(1)</p>
+</li>
+<li><p>最坏的情况，数组为逆序排列。需要执行 n 次冒泡操作，时间复杂度为 O(n^2)</p>
+</li>
+<li><p>平均的情况，取最好和最坏的中间值，(1 + n*(n - 1)/2)/2 = 1/2 + n*(n- 1)/4 = n*(n - 1)/4，时间复杂度为 O(n^2)</p>
+</li>
+</ul>
+<h6 id="内存消耗"><a href="#内存消耗" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>冒泡排序比较并交换相邻元素，只需要常量级的临时空间，空间复杂度为 O(1)，所以 <strong>是原地排序</strong> 算法。</p>
+<h6 id="稳定性-1"><a href="#稳定性-1" class="headerlink" title="稳定性"></a>稳定性</h6><p>冒泡排序在比较时，可以设定相邻元素大小相等时不交换，因此相同大小的数据顺序在排序前后不会改变顺序，所以是 <strong>稳定</strong> 的排序算法。</p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><h5 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h5><p>数组可以分为两个区间，已排序区间 与 未排序区间；不断取未排序区间的元素插入到已排序区间的合适位置。</p>
+<p>插入排序有两种操作，元素的比较 与 元素的移动。</p>
+<h5 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组；n 待排序数组长度*/</span><br><span class="line">for i:=1 to n-1 do</span><br><span class="line">	waitInsert := arr[i]</span><br><span class="line">	j := i-1</span><br><span class="line">	while j ≥ 0 do</span><br><span class="line">		if arr[j] &gt; waitInsert </span><br><span class="line">			then arr[j+1] := arr[j]</span><br><span class="line">			else exit</span><br><span class="line">		j := j-1</span><br><span class="line">	end</span><br><span class="line">	</span><br><span class="line">	arr[j+1] := waitInsert</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h5 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-1"><a href="#执行效率-1" class="headerlink" title="执行效率"></a>执行效率</h6><p>最好的情况，数组为逆序排列，不需要元素移动，比较一个数据即可插入元素，进行 n 次比较，时间复杂度为 O(n)。</p>
+<p>最坏的情况，数组为顺序排列，每次都要与每个已排序区间元素比较并移动每个元素，时间复杂度为 O(n^2)。</p>
+<p>平均的情况，每次插入操作都相当于在数组中插入一个数据，在数据中插入一个数据的平均时间复杂度为O(n)，循环执行n次插入操作，所以时间复杂度为 O(n^2)。</p>
+<h6 id="内存消耗-1"><a href="#内存消耗-1" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>插入排序时，不需要额外的存储空间，空间复杂度为 O(1) ，所以 <strong>是原地排序</strong> 算法。</p>
+<h6 id="稳定性-2"><a href="#稳定性-2" class="headerlink" title="稳定性"></a>稳定性</h6><p>插入排序时，可以选择将后面出现的元素，插入到前面出现元素的后面，从而保证原有顺序不变，所以是 <strong>稳定</strong> 的排序算法。</p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><h5 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h5><p>选择排序也分为已排序区间与未排序区间，每次选择未排序区间最小的元素，放到已排序区间最后位置。</p>
+<p>选择排序只有一种操作，比较元素。</p>
+<h5 id="伪代码-2"><a href="#伪代码-2" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组；n 待排序数组长度*/</span><br><span class="line">for i:=0 to n-2 do</span><br><span class="line">	minIndex := i</span><br><span class="line">	for j:=i+1 to n-1 do</span><br><span class="line">		if arr[minIndex] &gt; arr[j] then </span><br><span class="line">			minIndex := j</span><br><span class="line">	end</span><br><span class="line">	</span><br><span class="line">	if minIndex ≠ i then </span><br><span class="line">		swap arr[i] with arr[minIndex]</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h5 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-2"><a href="#执行效率-2" class="headerlink" title="执行效率"></a>执行效率</h6><p>选择排序的最好、最差、平均复杂度均为O(n^2)。因为主要步骤是进行元素的比较，此步骤并不会随着初始状态而改变。</p>
+<h6 id="内存消耗-2"><a href="#内存消耗-2" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>选择排序时，只需要常量级的临时空间，空间复杂度为O(1)，所以 <strong>是原地排序</strong> 算法。</p>
+<h6 id="稳定性-3"><a href="#稳定性-3" class="headerlink" title="稳定性"></a>稳定性</h6><p>选择排序会进行元素的交换，会导致顺序发生变化，所以它是一个 <strong>不稳定</strong> 的排序算法。</p>
+<p>比如，2 2 1，将1与2交换后，2的先后顺序发生了变化。</p>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><h5 id="概述-3"><a href="#概述-3" class="headerlink" title="概述"></a>概述</h5><p>归并排序的核心思想是分治。</p>
+<p>可以分为两部分，分解和合并。</p>
+<p>分解：先将数组从中间一分为二，每部分继续一分为二，直到每部分只有一个元素。</p>
+<p>合并：将相邻两部分按顺序合并，合并到最后。</p>
+<h5 id="伪代码-3"><a href="#伪代码-3" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组；front首索引；rear尾索引*/</span><br><span class="line">merge_sort(arr, front, rear)</span><br><span class="line">&#123;</span><br><span class="line">    if front ≥ rear then return</span><br><span class="line">    </span><br><span class="line">    mid := (front+rear)/2</span><br><span class="line">    merge_sort(arr, front, mid)</span><br><span class="line">    merge_sort(arr, mid+1, rear)</span><br><span class="line">    </span><br><span class="line">    merge(arr, front, mid, rear)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*arr 待排序数组；front首索引；mid中间索引；rear尾索引；tempArr中间过渡数组*/</span><br><span class="line">merge(arr, front, mid, rear, tempArr)</span><br><span class="line">&#123;</span><br><span class="line">    i := front</span><br><span class="line">    j := mid+1</span><br><span class="line">    k := 0</span><br><span class="line">    </span><br><span class="line">    while i ≤ mid and j ≤ rear do</span><br><span class="line">    	if arr[i] ≤ arr[j] </span><br><span class="line">    		then </span><br><span class="line">    			tempArr[k] := arr[i]</span><br><span class="line">    			k := k+1</span><br><span class="line">    			i := i+1</span><br><span class="line">    		else</span><br><span class="line">    			tempArr[k] := arr[j]</span><br><span class="line">    			k := k+1</span><br><span class="line">    			j := j+1</span><br><span class="line">    end</span><br><span class="line">    while i ≤ mid do</span><br><span class="line">    	tempArr[k] := arr[i]</span><br><span class="line">    	k := k+1</span><br><span class="line">    	i := i+1</span><br><span class="line">    end</span><br><span class="line">    while j ≤ rear do</span><br><span class="line">    	tempArr[k] := arr[j]</span><br><span class="line">    	k := k+1</span><br><span class="line">    	j := j+1</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    for l:=0 to rear-front do</span><br><span class="line">    	arr[front+l] := tempArr[l]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-3"><a href="#执行效率-3" class="headerlink" title="执行效率"></a>执行效率</h6><p>归并排序的时间复杂度计算比较特别，可以用递推公式来分析一下。</p>
+<p>假设对n个元素进行归并排序的时间是 T(n)，merge函数合并两个有序数组时间复杂度是O(n)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">T(<span class="number">1</span>)	=	C;					<span class="comment">// n=1时，只需要常量级执行时间，表示为C。</span></span><br><span class="line">T(n)	=	<span class="number">2</span>*T(n/<span class="number">2</span>) + n;</span><br><span class="line">		= 	<span class="number">2</span>* (<span class="number">2</span>*T(n/<span class="number">4</span>) + n/<span class="number">2</span>) + n 				= 	<span class="number">4</span>*T(n/<span class="number">4</span>) + <span class="number">2</span>*n</span><br><span class="line">		=	<span class="number">2</span>* (<span class="number">2</span>* (<span class="number">2</span>*T(n/<span class="number">8</span>) + n/<span class="number">4</span>) + n/<span class="number">2</span>) + n 		=	<span class="number">8</span>*T(n/<span class="number">8</span>) + <span class="number">3</span>*n</span><br><span class="line">        = 	<span class="number">2</span>* (<span class="number">2</span>* (<span class="number">2</span>* (<span class="number">2</span>*T(n/<span class="number">16</span>) + n/<span class="number">8</span>) + n/<span class="number">4</span>) + n/<span class="number">2</span>) + n 	= 	<span class="number">16</span>*T(n/<span class="number">16</span>) + <span class="number">4</span>*n</span><br><span class="line">        ...</span><br><span class="line">        = 	<span class="number">2</span>^k * T(n/<span class="number">2</span>^k) + k*n</span><br><span class="line">        ...</span><br><span class="line">            </span><br><span class="line">当</span><br><span class="line">T(n/<span class="number">2</span>^k) 	= 	T(<span class="number">1</span>)</span><br><span class="line">n/<span class="number">2</span>^k = <span class="number">1</span> 	=&gt; 	k = log2n</span><br><span class="line">T(n) 		= 	Cn + nlog2n</span><br></pre></td></tr></table></figure>
+<p>而且，归并排序的执行效率与原始数组的有序程度无关，所以最好、最差、平均时间复杂度均为 O(nlogn)。</p>
+<h6 id="内存消耗-3"><a href="#内存消耗-3" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>归并排序，在进行merge操作时候，会存在临时空间，最大不会超过n个数据大小。所以空间复杂度为 O(n)，它 <strong>不是原地排序</strong> 的算法。</p>
+<h6 id="稳定性-4"><a href="#稳定性-4" class="headerlink" title="稳定性"></a>稳定性</h6><p>归并排序稳定性在合并数组时的处理，只要保证前半部分的先于后半部分的放入最终数组就可以让排序稳定。因此，归并排序 <strong>是稳定</strong> 的排序算法。</p>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><h5 id="概述-4"><a href="#概述-4" class="headerlink" title="概述"></a>概述</h5><p>快速排序同归并排序一样，也是用的分治的思想。但是，又有些不同。它的思想是，取一个数为基准，将比它小的放在它左边，比它大的放在它右边；每部分再继续，直到区间缩小为1。</p>
+<p>由此可见，归并排序是不断向上合并，是自下而上的；快速排序是不断下分，是自上而下的。</p>
+<h5 id="伪代码-4"><a href="#伪代码-4" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组；low低位索引；high高位索引*/</span><br><span class="line">quick_sort(arr, low, high)</span><br><span class="line">&#123;</span><br><span class="line">	if low ≥ high then return</span><br><span class="line">	</span><br><span class="line">    q = partition(arr, low, high);</span><br><span class="line">    quick_sort(arr, low, q - 1);</span><br><span class="line">    quick_sort(arr, q + 1, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 将数组分成两部分, arr待排序数组，low低位索引，high高位索引 */</span><br><span class="line">partition(arr, low, high)</span><br><span class="line">&#123;</span><br><span class="line">    standard := arr[high]</span><br><span class="line">    i := low</span><br><span class="line">    for j:=low to high-1 do</span><br><span class="line">    	if arr[j] &lt; standard then</span><br><span class="line">    		swap arr[i] with arr[j]</span><br><span class="line">    		i := i+1</span><br><span class="line">    end</span><br><span class="line">    swap arr[i] with arr[high]</span><br><span class="line">    return i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分析-4"><a href="#分析-4" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-4"><a href="#执行效率-4" class="headerlink" title="执行效率"></a>执行效率</h6><p>快速排序的执行效率也可以通过递推公式来分析，如同归并排序一样</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">T(<span class="number">1</span>) = C</span><br><span class="line">T(n) = T(n/m) + T(n*(m<span class="number">-1</span>)/m) + n</span><br></pre></td></tr></table></figure>
+<p>m的取值在于每次选的标准，即把数组分割的比例。</p>
+<p>最好的情况，就是每次都将数组平分，即同归并排序的时间复杂度 O(nlogn)</p>
+<p>最坏的情况，就是每次都是极端分割，时间复杂度退化到 O(n^2)</p>
+<p>平均的情况，其实大部分的情况时间复杂度都可以达到 O(nlogn)；而且还有一些方法可以避免分割不均衡的发生。</p>
+<h6 id="内存消耗-4"><a href="#内存消耗-4" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>快速排序内存消耗主要在partition函数中，使用交换的方式进行替代了开辟新空间，所以快速排序时间复杂度是 O(1)，<strong>是原地排序</strong> 的算法。</p>
+<h6 id="稳定性-5"><a href="#稳定性-5" class="headerlink" title="稳定性"></a>稳定性</h6><p>上面分析内存消耗的时候讲到，快速排序用交换的方式实现原地排序，但正是因为这样，就无法保证数据的稳定性了（参考选择排序）。所以快速排序 <strong>不是稳定</strong> 的排序算法。</p>
+<h5 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h5><p>快速排序是常用的排序算法之一，但是它的时间复杂度最坏情况能退化到O(n^2)，这个是我们不想看到的，下面介绍几种可以尽量避免分区不平衡的方法。</p>
+<ol>
+<li>三数取中法：每次从区间的 头、中、尾 分别取出一个数，对比大小取中间值作为分区标准。当然，根据数据规模，可以扩展为n数取中。</li>
+<li>随机法：每次从待排序区间，随机取一个元素作为分区标准，从概率学角度上讲相对于取固定位置值要好。</li>
+</ol>
+<h4 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h4><h5 id="概述-5"><a href="#概述-5" class="headerlink" title="概述"></a>概述</h5><p>将待排序数组分到几个有序的桶中，每个桶的数据再排序，之后将每个桶的数据按照顺序依次取出即排序完成。</p>
+<p>桶排序不是基于比较的比较排序，是一种线性排序。</p>
+<p>桶排序比较适合用在外部排序中，外部排序就是数据存储在外部磁盘中，由于数据量比较大，内存有限，无法将数据全部加载到内存。</p>
+<h5 id="伪代码-5"><a href="#伪代码-5" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组，假定数组只有正数且范围在[0, 100), m为桶的数量*/</span><br><span class="line">bucket_sort(arr, n)</span><br><span class="line">&#123;</span><br><span class="line">	m := 10</span><br><span class="line">	</span><br><span class="line">    buckets := new array of m empty lists</span><br><span class="line">    for i:=0 to n-1 do</span><br><span class="line">    	insert arr[i] into buckets[arr[i]/10]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    for i:=0 to m-1 do</span><br><span class="line">    	sort(buckets[i])</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    return conncation of buckets[0], ..., buckets[m-1]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分析-5"><a href="#分析-5" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-5"><a href="#执行效率-5" class="headerlink" title="执行效率"></a>执行效率</h6><p>将n个数据平均分配到m个桶中，每个桶内有 k=n/m 个元素；</p>
+<p>每个桶的内部用比较排序，时间复杂度就是 O(k <em> logk)，m个桶排序的时间复杂度就是 O(m </em> k <em> logk)，也就是 O(m </em> n/m <em> log(n/m)) = O(n </em> log(n/m)) ；</p>
+<p>当桶的个数m接近n时，log(n/m)会很小，此时桶排序时间复杂度接近 O(n)。</p>
+<p>最好的情况，当m接近n，时间复杂度接近 O(n)。</p>
+<p>最差的情况，只有一个桶，时间复杂度即是内部排序时间复杂度 O(nlogn)</p>
+<p>平均的情况，时间复杂度为 O(n * log(n/m))</p>
+<h6 id="内存消耗-5"><a href="#内存消耗-5" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>桶排序需要的空间复杂度肯定不是O(1)了，最起码要分桶，而且如果想要达到O(n)的时间复杂度，桶的数量是不可少的。桶排序的空间复杂度为 O(n + m)，所以 <strong>不是原地排序</strong> 的算法。</p>
+<h6 id="稳定性-6"><a href="#稳定性-6" class="headerlink" title="稳定性"></a>稳定性</h6><p>桶排序，先将数据分到桶内，这个是稳定的；再是桶内的排序，这个取决于采用的算法，也可以看做是稳定的；然后就是合并，这个步骤是稳定的。所以，桶排序 <strong>是稳定</strong> 的排序算法。</p>
+<h4 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h4><h5 id="概述-6"><a href="#概述-6" class="headerlink" title="概述"></a>概述</h5><p>计数排序是桶排序的一种特殊情况。它通常对已知数量范围的数组进行排序，需要借助辅助数组C。</p>
+<p>例如，</p>
+<p>有一个大胃王比赛，总共有7个巨型包子，找10个人来参赛，成绩分别是 A[3, 1, 0, 2, 2, 5, 7, 1, 2, 0]。</p>
+<p>因为，总共就7个包子，所以元素范围就是 [0, 7]，创建数组C[8]。</p>
+<p>然后，遍历每个人吃的包子数量，填满数组C，比如第一个人吃了3个，C[0] += 1, C[1] += 1, C[2] += 1, C[3] += 1；数组内数字表示的是吃的包子数小于等于该下标的人数量，得到数组C[2, 4, 7, 8, 8, 9, 9, 10]。</p>
+<p>最后，从后向前遍历原数组A，</p>
+<p>根据原数组元素，在C数组找到在R数组的位置，并填入；比如元素0，在C数组0下标元素为2，表示小于等于0的元素有2个，它的位置为2，但是下标是从0开始，所以，位置修正为1。</p>
+<p>遍历到头，得到最终数组R</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">原数组	  	 A[3, 1, 0, 2, 2, 5, 7, 1, 2, 0]</span><br><span class="line"></span><br><span class="line">1: 		R[, 0, , , , , , , , ]					C[2-1, 4, 7, 8, 8, 9, 9, 10]</span><br><span class="line">2: 		R[, 0, , , , , 2, , , ]					C[1, 4, 7-1, 8, 8, 9, 9, 10]</span><br><span class="line">3: 		R[, 0, , 1, , , 2, , , ]				C[1, 4-1, 6, 8, 8, 9, 9, 10]</span><br><span class="line">4: 		R[, 0, , 1, , , 2, , , 7]				C[1, 3, 6, 8, 8, 9, 9, 10-1]</span><br><span class="line">5: 		R[, 0, , 1, , , 2, , 5, 7]				C[1, 3, 6, 8, 8, 9-1, 9, 9]</span><br><span class="line">6: 		R[, 0, , 1, , 2, 2, , 5, 7]				C[1, 3, 6-1, 8, 8, 8, 9, 9]</span><br><span class="line">7: 		R[, 0, , 1, 2, 2, 2, , 5, 7]			C[1, 3, 5-1, 8, 8, 8, 9, 9]</span><br><span class="line">8: 		R[0, 0, , 1, 2, 2, 2, , 5, 7]			C[1-1, 3, 4, 8, 8, 8, 9, 9]</span><br><span class="line">9: 		R[0, 0, 1, 1, 2, 2, 2, , 5, 7]			C[0, 3-1, 4, 8, 8, 8, 9, 9]</span><br><span class="line">10: 	R[0, 0, 1, 1, 2, 2, 2, 3, 5, 7]			C[0, 2, 4, 8-1, 8, 8, 9, 9]</span><br><span class="line"></span><br><span class="line">排序后数组 	R[0, 0, 1, 1, 2, 2, 2, 3, 5, 7]</span><br></pre></td></tr></table></figure>
+<h5 id="伪代码-6"><a href="#伪代码-6" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组，假定数组只有正数且范围在[0, 100), k为C数组大小*/</span><br><span class="line">count_sort(arr, n)</span><br><span class="line">&#123;</span><br><span class="line">    for i:=0 to n-1 do</span><br><span class="line">    	C[arr[i]] := C[arr[i]] + 1</span><br><span class="line">    end</span><br><span class="line">    for i:=0 to k-1 do</span><br><span class="line">    	C[k] := C[k] + C[k-1]</span><br><span class="line">    end</span><br><span class="line">    for i:=n-1 to 0 do</span><br><span class="line">    	C[arr[i]] := C[arr[i]]-1</span><br><span class="line">    	R[C[arr[i]]] = arr[i]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    return R</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分析-6"><a href="#分析-6" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-6"><a href="#执行效率-6" class="headerlink" title="执行效率"></a>执行效率</h6><p>计数排序的时间复杂度，最好、最坏、平均是一样的，都需要遍历两边数组，假定C的大小为k，时间复杂度均为 O(n + k)。</p>
+<h6 id="内存消耗-6"><a href="#内存消耗-6" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>很显然，计数排序需要额外的数组C，假定C的大小为k，空间复杂度为 O(n+k)，所以计数排序 <strong>不是原地排序</strong> 的算法。</p>
+<h6 id="稳定性-7"><a href="#稳定性-7" class="headerlink" title="稳定性"></a>稳定性</h6><p>通过倒序遍历原数组构造最终数组，可以保证排序的稳定性。所以计数排序 <strong>是稳定</strong> 的排序算法。</p>
+<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><h5 id="概述-7"><a href="#概述-7" class="headerlink" title="概述"></a>概述</h5><p>基数排序，也像是桶排序的变种。</p>
+<p>每次遍历只排序每个元素的某同位置的顺序，然后将所有元素按顺序取出，再次排序下一个位置。</p>
+<p>可以从低位到高位依次排序，称为LSD法（Least Significant Digit first）；也可以从高位到低位排序，称为MSD法（Most Significant Digit first）。</p>
+<p>基数排序，可以分为两个步骤：</p>
+<ol>
+<li>根据某个位置分配元素到桶中</li>
+<li>收集各个桶中元素</li>
+</ol>
+<p>不断重复，直到没有位数了。</p>
+<p>例如，有10个元素进行排序 [13, 55, 42, 30, 66, 89, 43, 79, 2, 81]，此处用LSD法排序。（<em>LSD法适合位数小的排序，MSD法适合位数多的排序</em>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">第一趟，根据个位数分配到各个桶中：</span><br><span class="line">0 - 30</span><br><span class="line">1 - 81</span><br><span class="line">2 - 42, 2</span><br><span class="line">3 - 13, 43</span><br><span class="line">4 - </span><br><span class="line">5 - 55</span><br><span class="line">6 - 66</span><br><span class="line">7 - </span><br><span class="line">8 - </span><br><span class="line">9 - 89, 79</span><br><span class="line">将各个桶中元素收集: 30, 81, 42, 2, 13, 43, 55, 66, 89, 79</span><br><span class="line"></span><br><span class="line">第二趟，根据十位数分配到各个桶中：</span><br><span class="line">0 - 2</span><br><span class="line">1 - 13</span><br><span class="line">2 - </span><br><span class="line">3 - 30</span><br><span class="line">4 - 42, 43</span><br><span class="line">5 - 55</span><br><span class="line">6 - 66</span><br><span class="line">7 - 79</span><br><span class="line">8 - 81, 89</span><br><span class="line">9 - </span><br><span class="line">将各个桶中元素收集: 2, 13, 30, 42, 43, 55, 66, 79, 81, 89</span><br><span class="line"></span><br><span class="line">没有三位数情况，所以第二趟收集的元素，即为最终排序后的数组</span><br></pre></td></tr></table></figure>
+<h5 id="伪代码-7"><a href="#伪代码-7" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组，n为数组长度，k为最大位数，m为桶个数*/</span><br><span class="line">radix_sort(arr, n)</span><br><span class="line">&#123;</span><br><span class="line">    for i:=1 to k do</span><br><span class="line">		m := 10</span><br><span class="line">		buckets := new array of m empty lists</span><br><span class="line">    	</span><br><span class="line">    	for j:=0 to n-1 do</span><br><span class="line">    		if i ≤ 1 then</span><br><span class="line">    			radix := arr[j]%pow(10, i)</span><br><span class="line">    		else</span><br><span class="line">    			radix := (arr[j]%pow(10, i))/pow(10, i-1)</span><br><span class="line">    		end</span><br><span class="line">    		insert arr[j] into buckets[radix]</span><br><span class="line">    	end</span><br><span class="line">    	</span><br><span class="line">    	clear arr</span><br><span class="line">    	for j:=0 to m-1 do</span><br><span class="line">    		for k:=0 to len(buckets[j]-1) do</span><br><span class="line">	    		insert buckets[j][k] into arr</span><br><span class="line">	    	end</span><br><span class="line">    	end</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="分析-7"><a href="#分析-7" class="headerlink" title="分析"></a>分析</h5><h6 id="执行效率-7"><a href="#执行效率-7" class="headerlink" title="执行效率"></a>执行效率</h6><p>基数排序的时间复杂度跟数组内最大位数 k 相关，也跟桶的数量 m 相关，时间复杂度为 O(n*(k + m))。</p>
+<h6 id="内存消耗-7"><a href="#内存消耗-7" class="headerlink" title="内存消耗"></a>内存消耗</h6><p>基数排序需要额外的桶来不断分配，所以它的空间复杂度为 O(n + m)，基数排序 <strong>不是原地排序</strong> 的算法。</p>
+<h6 id="稳定性-8"><a href="#稳定性-8" class="headerlink" title="稳定性"></a>稳定性</h6><p>基数排序在排序过程中是用分配的方式进行，有固定的顺序，所以不会打乱原先数组元素顺序。因此，基数排序 <strong>是稳定</strong> 的排序算法。</p>
+<p><br></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<thead>
+<tr>
+<th>排序算法</th>
+<th>时间复杂度</th>
+<th>是否稳定</th>
+<th>是否原地</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冒泡排序</td>
+<td>O(n^2)</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>插入排序</td>
+<td>O(n^2)</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td>O(n^2)</td>
+<td>不是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>O(nlogn)</td>
+<td>不是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>O(nlogn)</td>
+<td>是</td>
+<td>不是</td>
+</tr>
+<tr>
+<td>桶排序</td>
+<td>O(n)</td>
+<td>是</td>
+<td>不是</td>
+</tr>
+<tr>
+<td>计数排序</td>
+<td>O(n)</td>
+<td>是</td>
+<td>不是</td>
+</tr>
+<tr>
+<td>基数排序</td>
+<td>O(n)</td>
+<td>是</td>
+<td>不是</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>二分查找是对一个有序数组的集合，利用分治思想进行查找。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一般，直到找到查找的元素，或区间缩小为0即未找到。</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>二分查找非常的高效，每次查找都会将查找区间缩小一半，即 n, n/2, n/4, n/8, n/16 … n/2^k ，时间复杂度为 O(logn) 。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组，n为数组长度，aim为要查找的数值*/</span><br><span class="line">binary_search(arr, n, aim)</span><br><span class="line">&#123;</span><br><span class="line">    low := 0</span><br><span class="line">    high := n-1</span><br><span class="line">    </span><br><span class="line">    while low ≤ high do</span><br><span class="line">    	mid := (low + high)/2</span><br><span class="line">    	if arr[mid] &lt; aim then</span><br><span class="line">    		low = mid + 1</span><br><span class="line">    	else if arr[mid] &gt; aim then</span><br><span class="line">    		high = mid - 1</span><br><span class="line">    	else</span><br><span class="line">    		return mid</span><br><span class="line">    	end</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    return -1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/*arr 待排序数组，n为数组长度，aim为要查找的数值*/</span><br><span class="line">binary_search(arr, n, aim)</span><br><span class="line">&#123;</span><br><span class="line">    return block_binary_search(arr, 0, n-1, aim)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">recursive_binary_search(arr, low, high, aim)</span><br><span class="line">&#123;</span><br><span class="line">    if low &gt; high then</span><br><span class="line">    	return -1</span><br><span class="line">    	</span><br><span class="line">    mid := low + (high - low)/2</span><br><span class="line">    if arr[mid] &lt; aim then</span><br><span class="line">    	return recursive_binary_search(arr, mid + 1, high, aim)</span><br><span class="line">    else if arr[mid] &gt; aim then</span><br><span class="line">    	return recursive_binary_search(arr, low, mid - 1, aim)</span><br><span class="line">    else</span><br><span class="line">    	return mid</span><br><span class="line">    end</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="局限"><a href="#局限" class="headerlink" title="局限"></a>局限</h3><p>前面说了二分查找这么厉害，它是不是就是查找算法的万能钥匙呢？显然不是。它有以下四个局限性</p>
+<ul>
+<li><strong>依赖顺序表结构，即数组。</strong> 因为它利用了根据下标随机访问，如果用链表，复杂度将提高很多。</li>
+<li><strong>针对有序数据。</strong> 每次都用中间的元素来判断，下一个区间是哪一个。</li>
+<li><strong>不适合小数据量查找。</strong> 如果比较操作非常耗时，那么还是推荐用二分查找，减少比较次数。</li>
+<li><strong>不适合太大数据量查找。</strong> 因为二分查找依赖顺序表结构，会将占用连续一整块内存，如果数据量过大，会对存储造成大的麻烦。</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><h2 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h2><h3 id="必知必会"><a href="#必知必会" class="headerlink" title="必知必会"></a>必知必会</h3><h4 id="实现各种排序算法"><a href="#实现各种排序算法" class="headerlink" title="实现各种排序算法"></a>实现各种排序算法</h4><ul>
+<li>归并排序</li>
+<li>快速排序</li>
+<li>插入排序</li>
+<li>冒泡排序</li>
+<li>选择排序</li>
+</ul>
+<h4 id="实现O-n-时间复杂度找到数据中第K大的元素"><a href="#实现O-n-时间复杂度找到数据中第K大的元素" class="headerlink" title="实现O(n)时间复杂度找到数据中第K大的元素"></a>实现O(n)时间复杂度找到数据中第K大的元素</h4><h3 id="LeetCode"><a href="#LeetCode" class="headerlink" title="LeetCode"></a>LeetCode</h3><ul>
+<li><a href="https://blog.csdn.net/lttree/article/details/71313665" target="_blank" rel="noopener">23_Merge k Sorted Lists</a></li>
+<li><a href="https://blog.csdn.net/lttree/article/details/77826724" target="_blank" rel="noopener">41_First Missing Positive</a></li>
+<li><a href="https://blog.csdn.net/lttree/article/details/90150419" target="_blank" rel="noopener">74_Search a 2D Matrix</a></li>
+<li><a href="https://blog.csdn.net/lx417147512/article/details/93140593" target="_blank" rel="noopener">75_Sort Colors</a></li>
+<li><a href="https://blog.csdn.net/lx417147512/article/details/92854497" target="_blank" rel="noopener">148_Sort List</a></li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="二分查找-1"><a href="#二分查找-1" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="必知必会-1"><a href="#必知必会-1" class="headerlink" title="必知必会"></a>必知必会</h3><h4 id="实现有序数组二分查找"><a href="#实现有序数组二分查找" class="headerlink" title="实现有序数组二分查找"></a>实现有序数组二分查找</h4><h4 id="实现模糊二分查找（大于等于给定值的第一个元素）"><a href="#实现模糊二分查找（大于等于给定值的第一个元素）" class="headerlink" title="实现模糊二分查找（大于等于给定值的第一个元素）"></a>实现模糊二分查找（大于等于给定值的第一个元素）</h4><h3 id="LeetCode-1"><a href="#LeetCode-1" class="headerlink" title="LeetCode"></a>LeetCode</h3><ul>
+<li><a href="https://blog.csdn.net/lttree/article/details/64173253" target="_blank" rel="noopener">4_Median of Two Sorted Arrays</a></li>
+<li><a href="https://blog.csdn.net/lttree/article/details/72759051" target="_blank" rel="noopener">29_Divide Two Integers</a></li>
+<li><a href="https://blog.csdn.net/lttree/article/details/72972759" target="_blank" rel="noopener">33_Search in Rotated Sorted Array</a></li>
+<li><a href="https://blog.csdn.net/lttree/article/details/74899904" target="_blank" rel="noopener">34_Find First and Last Position of Element in Sorted Array</a></li>
+<li><a href="https://blog.csdn.net/lttree/article/details/90815455" target="_blank" rel="noopener">69_Sqrt(x)</a> </li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2019/06/20/数据结构与算法之美3_排序&二分查找/" title="数据结构与算法之美3_排序&二分查找">http://www.lt-tree.com/2019/06/20/数据结构与算法之美3_排序&二分查找/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/跟着学/" rel="tag"><i class="fa fa-tag"></i> 跟着学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/20/数据结构与算法之美2_栈&队列&递归/" rel="next" title="数据结构与算法之美2_栈&队列&递归">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法之美2_栈&队列&递归
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回顾"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">1.1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析标准"><span class="nav-number">1.1.1.</span> <span class="nav-text">分析标准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行效率（时间复杂度）"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">执行效率（时间复杂度）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存消耗（空间复杂度）"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">内存消耗（空间复杂度）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#稳定性"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">稳定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析方法"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">分析方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#有序度"><span class="nav-number">1.1.1.4.1.</span> <span class="nav-text">有序度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#逆序度"><span class="nav-number">1.1.1.4.2.</span> <span class="nav-text">逆序度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典排序算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">经典排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码"><span class="nav-number">1.1.2.1.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-number">1.1.2.1.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率"><span class="nav-number">1.1.2.1.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗"><span class="nav-number">1.1.2.1.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-1"><span class="nav-number">1.1.2.1.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-1"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-1"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-1"><span class="nav-number">1.1.2.2.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-1"><span class="nav-number">1.1.2.2.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-1"><span class="nav-number">1.1.2.2.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-2"><span class="nav-number">1.1.2.2.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-2"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-2"><span class="nav-number">1.1.2.3.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-2"><span class="nav-number">1.1.2.3.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-2"><span class="nav-number">1.1.2.3.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-2"><span class="nav-number">1.1.2.3.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-3"><span class="nav-number">1.1.2.3.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-3"><span class="nav-number">1.1.2.4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-3"><span class="nav-number">1.1.2.4.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-3"><span class="nav-number">1.1.2.4.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-3"><span class="nav-number">1.1.2.4.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-3"><span class="nav-number">1.1.2.4.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-4"><span class="nav-number">1.1.2.4.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-4"><span class="nav-number">1.1.2.5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-4"><span class="nav-number">1.1.2.5.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-4"><span class="nav-number">1.1.2.5.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-4"><span class="nav-number">1.1.2.5.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-4"><span class="nav-number">1.1.2.5.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-5"><span class="nav-number">1.1.2.5.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#优化"><span class="nav-number">1.1.2.5.4.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#桶排序"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">桶排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-5"><span class="nav-number">1.1.2.6.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-5"><span class="nav-number">1.1.2.6.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-5"><span class="nav-number">1.1.2.6.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-5"><span class="nav-number">1.1.2.6.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-5"><span class="nav-number">1.1.2.6.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-6"><span class="nav-number">1.1.2.6.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计数排序"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">计数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-6"><span class="nav-number">1.1.2.7.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-6"><span class="nav-number">1.1.2.7.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-6"><span class="nav-number">1.1.2.7.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-6"><span class="nav-number">1.1.2.7.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-6"><span class="nav-number">1.1.2.7.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-7"><span class="nav-number">1.1.2.7.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基数排序"><span class="nav-number">1.1.2.8.</span> <span class="nav-text">基数排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述-7"><span class="nav-number">1.1.2.8.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪代码-7"><span class="nav-number">1.1.2.8.2.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析-7"><span class="nav-number">1.1.2.8.3.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#执行效率-7"><span class="nav-number">1.1.2.8.3.1.</span> <span class="nav-text">执行效率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存消耗-7"><span class="nav-number">1.1.2.8.3.2.</span> <span class="nav-text">内存消耗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#稳定性-8"><span class="nav-number">1.1.2.8.3.3.</span> <span class="nav-text">稳定性</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.1.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找"><span class="nav-number">1.2.</span> <span class="nav-text">二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.2.2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">1.2.3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">非递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局限"><span class="nav-number">1.2.4.</span> <span class="nav-text">局限</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序-1"><span class="nav-number">2.1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#必知必会"><span class="nav-number">2.1.1.</span> <span class="nav-text">必知必会</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现各种排序算法"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">实现各种排序算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现O-n-时间复杂度找到数据中第K大的元素"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">实现O(n)时间复杂度找到数据中第K大的元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeetCode"><span class="nav-number">2.1.2.</span> <span class="nav-text">LeetCode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找-1"><span class="nav-number">2.2.</span> <span class="nav-text">二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#必知必会-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">必知必会</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现有序数组二分查找"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">实现有序数组二分查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现模糊二分查找（大于等于给定值的第一个元素）"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">实现模糊二分查找（大于等于给定值的第一个元素）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeetCode-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">LeetCode</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
