@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="用Python脚本实现对 Lua表的压缩">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-27T16:23:08.774Z">
+<meta property="og:updated_time" content="2019-07-12T15:22:03.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lua表存储优化">
 <meta name="twitter:description" content="用Python脚本实现对 Lua表的压缩">
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,995 字
+                  4,075 字
                 </span>
               
 
@@ -349,7 +349,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18 分钟
+                  19 分钟
                 </span>
               
             </div>
@@ -559,7 +559,7 @@
 <p>因为存在嵌套关系，那肯定是递归深度高的table嵌套了递归深度低的table。</p>
 <p>所以先输出递归深度低的table，再输出递归深度高的table，那就不会出现这种问题。</p>
 <p>但是，为了更好查找，同样深度的table，根据出现频率要再排序。</p>
-<h3 id="针对不同python版本打表不一致问题（v0-0-3更新）"><a href="#针对不同python版本打表不一致问题（v0-0-3更新）" class="headerlink" title="针对不同python版本打表不一致问题（v0.0.3更新）"></a>针对不同python版本打表不一致问题（v0.0.3更新）</h3><p>经使用发现，不同python版本会导致，输出的表内容不一致。（暂时只试验了 Python 3.4 及 Python 3.7）</p>
+<h3 id="针对不同python版本打表不一致问题（v0-0-3更新-amp-v0-0-4更新）"><a href="#针对不同python版本打表不一致问题（v0-0-3更新-amp-v0-0-4更新）" class="headerlink" title="针对不同python版本打表不一致问题（v0.0.3更新 &amp; v0.0.4更新）"></a>针对不同python版本打表不一致问题（v0.0.3更新 &amp; v0.0.4更新）</h3><p>经使用发现，不同python版本会导致，输出的表内容不一致。（暂时只试验了 Python 3.4 及 Python 3.7）</p>
 <p>经过试验查询，发现是Python在存到字典后读取的顺序是不同的，导致sorted排序会有所差异（Python3.7没有问题，Python3.4会有所差异）。</p>
 <p>查了相关资料发现，在python3.6开始 普通字典可以记住元素添加顺序，之前并没有，所以会导致之前的字典遍历顺序有问题。</p>
 <ul>
@@ -570,6 +570,7 @@
 </li>
 </ul>
 <p>原因查明白了，该想怎么解决了。就是对同样频率的再根据key排个序。（没有什么顺序是排序解决不了的，如果不行，多排几遍…）</p>
+<p>基于同样的问题，v0.0.4进一步修改，字典转字符串，要先对字典排序再转，否则将出现根据存储顺序不一致问题，然后比较是否重复元素，也由原来比较字符串相同改为比较字典相同。</p>
 <p><br></p>
 <p><br></p>
 <p><br></p>
@@ -729,7 +730,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -821,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一览"><span class="nav-number">1.</span> <span class="nav-text">一览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参照方案"><span class="nav-number">2.</span> <span class="nav-text">参照方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题-1"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对同一文件压缩后文件MD5可能不一致"><span class="nav-number">3.1.</span> <span class="nav-text">对同一文件压缩后文件MD5可能不一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度高"><span class="nav-number">3.2.</span> <span class="nav-text">复杂度高</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改方案"><span class="nav-number">4.</span> <span class="nav-text">修改方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目的"><span class="nav-number">4.1.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计"><span class="nav-number">4.1.2.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.1.3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">4.1.4.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案"><span class="nav-number">4.2.</span> <span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名词解释"><span class="nav-number">4.2.1.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">4.2.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">4.2.3.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件结构"><span class="nav-number">4.2.4.</span> <span class="nav-text">文件结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.3.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么-lua5-1-有序，-lua5-3-无序"><span class="nav-number">4.3.1.</span> <span class="nav-text">为什么 lua5.1 有序， lua5.3 无序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于-repeat-dict-的嵌套问题（v0-0-2更新）"><span class="nav-number">4.3.2.</span> <span class="nav-text">关于 repeat_dict 的嵌套问题（v0.0.2更新）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-2"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-1"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一"><span class="nav-number">4.3.2.2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二"><span class="nav-number">4.3.2.2.2.</span> <span class="nav-text">方案二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对不同python版本打表不一致问题（v0-0-3更新）"><span class="nav-number">4.3.3.</span> <span class="nav-text">针对不同python版本打表不一致问题（v0.0.3更新）</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一览"><span class="nav-number">1.</span> <span class="nav-text">一览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">1.2.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参照方案"><span class="nav-number">2.</span> <span class="nav-text">参照方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题-1"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对同一文件压缩后文件MD5可能不一致"><span class="nav-number">3.1.</span> <span class="nav-text">对同一文件压缩后文件MD5可能不一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度高"><span class="nav-number">3.2.</span> <span class="nav-text">复杂度高</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改方案"><span class="nav-number">4.</span> <span class="nav-text">修改方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目的"><span class="nav-number">4.1.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计"><span class="nav-number">4.1.2.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.1.3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">4.1.4.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案"><span class="nav-number">4.2.</span> <span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名词解释"><span class="nav-number">4.2.1.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">4.2.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码"><span class="nav-number">4.2.3.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件结构"><span class="nav-number">4.2.4.</span> <span class="nav-text">文件结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.3.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么-lua5-1-有序，-lua5-3-无序"><span class="nav-number">4.3.1.</span> <span class="nav-text">为什么 lua5.1 有序， lua5.3 无序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于-repeat-dict-的嵌套问题（v0-0-2更新）"><span class="nav-number">4.3.2.</span> <span class="nav-text">关于 repeat_dict 的嵌套问题（v0.0.2更新）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-2"><span class="nav-number">4.3.2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决-1"><span class="nav-number">4.3.2.2.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一"><span class="nav-number">4.3.2.2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二"><span class="nav-number">4.3.2.2.2.</span> <span class="nav-text">方案二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对不同python版本打表不一致问题（v0-0-3更新-amp-v0-0-4更新）"><span class="nav-number">4.3.3.</span> <span class="nav-text">针对不同python版本打表不一致问题（v0.0.3更新 &amp; v0.0.4更新）</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
