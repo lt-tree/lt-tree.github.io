@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="抽空写,想就做," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="联网战斗同步实现的心得">
+<meta name="keywords" content="抽空写,想就做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="联网战斗同步实现">
+<meta property="og:url" content="http://yoursite.com/2019/09/21/联网战斗同步实现/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="联网战斗同步实现的心得">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/sync_FrameProcess.png">
+<meta property="og:image" content="http://yoursite.com/images/sync_reconnect.png">
+<meta property="og:image" content="http://yoursite.com/images/sync_dataCollect.png">
+<meta property="og:updated_time" content="2019-09-21T07:44:25.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="联网战斗同步实现">
+<meta name="twitter:description" content="联网战斗同步实现的心得">
+<meta name="twitter:image" content="http://yoursite.com/images/sync_FrameProcess.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/21/联网战斗同步实现/"/>
+
+
+
+
+
+  <title>联网战斗同步实现 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/21/联网战斗同步实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">联网战斗同步实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-21T15:09:00+08:00">
+                2019-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/09/21/联网战斗同步实现/" class="leancloud_visitors" data-flag-title="联网战斗同步实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,521 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>联网战斗同步实现的心得</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在做联网战斗同步这块的东西，读了不少文章、书籍，于是整理了一下。</p>
+<p>之前也有在 团队内部技术分享 中分享过这块内容，但是有些东西受限于时间，只是大概的略过，重点放在了实现与遇到的难题解决上。</p>
+<p>后来，在做优化调整的时候，又有不少新的收获，改进了之前的分享稿。</p>
+<p>欢迎各位小伙伴来一起讨论，通过分享讨论来不断进步。</p>
+<hr>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>网络游戏的同步方案，大概由以下三部分搭配组成</p>
+<ul>
+<li>网络传输协议</li>
+<li>网络同步模型</li>
+<li>网络拓扑结构</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="网络传输协议（Network-Transport-Protocol）"><a href="#网络传输协议（Network-Transport-Protocol）" class="headerlink" title="网络传输协议（Network Transport Protocol）"></a>网络传输协议（Network Transport Protocol）</h2><ul>
+<li><p>分类</p>
+<ul>
+<li>UDP协议</li>
+<li>TCP协议</li>
+</ul>
+</li>
+<li><p>共同点</p>
+<ul>
+<li>在 TCP/IP 协议族中[物理层，数据链路层，网络层，传输层，应用层]，位于 传输层的协议，均依赖底层 网络层中的 IP协议。</li>
+</ul>
+</li>
+<li><p>区别</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>UDP</th>
+<th>TCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传输可靠性</td>
+<td>不可靠</td>
+<td>可靠</td>
+</tr>
+<tr>
+<td>传输速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>带宽</td>
+<td>包头小，省</td>
+<td>包头大，费</td>
+</tr>
+<tr>
+<td>连接速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>此外，TCP还提供了 流量控制、拥塞控制等</li>
+</ul>
+<ul>
+<li><p>其他</p>
+<ul>
+<li>关于 KCP协议<ul>
+<li>KCP协议是一个快速可靠协议，它以浪费10%-20%带宽的代价（相较于TCP协议），换取平均延迟降低 30%-40%，且最大延迟降低三倍的传输效果。纯算法实现，并不负责底层协议的收发。</li>
+<li>更详细信息可跳转最下方  参考资料2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="网络同步模型（Network-Model）"><a href="#网络同步模型（Network-Model）" class="headerlink" title="网络同步模型（Network Model）"></a>网络同步模型（Network Model）</h2><ul>
+<li><p>分类</p>
+<ul>
+<li>状态同步（State Synchronization ）<ul>
+<li>本质：上传包含 游戏外部变化原因集合（玩家操作等）及 中间状态的子集（客户端计算的部分）；下发包含 游戏状态的集合。</li>
+</ul>
+</li>
+<li>帧同步（Lockstep）<ul>
+<li>本质：上传下发只包含游戏外部变化原因集合（玩家操作等）。<ul>
+<li>对于A客户端：  [输入A] -&gt; [过程A + 运算A] -&gt; 输出A</li>
+<li>对于B客户端：  [输入B] -&gt; [过程B + 运算B] -&gt; 输出B</li>
+<li>确保 [输入] 相同，再保证 [过程] 与 [运算] 一致，那么 [输出] 一定是一致的</li>
+</ul>
+</li>
+<li>逻辑帧，游戏在逻辑层面是离散的过程，即可认为是一个逻辑帧一个逻辑帧进行逻辑运算。</li>
+<li>渲染帧，游戏在渲染层面是离散的过程，即可认为是一个渲染帧一个渲染帧进行画面呈现。</li>
+<li>游戏逻辑帧 与 渲染帧 需要互相独立。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>共同</p>
+<ul>
+<li>两种同步方案都分为 上传 和 下发 过程。<ul>
+<li>上传 指客户端将信息传输给 服务器/客户端</li>
+<li>下发 指客户端从 服务器/客户端 中获取信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对比</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>帧同步</th>
+<th>状态同步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>流量</td>
+<td>通常较低，取决于玩家数量</td>
+<td>通常较高，取决于该客户端可观察到的网络实体数量</td>
+</tr>
+<tr>
+<td>预表现</td>
+<td>难，客户端本地计算，进行回滚等</td>
+<td>较易，客户端进行预表现，服务器进行权威演算，客户端最终和服务器下发的状态进行调节或回滚</td>
+</tr>
+<tr>
+<td>确定性</td>
+<td>严格确定性</td>
+<td>不严格确定性</td>
+</tr>
+<tr>
+<td>弱网影响</td>
+<td>大，较难做到预表现</td>
+<td>小，较易做到预表现</td>
+</tr>
+<tr>
+<td>断线重连</td>
+<td>难，需要获取所有相关帧且快播追上进度</td>
+<td>易，根据快照迅速恢复</td>
+</tr>
+<tr>
+<td>实时回放</td>
+<td>难，客户端需要消耗非常大性能去从头播放到对应序列，回放完后需要快播追赶</td>
+<td>易，根据快照进行回放，回放完再根据快照恢复</td>
+</tr>
+<tr>
+<td>逻辑性能优化</td>
+<td>难，客户端需要运算所有逻辑，跟客户端性能强相关</td>
+<td>易，大部分逻辑可在服务器进行，分担客户端运算压力</td>
+</tr>
+<tr>
+<td>外挂影响</td>
+<td>大，客户端拥有所有信息，透视类外挂影响严重</td>
+<td>小，服务器可做视野剔除等处理</td>
+</tr>
+<tr>
+<td>开发特征</td>
+<td>平时开发高效，不需要前后端联调；但是开发时要保证各模块确定性，不同步BUG出现，难以排查</td>
+<td>平时开发效率一般，需要前后端联调，无不同步BUG</td>
+</tr>
+<tr>
+<td>第三方库影响</td>
+<td>大，第三方库需要确保确定性</td>
+<td>小，第三方库不需要确保确定性</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<h2 id="网络拓扑结构（Network-Topology）"><a href="#网络拓扑结构（Network-Topology）" class="headerlink" title="网络拓扑结构（Network Topology）"></a>网络拓扑结构（Network Topology）</h2><ul>
+<li><p>分类</p>
+<ul>
+<li>对等结构<ul>
+<li>P2P结构（Peer to Peer）</li>
+</ul>
+</li>
+<li>主从结构<ul>
+<li>CS结构（Client-Server）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>共同</p>
+<ul>
+<li>网络时延的评估标准<ul>
+<li>Ping<ul>
+<li>概念：网络连接的两个端之间的信号在网络传输所花费的时间。</li>
+<li>例：从A端发出信号开始计时，到B端响应并立刻返回响应信号，A端收到响应后停止计时，该时长为Ping。</li>
+</ul>
+</li>
+<li>RTT（Round Trip Time）<ul>
+<li>概念：一般可认为等于Ping，但此处 RTT = Ping +  两个端的处理信号前等待时间 + 两个端处理信号的时间，即 实际体验到的游戏时延。</li>
+<li>例：A端逻辑发出信号开始计时，在A端等待一段时间、处理一段时间；发出到B端，在B端等待一段时间、处理一段时间；处理发出响应信号；再次在B端等待一段时间、处理一段时间；发出到A端，再次等待一段时间、处理一段时间；A端逻辑收到响应信号，停止计时；该时长为RTT。</li>
+</ul>
+</li>
+<li>标准（单位 ms）<ul>
+<li>极好：&lt;= 20</li>
+<li>优秀：21 ~ 50</li>
+<li>正常：51 ~ 100</li>
+<li>差：101 ~ 200</li>
+<li>极差：&gt;= 201</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>丢包率<ul>
+<li>原因： 直接原因是由于 无线网络 和 拥塞控制，根本原因比较复杂。</li>
+<li>标准：<ul>
+<li>优秀：&lt;= 2%</li>
+<li>一般：2% ~ 10%</li>
+<li>差：&gt;= 10%</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对比</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>P2P结构</th>
+<th>CS结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>样式</td>
+<td>全连接的网状结构</td>
+<td>星状结构</td>
+</tr>
+<tr>
+<td>连接数</td>
+<td>O(n^2)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>流量</td>
+<td>各客户端相等，均为 O(n^2)</td>
+<td>服务器为 O(n)，客户端为 O(1)</td>
+</tr>
+<tr>
+<td>客户端间的时延</td>
+<td>较小，为RTT/2</td>
+<td>较大，为RTT</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="广义"><a href="#广义" class="headerlink" title="广义"></a>广义</h2><p>广义上来说，游戏采用的技术是：</p>
+<ul>
+<li>网络传输协议： KCP &amp; TCP</li>
+<li>网络同步模型： 帧同步</li>
+<li>网络拓扑结构： CS结构</li>
+</ul>
+<p>图例</p>
+<p><img src="/images/sync_FrameProcess.png" alt="帧同步流程"></p>
+<p><br></p>
+<p><br></p>
+<h2 id="狭义"><a href="#狭义" class="headerlink" title="狭义"></a>狭义</h2><p>关联类</p>
+<ul>
+<li>同步管理类</li>
+<li>联网战斗数据缓存类</li>
+<li>联网战斗场景类</li>
+</ul>
+<p><br></p>
+<h3 id="同步管理类"><a href="#同步管理类" class="headerlink" title="同步管理类"></a>同步管理类</h3><p>功能</p>
+<ul>
+<li>同步帧的操作的处理<ul>
+<li>添加</li>
+<li>处理</li>
+<li>执行</li>
+<li>修正</li>
+</ul>
+</li>
+<li>对玩家操作的处理<ul>
+<li>收集</li>
+<li>上传</li>
+<li>吞噬</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="联网战斗数据缓存类"><a href="#联网战斗数据缓存类" class="headerlink" title="联网战斗数据缓存类"></a>联网战斗数据缓存类</h3><p>功能</p>
+<ul>
+<li>提供联网战斗通用数据模型<ul>
+<li>解析玩家数据</li>
+</ul>
+</li>
+<li>客户端与战斗服交互的中枢<ul>
+<li>发往战斗服消息，均由此统一发送</li>
+<li>收到战斗服的消息，处理后转发给其他业务类</li>
+</ul>
+</li>
+<li>断线重连相关处理<ul>
+<li>追帧相关</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="联网战斗场景类"><a href="#联网战斗场景类" class="headerlink" title="联网战斗场景类"></a>联网战斗场景类</h3><p>功能</p>
+<ul>
+<li>处理联网战斗基础场景流程、方法<ul>
+<li>房间状态切换流程</li>
+<li>创建角色数据及实体</li>
+<li>传送逻辑</li>
+</ul>
+</li>
+<li>实现本地战斗与联网战斗切换</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="为什么采用帧同步"><a href="#为什么采用帧同步" class="headerlink" title="为什么采用帧同步"></a>为什么采用帧同步</h2><ol>
+<li>游戏的核心逻辑在客户端实现，服务器只负责转发验证等</li>
+<li>游戏类型及形式，动作类、房间为单位；更适合用帧同步</li>
+<li>开发速度快，周期短</li>
+</ol>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="重点处理"><a href="#重点处理" class="headerlink" title="重点处理"></a>重点处理</h1><p>如同帧同步的简介中介绍，要保证 输出的一致性，先要确保输入、过程、运算的一致性。</p>
+<p><br></p>
+<h2 id="浮点数与定点数-运算一致性"><a href="#浮点数与定点数-运算一致性" class="headerlink" title="浮点数与定点数  [运算一致性]"></a>浮点数与定点数  [运算一致性]</h2><p>浮点数的运算在不同的操作系统，甚至不同的机器上算出来的结果都是有精度差异的。</p>
+<p>一般解决该类问题方法：</p>
+<ul>
+<li>使用定点数</li>
+<li>使用分数</li>
+</ul>
+<p>这里主要麻烦点在于lua支持定点数，lua中的小数是double，需要把lua源码中的基础小数全部替换为定点数。</p>
+<p>然后，物理引擎的计算，第三方库的引用（比如随机数），都需要使用定点数。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="确定的-随机数机制-运算一致性"><a href="#确定的-随机数机制-运算一致性" class="headerlink" title="确定的 随机数机制  [运算一致性]"></a>确定的 随机数机制  [运算一致性]</h2><p>确定的随机数机制就是保证各个客户端一旦用到随机数，随机出来的值必须是一样的。</p>
+<p>得益于计算机的伪随机，通过设定同样的随机种子即可实现。</p>
+<p>但是，在客户端内，需要明确区分随机数的类型</p>
+<ul>
+<li>战斗类<ul>
+<li>设计战斗的实体、BUFF、技能 等等</li>
+</ul>
+</li>
+<li>非战斗类<ul>
+<li>主要是显示项的随机，比如 loading期间的 tip选择</li>
+</ul>
+</li>
+</ul>
+<p>这里，为了更明确区分，在客户端做了一层封装：</p>
+<ul>
+<li>AEUtil:GRandom，战斗类的随机数方法</li>
+<li>AEUtil:UIRandom，非战斗类的随机数方法</li>
+</ul>
+<p>做好区分，也便于相关日志的打印。</p>
+<p>使用战斗类随机数模块：</p>
+<ul>
+<li>AI</li>
+<li>行为树</li>
+<li>相机</li>
+<li>技能、BUFF、特殊能力</li>
+<li>实体相关</li>
+<li>地图相关</li>
+</ul>
+<p>使用 非战斗类 随机数模块：</p>
+<ul>
+<li>UI界面</li>
+<li>外挂检测</li>
+<li>数据收集</li>
+<li>音乐音效</li>
+</ul>
+<p>当然，也不是绝对的，比如实体相关的有些可以不用战斗类随机数，比如NPC弹出个对话，也是纯显示性的。这里是为了好区分，方便开发，一刀切了。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="确定的-容器及算法-过程一致性"><a href="#确定的-容器及算法-过程一致性" class="headerlink" title="确定的 容器及算法  [过程一致性]"></a>确定的 容器及算法  [过程一致性]</h2><ul>
+<li>对于lua语言，不要用 pairs 方式遍历，要用 ipairs，也相应就要求容器必须是数组</li>
+<li>所有用到的算法，必须是 <strong>稳定</strong> 的算法</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="隔离与封装-逻辑层-过程一致性"><a href="#隔离与封装-逻辑层-过程一致性" class="headerlink" title="隔离与封装 逻辑层  [过程一致性]"></a>隔离与封装 逻辑层  [过程一致性]</h2><p>所有模块都可以分为 draw 与 update 两部分</p>
+<ul>
+<li>draw 进行绘制，走本地绘制帧更新</li>
+<li>update 进行逻辑计算，走逻辑帧更新，可被帧同步接管</li>
+</ul>
+<p>实现帧同步尤其需要对 逻辑层的数据进行封装与隔离</p>
+<p>以位移组件为例：</p>
+<ul>
+<li>位移组件有两套坐标<ul>
+<li>逻辑坐标</li>
+<li>渲染坐标</li>
+</ul>
+</li>
+<li>人物的行走都是通过逻辑坐标计算，渲染坐标是在渲染帧的时候，将当前渲染坐标与逻辑坐标进行比较，再用差值平滑过渡</li>
+</ul>
+<p>同理的还有：</p>
+<ul>
+<li>碰撞框的计算</li>
+<li>各组件</li>
+<li>各实体</li>
+</ul>
+<p>做好分离，也便于之后做快照相关的优化。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="支持本地战斗"><a href="#支持本地战斗" class="headerlink" title="支持本地战斗"></a>支持本地战斗</h2><p>创建联网战斗场景基类继承自单人战斗场景基类，用来统一控制联网相关的特殊操作，如 传送，协议交互 等。</p>
+<p>然后，设置本地战斗变量，用来进行控制，若是本地战斗，交由基类处理。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="同步模式-及-处理帧策略-过程一致性"><a href="#同步模式-及-处理帧策略-过程一致性" class="headerlink" title="同步模式 及 处理帧策略  [过程一致性]"></a>同步模式 及 处理帧策略  [过程一致性]</h2><h3 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h3><ul>
+<li>服务器： 固定推帧    30帧/秒</li>
+<li>客户端： <ol>
+<li>30帧/秒，每次执行一次处理帧</li>
+<li>60帧/秒，每次执行一次处理帧</li>
+<li>30帧/秒，每次执行一次处理帧，绘制帧到来时，若有帧积压，再执行一次处理帧</li>
+</ol>
+</li>
+</ul>
+<p><br></p>
+<h3 id="处理帧策略"><a href="#处理帧策略" class="headerlink" title="处理帧策略"></a>处理帧策略</h3><p>每次执行一次处理帧操作，具体释放帧数量</p>
+<ol>
+<li>释放1帧</li>
+<li>逐步释放帧<ul>
+<li>累计帧数 &lt; 2帧，释放1帧</li>
+<li>累计帧数 &lt; 5帧，释放2帧</li>
+<li>累计帧数 &lt; 10帧，释放3帧</li>
+<li>累计帧数 &gt;= 10帧，释放所有帧</li>
+</ul>
+</li>
+<li>可变释放帧<ul>
+<li>释放帧数量由 PlayFrameScale 变量控制，可 加速/减速 播放（一般用于处理回放）</li>
+</ul>
+</li>
+<li>释放全部帧</li>
+</ol>
+<p><br></p>
+<p><br></p>
+<h2 id="断线重连"><a href="#断线重连" class="headerlink" title="断线重连"></a>断线重连</h2><p>断线重连，主要由 联网战斗数据缓存类负责。</p>
+<ol>
+<li>从服务器中获取重连过程中的战斗帧</li>
+<li>进入 追帧模式进行追帧，在追帧模式中，服务器发来的推送帧会被缓存起来</li>
+<li>追帧完毕后，退出追帧模式；并将追帧期间的 服务器推送帧压入 同步管理器中</li>
+</ol>
+<p><img src="/images/sync_reconnect.png" alt="断线重连"></p>
+<p><br></p>
+<p><br></p>
+<h2 id="同步校验"><a href="#同步校验" class="headerlink" title="同步校验"></a>同步校验</h2><p>验证多个客户端是否同步，主要依赖于随机数及调用随机数的位置。</p>
+<p>在联网战斗运行时，会将使用的随机数都打印出来，由于我们随机种子一致，所调用的随机数序列也应该是一致的，辅助以调用随机数的位置信息，战斗结束后对不同客户端的随机种子文件日志比对，可以校验同步。</p>
+<p>我处理这块的方式是使用两个日志文件，</p>
+<ul>
+<li>一个用来做同步校验：大部分内容是 使用随机数的模块 + 随机数范围 + 最终生成的随机数，还有一些必然一致的过程日志。</li>
+<li>另一个用来做同步排查：包含更详细的日志信息</li>
+</ul>
+<p>两场战斗结束后，用对比工具比较日志，一旦有差异，用更详细的日志信息，进行排查。</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="优化项"><a href="#优化项" class="headerlink" title="优化项"></a>优化项</h1><p>联网战斗同步向来不是一个做完就行的东西，而且也没有一套东西，在各个类型游戏通吃的情况。</p>
+<p>所以，在实现完基础的同步架构后，还有很长的路要走。</p>
+<p>目前只是搭建了一个基础的框架，要真正投入还有下面这些优化项可以做。</p>
+<p>下面这些东西，有些已经做了，有些正在做，有些是一些设想，即将做的；欢迎各位伙伴一起来讨论。</p>
+<p><br></p>
+<h2 id="快照的支持"><a href="#快照的支持" class="headerlink" title="快照的支持"></a>快照的支持</h2><p>在帧同步基础上，进行优化；就是 帧同步+快照 的模式。</p>
+<p>其实已经不属于帧同步了，偏向状态同步。</p>
+<p>快照作用就是将整个现场备份，缺点是数据量过大。</p>
+<p>但是，我们以房间为单位的战斗，尤其适合 帧同步+快照；因为有明确的划分单位；并且房间初始，很多东西都是不需要存储的。</p>
+<ul>
+<li>房间内的快照，所有实体的状态（怪物、NPC、传送门 等等），HP、EP、受损状态 等等</li>
+<li>房间间的快照，实体都是初始创建，且实体的创建是不通过帧的，可以本地处理</li>
+</ul>
+<p>这三者区别，</p>
+<ul>
+<li><p>帧同步 =&gt; 没有进度条的播放器；想要看到第6分30秒的内容，必须从头开始看</p>
+</li>
+<li><p>状态同步 =&gt; 有进度条的播放器；知道时间，就可以直接切到相应时间开始播放</p>
+</li>
+<li><p>帧同步+快照 =&gt; 有进度条，但单位是5分钟；要看 6分30秒的内容，不需要从头看，但是也要从第5分钟开始播放，直到6分30秒</p>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>帧同步的安全性也是一个重大的问题，可以分为几大部分。</p>
+<ol>
+<li><p>客户端的安全模块，游戏的核心战斗逻辑演算都在客户端进行，所以对于数据的加密，防篡改等都是由安全模块统一处理。</p>
+</li>
+<li><p>网络模块，对于网络层的外挂，由底层网络模块的加密等处理。</p>
+</li>
+<li><p>联网战斗系统的防外挂模块</p>
+<p>基础的几个方案</p>
+<ul>
+<li>每隔一段时间，进行玩家信息收集并上传（如血量、技能使用、buff使用），出现结算不一致，由服务器裁决，可以解决部分外挂</li>
+<li>服务器新开一个“客户端”，在那个客户端上跑所有的帧，作为评判依据。</li>
+<li>等等</li>
+</ul>
+</li>
+</ol>
+<p>防外挂这个东西，就是魔高一尺，道高一丈，不断优化，不断调整的过程，有些东西也不好讲太细，只能说个大概。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="不同步的处理"><a href="#不同步的处理" class="headerlink" title="不同步的处理"></a>不同步的处理</h2><p>解决不同步问题，也是帧同步方案的一大痛点。</p>
+<p>对于不同步的处理，可以分为三个部分：发现 -&gt; 重现 -&gt; 解决</p>
+<p>作为开发，应该深有感触，如果方便重现，那解决问题就很简单了。</p>
+<p>下面的处理方式都是针对传统的不同步处理各个步骤，进行优化设想。</p>
+<p>一般出现不同步： 发现不同步 -&gt; 打开日志开关 -&gt; 使用同样的数据源 -&gt; 复现问题 -&gt; 解决问题</p>
+<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><p>发现不同步，最简单粗暴的方式，肯定是人力跑，没有技术成本，纯跑…</p>
+<p>但是，缺点很多：</p>
+<ul>
+<li>人力不足</li>
+<li>时间不足</li>
+<li>不够全面</li>
+<li>不方便收集日志</li>
+<li>不能体现技术实力</li>
+<li>等等等等</li>
+</ul>
+<p>所以，需要一种自动化的测试工具，来进行大量全面的测试。</p>
+<p>目前打算是使用 python + jenkins 来部署自动化测试流水线，等测试完，再单独来说一说。</p>
+<p><br></p>
+<h3 id="重现"><a href="#重现" class="headerlink" title="重现"></a>重现</h3><p>重现不同步，也是很重要的一个步骤，能完美重现，那距离解决就不远了。</p>
+<p>这里预期采用的方案是，固定数据源 + 回放机制。</p>
+<ul>
+<li><p>固定数据源</p>
+<p>需要和服务器配合，服务器需要存储参战玩家信息及帧内容，便于回放。</p>
+<p>前期可以全部存储，但是这样服务器压力会比较大；后期可以将本地战斗产生的同步文件形成MD5，发给服务器；服务器判断各客户端MD5不同，采取缓存录像。</p>
+</li>
+<li><p>回放机制</p>
+<p>需要客户端实现一套根据帧内容回放机制，理论上来讲帧同步的回放还是比较好实现的。</p>
+<p>毕竟 确定的输入，确定的运算，确定的过程，都与时间无关联，可以得到确定的输出。</p>
+<p>但是，我们需要的是日志文件，所以绘制帧内容可以忽略掉，尽量做到逻辑帧的播放，这样在时间上也会更快。</p>
+</li>
+</ul>
+<p><br></p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>解决不同步问题，那就相对简单很多了。</p>
+<p>实现了上面的发现 与 重现，可以无数次反复执行不同步数据源，验证是否解决也很便捷。</p>
+<p><br></p>
+<h3 id="运行过程中的日志收集"><a href="#运行过程中的日志收集" class="headerlink" title="运行过程中的日志收集"></a><em>运行过程中的日志收集</em></h3><p>这应该属于发现不同步的部分。</p>
+<p>在实际项目中，日志的实现都是比较粗暴的，一般来说线上运行的模块，都不会开启日志文件。因为一般日志文件都会比较大，尤其是查同步问题的日志文件，涉及模块繁多，产生文件体积大。</p>
+<p>所以，线上出不同步问题，往往也很难复现并解决，就是无法固定数据源。（不产生校验文件，就不能上传MD5，不能传MD5，服务器无法判断是否不同步，就不会缓存）</p>
+<p>如果有一套性能损耗小一些的日志收集系统，会对同步问题的解决有很大的帮助，</p>
+<p>正好最近看到了 《腾讯游戏开发精粹》- 第六部分 - 第14章 - 一种高效的帧同步全过程日志输出方案 。</p>
+<p>上面的方案也对我有一些启发，之后可以去实验一下。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="延迟处理"><a href="#延迟处理" class="headerlink" title="延迟处理"></a>延迟处理</h2><p>在实际测验中，会有玩家反馈卡顿情况。</p>
+<p>延迟、卡顿的玩家体验，一般可以分为：</p>
+<ul>
+<li>延迟高</li>
+<li>波动大</li>
+</ul>
+<p>而且，不同游戏类型对延迟的敏感度也不同，现在实现的这种偏格斗类型的游戏，对延迟敏感度还是比较高的。</p>
+<p>再者，传统帧同步的处理，逻辑上就是比本地操作要慢一帧：</p>
+<p>A帧操作 -&gt; B帧上传 -&gt; C帧执行</p>
+<p>B ≥ A，C ≥ B+1</p>
+<p>最终，还是要用数据来验证延迟的具体位置，可以按照下流程打时间戳，再收集各个数据，来分析并解决延迟与卡顿：</p>
+<p><img src="/images/sync_dataCollect.png" alt="同步帧数据收集流程"></p>
+<p>这里列出几个方向：</p>
+<ul>
+<li>玩家的位置</li>
+<li><p>玩家的机型</p>
+</li>
+<li><p>战斗的时间</p>
+</li>
+<li>玩家的运营商</li>
+</ul>
+<p>数据收集的选项：</p>
+<ul>
+<li>最小值</li>
+<li>最大值</li>
+<li>平均值</li>
+<li>波动值</li>
+</ul>
+<p>这里还要注意设置阈值，防止某个异常操作，导致数据不准确，拉高或拉低平均值。</p>
+<p>甚至可以设置一些字段，来做筛选剔除异常数据。</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h1><h2 id="不信推送，相信帧"><a href="#不信推送，相信帧" class="headerlink" title="不信推送，相信帧"></a>不信推送，相信帧</h2><p>推送缺点</p>
+<ul>
+<li>每个客户端处理的时机不同<ul>
+<li>收到的时机：服务器 推送A，再推送B；对于客户端肯定是先收到A，再收到B</li>
+<li>处理的时机：由于各客户端阻塞状态等，每个客户端处理推送时机是不一致的</li>
+</ul>
+</li>
+<li>推送可能丢失</li>
+<li>推送内容，不支持在回放中处理</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>玩家复活</li>
+<li>玩家掉线，删除角色</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="逻辑帧的更新流程是确定的"><a href="#逻辑帧的更新流程是确定的" class="headerlink" title="逻辑帧的更新流程是确定的"></a>逻辑帧的更新流程是确定的</h2><p>游戏进行过程中，所有的相关模块：</p>
+<ul>
+<li><p>实体管理器</p>
+</li>
+<li><p>场景管理器</p>
+</li>
+<li><p>碰撞管理器</p>
+</li>
+<li><p>摄像机管理器</p>
+</li>
+<li><p>等等</p>
+</li>
+</ul>
+<p>这些模块的更新，都是固定顺序执行，所有参数都是确定的，所用随机都是指定随机方法</p>
+<p>需要客户端同步的东西，必须通过帧来驱动。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="同步的实质"><a href="#同步的实质" class="headerlink" title="同步的实质"></a>同步的实质</h2><p>同步，就像一个管理器，它的策略项设计项不难，难点主要在于管理的各个模块的内部实现。因为一场战斗涉及的模块很多，只要有一个模块实现有不同步的地方，整场战斗就不同步了。</p>
+<p>在到后期查找不同步原因，也往往是去排查下属模块的实现，可能就是在于遍历方式，随机数的使用，逻辑帧绘制帧等。</p>
+<p>主要还是要求：</p>
+<ul>
+<li>实现同步下属模块的责任人，有联网战斗的意识，尽量的不使用本地数据，能区分出哪些代码可以使用绘制帧的更新，哪些坚决不允许使用绘制帧的更新。</li>
+<li>做同步的责任人，对各个下属模块的涉猎广泛，不能只做完同步就可以了，还需要辅助下属模块进行不同步的排查。</li>
+</ul>
+<p>解决这个问题的方向：</p>
+<ul>
+<li>让所有实现模块的人都有联网战斗的意识，对整个逻辑帧绘制帧等更新都有概念。（难度很大）</li>
+<li>实现自动化同步测试，在发现不同步问题，辅助去定位解决。</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<hr>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/56923109" target="_blank" rel="noopener">DonaldW-网络游戏同步技术概述</a></li>
+<li><a href="https://github.com/skywind3000/kcp" target="_blank" rel="noopener">KCP - A Fast and Reliable ARQ Protocol</a>、</li>
+<li>《腾讯游戏开发精粹》</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2019/09/21/联网战斗同步实现/" title="联网战斗同步实现">http://www.lt-tree.com/2019/09/21/联网战斗同步实现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/抽空写/" rel="tag"><i class="fa fa-tag"></i> 抽空写</a>
+          
+            <a href="/tags/想就做/" rel="tag"><i class="fa fa-tag"></i> 想就做</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/21/科学上网/" rel="next" title="科学上网">
+                <i class="fa fa-chevron-left"></i> 科学上网
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#现状"><span class="nav-number">2.1.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络传输协议（Network-Transport-Protocol）"><span class="nav-number">2.2.</span> <span class="nav-text">网络传输协议（Network Transport Protocol）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络同步模型（Network-Model）"><span class="nav-number">2.3.</span> <span class="nav-text">网络同步模型（Network Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络拓扑结构（Network-Topology）"><span class="nav-number">2.4.</span> <span class="nav-text">网络拓扑结构（Network Topology）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义"><span class="nav-number">3.1.</span> <span class="nav-text">广义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#狭义"><span class="nav-number">3.2.</span> <span class="nav-text">狭义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步管理类"><span class="nav-number">3.2.1.</span> <span class="nav-text">同步管理类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联网战斗数据缓存类"><span class="nav-number">3.2.2.</span> <span class="nav-text">联网战斗数据缓存类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联网战斗场景类"><span class="nav-number">3.2.3.</span> <span class="nav-text">联网战斗场景类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么采用帧同步"><span class="nav-number">3.3.</span> <span class="nav-text">为什么采用帧同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重点处理"><span class="nav-number">4.</span> <span class="nav-text">重点处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数与定点数-运算一致性"><span class="nav-number">4.1.</span> <span class="nav-text">浮点数与定点数  [运算一致性]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定的-随机数机制-运算一致性"><span class="nav-number">4.2.</span> <span class="nav-text">确定的 随机数机制  [运算一致性]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定的-容器及算法-过程一致性"><span class="nav-number">4.3.</span> <span class="nav-text">确定的 容器及算法  [过程一致性]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离与封装-逻辑层-过程一致性"><span class="nav-number">4.4.</span> <span class="nav-text">隔离与封装 逻辑层  [过程一致性]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持本地战斗"><span class="nav-number">4.5.</span> <span class="nav-text">支持本地战斗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步模式-及-处理帧策略-过程一致性"><span class="nav-number">4.6.</span> <span class="nav-text">同步模式 及 处理帧策略  [过程一致性]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步模式"><span class="nav-number">4.6.1.</span> <span class="nav-text">同步模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理帧策略"><span class="nav-number">4.6.2.</span> <span class="nav-text">处理帧策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断线重连"><span class="nav-number">4.7.</span> <span class="nav-text">断线重连</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步校验"><span class="nav-number">4.8.</span> <span class="nav-text">同步校验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化项"><span class="nav-number">5.</span> <span class="nav-text">优化项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#快照的支持"><span class="nav-number">5.1.</span> <span class="nav-text">快照的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全性"><span class="nav-number">5.2.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同步的处理"><span class="nav-number">5.3.</span> <span class="nav-text">不同步的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发现"><span class="nav-number">5.3.1.</span> <span class="nav-text">发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重现"><span class="nav-number">5.3.2.</span> <span class="nav-text">重现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">5.3.3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行过程中的日志收集"><span class="nav-number">5.3.4.</span> <span class="nav-text">运行过程中的日志收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟处理"><span class="nav-number">5.4.</span> <span class="nav-text">延迟处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感悟"><span class="nav-number">6.</span> <span class="nav-text">感悟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不信推送，相信帧"><span class="nav-number">6.1.</span> <span class="nav-text">不信推送，相信帧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑帧的更新流程是确定的"><span class="nav-number">6.2.</span> <span class="nav-text">逻辑帧的更新流程是确定的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步的实质"><span class="nav-number">6.3.</span> <span class="nav-text">同步的实质</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
