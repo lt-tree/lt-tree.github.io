@@ -72,6 +72,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
 
 
 
@@ -485,9 +487,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/07/17/TreeHouse装修指南之工具/" itemprop="url">
+            <a class="post-title-link" href="/2018/07/17/TreeHouse装修指南之菜单/" itemprop="url">
               
-                <span itemprop="name">TreeHouse装修指南之工具</span>
+                <span itemprop="name">TreeHouse装修指南之菜单</span>
               
             </a>
         
@@ -513,9 +515,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/07/17/TreeHouse装修指南之菜单/" itemprop="url">
+            <a class="post-title-link" href="/2018/07/17/TreeHouse装修指南之工具/" itemprop="url">
               
-                <span itemprop="name">TreeHouse装修指南之菜单</span>
+                <span itemprop="name">TreeHouse装修指南之工具</span>
               
             </a>
         
@@ -614,6 +616,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -731,6 +740,12 @@
       </div>
     
 
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
     
 
   </div>
@@ -983,6 +998,43 @@
   
 
   
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
   
 
   
