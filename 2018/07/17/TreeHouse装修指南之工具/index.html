@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 工具相关">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-12T16:54:03.962Z">
+<meta property="og:updated_time" content="2020-04-12T16:55:56.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TreeHouse装修指南之工具">
 <meta name="twitter:description" content="本文章讲述了TreeHouse由无到有, 不断开枝散叶的过程。（通俗点说，就是hexo的相关搭建及应用的各效果的实现） 工具相关">
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,955 字
+                  1,976 字
                 </span>
               
 
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -508,9 +508,9 @@
 <h2 id="修改底部图标"><a href="#修改底部图标" class="headerlink" title="修改底部图标"></a>修改底部图标</h2><p>路径：/themes/next/layout/_partials/footer.swig</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">目标内容：</span><br><span class="line">  &lt;span class=&quot;with-love&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;fa fa-&#123;&#123; theme.footer.icon &#125;&#125;&quot;&gt;&lt;/i&gt;</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">修改为：</span><br><span class="line">&lt;span class=&quot;with-love&quot; id=&quot;animate&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;fa fa-heart&quot;&gt;&lt;/i&gt;</span><br><span class="line">  &lt;/span&gt;</span><br></pre></td></tr></table></figure>
 <p>后面的 fa-heart 图标可以换成其他的图标，图标库地址：<a href="http://fontawesome.io/icons/" target="_blank" rel="noopener">http://fontawesome.io/icons/</a> </p>
-<h2 id="显示访问量相关"><a href="#显示访问量相关" class="headerlink" title="显示访问量相关"></a>显示访问量相关</h2><p>使用卜算子提供的统计功能：</p>
+<h2 id="显示访问量相关"><a href="#显示访问量相关" class="headerlink" title="显示访问量相关"></a>显示访问量相关</h2><p>使用不蒜子提供的统计功能：（<a href="http://ibruce.info/2015/04/04/busuanzi/" target="_blank" rel="noopener">http://ibruce.info/2015/04/04/busuanzi/</a>）</p>
 <ol>
-<li><p>修改卜算子配置</p>
+<li><p>修改卜算子配置（由于原有域名过期，所以需要更换）</p>
 <ul>
 <li><p>路径：\themes\next\layout_third-party\analytics\busuanzi-counter.swig</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">目标代码：</span><br><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class=&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  </span><br><span class="line">修改为：</span><br><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class=&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
@@ -601,8 +601,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/06/Cocos2d iPhone 边缘触屏延迟现象/" rel="next" title="Cocos2d iPhone 边缘触屏延迟现象">
-                <i class="fa fa-chevron-left"></i> Cocos2d iPhone 边缘触屏延迟现象
+              <a href="/2018/07/17/TreeHouse装修指南之菜单/" rel="next" title="TreeHouse装修指南之菜单">
+                <i class="fa fa-chevron-left"></i> TreeHouse装修指南之菜单
               </a>
             
           </div>
@@ -611,8 +611,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/TreeHouse装修指南之菜单/" rel="prev" title="TreeHouse装修指南之菜单">
-                TreeHouse装修指南之菜单 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/17/TreeHouse装修指南之文章/" rel="prev" title="TreeHouse装修指南之文章">
+                TreeHouse装修指南之文章 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -694,7 +694,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -813,7 +813,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020-04-13</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020-04-19</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
