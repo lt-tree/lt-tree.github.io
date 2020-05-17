@@ -549,9 +549,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/07/17/TreeHouse装修指南之工具/" itemprop="url">
+            <a class="post-title-link" href="/2018/07/17/TreeHouse装修指南之菜单/" itemprop="url">
               
-                <span itemprop="name">TreeHouse装修指南之工具</span>
+                <span itemprop="name">TreeHouse装修指南之菜单</span>
               
             </a>
         
@@ -940,6 +940,28 @@ setInterval("createtime()",250);
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
