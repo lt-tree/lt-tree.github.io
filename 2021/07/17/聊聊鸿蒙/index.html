@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="瞎分析," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我所理解的鸿蒙">
+<meta name="keywords" content="瞎分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊鸿蒙">
+<meta property="og:url" content="http://yoursite.com/2021/07/17/聊聊鸿蒙/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="我所理解的鸿蒙">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2021/07/17/聊聊鸿蒙/聊聊鸿蒙/ape_fwk_all.png">
+<meta property="og:image" content="http://yoursite.com/2021/07/17/聊聊鸿蒙/聊聊鸿蒙/鸿蒙框架结构.png">
+<meta property="og:image" content="http://yoursite.com/2021/07/17/聊聊鸿蒙/聊聊鸿蒙/HAP元程序结构1.png">
+<meta property="og:image" content="http://yoursite.com/2021/07/17/聊聊鸿蒙/聊聊鸿蒙/华为1_8_N.png">
+<meta property="og:updated_time" content="2021-07-18T03:55:23.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊聊鸿蒙">
+<meta name="twitter:description" content="我所理解的鸿蒙">
+<meta name="twitter:image" content="http://yoursite.com/2021/07/17/聊聊鸿蒙/聊聊鸿蒙/ape_fwk_all.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/07/17/聊聊鸿蒙/"/>
+
+
+
+
+
+  <title>聊聊鸿蒙 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/17/聊聊鸿蒙/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">聊聊鸿蒙</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-17T21:11:16+08:00">
+                2021-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/07/17/聊聊鸿蒙/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/07/17/聊聊鸿蒙/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/07/17/聊聊鸿蒙/" class="leancloud_visitors" data-flag-title="聊聊鸿蒙">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,624 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我所理解的鸿蒙</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>鸿蒙问世以来，广受争论，它到底是个什么东西呢？<br>简单的说一下我的理解，本文纯属个人观点，欢迎讨论~</p>
+<p><br></p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>先了解一些简单的概念</p>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>广义上讲：Android是操作系统，包括 AOSP+GMS</p>
+<p>狭义上讲：Android是Android开源项目（即 AOSP）</p>
+<h3 id="AOSP"><a href="#AOSP" class="headerlink" title="AOSP"></a>AOSP</h3><p>AOSP是一个由谷歌维护的开源操作系统开发项目，谷歌引领着大方向和大部分的开发工作。AOSP会定期为Android加入最新的安全补丁，谷歌每年也会在其I/O开发者大会上公布操作系统的新功能。</p>
+<p>作为 AOSP 的主导者，Google 负责 Android 的维护和后续开发工作。虽然 Android 由多个子项目组成，但严格意义上，AOSP 这样只是出于项目管理的需要。我们将 Android 整体视为一个软件产品（而不是可更换部件的“发行版”、规范或集合），并依此原则进行管理。我们希望设备制造商只需将 Android 移植到其设备上，而无需实现一个规范或构建一个“发行版”。</p>
+<p><img src="聊聊鸿蒙/ape_fwk_all.png" alt=""></p>
+<h3 id="CM（编译团队-CyanogenMod）"><a href="#CM（编译团队-CyanogenMod）" class="headerlink" title="CM（编译团队  CyanogenMod）"></a>CM（编译团队  CyanogenMod）</h3><p>CyanogenMod是一个基于开源Android系统，供某些手机使用的二级市场固件，它提供一些在官方Android系统或手机厂商没有提供的功能。</p>
+<ul>
+<li>CM是全球最大的第三方ROM编译团队；CM是基于AOSP进行二次开发，在AOSP的基础上添加功能、适配更多机型、编写众多机型的内核和驱动。</li>
+<li>其他第三方ROM编译团队<ul>
+<li>第三方ROM编译团队，主要是基于CM或使用CM一部分代码（因为CM编写了大量底层驱动和内核，这样更容易适配更多的机型）</li>
+<li>包含但不仅限于：ParanoidAndroid、Slim、Carbon、Omni、PAC、AOSB、AOKP、Mahdi、Purity</li>
+</ul>
+</li>
+</ul>
+<h3 id="GMS（谷歌移动服务-Google-Mobile-Service）"><a href="#GMS（谷歌移动服务-Google-Mobile-Service）" class="headerlink" title="GMS（谷歌移动服务  Google Mobile Service）"></a>GMS（谷歌移动服务  Google Mobile Service）</h3><p>GMS是谷歌的一组应用程序和服务，预先安装在GMS认证的Android设备上。GMS是建立在Android开源项目(AOSP)之上的，这意味着制造商需要获得许可才能在设备上预安装GMS包。此外，来自谷歌的特定包在GMS设备上可用，而AOSP设备不可用。</p>
+<p>AOSP不包含谷歌的软件应用套件，如Chrome浏览器、YouTube，甚至谷歌Play商店。它也不包括谷歌的一些底层技术和API，而这些技术和API可以实现移动支付、语音命令和云存储等功能，这些都是作为谷歌移动服务（GMS）单独授权的。</p>
+<p>任何厂商想要在系统中安装GMS，都必须为自己的设备获得GMS授权和移动应用分发协议（MADA），然后通过多项兼容性测试。有Android兼容性测试套件（CTS）来验证软件和硬件以及API。然后是谷歌移动服务测试套件和供应商测试套件（VTS）来测试多媒体功能、操作系统内核和HAL功能。而获得GMS许可的另一个条件是在新设备上预装一些谷歌的应用。</p>
+<p>GMS包含</p>
+<ul>
+<li>Google Chrome</li>
+<li>Google Search</li>
+<li>YouTube</li>
+<li>Google PlayStore</li>
+<li>Gmail</li>
+<li>Google Drive</li>
+<li>Google Duo</li>
+<li>Google Maps</li>
+<li>Google Photos</li>
+<li>Google Play Music</li>
+<li>Google Play Speech</li>
+</ul>
+<p>商用收费</p>
+<ol>
+<li><p>免费使用Android操作系统，但不内嵌GMS；</p>
+</li>
+<li><p>内嵌部分GMS服务，但手机不能打上谷歌的商标；</p>
+</li>
+<li><p>内嵌所有的GMS服务，也可以使用谷歌商标。如果在android手机中内置有谷歌GMS服务的话，是等同被谷歌官方认证过的产品。</p>
+</li>
+</ol>
+<h2 id="IoT（物联网-Internet-of-Things）"><a href="#IoT（物联网-Internet-of-Things）" class="headerlink" title="IoT（物联网  Internet of Things）"></a>IoT（物联网  Internet of Things）</h2><p>物联网是指通过各种信息传感器、射频识别技术、全球定位系统、红外感应器、激光扫描器等各种装置与技术，实时采集任何需要监控、 连接、互动的物体或过程，采集其声、光、热、电、力学、化 学、生物、位置等各种需要的信息，通过各类可能的网络接入，实现物与物、物与人的泛在连接，实现对物品和过程的智能化感知、识别和管理。物联网是一个基于互联网、传统电信网等的信息承载体，它让所有能够被独立寻址的普通物理对象形成互联互通的网络。</p>
+<h2 id="HarmonyOS"><a href="#HarmonyOS" class="headerlink" title="HarmonyOS"></a>HarmonyOS</h2><p>华为智能终端操作系统（鸿蒙操作系统），是华为研发的面向万物互联时代的全新的、独立的智能终端操作系统，为不同设备的智能化、互联与协同提供统一语言。</p>
+<p>总的来说，鸿蒙更像是一个生态，在不同的领域代表不同的东西，最终是为万物互联的时代，提供一个基础通用的平台，让各种设备之间的交互更加便捷。</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="猜想"><a href="#猜想" class="headerlink" title="猜想"></a>猜想</h1><h2 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h2><p>要知道一个东西的出现，先要知道它的起因，它的需求，它的背景。</p>
+<p>首先是操作系统的演化，从PC端到移动端到未来的万物互联的时代，明显是一个大势，从这一点来说，是在为下一个风口做储备</p>
+<ol>
+<li>PC，Windows + Mac OS</li>
+<li>移动互联，Android + iOS</li>
+<li>万物互联时代 IoT</li>
+</ol>
+<p>目前，移动互联时代，市场量最大的操作系统Android，主导者是Google，虽然说Android提倡开源、免费等，但是实际上，各大厂商受到了很多的限制。（可见 谷歌与欧盟的抗争）</p>
+<ul>
+<li>目前安卓阵营各厂商并不只是使用了免费的AOSP，还使用了谷歌发布的收费的GMS以及谷歌的各类APP。</li>
+<li>虽然国内手机可以不使用谷歌app，但是由于早期GMS属于AOSP，因此大量的安卓App依赖了GMS的许多功能接口，随着后期谷歌把大批GMS代码从AOSP项目移出转为收费GMS，所以谷歌几乎控制了整个安卓生态。这也是为什么安卓标榜是免费开源项目而所有厂商都离不开谷歌的核心原因</li>
+</ul>
+<p>再加上，各国最近对中国互联网行业的一些制裁等。</p>
+<p><br></p>
+<p><br></p>
+<h2 id="做什么"><a href="#做什么" class="headerlink" title="做什么"></a>做什么</h2><h3 id="发布会宣传点"><a href="#发布会宣传点" class="headerlink" title="发布会宣传点"></a>发布会宣传点</h3><p>总结</p>
+<ul>
+<li>多设备兼容：不同设备 一个系统</li>
+<li>软总线</li>
+<li>分布式技术：打破硬件边界 一拉即合</li>
+<li>原子化服务：无需安装 自由流转</li>
+<li>卡片设计：万物互联时代的统一语言</li>
+<li>通信安全</li>
+</ul>
+<p>三大特征</p>
+<ul>
+<li>可以满足大大小小设备需求，实现统一OS，弹性部署</li>
+<li>搭载该操作系统的设备在系统层面融为一体、形成超级终端，让设备的硬件能力可以弹性扩展，实现设备之间硬件互助，资源共享</li>
+<li>面向开发者，实现一次开发，多端部署</li>
+</ul>
+<h3 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h3><p><img src="聊聊鸿蒙/鸿蒙框架结构.png" alt=""></p>
+<h3 id="应用结构"><a href="#应用结构" class="headerlink" title="应用结构"></a>应用结构</h3><p><img src="聊聊鸿蒙/HAP元程序结构1.png" alt=""></p>
+<h3 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h3><p>手机依旧是实现万物互联最为重要的一个拼图，华为用 1+8+N 战略实现农村包围城市</p>
+<ul>
+<li>1：<ul>
+<li>手机</li>
+</ul>
+</li>
+<li>8：<ul>
+<li>4个大屏入口（平板、车机、PC、智慧屏）</li>
+<li>4个非大屏入口（手表、耳机、AI音响、AR/VR 眼镜）</li>
+</ul>
+</li>
+<li>N：<ul>
+<li>泛IoT硬件构成的智能家居生态</li>
+</ul>
+</li>
+</ul>
+<p><img src="聊聊鸿蒙/华为1_8_N.png" alt=""></p>
+<p><br></p>
+<p><br></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="争论点"><a href="#争论点" class="headerlink" title="争论点"></a>争论点</h2><h3 id="为什么大家对鸿蒙如此苛刻"><a href="#为什么大家对鸿蒙如此苛刻" class="headerlink" title="为什么大家对鸿蒙如此苛刻"></a>为什么大家对鸿蒙如此苛刻</h3><p>国内在计算机基础核心领域缺乏建树，将领域比喻成一棵大树，国内的树枝、树叶都非常繁茂，但是树干、树根却不牢靠。</p>
+<p>国人对此有很大期待，也有部分人辜负了这份期待，出了很多事故（汉芯事件、红芯浏览器事件等），前车之鉴，导致国人对新出的打着自主知识产权的产品，就更加严苛，避免一腔热血付诸东流。</p>
+<h3 id="鸿蒙是不是套壳的android"><a href="#鸿蒙是不是套壳的android" class="headerlink" title="鸿蒙是不是套壳的android"></a>鸿蒙是不是套壳的android</h3><p>鸿蒙在只发布了一个版本的情况下，有些错误提示却是“此应用专为旧版鸿蒙打造，可能无法正常运行…” 与 android的错误提示 “此应用专为旧版 Android 打造，可能无法正常运行…” 不能说完全一样，只能说严丝合缝吧。所以，很多人怀疑是字符串批量替换。（主要还有一部分 P月亮 事件的前科干扰）</p>
+<p>个人观点来看，手机系统是生态很重要的一部分，时间紧任务重的情况，对现有开源内容进行模块化整合，先来补足自身生态最关键的一环，而后再继续优化处理，也是无可厚非的。而且，说了这么多了，如果还在乎是否是android套壳的东西，em….，我建议再多看几遍。</p>
+<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><ul>
+<li>逆势而为，芯片减少，供应减少情况下，推广生态</li>
+<li>企业不合作<ul>
+<li>老企业无法合作，排他协议</li>
+<li>新企业不方便合作，上市麻烦</li>
+</ul>
+</li>
+</ul>
+<h2 id="潜在对手"><a href="#潜在对手" class="headerlink" title="潜在对手"></a>潜在对手</h2><ul>
+<li>Fuchsia OS（Google）</li>
+<li>M1（Apple）</li>
+<li>Windows11 (MicroSoft)</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>鸿蒙，相对于一个操作系统，不如说是一个生态。</p>
+<p>它旨在解决IoT时代的底层操作系统，提供各物联网设备的基础内核。目前看来，物联网设备暂时离不开手机的支持反而手机是很重要的核心，所以鸿蒙也要提供手机操作系统。有了基础共通的内核，加上卡片式应用，通过软总线强化连接，多设备共通，这可能就是鸿蒙所畅想的未来生态。</p>
+<p>开发者，不再需要按设备支持的功能，底层系统而开发不同版本；</p>
+<p>用户，不再需要复杂且繁琐的连接步骤；</p>
+<p>厂商，不再需要为产品挑选所部署系统，对比优缺点，有取舍的选择。</p>
+<p>下面是两段关于鸿蒙的体验视频：</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1xK4y1X79x?p=1&amp;share_medium=android&amp;share_plat=android&amp;share_source=COPY&amp;share_tag=s_i&amp;timestamp=1624332773&amp;unique_k=WEmHIx" target="_blank" rel="noopener">小泽 鸿蒙全家桶体验</a></li>
+<li><a href="https://www.bilibili.com/video/BV16K4y1X7cw?p=1&amp;share_medium=android&amp;share_plat=android&amp;share_source=COPY&amp;share_tag=s_i&amp;timestamp=1624332799&amp;unique_k=DFPZDX" target="_blank" rel="noopener">万物互联是什么</a></li>
+</ul>
+<p>总的来说，先不看如何宣传，过去的各种前科，单看鸿蒙的背景及愿景，也是值得肯定的。或许步子太大，或许还太过空，或许还不够严谨；但它依旧在朝着那目标前进，总要有点梦想，有点希望，不是吗？</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<hr>
+<p>参考</p>
+<ul>
+<li><a href="https://source.android.com/devices/architecture" target="_blank" rel="noopener">https://source.android.com/devices/architecture</a></li>
+<li><a href="https://blog.esper.io/gms-vs-non-gms-for-android" target="_blank" rel="noopener">https://blog.esper.io/gms-vs-non-gms-for-android</a></li>
+<li><a href="https://www.xbxit.com/545" target="_blank" rel="noopener">https://www.xbxit.com/545</a></li>
+<li><a href="https://www.zhihu.com/question/447128093/answer/1759851619" target="_blank" rel="noopener">https://www.zhihu.com/question/447128093/answer/1759851619</a></li>
+<li><a href="https://developer.harmonyos.com/cn/docs/documentation/doc-guides/document-outline-0000001064589184" target="_blank" rel="noopener">https://developer.harmonyos.com/cn/docs/documentation/doc-guides/document-outline-0000001064589184</a></li>
+<li><a href="https://www.zhihu.com/question/374012496/answer/1979909631" target="_blank" rel="noopener">https://www.zhihu.com/question/374012496/answer/1979909631</a></li>
+<li><a href="https://www.zhihu.com/question/374012496" target="_blank" rel="noopener">https://www.zhihu.com/question/374012496</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2021/07/17/聊聊鸿蒙/" title="聊聊鸿蒙">http://www.lt-tree.com/2021/07/17/聊聊鸿蒙/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/瞎分析/" rel="tag"><i class="fa fa-tag"></i> 瞎分析</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/24/2020，苦中乐/" rel="next" title="2020，苦中乐">
+                <i class="fa fa-chevron-left"></i> 2020，苦中乐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">2.1.</span> <span class="nav-text">Android</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOSP"><span class="nav-number">2.1.1.</span> <span class="nav-text">AOSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CM（编译团队-CyanogenMod）"><span class="nav-number">2.1.2.</span> <span class="nav-text">CM（编译团队  CyanogenMod）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GMS（谷歌移动服务-Google-Mobile-Service）"><span class="nav-number">2.1.3.</span> <span class="nav-text">GMS（谷歌移动服务  Google Mobile Service）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoT（物联网-Internet-of-Things）"><span class="nav-number">2.2.</span> <span class="nav-text">IoT（物联网  Internet of Things）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarmonyOS"><span class="nav-number">2.3.</span> <span class="nav-text">HarmonyOS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#猜想"><span class="nav-number">3.</span> <span class="nav-text">猜想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么？"><span class="nav-number">3.1.</span> <span class="nav-text">为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做什么"><span class="nav-number">3.2.</span> <span class="nav-text">做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发布会宣传点"><span class="nav-number">3.2.1.</span> <span class="nav-text">发布会宣传点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#框架结构"><span class="nav-number">3.2.2.</span> <span class="nav-text">框架结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用结构"><span class="nav-number">3.2.3.</span> <span class="nav-text">应用结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式"><span class="nav-number">3.2.4.</span> <span class="nav-text">模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#争论点"><span class="nav-number">4.1.</span> <span class="nav-text">争论点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么大家对鸿蒙如此苛刻"><span class="nav-number">4.1.1.</span> <span class="nav-text">为什么大家对鸿蒙如此苛刻</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鸿蒙是不是套壳的android"><span class="nav-number">4.1.2.</span> <span class="nav-text">鸿蒙是不是套壳的android</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#难点"><span class="nav-number">4.2.</span> <span class="nav-text">难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#潜在对手"><span class="nav-number">4.3.</span> <span class="nav-text">潜在对手</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-07-18</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
