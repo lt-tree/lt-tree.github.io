@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="想就做," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="python脚本，检测不符合规则的文件。">
+<meta name="keywords" content="想就做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小脚本之检测超规文件">
+<meta property="og:url" content="http://yoursite.com/2021/10/29/小脚本之检测超规文件/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="python脚本，检测不符合规则的文件。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-10-30T14:43:51.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小脚本之检测超规文件">
+<meta name="twitter:description" content="python脚本，检测不符合规则的文件。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/10/29/小脚本之检测超规文件/"/>
+
+
+
+
+
+  <title>小脚本之检测超规文件 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/29/小脚本之检测超规文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小脚本之检测超规文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-29T20:51:35+08:00">
+                2021-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/10/29/小脚本之检测超规文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/10/29/小脚本之检测超规文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/10/29/小脚本之检测超规文件/" class="leancloud_visitors" data-flag-title="小脚本之检测超规文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,324 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>python脚本，检测不符合规则的文件。</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>热更工作流的一个问题。<br>美术会交付策划未压缩的图片/视频，策划不检查直接提交，在审核更新资源的时候发现不合规资源，打回美术/策划压缩调整。</p>
+<p>其他问题：</p>
+<ul>
+<li>检查不合规文件，需要开发遍历每条提交记录的文件，并判断是否合规；不同用途的文件是否合规的标准不同</li>
+<li>现有环境下存在一些不合规的文件（之前开发疏忽，已更新到线上环境）</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>不合规文件特点：</p>
+<ul>
+<li>不同用途（文件夹下）的文件，规范不同</li>
+<li>可以通用的根据大小来判断合规性</li>
+<li>部分不合规的文件需要过滤掉（已经在线上了，不需要列出来）</li>
+</ul>
+<p>最终的设计思路：</p>
+<ol>
+<li>遍历所有文件，将超过阈值的文件全部列出</li>
+<li>阈值可以动态调整<ul>
+<li>所属文件夹</li>
+<li>具体文件名</li>
+<li>文件后缀</li>
+</ul>
+</li>
+<li>可以设定缓存文件，若文件在缓存中，可以被过滤，不会列出</li>
+</ol>
+<p>代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">######################################################</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   File: 检查文件大小</span></span><br><span class="line"><span class="comment">#   Version: v0.0.1</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   </span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> join, getsize, isdir, splitext</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##################################################</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">##  一些配置项</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1KB = 1024</span></span><br><span class="line"><span class="comment"># 1MB = 1024 * 1024 = 1048576</span></span><br><span class="line"><span class="comment"># 5MB = 5 * 1024 * 1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认大小(byte, 1KB = 1024b)</span></span><br><span class="line">FILE_DEFAULT_SIZE = <span class="number">1048576</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 特殊大小限制（以文件夹为单位）</span></span><br><span class="line">SPECIAL_FOLDER_SIZE_MAP = &#123;</span><br><span class="line">    <span class="comment"># 'folder path(without \\ suffix)' : size,</span></span><br><span class="line">    <span class="string">'.\\Assets\\asset\\bg'</span> : <span class="number">2097152</span>,         <span class="comment">#2MB</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特殊大小限制（以文件为单位）</span></span><br><span class="line">SPECIAL_FILE_SIZE_MAP = &#123;</span><br><span class="line">    <span class="comment"># 'file path' : size,</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略的文件后缀</span></span><br><span class="line">IGNORE_FILE_SUFFIX_LIST = [</span><br><span class="line">    <span class="comment"># '.suffix',</span></span><br><span class="line">    <span class="string">'.exe'</span>,</span><br><span class="line">    <span class="string">'.dll'</span>,</span><br><span class="line">    <span class="string">'.animxml'</span>,</span><br><span class="line">    <span class="string">'.ttf'</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始路径</span></span><br><span class="line">ORIGINAL_PATH = <span class="string">".\\Assets\\"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 缓存文件</span></span><br><span class="line">STORAGE_FILE_PATH = <span class="string">".\\checkFileSizeTemp.json"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否生成缓存文件</span></span><br><span class="line">IS_GENERATE_STORAGE_FILE = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">needCheckFile</span><span class="params">(file_path, storage_map)</span>:</span></span><br><span class="line">    <span class="string">""" Check is file need to calculate size</span></span><br><span class="line"><span class="string">        1. is file suffix in IGNORE_FILE_SUFFIX_LIST</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        file_path: string</span></span><br><span class="line"><span class="string">            file path(include suffix)</span></span><br><span class="line"><span class="string">        storage_map: map&lt;file_path, file info&gt;</span></span><br><span class="line"><span class="string">            need be ignore file path</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        returns:</span></span><br><span class="line"><span class="string">            boolean: is file need be checked</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    file_cfg = splitext(file_path)</span><br><span class="line">    <span class="keyword">if</span> file_cfg[<span class="number">1</span>] <span class="keyword">in</span> IGNORE_FILE_SUFFIX_LIST:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> file_path <span class="keyword">in</span> storage_map.keys():</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDefaultSize</span><span class="params">(file_path, folder_path)</span>:</span></span><br><span class="line">    <span class="string">""" Get default standard size(byte)</span></span><br><span class="line"><span class="string">        1. get size by SPECIAL_FILE_SIZE_MAP and file path</span></span><br><span class="line"><span class="string">        2. get size by SPECIAL_FOLDER_SIZE_MAP and belong folder</span></span><br><span class="line"><span class="string">        3. get size by FILE_DEFAULT_SIZE direc</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        file_path: string</span></span><br><span class="line"><span class="string">            file path(include suffix)</span></span><br><span class="line"><span class="string">        folder_path: string</span></span><br><span class="line"><span class="string">            folder_path</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        returns:</span></span><br><span class="line"><span class="string">            int: file standrd size(byte)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    size = SPECIAL_FILE_SIZE_MAP.get(file_path)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> size:</span><br><span class="line">        size = SPECIAL_FOLDER_SIZE_MAP.get(folder_path, FILE_DEFAULT_SIZE)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> size</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">notFileSizeStandard</span><span class="params">(file_path, folder_path)</span>:</span></span><br><span class="line">    <span class="string">""" Check is file size standard</span></span><br><span class="line"><span class="string">        compare file size and file standard size</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        file_path: string</span></span><br><span class="line"><span class="string">            file path(include suffix)</span></span><br><span class="line"><span class="string">        folder_path: string</span></span><br><span class="line"><span class="string">            folder_path</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        returns:</span></span><br><span class="line"><span class="string">            boolean: is file size not standard</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    default_size = getDefaultSize(file_path, folder_path)</span><br><span class="line">    file_size = getsize(file_path)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># print(file_path + ' , ' + str(file_size) + ', ' + str(default_size) + '  ==  ' + str(file_size &gt;= default_size))</span></span><br><span class="line">    <span class="keyword">return</span> file_size &gt;= default_size, file_size, default_size</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">walkFolders</span><span class="params">(folder_path, storage_map)</span>:</span></span><br><span class="line">    <span class="string">""" Check is file size standard</span></span><br><span class="line"><span class="string">        compare file size and file standard size</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        folder_path: string</span></span><br><span class="line"><span class="string">            folder_path</span></span><br><span class="line"><span class="string">        storage_map: map&lt;file path, file info&gt;</span></span><br><span class="line"><span class="string">            need be ignore file path</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        returns:</span></span><br><span class="line"><span class="string">            dict[fileInfo]: illegal file info map</span></span><br><span class="line"><span class="string">                dict[fileInfo]</span></span><br><span class="line"><span class="string">                    path: file path</span></span><br><span class="line"><span class="string">                    size: file size</span></span><br><span class="line"><span class="string">                    standard: file standard size</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    illegal_file_map = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> file_path <span class="keyword">in</span> os.listdir(folder_path):</span><br><span class="line">        temp_path = join(folder_path, file_path)</span><br><span class="line">        <span class="keyword">if</span> isdir(temp_path):</span><br><span class="line">            temp_map = walkFolders(temp_path, storage_map)</span><br><span class="line">            illegal_file_map.update(temp_map)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> needCheckFile(temp_path, storage_map):</span><br><span class="line">                notStandard, file_size, standard_size = notFileSizeStandard(temp_path, folder_path)</span><br><span class="line">                <span class="keyword">if</span> notStandard:</span><br><span class="line">                    file_info = &#123;&#125;</span><br><span class="line">                    file_info[<span class="string">"path"</span>] = temp_path</span><br><span class="line">                    file_info[<span class="string">"size"</span>] = file_size</span><br><span class="line">                    file_info[<span class="string">"standard"</span>] = standard_size</span><br><span class="line"></span><br><span class="line">                    illegal_file_map[temp_path] = file_info</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> illegal_file_map</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveStorageFileMap</span><span class="params">(illegal_file_map, storage_file_map)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> IS_GENERATE_STORAGE_FILE:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    storage_file_map.update(illegal_file_map)</span><br><span class="line">    <span class="keyword">with</span> codecs.open(STORAGE_FILE_PATH,<span class="string">'w'</span>, <span class="string">'utf-8'</span>) <span class="keyword">as</span> outf:</span><br><span class="line">        json.dump(storage_file_map, outf, ensure_ascii=<span class="keyword">False</span>)</span><br><span class="line">        outf.write(<span class="string">'\n'</span>)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadStorageFileMap</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isfile(STORAGE_FILE_PATH):</span><br><span class="line">        print(<span class="string">"[WARNING] storage file not exist!"</span>)</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    file_map = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> codecs.open(STORAGE_FILE_PATH, <span class="string">"r"</span>, <span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            temp = json.loads(line)</span><br><span class="line">            file_map.update(temp)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> file_map</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">regularOutputResult</span><span class="params">(illegal_file_map)</span>:</span></span><br><span class="line">    print(<span class="string">"\n\n-- Result: "</span>)</span><br><span class="line">    <span class="keyword">if</span> len(illegal_file_map) &lt;= <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"\n==========&gt; Success! &lt;==========\n\n"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"\n==========&gt; !Error! &lt;=========="</span>)</span><br><span class="line">        print(<span class="string">"==========&gt; !Error! &lt;=========="</span>)</span><br><span class="line">        print(<span class="string">"==========&gt; !Error! &lt;==========\n"</span>)</span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> illegal_file_map.items():</span><br><span class="line">            size = v[<span class="string">'size'</span>] / <span class="number">1024</span></span><br><span class="line">            <span class="keyword">if</span> size / <span class="number">1024</span> &gt; <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">'\t'</span> + k + <span class="string">'  |  '</span> + str(size / <span class="number">1024</span>) + <span class="string">'MB'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">'\t'</span> + k + <span class="string">'  |  '</span> + str(size) + <span class="string">'KB'</span>)</span><br><span class="line"></span><br><span class="line">        print(<span class="string">"\n==========&gt; !Error! &lt;=========="</span>)</span><br><span class="line">        print(<span class="string">"==========&gt; !Error! &lt;=========="</span>)</span><br><span class="line">        print(<span class="string">"==========&gt; !Error! &lt;==========\n"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(dir)</span>:</span></span><br><span class="line">    print(<span class="string">"=================================================="</span>)</span><br><span class="line">    print(<span class="string">"Start"</span>)</span><br><span class="line">    print(<span class="string">"-- Config: "</span>)</span><br><span class="line">    print(<span class="string">"\tOri Path: "</span> + str(dir))</span><br><span class="line">    print(<span class="string">"\tStorage Path: "</span> + str(STORAGE_FILE_PATH))</span><br><span class="line">    print(<span class="string">"\tIs Generate Storage File: "</span> + str(IS_GENERATE_STORAGE_FILE))</span><br><span class="line"></span><br><span class="line">    storage_file_map = loadStorageFileMap()</span><br><span class="line">    <span class="comment"># print(json.dumps(storage_file_map, indent=4, ensure_ascii=False, encoding='utf-8'))</span></span><br><span class="line"></span><br><span class="line">    illegal_file_map = walkFolders(dir, storage_file_map)</span><br><span class="line">    regularOutputResult(illegal_file_map)</span><br><span class="line">    saveStorageFileMap(illegal_file_map, storage_file_map)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main(ORIGINAL_PATH)</span><br></pre></td></tr></table></figure></p>
+<p>使用流程：<br>初次使用：</p>
+<ol>
+<li>找到一个稳定版本，执行缓存模式，缓存当前已在线上的不合规文件</li>
+<li>动态配置一些阈值</li>
+</ol>
+<p>后续使用：</p>
+<ol>
+<li>在合并完资源后，执行脚本</li>
+<li>若存在不合规文件，则列出具体路径，通知策划调整；若无不合规文件，显示Success。</li>
+</ol>
+<p><br><br><br></p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>依旧存在改进的方向。</p>
+<p>按流程来说</p>
+<ol>
+<li>美术原图</li>
+<li>策划修正</li>
+<li>开发检查</li>
+</ol>
+<p>如果出现问题：</p>
+<ol>
+<li>美术原图</li>
+<li>策划修正</li>
+<li>开发检查，不合规，反馈策划</li>
+<li>策划再次修正</li>
+<li>开发检查，合规</li>
+</ol>
+<p>那么，既然我们开发检查的内容可以脚本化，即自动化；那完全可以前置检查，让策划无法提交不合规的文件。<br>这个就涉及到Hook，相关内容可参考文章 SVN之Hook</p>
+<p><br><br><br><br><br><br><br><br><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2021/10/29/小脚本之检测超规文件/" title="小脚本之检测超规文件">http://www.lt-tree.com/2021/10/29/小脚本之检测超规文件/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/想就做/" rel="tag"><i class="fa fa-tag"></i> 想就做</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/10/26/字符集与字符编码/" rel="next" title="字符集与字符编码">
+                <i class="fa fa-chevron-left"></i> 字符集与字符编码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/29/Cocos2d 之 控制台/" rel="prev" title="Cocos2d 之 控制台">
+                Cocos2d 之 控制台 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#起源"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方案"><span class="nav-number">2.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改进"><span class="nav-number">3.</span> <span class="nav-text">改进</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-10-30</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
