@@ -87,16 +87,16 @@
 <meta property="og:site_name" content="Tree House">
 <meta property="og:description" content="SVN之Hook">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_1">
-<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_2">
-<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_3">
-<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_4">
-<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_5">
-<meta property="og:updated_time" content="2021-10-30T14:49:13.502Z">
+<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_1.png">
+<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_2.png">
+<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_3.png">
+<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_4.png">
+<meta property="og:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_5.png">
+<meta property="og:updated_time" content="2021-10-30T15:34:35.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVN之Hook">
 <meta name="twitter:description" content="SVN之Hook">
-<meta name="twitter:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_1">
+<meta name="twitter:image" content="http://yoursite.com/2021/10/30/SVN之Hook/流程_1.png">
 
 
 
@@ -526,11 +526,11 @@
 </ul>
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="comment">REM Get input param</span></span><br><span class="line"></span><br><span class="line"><span class="comment">REM svn root path like D:\work\SG\s, it will include folder svn, folder design</span></span><br><span class="line"><span class="built_in">set</span> TSVN_ROOT_PATH=%<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> TSVN_PATH=%<span class="number">2</span></span><br><span class="line"><span class="built_in">set</span> TSVN_DEPTH=%<span class="number">3</span></span><br><span class="line"><span class="built_in">set</span> TSVN_MESSAGEFILE=%<span class="number">4</span></span><br><span class="line"><span class="built_in">set</span> TSVN_CWD=%<span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">REM lua脚本错误日志文件</span></span><br><span class="line"><span class="built_in">set</span> TSVN_TEMP_FILE=<span class="variable">%TSVN_ROOT_PATH%</span>\svn\svn_hook\temp_output.txt</span><br><span class="line"><span class="comment">REM lua脚本所在目录</span></span><br><span class="line"><span class="built_in">set</span> TSVN_DESIGN_PATH=<span class="variable">%TSVN_ROOT_PATH%</span>\design\</span><br><span class="line"><span class="comment">REM lua脚本</span></span><br><span class="line"><span class="built_in">set</span> TSVN_CHECK_LUA_SCRIPT=csvToClient1.<span class="number">0</span>_forsvnhook.py</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /d <span class="variable">%TSVN_DESIGN_PATH%</span></span><br><span class="line">python <span class="variable">%TSVN_CHECK_LUA_SCRIPT%</span> &gt; <span class="variable">%TSVN_TEMP_FILE%</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="variable">%errorlevel%</span> <span class="keyword">gtr</span> <span class="number">0</span> <span class="keyword">goto</span> err</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">%errorlevel%</span>! <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line"><span class="built_in">echo</span> Success! <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line"><span class="keyword">exit</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">:err</span><br><span class="line"><span class="built_in">echo</span> Please check your csv. Commit aborted! <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">%errorlevel%</span>! <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line"><span class="built_in">echo</span> error message:  <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line"><span class="keyword">for</span> /f "delims=" <span class="variable">%%x</span> <span class="keyword">in</span> (<span class="variable">%TSVN_TEMP_FILE%</span>) <span class="keyword">do</span> (<span class="built_in">echo</span> <span class="variable">%%x</span> <span class="number">1</span>&gt;&amp;<span class="number">2</span>)</span><br><span class="line"><span class="keyword">exit</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>具体配置流程：</p>
-<p><img src="流程_1" alt=""></p>
-<p><img src="流程_2" alt=""></p>
-<p><img src="流程_3" alt=""></p>
-<p><img src="流程_4" alt=""></p>
-<p><img src="流程_5" alt=""></p>
+<p><img src="流程_1.png" alt=""></p>
+<p><img src="流程_2.png" alt=""></p>
+<p><img src="流程_3.png" alt=""></p>
+<p><img src="流程_4.png" alt=""></p>
+<p><img src="流程_5.png" alt=""></p>
 <p><br></p>
 <p><br></p>
 <p><br></p>
