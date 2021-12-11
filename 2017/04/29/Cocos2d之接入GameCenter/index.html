@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多实践,Cocos2d," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Cocos2d接入GameCenter 排行榜与成就">
+<meta name="keywords" content="多实践,Cocos2d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d之接入GameCenter">
+<meta property="og:url" content="http://yoursite.com/2017/04/29/Cocos2d之接入GameCenter/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="Cocos2d接入GameCenter 排行榜与成就">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-11-05T16:19:16.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d之接入GameCenter">
+<meta name="twitter:description" content="Cocos2d接入GameCenter 排行榜与成就">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/29/Cocos2d之接入GameCenter/"/>
+
+
+
+
+
+  <title>Cocos2d之接入GameCenter | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/29/Cocos2d之接入GameCenter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cocos2d之接入GameCenter</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T12:13:11+08:00">
+                2017-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/29/Cocos2d之接入GameCenter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/04/29/Cocos2d之接入GameCenter/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/04/29/Cocos2d之接入GameCenter/" class="leancloud_visitors" data-flag-title="Cocos2d之接入GameCenter">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,773 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Cocos2d接入GameCenter 排行榜与成就</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>要求接入GameCenter的排行榜和成就。</p>
+<p>GameCenter 是苹果推出的一个社交平台，<br>它主要提供了以下几个功能：</p>
+<ul>
+<li>排行榜</li>
+<li>成就</li>
+<li>挑战</li>
+</ul>
+<p>而且，苹果同时提供了GameKit框架来让GameCenter更易集成。<br>可能是因为GameCenter的热度过去了吧，相关的东西都比较早期。<br>整理总结了一下，希望对他人有所帮助。</p>
+<p>环境：</p>
+<ul>
+<li><p>XCode 8.3</p>
+</li>
+<li><p>Cocos2dx-lua</p>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h1 id="公共的处理"><a href="#公共的处理" class="headerlink" title="公共的处理"></a>公共的处理</h1><h2 id="配置-iTunes-Connect-排行榜与成就的位置。"><a href="#配置-iTunes-Connect-排行榜与成就的位置。" class="headerlink" title="配置 iTunes Connect 排行榜与成就的位置。"></a>配置 iTunes Connect 排行榜与成就的位置。</h2><p>登录iTunes Connect, 找到要处理的APP。<br>选择 功能-&gt;GameCenter<br>可以看到三个大项：</p>
+<ul>
+<li>移动群组</li>
+<li>排行榜</li>
+<li>成就</li>
+</ul>
+<h2 id="添加GameKit框架"><a href="#添加GameKit框架" class="headerlink" title="添加GameKit框架"></a>添加GameKit框架</h2><p>打开项目工程，将 Capabilities 的 GameCenter 打开。<br>这样，XCode就会将GameKit框架加到我们的工程中。</p>
+<h2 id="登录GameCenter"><a href="#登录GameCenter" class="headerlink" title="登录GameCenter"></a>登录GameCenter</h2><p>登录GameCenter:  【这个步骤在我们加载完游戏时进行即可】</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) authenticateLocalPlayer &#123;</span><br><span class="line">    <span class="comment">// 获取本地用户</span></span><br><span class="line">    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 认证登录</span></span><br><span class="line">    localPlayer.authenticateHandler = ^(<span class="built_in">UIViewController</span> *viewController, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (localPlayer.authenticated) &#123;                        <span class="comment">// 本地用户已经登录</span></span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">YES</span>;                   <span class="comment">// 此变量是判断是否已经登录上GameCenter</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(viewController) &#123;                             <span class="comment">// 没有用户，弹出登录界面</span></span><br><span class="line">            [<span class="keyword">self</span> presentViewController:viewController];        </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;                                                <span class="comment">// 没有用户，并且没有登录界面</span></span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">NO</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关于lua调用object-c"><a href="#关于lua调用object-c" class="headerlink" title="关于lua调用object-c"></a>关于lua调用object-c</h2><p>因为我的环境是 cocos2d-x lua，所以，用通过lua来调用object-c。<br>cocos2d-x其实已经有相关的调用结构 —— LuaObjcBridge, 可以直接用 callStaticMethod来调用：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LuaObjcBridge.callStaticMethod(methodName className,args)</span><br></pre></td></tr></table></figure>
+<h2 id="GameKit辅助处理类"><a href="#GameKit辅助处理类" class="headerlink" title="GameKit辅助处理类"></a>GameKit辅助处理类</h2><p>GameKitHelper.h:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;GameKit/GameKit.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方便lua调用</span></span><br><span class="line"><span class="meta">#include <span class="meta-string">"CCLuaEngine.h"</span></span></span><br><span class="line"><span class="meta">#include <span class="meta-string">"CCLuaBridge.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">GameKitHelper</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="comment">// 处理错误</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSError</span>* lastError;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">+ (<span class="keyword">id</span>) sharedGameKitHelper;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Player authentication, info</span></span><br><span class="line">-(<span class="keyword">void</span>) authenticateLocalPlayer;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"GameKitHelper.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">GameKitHelper</span> ()</span></span><br><span class="line">        &lt;GKGameCenterControllerDelegate&gt; &#123;</span><br><span class="line">    <span class="built_in">BOOL</span> _gameCenterFeaturesEnabled;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">GameKitHelper</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark Singleton stuff</span></span><br><span class="line"></span><br><span class="line">+(<span class="keyword">id</span>) sharedGameKitHelper &#123;</span><br><span class="line">    <span class="keyword">static</span> GameKitHelper *sharedGameKitHelper;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        sharedGameKitHelper =</span><br><span class="line">                [[GameKitHelper alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> sharedGameKitHelper;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark Player Authentication</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) authenticateLocalPlayer &#123;</span><br><span class="line">    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];</span><br><span class="line"></span><br><span class="line">    localPlayer.authenticateHandler = ^(<span class="built_in">UIViewController</span> *viewController, <span class="built_in">NSError</span> *error) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line">        <span class="keyword">if</span> (localPlayer.authenticated) &#123;</span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">YES</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(viewController) &#123;</span><br><span class="line">            [<span class="keyword">self</span> presentViewController:viewController];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            _gameCenterFeaturesEnabled = <span class="literal">NO</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark Property setters</span></span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) setLastError:(<span class="built_in">NSError</span>*)error &#123;</span><br><span class="line">    _lastError = [error <span class="keyword">copy</span>];</span><br><span class="line">    <span class="keyword">if</span> (_lastError) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- setLastError -- ERROR: %@"</span>, [[_lastError userInfo] </span><br><span class="line">          description]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#pragma mark UIViewController stuff</span></span><br><span class="line"></span><br><span class="line">-(<span class="built_in">UIViewController</span>*) getRootViewController &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">UIApplication</span> </span><br><span class="line">      sharedApplication].keyWindow.rootViewController;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span>*)vc &#123;</span><br><span class="line">    <span class="built_in">UIViewController</span>* rootVC = [<span class="keyword">self</span> getRootViewController];</span><br><span class="line">    [rootVC presentViewController:vc animated:<span class="literal">YES</span> </span><br><span class="line">      completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h2 id="登录GameCenter时机"><a href="#登录GameCenter时机" class="headerlink" title="登录GameCenter时机"></a>登录GameCenter时机</h2><p>由你决定，可以放在 AppDelegate 中 applicationDidFinishLaunching时。</p>
+<p><br></p>
+<p><br></p>
+<h1 id="关于排行榜"><a href="#关于排行榜" class="headerlink" title="关于排行榜"></a>关于排行榜</h1><h2 id="配置-iTunes-Connect"><a href="#配置-iTunes-Connect" class="headerlink" title="配置 iTunes Connect"></a>配置 iTunes Connect</h2><p>在iTunes Connect 找到 排行榜。</p>
+<p>简单说一下流程吧：<br>配置排行榜的结构，然后我们在游戏中将数据上传到这个结构，最后显示到GameCenter中。</p>
+<p>排行榜分为 单个排行榜 与 组合排行榜。(顾名思义，区别就不需要解释了吧？)<br>里面需要配置的相应属性，可参考本文末尾的关于。</p>
+<p>要注意两点：</p>
+<ol>
+<li>排行榜ID，因为只有它是在创建后无法更改的。（而且，要记住这个ID，因为后面程序要用到）</li>
+<li>排行榜只要发布了（经过审批发布），就无法删除了。</li>
+</ol>
+<p>接下来就看属性去配置它吧。</p>
+<h2 id="XCode工程配置"><a href="#XCode工程配置" class="headerlink" title="XCode工程配置"></a>XCode工程配置</h2><p>模拟这个流程：登录GameCenter -&gt; 提交排行榜数据 ( -&gt; 如果需要，弹出GameCenter排行榜)<br>提交排行榜数据:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitScore:(int64_t)score category:(<span class="built_in">NSString</span>*)category &#123;       <span class="comment">// 这里两个参数 score是数据， category是ID，就是我们创建排行榜以后，不可更改的那个ID。</span></span><br><span class="line">    <span class="comment">// 检查是否在登录状态</span></span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitScore -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个分数对象</span></span><br><span class="line">    GKScore* gkScore = [[GKScore alloc] initWithCategory:category];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置分数对象的值</span></span><br><span class="line">    gkScore.value = score;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向GameCenter提交数据</span></span><br><span class="line">    [gkScore reportScoreWithCompletionHandler: ^(<span class="built_in">NSError</span>* error)    &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实践使用"><a href="#实践使用" class="headerlink" title="实践使用"></a>实践使用</h2><p>在公用部分，已经添加了GameCenter的登录验证相关的东西了。</p>
+<ul>
+<li>将排行榜数据提交的函数</li>
+</ul>
+<p>GameKitHelper.h</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitScore:(int64_t)score category:(<span class="built_in">NSString</span>*)category;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitScore:(int64_t)score category:(<span class="built_in">NSString</span>*)category &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitScore -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    GKScore* gkScore = [[GKScore alloc] initWithCategory:category];</span><br><span class="line"></span><br><span class="line">    gkScore.value = score;</span><br><span class="line"></span><br><span class="line">    [gkScore reportScoreWithCompletionHandler: ^(<span class="built_in">NSError</span>* error)    &#123;</span><br><span class="line">        [<span class="keyword">self</span> setLastError:error];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>给lua调用的函数</li>
+</ul>
+<p>GameKitHelper.h</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getScore:(<span class="built_in">NSDictionary</span> *)dict;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getScore:(<span class="built_in">NSDictionary</span> *)dict &#123;</span><br><span class="line">    <span class="built_in">NSString</span>* rID = [dict objectForKey:<span class="string">@"id"</span>];</span><br><span class="line">    <span class="keyword">int</span> score = [[dict objectForKey:<span class="string">@"score"</span>] intValue];</span><br><span class="line">    </span><br><span class="line">    [[GameKitHelper sharedGameKitHelper] submitScore:(int64_t)score category:rID];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>lua调用</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LuaObjcBridge.callStaticMethod(<span class="string">"GameKitHelper"</span>, <span class="string">"getScore"</span>, &#123;id = 排行榜的ID, score = 分数值&#125;)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><br></p>
+<h1 id="关于成就"><a href="#关于成就" class="headerlink" title="关于成就"></a>关于成就</h1><h2 id="配置-iTunes-Connect-1"><a href="#配置-iTunes-Connect-1" class="headerlink" title="配置 iTunes Connect"></a>配置 iTunes Connect</h2><p>还是老位置，之前看的排行榜，这次点成就。<br>还是老样子，成就的ID，创建后不可修改，成就发布后不可删除。<br>但是，成就还要多一点，就是每个游戏总共有2000点成就分（为什么是2000？你问老乔去。。），你可以给每个成就分配一些成就分。<br>成就还有是否隐藏的选项，但是它的隐藏并不是看不到这个成就了，而是有一个成就名称为隐藏的成就显示在列表中。<br>还有，它的进度是一个顺时针扇形来表示，就是你的图标刚开始是被遮掩的，随着进度的增加，会逐渐显现出图标，方向是顺时针扇形。</p>
+<p>其他相关参数，可参考本文末尾的关于。</p>
+<h2 id="XCode工程配置-1"><a href="#XCode工程配置-1" class="headerlink" title="XCode工程配置"></a>XCode工程配置</h2><p>流程与排行榜的一样，但是这次提交的不是分数了，而是成就完成的百分比。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 提交成就数据</span></span><br><span class="line">-(<span class="keyword">void</span>) submitAchievment:(<span class="built_in">NSString</span> *)identifier percent:(<span class="keyword">double</span>) percentComplete &#123;          <span class="comment">// identifier 成就ID, percentComplete: 成就完成百分比</span></span><br><span class="line">    <span class="comment">// 判断登录认证</span></span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建成就结构，注入成就ID</span></span><br><span class="line">    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 设置成就百分比</span></span><br><span class="line">    [achievement setPercentComplete:percentComplete];  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 提交成就数据</span></span><br><span class="line">    [achievement reportAchievementWithCompletionHandler:^(<span class="built_in">NSError</span> *error) &#123;  </span><br><span class="line">        <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  error:%@"</span>, [error localizedDescription]);  </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  提交成就成功"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实践使用-1"><a href="#实践使用-1" class="headerlink" title="实践使用"></a>实践使用</h2><p>同排行榜一样。</p>
+<ul>
+<li>将成就数据提交的函数</li>
+</ul>
+<p>GameKitHelper.h</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)submitAchievment:(<span class="built_in">NSString</span> *)identifier percent:(<span class="keyword">double</span>)percentComplete;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>) submitAchievment:(<span class="built_in">NSString</span> *)identifier percent:(<span class="keyword">double</span>) percentComplete &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_gameCenterFeaturesEnabled)    &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment -- Player not authenticated"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:identifier];  </span><br><span class="line">      </span><br><span class="line">    [achievement setPercentComplete:percentComplete];  </span><br><span class="line">      </span><br><span class="line">    [achievement reportAchievementWithCompletionHandler:^(<span class="built_in">NSError</span> *error) &#123;  </span><br><span class="line">        <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  error:%@"</span>, [error localizedDescription]);  </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"GameCenter -- submitAchievment --  提交成就成功"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>给lua调用的函数</li>
+</ul>
+<p>GameKitHelper.h</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getAchievement:(<span class="built_in">NSDictionary</span> *)dict;</span><br></pre></td></tr></table></figure>
+<p>GameKitHelper.mm</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">void</span>) getAchievement:(<span class="built_in">NSDictionary</span> *)dict &#123;</span><br><span class="line">    <span class="built_in">NSString</span>* aID = [dict objectForKey:<span class="string">@"id"</span>];</span><br><span class="line">    <span class="keyword">double</span> percent = [[dict objectForKey:<span class="string">@"percent"</span>] doubleValue];</span><br><span class="line">    </span><br><span class="line">    [[GameKitHelper sharedGameKitHelper] submitAchievment:(<span class="built_in">NSString</span> *)aID percent:percent];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>lua调用</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LuaObjcBridge.callStaticMethod(<span class="string">"GameKitHelper"</span>, <span class="string">"getAchievement"</span>, &#123;id = 成就ID, percent = 成就百分比&#125;)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><br></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>GameCenter还是挺好的一个东西。<br>它还有一个好友挑战功能，但这个主要适合之前 Flappy Bird，别踩白块 那些游戏来弄。<br>或许，这也是这个平台没落了的原因吧。</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<hr>
+<p>参考资料</p>
+<ul>
+<li><a href="http://www.cocos2d-x.org/reference/native-cpp/V3.5/d6/d59/classcocos2d_1_1_lua_objc_bridge.html" target="_blank" rel="noopener">关于 LuaObjcBridge</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide_zh_CN/Chapters/About.html#//apple_ref/doc/uid/TP40016325-CH1-SW1" target="_blank" rel="noopener">关于 iTunes Connect</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/LanguagesUtilities/Conceptual/iTunesConnectGameCenter_Guide_SCh/Chapters/Leaderboards.html#//apple_ref/doc/uid/TP40014490-CH2-SW1" target="_blank" rel="noopener">中文版 排行榜及成就 配置属性</a></li>
+<li><a href="https://www.raywenderlich.com/23189/whats-new-with-game-center-in-ios-6" target="_blank" rel="noopener">GameCenter在iOS6新特性</a></li>
+<li><a href="http://www.jianshu.com/p/4279f84d8340" target="_blank" rel="noopener">iOS游戏开发之Game Center实战</a></li>
+<li><a href="http://blog.csdn.net/shenjie12345678/article/details/45025403/" target="_blank" rel="noopener">iOS 平台游戏如何对接 GameCenter</a></li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2017/04/29/Cocos2d之接入GameCenter/" title="Cocos2d之接入GameCenter">http://www.lt-tree.com/2017/04/29/Cocos2d之接入GameCenter/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多实践/" rel="tag"><i class="fa fa-tag"></i> 多实践</a>
+          
+            <a href="/tags/Cocos2d/" rel="tag"><i class="fa fa-tag"></i> Cocos2d</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/23/Go学习之环境搭建/" rel="next" title="Go学习之环境搭建">
+                <i class="fa fa-chevron-left"></i> Go学习之环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/30/《我们仨》读记/" rel="prev" title="《我们仨》读记">
+                《我们仨》读记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公共的处理"><span class="nav-number">2.</span> <span class="nav-text">公共的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-iTunes-Connect-排行榜与成就的位置。"><span class="nav-number">2.1.</span> <span class="nav-text">配置 iTunes Connect 排行榜与成就的位置。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加GameKit框架"><span class="nav-number">2.2.</span> <span class="nav-text">添加GameKit框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录GameCenter"><span class="nav-number">2.3.</span> <span class="nav-text">登录GameCenter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于lua调用object-c"><span class="nav-number">2.4.</span> <span class="nav-text">关于lua调用object-c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GameKit辅助处理类"><span class="nav-number">2.5.</span> <span class="nav-text">GameKit辅助处理类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录GameCenter时机"><span class="nav-number">2.6.</span> <span class="nav-text">登录GameCenter时机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于排行榜"><span class="nav-number">3.</span> <span class="nav-text">关于排行榜</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-iTunes-Connect"><span class="nav-number">3.1.</span> <span class="nav-text">配置 iTunes Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode工程配置"><span class="nav-number">3.2.</span> <span class="nav-text">XCode工程配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践使用"><span class="nav-number">3.3.</span> <span class="nav-text">实践使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于成就"><span class="nav-number">4.</span> <span class="nav-text">关于成就</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-iTunes-Connect-1"><span class="nav-number">4.1.</span> <span class="nav-text">配置 iTunes Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode工程配置-1"><span class="nav-number">4.2.</span> <span class="nav-text">XCode工程配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践使用-1"><span class="nav-number">4.3.</span> <span class="nav-text">实践使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-12-11</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+

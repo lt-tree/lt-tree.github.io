@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多实践,Cocos2d,Lua," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="通过重用ScrollView中的item来提高ScrollView的性能。 通过对ScrollView更多的扩展来更好落地业务功能。">
+<meta name="keywords" content="多实践,Cocos2d,Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d之ScrollView进阶">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/Cocos2d之ScrollView进阶/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="通过重用ScrollView中的item来提高ScrollView的性能。 通过对ScrollView更多的扩展来更好落地业务功能。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-11-05T16:13:18.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d之ScrollView进阶">
+<meta name="twitter:description" content="通过重用ScrollView中的item来提高ScrollView的性能。 通过对ScrollView更多的扩展来更好落地业务功能。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/Cocos2d之ScrollView进阶/"/>
+
+
+
+
+
+  <title>Cocos2d之ScrollView进阶 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/Cocos2d之ScrollView进阶/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cocos2d之ScrollView进阶</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T23:44:35+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/Cocos2d之ScrollView进阶/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/21/Cocos2d之ScrollView进阶/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/21/Cocos2d之ScrollView进阶/" class="leancloud_visitors" data-flag-title="Cocos2d之ScrollView进阶">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,528 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  25 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>通过重用ScrollView中的item来提高ScrollView的性能。</p>
+<p>通过对ScrollView更多的扩展来更好落地业务功能。</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在使用ListView的时候，有多少个数据就会创建多少个item，并不会重复利用或回收释放。</p>
+<p>随着数据量的增加，会对性能造成很大的影响。</p>
+<p><br></p>
+<p><br></p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>有几个修改方向</p>
+<h2 id="方案之clone替换create"><a href="#方案之clone替换create" class="headerlink" title="方案之clone替换create"></a>方案之clone替换create</h2><p>描述：</p>
+<p>clone 改成 create[据说是这样，我没有测试过 = =…]</p>
+<p>我们在使用ListView的时候，创建一个item，是通过lua重写的pushBackCustomItemView，</p>
+<p>它会先调用ListView的pushBackDefaultItem，通过clone创建一个csb，我们再把数据赋过去。</p>
+<p>所以，我们完全可以create一个csb，相对于clone会快一些。</p>
+<p>缺点：</p>
+<p>这个应该会有点效果，嗯，有点效果而已。</p>
+<p><br></p>
+<h2 id="方案之分帧加载（逐帧加载）"><a href="#方案之分帧加载（逐帧加载）" class="headerlink" title="方案之分帧加载（逐帧加载）"></a>方案之分帧加载（逐帧加载）</h2><p>描述：</p>
+<p>分帧加载（逐帧加载）</p>
+<p>并不是在一帧全加载完，而是选择每帧加载一定个数，直到加载完成</p>
+<p>缺点：</p>
+<p>通过lua现有的协程来实现，但是流畅度不是很好，刚进入界面的时候可能看到item是逐渐加载进来的。</p>
+<p><br></p>
+<h2 id="方案之异步加载"><a href="#方案之异步加载" class="headerlink" title="方案之异步加载"></a>方案之异步加载</h2><p>描述：</p>
+<p>异步加载</p>
+<p>这个主要对一些图片多的item，我们如果需要切换图，可以通过异步加载，等图片加载完再换图，这样不影响之后item的加载。</p>
+<p>缺点：</p>
+<p>会看到 默认图（csb创建的样子） -&gt; 真正效果的转换过程。</p>
+<p><br></p>
+<h2 id="方案之边界加载"><a href="#方案之边界加载" class="headerlink" title="方案之边界加载"></a>方案之边界加载</h2><p>描述：</p>
+<p>滑动到底加载</p>
+<p>就是先加载一定数量，监听到底部了，再拉取后面的部分，直到全部加载完。</p>
+<p>缺点：</p>
+<p>做一系列监听滑动等，没有根本解决问题。</p>
+<p><br></p>
+<h2 id="方案之重用-item"><a href="#方案之重用-item" class="headerlink" title="方案之重用 item"></a>方案之重用 item</h2><p>描述：</p>
+<p>重用item</p>
+<p>其实，上面的那些方法，都是优化的技巧，并没有从根本上解决问题。</p>
+<p>我们要根本的解决问题，就是创建可视区域可容纳数量+1的item，然后不断重用这些item。</p>
+<p>在ListView同一时刻，只能见到5个item，那我就创建6个item，然后不断重用这些item。</p>
+<p><br></p>
+<p><br></p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><p>首先明确view与inner</p>
+<ul>
+<li><p>view像一个窗口，它的大小就是我们可以见到的大小（当然要设置裁切）</p>
+</li>
+<li><p>inner是我们创建的所有item添加的地方（item并不是加载ScrollView上，而是加在了inner上）</p>
+</li>
+</ul>
+<p>ScrollView/ListView会监听滑动，同时相应的移动inner的位置，从而让我们看到item位置的变化。</p>
+<p><strong>简而言之，item加载inner上，是inner动，不是view动。</strong></p>
+<p><br></p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>在ScrollView或者ListView中，正常情况是这样的：</p>
+<p>(前面数字代表item位置，后面数字代表item， —-代表可视区域)</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>   <span class="number">1</span>                   <span class="number">1</span></span><br><span class="line">    <span class="comment">----</span></span><br><span class="line"><span class="number">2</span>   <span class="number">2</span>                   <span class="number">2</span></span><br><span class="line"><span class="number">3</span>   <span class="number">3</span>                   <span class="number">3</span></span><br><span class="line">                        <span class="comment">----</span></span><br><span class="line"><span class="number">4</span>   <span class="number">4</span>                   <span class="number">4</span></span><br><span class="line">    <span class="comment">----                </span></span><br><span class="line"><span class="number">5</span>   <span class="number">5</span>                   <span class="number">5</span></span><br><span class="line"><span class="number">6</span>   <span class="number">6</span>                   <span class="number">6</span></span><br><span class="line">                        <span class="comment">----</span></span><br><span class="line"><span class="number">7</span>   <span class="number">7</span>                   <span class="number">7</span></span><br><span class="line"><span class="number">8</span>   <span class="number">8</span>                   <span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>可以发现，</p>
+<p>前面的例子中, 只能看见2, 3, 4; 但是看不见的1, 5, 6, 7, 8 依旧存在</p>
+<p>后面的例子中, 只能看见4, 5, 6; 但是看不见的1, 2, 3, 7, 8 依旧存在</p>
+<p>所以，我们改成下面的样子:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>                        </span><br><span class="line">    <span class="comment">----</span></span><br><span class="line"><span class="number">2</span>   <span class="number">2</span>                    </span><br><span class="line"><span class="number">3</span>   <span class="number">3</span>                    </span><br><span class="line">                        <span class="comment">----</span></span><br><span class="line"><span class="number">4</span>   <span class="number">4</span>                   <span class="number">4</span></span><br><span class="line">    <span class="comment">----                </span></span><br><span class="line"><span class="number">5</span>                       <span class="number">5</span></span><br><span class="line"><span class="number">6</span>                       <span class="number">6</span></span><br><span class="line">                        <span class="comment">----</span></span><br><span class="line"><span class="number">7</span>                        </span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>因为可视区域只有3个item，我们就创建3个item，然后不断重用它们。(当然实际操作中，需要多创建一个，否则有穿帮风险)</p>
+<p>但是，位置，我们依旧留着（划重点，<strong>inner大小不变</strong>，否则无法滑动），</p>
+<p>在往下滑的时候，最上面的跑到下面去顶替下面的item；</p>
+<p>往上滑的时候，最下面的跑到上面去顶替上面的item。</p>
+<p><br></p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现方法，</p>
+<p>可以通过监听ScrollView滑动，每当ScrollView滚动，我们可以知道当前inner位置，</p>
+<p>然后知道item的位置，从而判断item需不需要移动位置。</p>
+<p>这里，用的是编辑一个绘制方法，每隔一段时间，都看一下各个item位置，然后根据需求移动位置。</p>
+<p>我们在加载csb的时候将ScrollView记录下来，在view的update中调用它。</p>
+<p>（本来想重写update，但是遇到了一些问题，所以妥协用了它，具体可以看后面 遇到的问题）</p>
+<p>init:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    name            :   item类名 </span></span><br><span class="line"><span class="comment">    totalItemNum    :   item总数</span></span><br><span class="line"><span class="comment">    ...             :   创建item时需要的参数</span></span><br><span class="line"><span class="comment">--]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:setItemViewModel</span><span class="params">(name, totalItemNum, ...)</span></span></span><br></pre></td></tr></table></figure>
+<p>主要代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 得到所需绘制item个数</span></span><br><span class="line"><span class="keyword">local</span> count = <span class="built_in">math</span>.<span class="built_in">ceil</span>(self:getContentSize().height / self.tItemContentSize.height) + <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, count <span class="keyword">do</span></span><br><span class="line">    <span class="comment">-- 创建item</span></span><br><span class="line">    <span class="keyword">local</span> view = CSBReaderLoad(name)</span><br><span class="line">    view:init(...)</span><br><span class="line">    <span class="keyword">if</span> view.setIndex <span class="keyword">then</span></span><br><span class="line">        view:setIndex(i)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 将父节点转为widget类型（原因可见 遇到的问题）</span></span><br><span class="line">    <span class="keyword">local</span> widget = quick.packageNodeToWidget(view.pLayer:getChildByName(<span class="string">"LayerTouch"</span>))</span><br><span class="line">    view.pLayer = widget</span><br><span class="line">    <span class="comment">-- widget随父节点透明度变化，默认是false</span></span><br><span class="line">    widget:setCascadeOpacityEnabled(<span class="literal">true</span>)</span><br><span class="line">    self:addChild(view.pLayer)</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 总数小于所需绘制item个数，需要隐藏多创建的</span></span><br><span class="line">    view.pLayer:setVisible(i &gt; <span class="number">0</span> <span class="keyword">and</span> i &lt;= self.totalItemNum)</span><br><span class="line">    <span class="comment">-- 设置位置，注意我们加item是从下往上加的</span></span><br><span class="line">    view.pLayer:setPositionY(self.tItemContentSize.height * (self.totalItemNum - i))</span><br><span class="line">    <span class="built_in">table</span>.<span class="built_in">insert</span>(self.tItemView, view)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>update:</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:updateView</span><span class="params">(dt)</span></span></span><br></pre></td></tr></table></figure>
+<p>主要代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 控制刷新时间</span></span><br><span class="line">self.updateTimer = self.updateTimer + dt</span><br><span class="line"><span class="keyword">if</span> (self.updateTimer &lt; self.updateInterval) <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">self.updateTimer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 遍历所有创建的item，如果它们需要移动位置，就移动它们的位置，并让它们重绘自己</span></span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, length <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">local</span> item = self:getItemView(i)</span><br><span class="line">    <span class="keyword">local</span> viewPos = self:getPositionInView(item.pLayer);</span><br><span class="line">    <span class="keyword">if</span> increaseVal &lt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> viewPos.y &lt; minBoundary <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> item.index <span class="keyword">and</span> item.setIndex <span class="keyword">then</span></span><br><span class="line">                item:setIndex(item.index - length)</span><br><span class="line">                item.pLayer:setVisible(item.index &gt; <span class="number">0</span> <span class="keyword">and</span> item.index &lt;= self.totalItemNum)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">            item.pLayer:setPositionY(item.pLayer:getPositionY() + offset)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">elseif</span> increaseVal &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> (viewPos.y &gt; maxBoundary <span class="keyword">and</span> item.pLayer:getPositionY() - offset &gt; -self.tContentSize.height) <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> item.index <span class="keyword">and</span> item.setIndex <span class="keyword">then</span></span><br><span class="line">                item:setIndex(item.index + length)</span><br><span class="line">                item.pLayer:setVisible(item.index &gt; <span class="number">0</span> <span class="keyword">and</span> item.index &lt;= self.totalItemNum)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">            item.pLayer:setPositionY(item.pLayer:getPositionY() - offset)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>使用方法</p>
+<ol>
+<li>调用 ScrollView:setItemViewModel(item, item总数, 创建item所需的额外参数)</li>
+<li>所有的item要有方法 item:setIndex(index), 并且以 self.index 作为自己的index[这里可以写一个类来封装，让所有item都继承它]</li>
+<li>在删除的时候，要将ScrollView的每帧更新方法移除 </li>
+</ol>
+<p><br></p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><h3 id="关于update"><a href="#关于update" class="headerlink" title="关于update"></a>关于update</h3><p>在3.x中lua启用定时器有两种方法：</p>
+<p>第一种方法 scheduleUpdateWithPriorityLua</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scheduleUpdateWithPriorityLua(update, priority)</span><br><span class="line">	update - 刷新函数，</span><br><span class="line">	priority - 优先级，</span><br></pre></td></tr></table></figure>
+<p>此方法在Node类中实现，所以它的子类都可以使用。</p>
+<p>此方法默认为每帧都刷新因此，无法自定义刷新时间。</p>
+<p>这里，没有用这个方法，是因为ScrollView自己已经实现了update方法。</p>
+<p>所以，当我们重新注册给ScrollView一个update的时候，发现无法替换。</p>
+<p>这里涉及到计时器存储刷新方法：</p>
+<p>刷新方法通过哈希表存储，在主循环期间，不移除已有方法，而是将它暂停，且恢复时不加载新方法，而是将原有方法恢复。</p>
+<p>启用定时器的源码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Node::scheduleUpdateWithPriorityLua(<span class="keyword">int</span> nHandler, <span class="keyword">int</span> priority)</span><br><span class="line">&#123;</span><br><span class="line">    unscheduleUpdate();</span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> CC_ENABLE_SCRIPT_BINDING</span></span><br><span class="line">    _updateScriptHandler = nHandler;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    </span><br><span class="line">    _scheduler-&gt;scheduleUpdate(<span class="keyword">this</span>, priority, !_running);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行： unscheduleUpdate();</p>
+<p>会先判断节点是否有update方法，在哈希表中查找，并执行移除方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tHashUpdateEntry *element = <span class="literal">nullptr</span>;</span><br><span class="line">HASH_FIND_PTR(_hashForUpdates, &amp;target, element);</span><br><span class="line"><span class="keyword">if</span> (element)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_updateHashLocked)</span><br><span class="line">    &#123;</span><br><span class="line">        element-&gt;entry-&gt;markedForDeletion = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;removeUpdateFromHash(element-&gt;entry);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面移除方法，会根据_updateHashLocked值来执行，</p>
+<ul>
+<li><p>它为真时，如果节点原来有update，就先废弃它，废弃的方法是，将它标记为已删除，并让它暂停。注意！这里并没有真正的删除，而是将他表示是否删除的字段改值。</p>
+</li>
+<li><p>它为假时，直接从哈希表中移除update方法。</p>
+</li>
+</ul>
+<p>执行：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_scheduler-&gt;scheduleUpdate(<span class="keyword">this</span>, priority, !_running);</span><br></pre></td></tr></table></figure></p>
+<p>加入update，也会先从哈希表中查找update，再执行添加方法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">tHashUpdateEntry *hashElement = <span class="literal">nullptr</span>;</span><br><span class="line">HASH_FIND_PTR(_hashForUpdates, &amp;target, hashElement);</span><br><span class="line"><span class="keyword">if</span> (hashElement)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// check if priority has changed</span></span><br><span class="line">    <span class="keyword">if</span> ((*hashElement-&gt;<span class="built_in">list</span>)-&gt;priority != priority)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (_updateHashLocked)</span><br><span class="line">        &#123;</span><br><span class="line">            CCLOG(<span class="string">"warning: you CANNOT change update priority in scheduled function"</span>);</span><br><span class="line">            hashElement-&gt;entry-&gt;markedForDeletion = <span class="literal">false</span>;</span><br><span class="line">            hashElement-&gt;entry-&gt;paused = paused;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// will be added again outside if (hashElement).</span></span><br><span class="line">            unscheduleUpdate(target);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        hashElement-&gt;entry-&gt;markedForDeletion = <span class="literal">false</span>;</span><br><span class="line">        hashElement-&gt;entry-&gt;paused = paused;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加方法，会先判断优先级，如果优先级相同，那么就恢复原来的update。</p>
+<p>否则，根据 _updateHashLocked 值执行接下来操作。</p>
+<p>从移除和添加可以发现，关键值在于 _updateHashLocked的值，</p>
+<p>这个值在Scheduler::update中设置，开始的时候设置为true，最后结束设置为false。</p>
+<p>所以，如果要修改，就很麻烦，就放弃用这个方法了。</p>
+<p>道理同样适用于所有自己已经重写了update，想要更换update情形*</p>
+<p>第二种方法，通过定时管理器调用</p>
+<p>就是上面指的Scheduler,不过我们不调ScrollView的，而是创建一个新的。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scheduler:scheduleScriptFunc(update, inteval, isOnce)</span><br><span class="line">	scheduler - cc.Director:getInstance():getScheduler()</span><br><span class="line">	update - 更新方法</span><br><span class="line">	inteval - 刷新时间间隔</span><br><span class="line">	isOnce - 是否只执行一次</span><br></pre></td></tr></table></figure>
+<p>注意，如果用这个方法，需要负责创建，也要负责移除。</p>
+<p>上面方法会返回一个id，之后可以通过这个id来删除它。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc.Director:getInstance():getScheduler():unscheduleScriptEntry(id)</span><br></pre></td></tr></table></figure>
+<h3 id="为什么要把item封装成Widget"><a href="#为什么要把item封装成Widget" class="headerlink" title="为什么要把item封装成Widget"></a>为什么要把item封装成Widget</h3><p>在刚开始往ScrollView加child时，方法是将item的Node直接往ScrollView addChild（ScrollView封装了它，其实就是往inner addChild）<br>但是当直接addChild时，会产生很多问题：比如按钮吞噬触摸，无法滑动等等。</p>
+<p>那就要问一下了，为什么ListView没事呢？<br>这其实是Cocos对继承自ccui.Widget的事件的处理。<br>所有的控件事件监听都是单点触摸，并且会吞噬事件。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_touchListener = EventListenerTouchOneByOne::create();</span><br><span class="line">CC_SAFE_RETAIN(_touchListener);</span><br><span class="line">_touchListener-&gt;setSwallowTouches(<span class="literal">true</span>);</span><br><span class="line">_touchListener-&gt;onTouchBegan = CC_CALLBACK_2(Widget::onTouchBegan, <span class="keyword">this</span>);</span><br><span class="line">_touchListener-&gt;onTouchMoved = CC_CALLBACK_2(Widget::onTouchMoved, <span class="keyword">this</span>);</span><br><span class="line">_touchListener-&gt;onTouchEnded = CC_CALLBACK_2(Widget::onTouchEnded, <span class="keyword">this</span>);</span><br><span class="line">_touchListener-&gt;onTouchCancelled = CC_CALLBACK_2(Widget::onTouchCancelled, <span class="keyword">this</span>);</span><br><span class="line">_eventDispatcher-&gt;addEventListenerWithSceneGraphPriority(_touchListener, <span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>在widget的onTouchBegan, onTouchMove, onTouchEnd中，都会调用 propagateTouchEvent,<br>这个方法是传播事件，每个子节点会吞噬事件，自己处理完，再向父节点传递，一般ScrollView、ListView、PageView会处理这些事件。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Widget* widgetParent = getWidgetParent();</span><br><span class="line"><span class="keyword">if</span> (widgetParent)</span><br><span class="line">&#123;</span><br><span class="line">    widgetParent-&gt;_hittedByCamera = _hittedByCamera;</span><br><span class="line">    widgetParent-&gt;interceptTouchEvent(event, sender, touch);</span><br><span class="line">    widgetParent-&gt;_hittedByCamera = <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，只有继承自Widget类的，才会接收到interceptTouchEvent,并进行处理。<br>而且，ScrollView的interceptTouchEvent 已经处理好了按钮的点击，取消等效果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ScrollView::interceptTouchEvent(Widget::TouchEventType event, Widget *sender,Touch* touch)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(!_touchEnabled)</span><br><span class="line">    &#123;</span><br><span class="line">        Layout::interceptTouchEvent(event, sender, touch);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(_direction == Direction::NONE)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    Vec2 touchPoint = touch-&gt;getLocation();</span><br><span class="line">    <span class="keyword">switch</span> (event)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> TouchEventType::BEGAN:</span><br><span class="line">        &#123;</span><br><span class="line">            _isInterceptTouch = <span class="literal">true</span>;</span><br><span class="line">            _touchBeganPosition = touch-&gt;getLocation();</span><br><span class="line">            handlePressLogic(touch);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> TouchEventType::MOVED:</span><br><span class="line">        &#123;</span><br><span class="line">            _touchMovePosition = touch-&gt;getLocation();</span><br><span class="line">            <span class="comment">// calculates move offset in points</span></span><br><span class="line">            <span class="keyword">float</span> offsetInInch = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">switch</span> (_direction)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">case</span> Direction::HORIZONTAL:</span><br><span class="line">                    offsetInInch = convertDistanceFromPointToInch(Vec2(<span class="built_in">std</span>::<span class="built_in">abs</span>(sender-&gt;getTouchBeganPosition().x - touchPoint.x), <span class="number">0</span>));</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> Direction::VERTICAL:</span><br><span class="line">                    offsetInInch = convertDistanceFromPointToInch(Vec2(<span class="number">0</span>, <span class="built_in">std</span>::<span class="built_in">abs</span>(sender-&gt;getTouchBeganPosition().y - touchPoint.y)));</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> Direction::BOTH:</span><br><span class="line">                    offsetInInch = convertDistanceFromPointToInch(sender-&gt;getTouchBeganPosition() - touchPoint);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (offsetInInch &gt; _childFocusCancelOffsetInInch)</span><br><span class="line">            &#123;</span><br><span class="line">                sender-&gt;setHighlighted(<span class="literal">false</span>);</span><br><span class="line">                handleMoveLogic(touch);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> TouchEventType::CANCELED:</span><br><span class="line">        <span class="keyword">case</span> TouchEventType::ENDED:</span><br><span class="line">        &#123;</span><br><span class="line">            _touchEndPosition = touch-&gt;getLocation();</span><br><span class="line">            handleReleaseLogic(touch);</span><br><span class="line">            <span class="keyword">if</span> (sender-&gt;isSwallowTouches())</span><br><span class="line">            &#123;</span><br><span class="line">                _isInterceptTouch = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之前的方法有问题，就是因为直接将Node addChild到ScrollView，当触摸传递到Node，发现无法转成Widget对象，就放弃了向上传播事件。<br>所以，需要将item包装成Widget来让它将事件传递给ScrollView。</p>
+<p><br></p>
+<p><br></p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>真正要当ListView使用，还需要支持很多接地气的方法。</p>
+<h2 id="多方向滑动"><a href="#多方向滑动" class="headerlink" title="多方向滑动"></a>多方向滑动</h2><p>之前的版本仅仅是纵向而已, 当然要支持横向的滑动了。<br>横向滑动其实与纵向不同。</p>
+<h3 id="纵向滑动"><a href="#纵向滑动" class="headerlink" title="纵向滑动"></a>纵向滑动</h3><p>由于ScrollView锚点在(0, 0), 要针对这个做一些处理。<br>否则, 显示的是如下的样子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>从下往上排列, 而且滑动是从下往上滑。<br>显然, 这并不符合常规操作。<br>正常应该是, 从上往下滑, 且:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>所以, 需要对它的坐标进行小处理。<br>这里有两个坐标需要被处理：</p>
+<ul>
+<li>item（要求锚点为(0, 0))<br>它正常坐标是从(0, 0)开始, 然后随着索引增加变为: (0, itemSize.height <em> index)<br>修改后的坐标应该是从(0, innerSize.height - itemSize.height)开始, 随着索引增加变为:(0, innerSize.height - itemSize.height </em> index)</li>
+<li>inner<br>正常开始的坐标为(0, 0), 显示的是最底部的信息, 随着滑动y坐标减少。<br>修改后坐标为(0, scrollviewSize.height - innerSize.height), 显示最顶部的信息, 随着滑动y坐标增加。</li>
+</ul>
+<h3 id="横向滑动"><a href="#横向滑动" class="headerlink" title="横向滑动"></a>横向滑动</h3><p>横向就没有那么多问题了, 很符合常规的动作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 	2 	3 	4 	5 	...</span><br></pre></td></tr></table></figure>
+<p>它的两个坐标就不需要处理:</p>
+<ul>
+<li>item(要求锚点为(0, 0))<br>坐标从(0, 0)开始, 随着索引增加变为: (itemSize.width * index, 0)</li>
+<li>inner<br>坐标从(0, 0)开始, 随着滑动x坐标增加</li>
+</ul>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ScrollViewDirection = &#123;</span><br><span class="line">    DIR_VERTICAL = <span class="number">1</span>,</span><br><span class="line">    DIR_HORIZONTAL = <span class="number">2</span>,</span><br><span class="line">    DIR_BOTH = <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ScrollView 的大小</span></span><br><span class="line">self.tContentSize</span><br><span class="line"><span class="comment">-- Item 的大小</span></span><br><span class="line">self.tItemContentSize</span><br><span class="line"><span class="comment">-- item总数</span></span><br><span class="line">self.iTotalItemNum </span><br><span class="line"><span class="comment">-- 重用的item的集合</span></span><br><span class="line">self.tItemView</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ScrollViewDirection.DIR_HORIZONTAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">    self.tContentSize.width = self.tItemContentSize.width * self.iTotalItemNum</span><br><span class="line">    self:getInnerContainer():setContentSize(self.tContentSize)</span><br><span class="line">    self.fLastContentPos = self:getContentSize().width - self.tContentSize.width</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> count = <span class="built_in">math</span>.<span class="built_in">min</span>(self.iTotalItemNum, <span class="built_in">math</span>.<span class="built_in">ceil</span>(self:getContentSize().width / self.tItemContentSize.width) + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, count <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> view = CSBReaderLoad(name)</span><br><span class="line">        view:init(...)</span><br><span class="line">        <span class="keyword">if</span> view.setIndex <span class="keyword">then</span></span><br><span class="line">            view:setIndex(i)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">-- 将父节点转为widget类型（原因可见 上一篇文章）</span></span><br><span class="line">        <span class="keyword">local</span> widget = quick.packageNodeToWidget(view.pLayer:getChildByName(<span class="string">"LayerTouch"</span>))</span><br><span class="line">        view.pLayer = widget</span><br><span class="line">        <span class="comment">-- widget随父节点透明度变化，默认是false</span></span><br><span class="line">        widget:setCascadeOpacityEnabled(<span class="literal">true</span>)</span><br><span class="line">        self:addChild(view.pLayer)</span><br><span class="line"></span><br><span class="line">        view.pLayer:setVisible(i &gt; <span class="number">0</span> <span class="keyword">and</span> i &lt;= self.iTotalItemNum)</span><br><span class="line">        view.pLayer:setPosition(self.tItemContentSize.width * (i - <span class="number">1</span>), <span class="number">0</span>)</span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">insert</span>(self.tItemView, view)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    self:jumpToLeft()</span><br><span class="line">    self:getInnerContainer():setPositionX(self.fLastContentPos)</span><br><span class="line">    self:setTouchEnabled(self.tContentSize.width &gt; self:getContentSize().width)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elseif</span> ScrollViewDirection.DIR_VERTICAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">    self.tContentSize.height = self.tItemContentSize.height * self.iTotalItemNum</span><br><span class="line">    self:getInnerContainer():setContentSize(self.tContentSize)</span><br><span class="line">    self.fLastContentPos = self:getContentSize().height - self.tContentSize.height</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> count = <span class="built_in">math</span>.<span class="built_in">min</span>(self.iTotalItemNum, <span class="built_in">math</span>.<span class="built_in">ceil</span>(self:getContentSize().height / self.tItemContentSize.height) + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, count <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> view = CSBReaderLoad(name)</span><br><span class="line">        view:init(...)</span><br><span class="line">        <span class="keyword">if</span> view.setIndex <span class="keyword">then</span></span><br><span class="line">            view:setIndex(i)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">-- 将父节点转为widget类型（原因可见 上一篇文章）</span></span><br><span class="line">        <span class="keyword">local</span> widget = quick.packageNodeToWidget(view.pLayer:getChildByName(<span class="string">"LayerTouch"</span>))</span><br><span class="line">        view.pLayer = widget</span><br><span class="line">        <span class="comment">-- widget随父节点透明度变化，默认是false</span></span><br><span class="line">        widget:setCascadeOpacityEnabled(<span class="literal">true</span>)</span><br><span class="line">        self:addChild(view.pLayer)</span><br><span class="line"></span><br><span class="line">        view.pLayer:setVisible(i &gt; <span class="number">0</span> <span class="keyword">and</span> i &lt;= self.iTotalItemNum)</span><br><span class="line">        view.pLayer:setPositionY(self.tItemContentSize.height * (self.iTotalItemNum - i))</span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">insert</span>(self.tItemView, view)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    self:jumpToTop()</span><br><span class="line">    self:getInnerContainer():setPositionY(self.fLastContentPos)</span><br><span class="line">    self:setTouchEnabled(self.tContentSize.height &gt; self:getContentSize().height)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="适配item"><a href="#适配item" class="headerlink" title="适配item"></a>适配item</h2><p>根据ScrollView显示区域大小及方向, 适当调整item大小。</p>
+<p>更充分重用item, 适应多尺寸item。</p>
+<p>如果是纵向的ScrollView, 根据width的值, 来决定放缩值。</p>
+<p>如果是横向的ScrollView, 根据height的值, 来决定放缩值。</p>
+<p>然后根据放缩值再修改一下item size的值。</p>
+<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><p>以纵向滑动ScrollView为例</p>
+<ul>
+<li>ScrollView inner 大小</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> scale = ScrollViewSize.width / (ItemSize.width * multiNum)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要绘制item的总个数</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> totalRow = cond(totalItemNum % multiNum == <span class="number">0</span>, </span><br><span class="line">    totalItemNum / multiNum,</span><br><span class="line">    <span class="built_in">math</span>.<span class="built_in">ceil</span>(totalItemNum / multiNum))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>item的位置</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">self.iCount = <span class="built_in">math</span>.<span class="built_in">min</span>(totalRow, <span class="built_in">math</span>.<span class="built_in">ceil</span>(ScrollViewSize.height / ItemSize.height) + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, self.iCount <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> j = <span class="number">1</span>, self.iMultiNum <span class="keyword">do</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        item:setPosition(ItemSize.width * (j - <span class="number">1</span>), ItemSize.height * (totalRow - i))</span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="多行多列"><a href="#多行多列" class="headerlink" title="多行多列"></a>多行多列</h2><p>重用item, 这么棒的东西, 肯定要多用用呀。<br>支持多行多列，是根据ScrollView的滚动方向，再根据传入的行/列值进行设置。<br>需要重新计算一些数值。(下面均以纵向滑动的ScrollView为例)</p>
+<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><p>初始化</p>
+<ul>
+<li>放缩值</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scale = innerSize.width / (itemSize.width * multiNum)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>inner size</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 根据总共需要的行数来计算高度</span></span><br><span class="line">totalRow = (totalItemNum % multiNum == <span class="number">0</span>) <span class="keyword">and</span> (totalItemNum / multiNum) <span class="keyword">or</span> (<span class="built_in">math</span>.<span class="built_in">ceil</span>(totalItemNum / multiNum))</span><br><span class="line">innerSize.height = totalRow * itemSize.height</span><br></pre></td></tr></table></figure>
+<ul>
+<li>item position</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获得需要重用的行数</span></span><br><span class="line">showRow = <span class="built_in">math</span>.<span class="built_in">min</span>(totalRow, <span class="built_in">math</span>.<span class="built_in">ceil</span>(viewSize.height / itemSize.height) + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, showRow <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">for</span> j = <span class="number">1</span>, multiNum <span class="keyword">do</span></span><br><span class="line">		...</span><br><span class="line"></span><br><span class="line">		view:setPosition(itemSize.width * (j - <span class="number">1</span>), itemSize.height * (totalRow - i))</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="item数量不够时的居中"><a href="#item数量不够时的居中" class="headerlink" title="item数量不够时的居中"></a>item数量不够时的居中</h2><p>主要是有个需求，希望item没有填满view的时候，所有的item居中显示。<br>其实，item还是按照原来的方式放置，只需要移动inner的位置即可。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        ScrollView内Item是否居中显示</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        isCenter - boolean</span></span><br><span class="line"><span class="comment">            是否居中显示</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">--]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:setShowCenter</span><span class="params">(isCenter)</span></span></span><br><span class="line">    <span class="keyword">local</span> viewSize = self:getContentSize()</span><br><span class="line">    <span class="keyword">if</span> ScrollViewDirection.DIR_HORIZONTAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> dertaValue = viewSize.width - self.tContentSize.width</span><br><span class="line">        <span class="keyword">if</span> isCenter <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> dertaValue &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">                self:getInnerContainer():setPositionX(dertaValue/<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            self:getInnerContainer():setPositionX(dertaValue)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">elseif</span> ScrollViewDirection.DIR_VERTICAL == self:getDirection() <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> dertaValue = viewSize.height - self.tContentSize.height</span><br><span class="line">        <span class="keyword">if</span> isCenter <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> dertaValue &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">                self:getInnerContainer():setPositionY(dertaValue/<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            self:getInnerContainer():setPositionY(dertaValue)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="刷新数据"><a href="#刷新数据" class="headerlink" title="刷新数据"></a>刷新数据</h2><p>创建完ScrollView，除非item变动自己的位置，否则是不会刷新数据的。<br>所以需要一个手动刷新的方法。<br>这里充分利用了lua的变长参数，在配合人为默认规定。ie</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        刷新ScrollView中指定索引的item</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        ... - 传入一堆int</span></span><br><span class="line"><span class="comment">            item的索引, -1代表全部刷新</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">--]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:refreshItems</span><span class="params">(...)</span></span></span><br><span class="line">    <span class="keyword">local</span> args = &#123;...&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> #args &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> args[<span class="number">1</span>] == <span class="number">-1</span> <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">local</span> items = self:getAllItemView()</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(items) <span class="keyword">do</span></span><br><span class="line">                v:setIndex(v.iIndex)</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="comment">-- 先做一个映射表，便于查找是否需要更新</span></span><br><span class="line">            <span class="keyword">local</span> tempTable = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(args) <span class="keyword">do</span></span><br><span class="line">                tempTable[v] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">local</span> items = self:getAllItemView()</span><br><span class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(items) <span class="keyword">do</span></span><br><span class="line">                <span class="keyword">if</span> v.iIndex <span class="keyword">and</span> tempTable[v.iIndex] == <span class="number">1</span> <span class="keyword">then</span></span><br><span class="line">                    v:setIndex(v.iIndex)</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>这里我用了一个映射表。<br>否则需要嵌套两层循环，复杂度 m * n<br>做一个映射，只需要 n + m<br>用空间来换取时间</p>
+<p><br></p>
+<h2 id="跳转到指定item"><a href="#跳转到指定item" class="headerlink" title="跳转到指定item"></a>跳转到指定item</h2><p>这个功能ListView是支持的，觉得ScrollView也有必要支持一下。<br>方法是先计算出inner需要移动多少距离，从而知道了index需要变化多少。</p>
+<p>主要步骤:（也是以垂直滑动方向为例）</p>
+<ol>
+<li>计算所需跳转的index在最上方位置是第几行</li>
+<li>计算inner需要滑动多少距离</li>
+<li>计算从当前到目标，index需要变动多少</li>
+<li>按照移动后的index，重新布局item</li>
+</ol>
+<h3 id="实现-4"><a href="#实现-4" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>步骤1</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> line = (index % self.iMultiNum == <span class="number">0</span>) <span class="keyword">and</span></span><br><span class="line">    (index / self.iMultiNum) <span class="keyword">or</span></span><br><span class="line">    (<span class="built_in">math</span>.<span class="built_in">ceil</span>(index / self.iMultiNum))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>步骤2</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - <span class="number">1</span>)</span><br><span class="line"><span class="comment">-- 要考虑到滑动到底部，无法继续向上滑的情况</span></span><br><span class="line">posY = (posY &gt; <span class="number">0</span>) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> posY</span><br></pre></td></tr></table></figure>
+<ul>
+<li>步骤3</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> changeIndex = <span class="built_in">math</span>.<span class="built_in">ceil</span>((posY - self:getInnerContainer():getPositionY()) / self.tItemContentSize.height)</span><br><span class="line"><span class="comment">-- inner跳到指定位置</span></span><br><span class="line">self:jumpToDestination(cc.p(<span class="number">0</span>, posY))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>步骤4</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self:updateViewByChangeIndex(changeIndex * self.iMultiNum)</span><br></pre></td></tr></table></figure>
+<h3 id="根据index，重新布局item"><a href="#根据index，重新布局item" class="headerlink" title="根据index，重新布局item"></a>根据index，重新布局item</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        根据index，重新布局item</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        changeIndex:   int</span></span><br><span class="line"><span class="comment">            改变的index值</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:updateViewByChangeIndex</span><span class="params">(changeIndex)</span></span></span><br><span class="line">    <span class="keyword">local</span> totalBlock = (self.iTotalItemNum % self.iMultiNum == <span class="number">0</span>) <span class="keyword">and</span></span><br><span class="line">        (self.iTotalItemNum / self.iMultiNum) <span class="keyword">or</span></span><br><span class="line">        (<span class="built_in">math</span>.<span class="built_in">ceil</span>(self.iTotalItemNum / self.iMultiNum))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> items = self:getAllItemView()</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(items) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> idx = v.iIndex + changeIndex</span><br><span class="line"></span><br><span class="line">        v:setIndex(idx)</span><br><span class="line">        v.pLayer:setVisible(idx &gt; <span class="number">0</span> <span class="keyword">and</span> idx &lt;= self.iTotalItemNum)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">local</span> i = (idx % self.iMultiNum == <span class="number">0</span>) <span class="keyword">and</span> (idx / self.iMultiNum) <span class="keyword">or</span> (<span class="built_in">math</span>.<span class="built_in">ceil</span>(idx / self.iMultiNum))</span><br><span class="line">        <span class="keyword">local</span> j = self.iMultiNum - (idx % self.iMultiNum)</span><br><span class="line">        v.pLayer:setPosition(self.tItemContentSize.width * (j - <span class="number">1</span>), self.tItemContentSize.height * (totalBlock - i))</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="跳转的item在ScrollView中的位置"><a href="#跳转的item在ScrollView中的位置" class="headerlink" title="跳转的item在ScrollView中的位置"></a>跳转的item在ScrollView中的位置</h3><p>需要跳转到的item在可视区域的 上、中、下 显示<br>首先，一定要让使用者传入出现的位置枚举，<br>然后在计算inner移动的位置上加上偏移量。<br>如果要在中间显示，需要减去（向下移动） ScrollViewSize.height/2 , 因为初始的位置是按照item在最上面计算的，减去一半高度后，还需要再加上item本身高度的一半 ItemSize.height/2。<br>如果在底部显示，则需要减去（向下移动） ScrollViewSize.height , 同理，需要再加回来一个item的高度 ItemSize.height。<br>最后，依然要判定滑动到底部，无法滑动的情况。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SCROLLVIEW_ALIGNMENT = &#123;</span><br><span class="line">    FIRST = <span class="number">1</span>,</span><br><span class="line">    MID = <span class="number">2</span>,</span><br><span class="line">    LAST = <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">local</span> posY = self:getContentSize().height - self.tContentSize.height + self.tItemContentSize.height * (line - <span class="number">1</span>)</span><br><span class="line"><span class="keyword">if</span> alignment == SCROLLVIEW_ALIGNMENT.MID <span class="keyword">then</span></span><br><span class="line">    posY = posY - self:getContentSize().height / <span class="number">2</span> + self.tItemContentSize.height / <span class="number">2</span></span><br><span class="line"><span class="keyword">elseif</span> alignment == SCROLLVIEW_ALIGNMENT.LAST <span class="keyword">then</span></span><br><span class="line">    posY = posY - self:getContentSize().height + self.tItemContentSize.height</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">posY = (posY &gt; <span class="number">0</span>) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> posY</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="飞入动画"><a href="#飞入动画" class="headerlink" title="飞入动画"></a>飞入动画</h2><p>额外再加一个飞入动画的支持吧。<br>就是从外部飞入到ScrollView的效果。</p>
+<p>方法也很简单，就是在开始的时候，让所有的item在ScrollView外部；再一个个飞入到自己本应在的位置。<br>依旧是以垂直向为例。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 遍历所有item</span></span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self.tItemView) <span class="keyword">do</span></span><br><span class="line">	<span class="comment">-- 记录它本来所在的位置</span></span><br><span class="line">    <span class="keyword">local</span> aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())</span><br><span class="line"></span><br><span class="line">    <span class="comment">-- 把它放在区域外</span></span><br><span class="line">    v.pLayer:setPositionY(-self:getContentSize().height - self.tItemContentSize.height)</span><br><span class="line">    v.pLayer:runAction(</span><br><span class="line">        act.seq(</span><br><span class="line">        	<span class="comment">-- 一个个飞入</span></span><br><span class="line">            act.delay((k - <span class="number">1</span>) * [delay_time]),</span><br><span class="line">            act.movto([move_time], aimPos)</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>当然，也要支持多方向ScrollView，并且要支持从前端飞入还是从后端飞入。<br>这些都是通过改动初始位置及回弹值来实现。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">    描述:</span></span><br><span class="line"><span class="comment">        ScrollView内item的从外部飞入动画, 有回弹效果</span></span><br><span class="line"><span class="comment">    参数:</span></span><br><span class="line"><span class="comment">        fromBack:   boolean</span></span><br><span class="line"><span class="comment">            对于垂直方向, true代表自下而上; 对于水平方向, true代表自右向左</span></span><br><span class="line"><span class="comment">    返回:</span></span><br><span class="line"><span class="comment">        无</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ScrollView:playFlyInAction</span><span class="params">(fromBack)</span></span></span><br><span class="line">    fromBack = fromBack == <span class="literal">nil</span> <span class="keyword">and</span> <span class="literal">true</span>    </span><br><span class="line">    self.tItemView = self.tItemView <span class="keyword">or</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">   	<span class="keyword">local</span> moveTime = <span class="number">0.2</span></span><br><span class="line">   	<span class="keyword">local</span> delayTime = <span class="number">0.1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self:getDirection() == ScrollViewDirection.DIR_HORIZONTAL <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> initPos = fromBack <span class="keyword">and</span> (self:getContentSize().width + self.tItemContentSize.width) <span class="keyword">or</span> (-self:getContentSize().width - self.tItemContentSize.width)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self.tItemView) <span class="keyword">do</span></span><br><span class="line">            <span class="keyword">local</span> aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())</span><br><span class="line"></span><br><span class="line">            v.pLayer:setPositionX(initPos)</span><br><span class="line">            v.pLayer:runAction(</span><br><span class="line">                act.seq(</span><br><span class="line">                    act.delay((k - <span class="number">1</span>) * delayTime),</span><br><span class="line">                    act.movto(moveTime, aimPos)</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">elseif</span> self:getDirection() == ScrollViewDirection.DIR_VERTICAL <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">local</span> initPos = fromBack <span class="keyword">and</span> (-self:getContentSize().height - self.tItemContentSize.height) <span class="keyword">or</span> (self:getContentSize().height + self.tItemContentSize.height)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self.tItemView) <span class="keyword">do</span></span><br><span class="line">            <span class="keyword">local</span> aimPos = cc.p(v.pLayer:getPositionX(), v.pLayer:getPositionY())</span><br><span class="line"></span><br><span class="line">            v.pLayer:setPositionY(initPos)</span><br><span class="line">            v.pLayer:runAction(</span><br><span class="line">                act.seq(</span><br><span class="line">                    act.delay((k - <span class="number">1</span>) * delayTime),</span><br><span class="line">                    act.movto(moveTime, aimPos)</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2018/05/21/Cocos2d之ScrollView进阶/" title="Cocos2d之ScrollView进阶">http://www.lt-tree.com/2018/05/21/Cocos2d之ScrollView进阶/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多实践/" rel="tag"><i class="fa fa-tag"></i> 多实践</a>
+          
+            <a href="/tags/Cocos2d/" rel="tag"><i class="fa fa-tag"></i> Cocos2d</a>
+          
+            <a href="/tags/Lua/" rel="tag"><i class="fa fa-tag"></i> Lua</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/2017年结之迷不茫/" rel="next" title="2017年结之迷不茫">
+                <i class="fa fa-chevron-left"></i> 2017年结之迷不茫
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/28/Python字典与Lua表转换/" rel="prev" title="Python字典与Lua表转换">
+                Python字典与Lua表转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方案之clone替换create"><span class="nav-number">2.1.</span> <span class="nav-text">方案之clone替换create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案之分帧加载（逐帧加载）"><span class="nav-number">2.2.</span> <span class="nav-text">方案之分帧加载（逐帧加载）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案之异步加载"><span class="nav-number">2.3.</span> <span class="nav-text">方案之异步加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案之边界加载"><span class="nav-number">2.4.</span> <span class="nav-text">方案之边界加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案之重用-item"><span class="nav-number">2.5.</span> <span class="nav-text">方案之重用 item</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#机制"><span class="nav-number">3.1.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#想法"><span class="nav-number">3.2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">3.4.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于update"><span class="nav-number">3.4.1.</span> <span class="nav-text">关于update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要把item封装成Widget"><span class="nav-number">3.4.2.</span> <span class="nav-text">为什么要把item封装成Widget</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">4.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多方向滑动"><span class="nav-number">4.1.</span> <span class="nav-text">多方向滑动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#纵向滑动"><span class="nav-number">4.1.1.</span> <span class="nav-text">纵向滑动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#横向滑动"><span class="nav-number">4.1.2.</span> <span class="nav-text">横向滑动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适配item"><span class="nav-number">4.2.</span> <span class="nav-text">适配item</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-2"><span class="nav-number">4.2.1.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多行多列"><span class="nav-number">4.3.</span> <span class="nav-text">多行多列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-3"><span class="nav-number">4.3.1.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#item数量不够时的居中"><span class="nav-number">4.4.</span> <span class="nav-text">item数量不够时的居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#刷新数据"><span class="nav-number">4.5.</span> <span class="nav-text">刷新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跳转到指定item"><span class="nav-number">4.6.</span> <span class="nav-text">跳转到指定item</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-4"><span class="nav-number">4.6.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据index，重新布局item"><span class="nav-number">4.6.2.</span> <span class="nav-text">根据index，重新布局item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转的item在ScrollView中的位置"><span class="nav-number">4.6.3.</span> <span class="nav-text">跳转的item在ScrollView中的位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#飞入动画"><span class="nav-number">4.7.</span> <span class="nav-text">飞入动画</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-12-11</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+

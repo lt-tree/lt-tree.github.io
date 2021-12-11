@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="跟着学," />
+  <meta name="keywords" content="多总结,Cocos2d," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Cocos2d之颜色混合BlendFunc、Sprite、ImageView">
-<meta name="keywords" content="跟着学">
+<meta name="description" content="Cocos2d之颜色混合 BlendFunc、Sprite、ImageView">
+<meta name="keywords" content="多总结,Cocos2d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cocos2d之颜色混合">
 <meta property="og:url" content="http://yoursite.com/2018/09/09/Cocos2d之颜色混合/index.html">
 <meta property="og:site_name" content="Tree House">
-<meta property="og:description" content="Cocos2d之颜色混合BlendFunc、Sprite、ImageView">
+<meta property="og:description" content="Cocos2d之颜色混合 BlendFunc、Sprite、ImageView">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-18T15:58:29.636Z">
+<meta property="og:updated_time" content="2021-11-05T16:20:46.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cocos2d之颜色混合">
-<meta name="twitter:description" content="Cocos2d之颜色混合BlendFunc、Sprite、ImageView">
+<meta name="twitter:description" content="Cocos2d之颜色混合 BlendFunc、Sprite、ImageView">
 
 
 
@@ -421,7 +421,8 @@
       
 
       
-        <p>Cocos2d之颜色混合<br>BlendFunc、Sprite、ImageView</p>
+        <p>Cocos2d之颜色混合</p>
+<p>BlendFunc、Sprite、ImageView</p>
 <a id="more"></a>
 <p><br></p>
 <h1 id="颜色混合"><a href="#颜色混合" class="headerlink" title="颜色混合"></a>颜色混合</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
@@ -504,16 +505,21 @@
 </tr>
 </tbody>
 </table>
-<p><br><br><br></p>
+<p><br></p>
+<p><br></p>
 <h1 id="Cocos2d相关基础"><a href="#Cocos2d相关基础" class="headerlink" title="Cocos2d相关基础"></a>Cocos2d相关基础</h1><h2 id="BlendFunc"><a href="#BlendFunc" class="headerlink" title="BlendFunc"></a>BlendFunc</h2><p>定义在 ccTypes.h 中，是一个存储源因子和目标因子的结构体。</p>
 <p>内部定义了一些常用混合因子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Blending disabled. Uses &#123;GL_ONE, GL_ZERO&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc DISABLE;</span><br><span class="line"><span class="comment">/** Blending enabled for textures with Alpha premultiplied. Uses &#123;GL_ONE, GL_ONE_MINUS_SRC_ALPHA&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc ALPHA_PREMULTIPLIED;</span><br><span class="line"><span class="comment">/** Blending enabled for textures with Alpha NON premultiplied. Uses &#123;GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc ALPHA_NON_PREMULTIPLIED;</span><br><span class="line"><span class="comment">/** Enables Additive blending. Uses &#123;GL_SRC_ALPHA, GL_ONE&#125; */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BlendFunc ADDITIVE;</span><br></pre></td></tr></table></figure></p>
 <h2 id="BlendProtocol-amp-TextureProtocol"><a href="#BlendProtocol-amp-TextureProtocol" class="headerlink" title="BlendProtocol &amp; TextureProtocol"></a>BlendProtocol &amp; TextureProtocol</h2><p>均定义在协议基类 CCProtocols.h 中，<br>BlendProtocol类是用来设置/获取当前使用的BlendFunc（混合因子）的。<br>TextureProtocol继承了BlendProtocol类，同时提供了对当前纹理的操作支持。</p>
-<p><br><br><br></p>
+<p><br></p>
+<p><br></p>
 <h1 id="Sprite-amp-ImageView"><a href="#Sprite-amp-ImageView" class="headerlink" title="Sprite &amp; ImageView"></a>Sprite &amp; ImageView</h1><p>在Cocos2d中主要是会对图片进行颜色混合的设置，图片类主要就是Sprite和ImageView。</p>
 <h2 id="Sprite"><a href="#Sprite" class="headerlink" title="Sprite"></a>Sprite</h2><p>因为Sprite继承了TextureProtocol类，所以相应继承了对BlendFunc的操作。<br>直接使用 setBlendFunc/getBlendFunc 即可。</p>
-<p><br></p>
 <h2 id="ImageView"><a href="#ImageView" class="headerlink" title="ImageView"></a>ImageView</h2><p>虽然ImageView没有继承相关类，但是所有继承Widget的类都有获取绘制节点的方法 getVirtualRenderer。<br>ImageView重写了这个方法，会返回一个 Scale9Sprite，它是继承Sprite的，然后可以用对Sprite方法了。</p>
-<p><br><br><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
 
       
     </div>
@@ -551,7 +557,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/跟着学/" rel="tag"><i class="fa fa-tag"></i> 跟着学</a>
+            <a href="/tags/多总结/" rel="tag"><i class="fa fa-tag"></i> 多总结</a>
+          
+            <a href="/tags/Cocos2d/" rel="tag"><i class="fa fa-tag"></i> Cocos2d</a>
           
         </div>
       
@@ -579,8 +587,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/02/千分位格式化数字/" rel="next" title="千分位格式化数字">
-                <i class="fa fa-chevron-left"></i> 千分位格式化数字
+              <a href="/2018/09/02/小技巧之千分位格式化数字/" rel="next" title="小技巧之千分位格式化数字">
+                <i class="fa fa-chevron-left"></i> 小技巧之千分位格式化数字
               </a>
             
           </div>
@@ -589,8 +597,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/18/Cocos2d-lua class实现分析/" rel="prev" title="Cocos2d-lua class实现分析">
-                Cocos2d-lua class实现分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/18/Cocos2d之用Lua实现类/" rel="prev" title="Cocos2d之用Lua实现类">
+                Cocos2d之用Lua实现类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -675,7 +683,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -688,7 +696,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -794,7 +802,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-10-31</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-12-11</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

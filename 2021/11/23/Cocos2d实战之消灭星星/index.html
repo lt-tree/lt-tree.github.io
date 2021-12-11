@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多实践," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Cocos2d-x 消灭星星">
+<meta name="keywords" content="多实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d实战之消灭星星">
+<meta property="og:url" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="Cocos2d-x 消灭星星">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/01.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/02.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/03.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/04.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/05.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/06.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/07.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/08.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/09.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/12.png">
+<meta property="og:updated_time" content="2021-11-23T15:10:23.445Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d实战之消灭星星">
+<meta name="twitter:description" content="Cocos2d-x 消灭星星">
+<meta name="twitter:image" content="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/"/>
+
+
+
+
+
+  <title>Cocos2d实战之消灭星星 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/23/Cocos2d实战之消灭星星/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cocos2d实战之消灭星星</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-23T21:00:00+08:00">
+                2021-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/11/23/Cocos2d实战之消灭星星/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/11/23/Cocos2d实战之消灭星星/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/11/23/Cocos2d实战之消灭星星/" class="leancloud_visitors" data-flag-title="Cocos2d实战之消灭星星">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,416 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Cocos2d-x 消灭星星</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>将很久以前写的教程梳理梳理</p>
+<p><br></p>
+<p><br></p>
+<h1 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h1><p>环境：</p>
+<ul>
+<li>Cocos2d-x 3.4</li>
+<li>VS2012</li>
+</ul>
+<h2 id="一、游戏场景-amp-选中星星"><a href="#一、游戏场景-amp-选中星星" class="headerlink" title="一、游戏场景 &amp; 选中星星"></a>一、游戏场景 &amp; 选中星星</h2><p>星星类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">       <span class="comment">/*           初始化           */</span></span><br><span class="line">Star();</span><br><span class="line"><span class="function"><span class="keyword">static</span> Star* <span class="title">create</span><span class="params">( <span class="keyword">int</span> row , <span class="keyword">int</span> col )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设定星星显示状态</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setDisplayMode</span><span class="params">(DisplayMode mode)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*           设定函数           */</span></span><br><span class="line">CC_SYNTHESIZE(<span class="keyword">int</span>, m_row, Row);</span><br><span class="line">       CC_SYNTHESIZE(<span class="keyword">int</span>, m_col, Col);</span><br><span class="line">CC_SYNTHESIZE(<span class="keyword">int</span>, m_imgIndex, ImgIndex);</span><br><span class="line">       CC_SYNTHESIZE_READONLY(DisplayMode, m_displayMode, DisplayMode);</span><br></pre></td></tr></table></figure>
+<p>GameDefine文件，存储游戏内的一些常量设定</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义屏幕宽高，这与所做的图片有关</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GAME_SCREEN_WIDTH 480</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GAME_SCREEN_HEIGHT 800</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 定义每个精灵大小与边框大小</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STAR_WIDTH 48</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BOADER_WIDTH 0.5</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 行列值</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROWS 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> COLS 10</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 关于这些星星</span></span><br><span class="line"><span class="comment">// 星星的模式，NORMAL 普通状态，HEART 高亮状态</span></span><br><span class="line"><span class="keyword">enum</span> DisplayMode&#123;</span><br><span class="line">    DISPLAY_MODE_NORMAL = <span class="number">0</span>,</span><br><span class="line">    DISPLAY_MODE_HEART</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 星星总数</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TOTAL_STAR 5</span></span><br><span class="line"><span class="comment">// 普通状态</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *starNormal[TOTAL_STAR] = &#123;</span><br><span class="line">	<span class="string">"red.png"</span>,</span><br><span class="line">	<span class="string">"blue.png"</span>,</span><br><span class="line">	<span class="string">"green.png"</span>,</span><br><span class="line">	<span class="string">"purple.png"</span>,</span><br><span class="line">	<span class="string">"yellow.png"</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 高亮状态</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> *starHeart[TOTAL_STAR] = &#123;</span><br><span class="line">	<span class="string">"red_heart.png"</span>,</span><br><span class="line">	<span class="string">"blue_heart.png"</span>,</span><br><span class="line">	<span class="string">"green_heart.png"</span>,</span><br><span class="line">	<span class="string">"purple_heart.png"</span>,</span><br><span class="line">	<span class="string">"yellow_heart.png"</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>游戏场景，用一个二维数组来存储星星个体，通过plist文件加载图集</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载plist和png</span></span><br><span class="line">SpriteFrameCache::getInstance()-&gt;addSpriteFramesWithFile(<span class="string">"stars.plist"</span>);</span><br><span class="line">starSheet = Sprite::create();</span><br><span class="line">starSheet-&gt;setAnchorPoint(Vec2::ZERO);</span><br><span class="line"><span class="keyword">this</span>-&gt;addChild(starSheet,<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 初始化坐标值</span></span><br><span class="line">mapLBX = (GAME_SCREEN_WIDTH - STAR_WIDTH * COLS - (COLS - <span class="number">1</span>) * BOADER_WIDTH) / <span class="number">2</span>;</span><br><span class="line">mapLBY = (GAME_SCREEN_HEIGHT - STAR_WIDTH * ROWS - (ROWS - <span class="number">1</span>) * BOADER_WIDTH) / <span class="number">2</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">auto</span> sprite = Sprite::create(<span class="string">"bg_mainscene.jpg"</span>);</span><br><span class="line">sprite-&gt;setPosition(Vec2(GAME_SCREEN_WIDTH/<span class="number">2</span>,GAME_SCREEN_HEIGHT/<span class="number">2</span>));</span><br><span class="line"><span class="keyword">this</span>-&gt;addChild(sprite, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">initMap();</span><br></pre></td></tr></table></figure>
+<p>初始化地图方法 &amp; 创建星星方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化地图</span></span><br><span class="line"><span class="keyword">void</span> GameScene::initMap( )	&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>( <span class="keyword">int</span> r = <span class="number">0</span> ; r &lt; ROWS ; ++r )&#123;</span><br><span class="line">		<span class="keyword">for</span>( <span class="keyword">int</span> c = <span class="number">0</span> ; c &lt; COLS ; ++c )&#123;</span><br><span class="line">			createStar(r,c);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 创建星星</span></span><br><span class="line"><span class="keyword">void</span> GameScene::createStar( <span class="keyword">int</span> row , <span class="keyword">int</span> col )	</span><br><span class="line">&#123;</span><br><span class="line">	Star* spr = Star::create(row, col);</span><br><span class="line">	</span><br><span class="line">	Point pos = positionOfItem(row, col);</span><br><span class="line">    spr-&gt;setPosition(pos);</span><br><span class="line">    starSheet -&gt; addChild(spr);</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 填充数组相应位置</span></span><br><span class="line">    <span class="built_in">map</span>[row][col] = spr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行一下，场景显示完毕</p>
+<p><img src="01.png" alt=""></p>
+<p>接下来，处理选中星星，先是触摸事件的添加</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GameScene.cpp  init函数</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 触摸事件处理</span></span><br><span class="line"><span class="keyword">auto</span> touchListener = EventListenerTouchOneByOne::create();</span><br><span class="line">touchListener-&gt;onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, <span class="keyword">this</span>);</span><br><span class="line">_eventDispatcher-&gt;addEventListenerWithSceneGraphPriority(touchListener, <span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>当触摸的时候，逻辑如下：当选中一个星星时，要让它和四个方向上同色的星星都处于高亮状态。</p>
+<p>可以使用一个搜索算法实现</p>
+<ol>
+<li>让当前星星处于高亮状态</li>
+<li>将当前星星分别与和四个方向上星星进行颜色比较<ul>
+<li>若相同，将该星星坐标扔进函数</li>
+<li>若不同，则跳过</li>
+</ul>
+</li>
+</ol>
+<p>当然，要记得设置标记数组，避免遍历过的星星再次遍历。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 触摸事件</span></span><br><span class="line"><span class="keyword">bool</span> GameScene::onTouchBegan(Touch *touch, Event *unused)	&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">auto</span> location = touch-&gt;getLocation();</span><br><span class="line">	Star* sta;</span><br><span class="line">	sta = starOfPoint(&amp;location);</span><br><span class="line">	<span class="keyword">if</span>( sta )	&#123;</span><br><span class="line">		<span class="comment">// 初始化记忆地图mapR+恢复普通状态</span></span><br><span class="line">		<span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; ROWS ; i++ )	&#123;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;COLS ; j++ )	&#123;</span><br><span class="line">				mapR[i][j] = <span class="literal">false</span>;</span><br><span class="line">				<span class="built_in">map</span>[i][j]-&gt;setDisplayMode(DISPLAY_MODE_NORMAL);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 如果只有当前一个星星这个颜色，不要让它处于高亮状态</span></span><br><span class="line">		<span class="keyword">if</span>( waitPop(sta-&gt;getRow(),sta-&gt;getCol()) == <span class="number">1</span> )	</span><br><span class="line">			sta-&gt;setDisplayMode(DISPLAY_MODE_NORMAL);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面mapR数组就是标记数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> GameScene::waitPop(<span class="keyword">int</span> row , <span class="keyword">int</span> col)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> i,r,c,tol;</span><br><span class="line">	<span class="comment">// 四个方向 </span></span><br><span class="line">	<span class="keyword">int</span> search[<span class="number">4</span>][<span class="number">2</span>]=&#123;<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"> </span><br><span class="line">	tol = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">map</span>[row][col]-&gt;setDisplayMode(DISPLAY_MODE_HEART);</span><br><span class="line">	mapR[row][col] = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 四个方向遍历</span></span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++ )	&#123;</span><br><span class="line">		r = row + search[i][<span class="number">0</span>];</span><br><span class="line">		c = col + search[i][<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span>( r &gt;= <span class="number">0</span> &amp;&amp; r &lt; ROWS &amp;&amp; c &gt;= <span class="number">0</span> &amp;&amp; c &lt; COLS )	&#123;</span><br><span class="line">			<span class="keyword">if</span>( <span class="built_in">map</span>[row][col]-&gt;getImgIndex() == <span class="built_in">map</span>[r][c]-&gt;getImgIndex() &amp;&amp; !mapR[r][c] )	&#123;</span><br><span class="line">				mapR[r][c] = <span class="literal">true</span>;</span><br><span class="line">				tol += waitPop(r,c);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> tol;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>提取设置一些工具函数，方便处理</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据行列，获取坐标值</span></span><br><span class="line">Point GameScene::positionOfItem(<span class="keyword">int</span> row , <span class="keyword">int</span> col)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">float</span> x = mapLBX + (STAR_WIDTH + BOADER_WIDTH) * col + STAR_WIDTH / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> y = mapLBY + (STAR_WIDTH + BOADER_WIDTH) * row + STAR_WIDTH / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> Point(x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据触摸点，判断地图上的星星位置</span></span><br><span class="line">Star* GameScene::starOfPoint(Point *point)</span><br><span class="line">&#123;</span><br><span class="line">    Star *sta = <span class="literal">NULL</span>;</span><br><span class="line">    Rect rect = Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	Size sz;</span><br><span class="line">	sz.height=STAR_WIDTH;</span><br><span class="line">	sz.width=STAR_WIDTH;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span>( <span class="keyword">int</span> r = <span class="number">0</span> ; r &lt; ROWS ; ++r )	&#123;</span><br><span class="line">		<span class="keyword">for</span>( <span class="keyword">int</span> c = <span class="number">0</span> ; c &lt; COLS ; ++c )	&#123;</span><br><span class="line">			sta = <span class="built_in">map</span>[r][c];</span><br><span class="line">			<span class="keyword">if</span>( sta )	&#123;</span><br><span class="line">				rect.origin.x = sta-&gt;getPositionX() - ( STAR_WIDTH / <span class="number">2</span>);</span><br><span class="line">				rect.origin.y = sta-&gt;getPositionY() - ( STAR_WIDTH / <span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line">				rect.size = sz;</span><br><span class="line">				<span class="keyword">if</span> (rect.containsPoint(*point)) &#123;</span><br><span class="line">					<span class="keyword">return</span> sta;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下</p>
+<p><img src="02.png" alt=""></p>
+<p><br></p>
+<h2 id="二、消除逻辑"><a href="#二、消除逻辑" class="headerlink" title="二、消除逻辑"></a>二、消除逻辑</h2><p>处于高亮状态下的星星，再次被点击时的消除逻辑</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 触摸事件</span></span><br><span class="line"><span class="keyword">bool</span> GameScene::onTouchBegan(Touch *touch, Event *unused)	&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">auto</span> location = touch-&gt;getLocation();</span><br><span class="line">	Star* sta;</span><br><span class="line">	sta = starOfPoint(&amp;location);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 当前对象不为空</span></span><br><span class="line">	<span class="keyword">if</span>( sta )	&#123;</span><br><span class="line">		<span class="comment">// 看该 星星 处于什么状态</span></span><br><span class="line">		<span class="keyword">if</span>( sta-&gt;getDisplayMode() == DISPLAY_MODE_NORMAL )	&#123;</span><br><span class="line"> </span><br><span class="line">			<span class="comment">// 初始化记忆地图mapR+恢复普通状态</span></span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; ROWS ; i++ )	&#123;</span><br><span class="line">				<span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;COLS ; j++ )	&#123;</span><br><span class="line">					mapR[i][j] = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">if</span>( <span class="built_in">map</span>[i][j]!=<span class="literal">NULL</span> )</span><br><span class="line">						<span class="built_in">map</span>[i][j]-&gt;setDisplayMode(DISPLAY_MODE_NORMAL);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"> </span><br><span class="line">			<span class="comment">// 如果只有当前一个星星这个颜色，不要让它处于高亮状态</span></span><br><span class="line">			<span class="keyword">if</span>( waitPop(sta-&gt;getRow(),sta-&gt;getCol()) == <span class="number">1</span> )	&#123;</span><br><span class="line">				mapR[sta-&gt;getRow()][sta-&gt;getCol()]=<span class="literal">false</span>;</span><br><span class="line">				sta-&gt;setDisplayMode(DISPLAY_MODE_NORMAL);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			deleteStar();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在所点击的星星非空时，判断星星是否为高亮状态，若不是，则初始化标记数组，将所有星星显示状态恢复为普通。</p>
+<p>注意，此处所有星星的显示状态中，要把消除掉的过滤掉。</p>
+<p>然后，是消除星星的方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameScene::deleteStar( <span class="keyword">void</span> )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> r,c;</span><br><span class="line">	<span class="keyword">for</span>( r = <span class="number">0</span> ; r &lt; ROWS ; r++ )	&#123;</span><br><span class="line">		<span class="keyword">for</span>( c = <span class="number">0</span> ;c &lt; COLS ; c++ )	&#123;</span><br><span class="line">			<span class="keyword">if</span>( mapR[r][c] == <span class="literal">true</span> )	&#123;	</span><br><span class="line">				<span class="comment">// popStar(map[i][j]);</span></span><br><span class="line"> </span><br><span class="line">				<span class="built_in">map</span>[r][c]-&gt;removeFromParent();</span><br><span class="line">				<span class="built_in">map</span>[r][c]=<span class="literal">NULL</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>初始化标记数组，可用memset函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GameScene::GameScene()	</span><br><span class="line">: starSheet(<span class="literal">NULL</span>)</span><br><span class="line">,mapLBX ( (GAME_SCREEN_WIDTH - STAR_WIDTH * COLS - (COLS - <span class="number">1</span>) * BOADER_WIDTH) / <span class="number">2</span> )</span><br><span class="line">,mapLBY ( (GAME_SCREEN_HEIGHT - STAR_WIDTH * ROWS - (ROWS - <span class="number">1</span>) * BOADER_WIDTH) / <span class="number">2</span> )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 初始化 mapR 数组(string.h 头文件)</span></span><br><span class="line">	<span class="built_in">memset</span>(mapR,<span class="literal">false</span>,<span class="keyword">sizeof</span>(mapR));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看一下消除后的效果（本来想用GIF，但是工具出了点问题，简单看个图片吧）</p>
+<p><img src="03.png" alt=""></p>
+<p>星星已经消除成功，接下来是消除后的整合处理。</p>
+<p>思路：</p>
+<ol>
+<li>向下归拢，按列为单位，每列中从下往上遍历</li>
+<li>遍历到第一个为空对象，将该对象上方第一个不为空对象，落下来，不断向上遍历到最后</li>
+<li>向左归拢，依旧按列为单位，先判断每列第一行是否为空</li>
+<li>遍历到第一个为空对象，将该对象右方第一个不为空对象，移过来，不断向右遍历到最后</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameScene::adjustStar( )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> r,c;</span><br><span class="line">	<span class="comment">// 向下归拢</span></span><br><span class="line">	<span class="keyword">for</span>( c = <span class="number">0</span> ; c &lt; COLS ; c++ )	&#123;</span><br><span class="line">		<span class="keyword">for</span>( r = <span class="number">0</span> ; r &lt; ROWS<span class="number">-1</span> ; r++ )	&#123;</span><br><span class="line">			<span class="keyword">if</span>( <span class="built_in">map</span>[r][c] == <span class="literal">NULL</span> )	&#123;</span><br><span class="line">				<span class="keyword">for</span>( <span class="keyword">int</span> newR = r+<span class="number">1</span> ; newR &lt; ROWS ; newR++ )	&#123;</span><br><span class="line">					Star* sta = <span class="built_in">map</span>[newR][c];</span><br><span class="line">					<span class="keyword">if</span>( sta != <span class="literal">NULL</span> )	&#123;</span><br><span class="line"> </span><br><span class="line">						<span class="built_in">map</span>[r][c] = sta;</span><br><span class="line">						<span class="built_in">map</span>[newR][c] = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">						Point startPosition = sta-&gt;getPosition();</span><br><span class="line">						Point endPosition = positionOfItem(r, c);</span><br><span class="line">						<span class="keyword">float</span> speed = (startPosition.y - endPosition.y) / GAME_SCREEN_HEIGHT*<span class="number">2</span>;</span><br><span class="line">						sta-&gt;stopAllActions();</span><br><span class="line">						sta-&gt;runAction(MoveTo::create(speed, endPosition));</span><br><span class="line">						sta-&gt;setRow(r);</span><br><span class="line"> </span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 向左归拢</span></span><br><span class="line">	<span class="keyword">for</span>( c = <span class="number">0</span> ; c &lt; COLS<span class="number">-1</span> ; c++ )	</span><br><span class="line">		<span class="keyword">if</span>( <span class="built_in">map</span>[<span class="number">0</span>][c] == <span class="literal">NULL</span> )	&#123;</span><br><span class="line">			<span class="keyword">for</span>( <span class="keyword">int</span> newC=c+<span class="number">1</span>; newC &lt; COLS ; newC++ )	&#123;</span><br><span class="line">				<span class="keyword">if</span>( <span class="built_in">map</span>[<span class="number">0</span>][newC] != <span class="literal">NULL</span> )	&#123;</span><br><span class="line">					<span class="keyword">for</span>( <span class="keyword">int</span> moveR = <span class="number">0</span> ; moveR &lt; ROWS ; moveR++ )	&#123;</span><br><span class="line">						Star* sta = <span class="built_in">map</span>[moveR][newC];</span><br><span class="line">						</span><br><span class="line">						<span class="keyword">if</span>( sta!=<span class="literal">NULL</span> )	&#123;</span><br><span class="line">							<span class="built_in">map</span>[moveR][c] = sta;</span><br><span class="line">							<span class="built_in">map</span>[moveR][newC] = <span class="literal">NULL</span>;</span><br><span class="line"> </span><br><span class="line">							Point startPosition = sta-&gt;getPosition();</span><br><span class="line">							Point endPosition = positionOfItem(moveR,c);</span><br><span class="line">							<span class="keyword">float</span> speed = (startPosition.x - endPosition.x) / GAME_SCREEN_WIDTH*<span class="number">2</span>;</span><br><span class="line">							sta-&gt;stopAllActions();</span><br><span class="line">							sta-&gt;runAction(MoveTo::create(speed, endPosition));</span><br><span class="line">							sta-&gt;setCol(c);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果展示</p>
+<p><img src="04.png" alt=""></p>
+<p>最后，判断游戏是否结束</p>
+<p>思路：</p>
+<ul>
+<li>由于数组不大，直接遍历即可</li>
+<li>将本对象与上下左右四个方向上对象比较<ul>
+<li>如果有同颜色，直接返回false（表示 未结束）</li>
+<li>如果无同颜色，返回true（表示 结束）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> GameScene::isFinish( )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> i,r,c;</span><br><span class="line">	<span class="comment">// 四个方向 </span></span><br><span class="line">	<span class="keyword">int</span> search[<span class="number">4</span>][<span class="number">2</span>]=&#123;<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span>( r = <span class="number">0</span> ; r &lt; ROWS ; r++ )	&#123;</span><br><span class="line">		<span class="keyword">for</span>( c = <span class="number">0</span> ; c &lt; COLS ; c++ )	&#123;</span><br><span class="line">			<span class="keyword">if</span>( !<span class="built_in">map</span>[r][c] )	<span class="keyword">continue</span>;</span><br><span class="line"> </span><br><span class="line">			<span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++ )	&#123;</span><br><span class="line">				<span class="keyword">int</span> nr = r + search[i][<span class="number">0</span>];</span><br><span class="line">				<span class="keyword">int</span> nc = c + search[i][<span class="number">1</span>];</span><br><span class="line"> </span><br><span class="line">				<span class="keyword">if</span>( nr&gt;=<span class="number">0</span> &amp;&amp; nr&lt;ROWS &amp;&amp; nc&gt;=<span class="number">0</span> &amp;&amp; nc&lt;COLS )	&#123;</span><br><span class="line">					<span class="keyword">if</span>( <span class="built_in">map</span>[nr][nc]!=<span class="literal">NULL</span> )	&#123;</span><br><span class="line">						<span class="keyword">if</span>( <span class="built_in">map</span>[r][c]-&gt;getImgIndex() == <span class="built_in">map</span>[nr][nc]-&gt;getImgIndex() )</span><br><span class="line">							<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后效果</p>
+<p><img src="05.png" alt=""></p>
+<p><br></p>
+<h2 id="三、特效"><a href="#三、特效" class="headerlink" title="三、特效"></a>三、特效</h2><h3 id="爆炸特效"><a href="#爆炸特效" class="headerlink" title="爆炸特效"></a>爆炸特效</h3><p>在星星消除后，加一些爆炸的粒子特效</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">starSpecialEffect</span><span class="params">(Star* sta,Point position,Node* node,<span class="keyword">int</span> staNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 创建爆炸粒子效果，粒子数量为 staNum 个</span></span><br><span class="line">	ParticleExplosion* effect = ParticleExplosion::createWithTotalParticles(staNum);</span><br><span class="line">	<span class="comment">// 设置此粒子特效的纹理图片</span></span><br><span class="line">    effect-&gt;setTexture(Director::getInstance()-&gt;getTextureCache()-&gt;addImage(<span class="string">"star.png"</span>));</span><br><span class="line">	<span class="comment">// 设置开始时候的粒子颜色</span></span><br><span class="line">	effect-&gt;setStartColor(getColor4F(sta-&gt;getImgIndex()));</span><br><span class="line">	effect-&gt;setStartColorVar(Color4F(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>));</span><br><span class="line">    effect-&gt;setEndColor(getColor4F(sta-&gt;getImgIndex()));</span><br><span class="line">    effect-&gt;setEndColorVar(Color4F(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>));</span><br><span class="line">	<span class="comment">// 设置开始时的粒子大小</span></span><br><span class="line">    effect-&gt;setStartSize(<span class="number">20.0f</span>);</span><br><span class="line">    effect-&gt;setGravity(Point(<span class="number">0</span>,<span class="number">-300</span>));</span><br><span class="line">	<span class="comment">// 设置粒子生命周期</span></span><br><span class="line">    effect-&gt;setLife(<span class="number">2.0f</span>);</span><br><span class="line">	<span class="comment">// 设置粒子速度</span></span><br><span class="line">    effect-&gt;setSpeed(<span class="number">200</span>);</span><br><span class="line">    effect-&gt;setSpeedVar(<span class="number">10</span>);</span><br><span class="line">	<span class="comment">// 设置粒子位置</span></span><br><span class="line">    effect-&gt;setPosition(position);</span><br><span class="line">    node-&gt;addChild(effect,<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function">Color4F <span class="title">getColor4F</span><span class="params">(<span class="keyword">int</span> imgIndex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">switch</span>(imgIndex)&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		<span class="comment">//red</span></span><br><span class="line">		<span class="keyword">return</span> Color4F::RED;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		<span class="comment">//blue</span></span><br><span class="line">		<span class="keyword">return</span> Color4F::BLUE;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		<span class="comment">//green</span></span><br><span class="line">		<span class="keyword">return</span> Color4F::GREEN;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		<span class="comment">//purple</span></span><br><span class="line">		<span class="keyword">return</span> Color4F(<span class="number">128.0f</span>,<span class="number">0</span>,<span class="number">128.0f</span>,<span class="number">1.0f</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">		<span class="comment">//yellow</span></span><br><span class="line">		<span class="keyword">return</span> Color4F::YELLOW;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Color4F(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下</p>
+<p><img src="06.png" alt=""></p>
+<h3 id="音乐音效"><a href="#音乐音效" class="headerlink" title="音乐音效"></a>音乐音效</h3><p>此处用UserDefault存储开关，此处并没有分开处理，而是一个开关控制。</p>
+<p>背景音乐，需要重载虚函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 场景加载完成后进行</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">onEnterTransitionDidFinish</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">// 场景被消除时执行</span></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p>添加方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> WelcomeScene::onEnterTransitionDidFinish()</span><br><span class="line">&#123;</span><br><span class="line">	Layer::onEnterTransitionDidFinish();  </span><br><span class="line">	<span class="keyword">if</span> ( userDefault-&gt;getBoolForKey(<span class="string">"MusicKey"</span>) ) &#123;                      </span><br><span class="line">        SimpleAudioEngine::getInstance()-&gt;playBackgroundMusic(<span class="string">"Music/music.ogg"</span>, <span class="literal">true</span>);  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> WelcomeScene::cleanup()</span><br><span class="line">&#123;</span><br><span class="line">	Layer::cleanup();</span><br><span class="line">	SimpleAudioEngine::getInstance()-&gt;stopBackgroundMusic();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="漂浮文字"><a href="#漂浮文字" class="headerlink" title="漂浮文字"></a>漂浮文字</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">FloatWord* FloatWord::create( <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; word,<span class="keyword">const</span> <span class="keyword">int</span> fontSize,Vec2 begin )</span><br><span class="line">&#123;</span><br><span class="line">	FloatWord* fw = <span class="keyword">new</span> FloatWord();</span><br><span class="line">	<span class="keyword">if</span>( !fw-&gt;init(word,fontSize,begin) )	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	fw-&gt;autorelease();</span><br><span class="line">	<span class="keyword">return</span> fw;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> FloatWord::floatInOut(<span class="keyword">const</span> <span class="keyword">float</span> speed,<span class="keyword">const</span> <span class="keyword">float</span> delayTime,<span class="built_in">std</span>::function&lt;<span class="keyword">void</span>()&gt; callback)&#123;</span><br><span class="line">	</span><br><span class="line">	MoveTo* moveIn = MoveTo::create(speed,Vec2(GAME_SCREEN_WIDTH/<span class="number">2</span>,fw_begin.y));</span><br><span class="line">	MoveTo* moveOut = MoveTo::create(speed,Vec2(-fw_label-&gt;getContentSize().width,fw_begin.y));</span><br><span class="line"> </span><br><span class="line">	CallFunc* call = CallFunc::create(callback);</span><br><span class="line"> </span><br><span class="line">	Sequence* action = Sequence::create(moveIn,DelayTime::create(delayTime),moveOut,call,<span class="literal">NULL</span>);</span><br><span class="line">	fw_label-&gt;runAction(action);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">void</span> FloatWord::floatIn(<span class="keyword">const</span> <span class="keyword">float</span> speed)&#123;</span><br><span class="line">	</span><br><span class="line">	MoveTo* moveIn = MoveTo::create(speed,Vec2(GAME_SCREEN_WIDTH/<span class="number">2</span>,fw_begin.y));</span><br><span class="line"> </span><br><span class="line">	Sequence* action = Sequence::create(moveIn,<span class="literal">NULL</span>);</span><br><span class="line">	fw_label-&gt;runAction(action);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">void</span> FloatWord::floatOut(<span class="keyword">const</span> <span class="keyword">float</span> speed,<span class="keyword">const</span> <span class="keyword">float</span> delayTime)&#123;</span><br><span class="line">	</span><br><span class="line">	MoveTo* moveOut = MoveTo::create(speed,Vec2(-fw_label-&gt;getContentSize().width,fw_begin.y));</span><br><span class="line"> </span><br><span class="line">	Sequence* action = Sequence::create(DelayTime::create(delayTime),moveOut,<span class="literal">NULL</span>);</span><br><span class="line">	fw_label-&gt;runAction(action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加后效果：</p>
+<p><img src="07.png" alt=""></p>
+<h3 id="Combo特效-amp-最终星星消除"><a href="#Combo特效-amp-最终星星消除" class="headerlink" title="Combo特效 &amp; 最终星星消除"></a>Combo特效 &amp; 最终星星消除</h3><p>首先是combo特效，每次消除的时候，判断消除的个数是否满足combo条件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">comboEffect</span><span class="params">(<span class="keyword">int</span> num,Node* node)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>( num &lt; <span class="number">5</span> )</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line"> </span><br><span class="line">	Sprite* comboSprite;</span><br><span class="line">	<span class="keyword">if</span>( num &gt;= <span class="number">10</span> )&#123;</span><br><span class="line">		comboSprite = Sprite::create(<span class="string">"combo_3.png"</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>( num &gt;= <span class="number">7</span> )&#123;</span><br><span class="line">		comboSprite = Sprite::create(<span class="string">"combo_2.png"</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		comboSprite = Sprite::create(<span class="string">"combo_1.png"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	comboSprite-&gt;setPosition(Vec2(GAME_SCREEN_WIDTH/<span class="number">2</span>,GAME_SCREEN_HEIGHT/<span class="number">2</span>));</span><br><span class="line">	node-&gt;addChild(comboSprite,<span class="number">4</span>);</span><br><span class="line"> </span><br><span class="line">	Blink* blink = Blink::create(<span class="number">1.0f</span>,<span class="number">5</span>);</span><br><span class="line">	CallFunc* remove = CallFunc::create([=]()&#123;comboSprite-&gt;removeFromParentAndCleanup(<span class="literal">true</span>);&#125;);</span><br><span class="line">	Sequence* action = Sequence::create(blink,remove,<span class="literal">nullptr</span>);</span><br><span class="line">	comboSprite-&gt;runAction(action);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后星星消除，流程如下</p>
+<ol>
+<li>判断此关卡结束（没有可以消除的星星），然后将全局的关卡结束变量设置为true，获得剩余星星的数量，如果剩余星星数量大于10则设置为10个（因为一个个消除的效果，最多10个）</li>
+<li>在update函数中（每一帧都会调用），会判断关卡是否结束；若结束，调用消除函数，10个以内，每消除一个都会返回，不会继续消除，而且记录消除时间，消除一次后一定时间间隔再进行下一次消除</li>
+<li>消除完10个（或者小于10个）以后，不会再返回，会一次性将剩余星星消除完毕，将关卡结束变量设置为false</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>( isFinish() )	&#123;</span><br><span class="line">    isLevelFinish = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> temp = totalStarNum();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span>( temp &lt;= <span class="number">10</span> )	&#123;</span><br><span class="line">        needDelOneByOne = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    needDelOneByOne = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>update函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameScene::update( <span class="keyword">float</span> dt )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 分数变化</span></span><br><span class="line">	Label *labelScore = (Label *)<span class="keyword">this</span> -&gt; getChildByTag(<span class="number">6</span>);</span><br><span class="line">	labelScore -&gt; setString( StringUtils::format(<span class="string">"Score: %d "</span>,_score));</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 如果当前关卡结束  星星一个个消除的实现</span></span><br><span class="line">	<span class="keyword">if</span>( isLevelFinish )	&#123;</span><br><span class="line"> </span><br><span class="line">		deleteTime += dt;</span><br><span class="line">		<span class="keyword">if</span>( deleteTime &gt; DELSTAR_ONEBYONE_TIME )	&#123;</span><br><span class="line">			popFinishStar(needDelOneByOne);</span><br><span class="line">			needDelOneByOne--;</span><br><span class="line">			deleteTime = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>消除最终星星函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GameScene::popFinishStar( <span class="keyword">int</span> n )</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> r,c;</span><br><span class="line">	Star* sta;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span>( r = ROWS<span class="number">-1</span> ; r &gt;= <span class="number">0</span> ; r-- )	&#123;</span><br><span class="line">		<span class="keyword">for</span>( c = <span class="number">0</span> ; c &lt; COLS ; c++ )	&#123;</span><br><span class="line">			sta = <span class="built_in">map</span>[r][c];</span><br><span class="line">			<span class="keyword">if</span>( sta )	&#123;</span><br><span class="line">					starSpecialEffect(sta,sta-&gt;getPosition(),<span class="keyword">this</span>,<span class="number">5</span>);</span><br><span class="line">					<span class="built_in">map</span>[r][c]=<span class="literal">NULL</span>;</span><br><span class="line">					sta-&gt;removeFromParentAndCleanup(<span class="literal">true</span>);</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					starSpecialEffect(sta,sta-&gt;getPosition(),<span class="keyword">this</span>,totalStarNum()*<span class="number">4</span>);</span><br><span class="line">					<span class="built_in">map</span>[r][c]=<span class="literal">NULL</span>;</span><br><span class="line">					sta-&gt;removeFromParentAndCleanup(<span class="literal">true</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">	isLevelFinish = <span class="literal">false</span>;</span><br><span class="line">	scheduleOnce(schedule_selector(GameScene::levelOver),<span class="number">2.0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>各种combo效果</p>
+<p><img src="08.png" alt=""></p>
+<p><img src="09.png" alt=""></p>
+<p><img src="10.png" alt=""></p>
+<h3 id="最高分记录"><a href="#最高分记录" class="headerlink" title="最高分记录"></a>最高分记录</h3><p>依旧用UserDefault存储</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>( userDefault-&gt;getIntegerForKey(<span class="string">"HightScore"</span>) &lt; _score )</span><br><span class="line">		userDefault-&gt;setIntegerForKey(<span class="string">"HightScore"</span>,_score);</span><br></pre></td></tr></table></figure>
+<p>场景的存储用了push和pop，</p>
+<p>在主界面定义一个变量，来判断是否可以继续，</p>
+<p>刚进入主界面时，场景栈是没有场景存储的，此时点击继续游戏就会退出游戏，所以要在场景栈没有场景时，不允许点击继续游戏按钮，</p>
+<p>这个变量，在从游戏界面跳转到主界面（通过返回函数跳转）时，会设置为true，就是可以点击。</p>
+<h3 id="消除星星Hint"><a href="#消除星星Hint" class="headerlink" title="消除星星Hint"></a>消除星星Hint</h3><p>当消除几个星星，都要有提示，加了多少分。</p>
+<p>游戏结束，如果剩余星星数小于10个，还会有额外加分。</p>
+<p>星星消除逻辑</p>
+<ul>
+<li><p>一个等差数列，第一个星星5分，第二个15分，第三个25分（首项为5，公差为10）</p>
+</li>
+<li><p>当消除n个星星</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n*5 + n*(n-1) * 10 / 2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>剩余星星数量，所获得的额外分数，则通过数组，放在GameDefine头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 剩余星星所奖励的分数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> rewardScore[<span class="number">11</span>] = &#123;</span><br><span class="line">	<span class="number">2000</span>,</span><br><span class="line">	<span class="number">1980</span>,</span><br><span class="line">	<span class="number">1920</span>,</span><br><span class="line">	<span class="number">1820</span>,</span><br><span class="line">	<span class="number">1680</span>,</span><br><span class="line">	<span class="number">1500</span>,</span><br><span class="line">	<span class="number">1280</span>,</span><br><span class="line">	<span class="number">1020</span>,</span><br><span class="line">	<span class="number">720</span>,</span><br><span class="line">	<span class="number">380</span>,</span><br><span class="line">	<span class="number">0</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="11.png" alt=""></p>
+<p><img src="12.png" alt=""></p>
+<p><br></p>
+<p><br></p>
+<hr>
+<p>资料</p>
+<ul>
+<li><a href="https://pan.baidu.com/s/1c01zfsW" target="_blank" rel="noopener">源码</a></li>
+<li><a href="https://pan.baidu.com/s/1kTlBPm3" target="_blank" rel="noopener">APK</a></li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2021/11/23/Cocos2d实战之消灭星星/" title="Cocos2d实战之消灭星星">http://www.lt-tree.com/2021/11/23/Cocos2d实战之消灭星星/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多实践/" rel="tag"><i class="fa fa-tag"></i> 多实践</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/23/Cocos2d实战之别踩白块/" rel="next" title="Cocos2d实战之别踩白块">
+                <i class="fa fa-chevron-left"></i> Cocos2d实战之别踩白块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/30/聊聊元宇宙/" rel="prev" title="聊聊元宇宙">
+                聊聊元宇宙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原文"><span class="nav-number">2.</span> <span class="nav-text">原文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、游戏场景-amp-选中星星"><span class="nav-number">2.1.</span> <span class="nav-text">一、游戏场景 &amp; 选中星星</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、消除逻辑"><span class="nav-number">2.2.</span> <span class="nav-text">二、消除逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、特效"><span class="nav-number">2.3.</span> <span class="nav-text">三、特效</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#爆炸特效"><span class="nav-number">2.3.1.</span> <span class="nav-text">爆炸特效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音乐音效"><span class="nav-number">2.3.2.</span> <span class="nav-text">音乐音效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漂浮文字"><span class="nav-number">2.3.3.</span> <span class="nav-text">漂浮文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Combo特效-amp-最终星星消除"><span class="nav-number">2.3.4.</span> <span class="nav-text">Combo特效 &amp; 最终星星消除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最高分记录"><span class="nav-number">2.3.5.</span> <span class="nav-text">最高分记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除星星Hint"><span class="nav-number">2.3.6.</span> <span class="nav-text">消除星星Hint</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021-12-11</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
