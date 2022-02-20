@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多总结,多实践,Cocos2d," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="大地图实现，由各部分对Tiled的支持开始。">
+<meta name="keywords" content="多总结,多实践,Cocos2d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大地图探索，由Tiled出发">
+<meta property="og:url" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="大地图实现，由各部分对Tiled的支持开始。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/tilemap_90.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/tilemap_斜45.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/tilemap_45交错.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/tilemap_六边形.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/TMXTiledMap.png">
+<meta property="og:updated_time" content="2022-02-20T15:15:28.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大地图探索，由Tiled出发">
+<meta name="twitter:description" content="大地图实现，由各部分对Tiled的支持开始。">
+<meta name="twitter:image" content="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/tilemap_90.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/"/>
+
+
+
+
+
+  <title>大地图探索，由Tiled出发 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/02/20/大地图探索，由Tiled出发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大地图探索，由Tiled出发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-20T23:06:16+08:00">
+                2022-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/02/20/大地图探索，由Tiled出发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/02/20/大地图探索，由Tiled出发/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2022/02/20/大地图探索，由Tiled出发/" class="leancloud_visitors" data-flag-title="大地图探索，由Tiled出发">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,866 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大地图实现，由各部分对Tiled的支持开始。</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>项目中需要用到“大”地图玩法，来实现一些GVE、GVG玩法，根据游戏类型及玩法体量，选择最合适的TileMap来实现。<br>但眼光要不仅于此，由TileMap开始，向其他游戏类型的技术方案进行拓展了解。</p>
+<p>通过本篇文章，可以了解：</p>
+<ul>
+<li>Tiled地图编辑器的介绍</li>
+<li>其他大地图方案技术</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="Tiled"><a href="#Tiled" class="headerlink" title="Tiled"></a>Tiled</h1><p>Tiled是一个编辑2D游戏地图的编辑器，可以帮助开发游戏的内容。</p>
+<p>优点</p>
+<ul>
+<li>可快速制作关卡地图，策划可视化编辑，降低配置成本</li>
+<li>支持多种压缩格式，支持多层级设置，完全可作为关卡编辑器使用</li>
+</ul>
+<h2 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h2><p>可导出的格式</p>
+<ul>
+<li>[常用] TMX</li>
+<li>CSV</li>
+<li>GMX</li>
+<li>JSON</li>
+<li>JS</li>
+<li>LUA</li>
+</ul>
+<p>压缩模式</p>
+<ul>
+<li>XML</li>
+<li>CSV</li>
+<li>BASE64<ul>
+<li>无</li>
+<li>GZIP</li>
+<li>ZLIB</li>
+<li>Z标准</li>
+</ul>
+</li>
+</ul>
+<p>支持类型</p>
+<ul>
+<li>直90°</li>
+<li>斜45°</li>
+<li>斜45°交错</li>
+<li>六边形</li>
+</ul>
+<p><br><br><br></p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>坐标系（OpenGL坐标系原点在左下角，需要转换）</p>
+<ul>
+<li>原点：左上角</li>
+<li>单位：瓦片数量（非像素）</li>
+<li>x轴方向：自左向右</li>
+<li>y轴方向：自上向下</li>
+</ul>
+<p><img src=".\tilemap_90.jpg" alt=""><br><img src=".\tilemap_斜45.jpg" alt=""><br><img src=".\tilemap_45交错.jpg" alt=""><br><img src=".\tilemap_六边形.jpg" alt=""></p>
+<p>瓦片锚点</p>
+<ul>
+<li>瓦片地图锚点默认为(0, 0)，每个瓦片锚点默认为(0, 0)，且可修改</li>
+</ul>
+<p>遮挡关系</p>
+<ul>
+<li>地图层之间，存在 ZOrder，ZOrder大的在上层</li>
+<li>瓦片之间，渲染顺序为自左向右，自上向下</li>
+</ul>
+<p>各元素</p>
+<ul>
+<li>属性<ul>
+<li>所有的属性都是key-value键值对形式存储；除了指定的属性外还有自定义属性可灵活配置</li>
+<li>类型<ul>
+<li>地图属性</li>
+<li>图层属性</li>
+<li>对象属性</li>
+<li>自定义属性<ul>
+<li>bool</li>
+<li>color</li>
+<li>float</li>
+<li>int</li>
+<li>string</li>
+<li>file</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图层<ul>
+<li>图块层<ul>
+<li>规则图块拼接铺设</li>
+<li>为了便于编辑，支持一些刷子工具<ul>
+<li>填充工具<ul>
+<li>图章刷<ul>
+<li>选择1块或多块图块绘制，</li>
+<li>按住shift可以绘制一条线段</li>
+<li>按住ctrl+shift可以绘制一个椭圆</li>
+</ul>
+</li>
+<li>地形刷<ul>
+<li>提供角落地形过度的编辑方式</li>
+<li>支持图章刷的shift和ctrl+shift规则</li>
+</ul>
+</li>
+<li>王氏刷<ul>
+<li>类似于地形刷，但可以编辑边和角</li>
+</ul>
+</li>
+<li>填充<ul>
+<li>将相邻的同图块全部替换成指定图块</li>
+</ul>
+</li>
+<li>填充形状工具<ul>
+<li>选择一块区域填充图块</li>
+<li>按住shift可以填充正方形和圆形</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>选择工具（选择指定区域修改，不可修改其他区域）<ul>
+<li>矩形选择<ul>
+<li>自定义矩形区域</li>
+</ul>
+</li>
+<li>魔术棒<ul>
+<li>相连的同地块</li>
+</ul>
+</li>
+<li>同地块选择<ul>
+<li>地图内所有同地块</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对象层<ul>
+<li>自定义对象的放置，支持形状/图片</li>
+</ul>
+</li>
+<li>图像层<ul>
+<li>前景后景图的设置</li>
+</ul>
+</li>
+<li>组<ul>
+<li>管理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对象<ul>
+<li>在对象层可以放置对象，支持矩形、圆形、三角形、图片等等方式</li>
+<li>可以对对象进行旋转、放缩、翻转、修改大小等等</li>
+<li>可以在对象添加自定义属性，方便进行与游戏内逻辑关联</li>
+</ul>
+</li>
+<li>图块集<ul>
+<li>图块集是绘制图块层与对象的图片来源<ul>
+<li>对于图块层的图块集，指定宽高，来截取使用，还支持设置边界值</li>
+<li>对于对象的图块集，每个图块都是自己一个完整的图片，方便整个绘制</li>
+</ul>
+</li>
+<li>一个图块层只能绑定一张图块集</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br><br><br></p>
+<h2 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h2><h3 id="Cocos2d"><a href="#Cocos2d" class="headerlink" title="Cocos2d"></a>Cocos2d</h3><p>Cocos2d引擎对TileMap的支持</p>
+<p><img src=".\TMXTiledMap.png" alt=""></p>
+<p>主要文件：</p>
+<ul>
+<li>CCTMXTiledMap.h &amp; CCTMXTiledMap.cpp<ul>
+<li>主类，解析并绘制TileMap</li>
+</ul>
+</li>
+<li>CCTMXLayer.h &amp; CCTMXLayer.cpp<ul>
+<li>TileMap图块层结构</li>
+</ul>
+</li>
+<li>CCTMXObjectGroup.h &amp; CCTMXObjectGroup.cpp<ul>
+<li>TileMap对象层结构</li>
+</ul>
+</li>
+<li>CCTMXXMLParser.h &amp; CCTMXXMLParser.cpp<ul>
+<li>解析TileMap的工具类</li>
+</ul>
+</li>
+<li>CCFastTMXTiledMap.h &amp; CCFastTMXTiledMap.cpp<ul>
+<li>v3.2新增方法，对应CCTMXTiledMap</li>
+</ul>
+</li>
+<li>CCFastTMXLayer.h &amp; CCFastTMXLayer.cpp<ul>
+<li>v3.2新增方法，对应CCTMXLayer</li>
+</ul>
+</li>
+</ul>
+<p>引擎通过CCTMXXMLParser的相关方法解析地图，创建 TMXTiledMap 对象，该对象子节点都是 TMXLayer对象，对应TileMap的图块层，包含 TMXObjectGroup 对象数组，对应TileMap的对象层。<br>所创建出的地图，仅仅包含图块层的初始化与应用，并不会将对象创建出来，只是解析了数据进行存储。（使用图片对象，并不会在地图中创建出对象，依旧需要自己来获取对象层数据，进行创建）</p>
+<p>创建流程</p>
+<ol>
+<li>【外部调用】通过 TMXTiledMap:create / TMXTiledMap:createWithXML 方法，使用TMX格式或XML格式文件创建地图对象</li>
+<li>【解析】通过SAXParser解析地图文件，生成TMXMapInfo对象<ul>
+<li>这一步是将地图数据解析成自己的数据结构</li>
+<li>类型<ul>
+<li>TMXTilesetInfo，图块集数据结构</li>
+<li>TMXLayerInfo，图块层数据结构</li>
+<li>TMXMapInfo，地图数据结构</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>【构建】通过解析的数据结构，构建地图对象<ul>
+<li>这一步是根据数据创建具体对象，包含加载图集，创建每个图片等</li>
+<li>类型<ul>
+<li>简单的地图属性，直接赋值</li>
+<li>对象层数据，直接赋值</li>
+<li>图块层数据，需要配合图块集数据与地图数据，共同创建出TMXLayer对象（一个SpriteBatchNode对象）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>重要枚举<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 地图方向枚举</span></span><br><span class="line"><span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">    TMXOrientationOrtho,        <span class="comment">// 正常</span></span><br><span class="line">    TMXOrientationHex,          <span class="comment">// 六角交错</span></span><br><span class="line">    TMXOrientationIso,          <span class="comment">// 45度</span></span><br><span class="line">    TMXOrientationStaggered,    <span class="comment">// 等角交错</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 栅格轴方向（对于六边形，X-边朝上，Y-点朝上）</span></span><br><span class="line"><span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">    TMXStaggerAxis_X,           <span class="comment">// X</span></span><br><span class="line">    TMXStaggerAxis_Y,           <span class="comment">// Y</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 栅格类型</span></span><br><span class="line"><span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">    TMXStaggerIndex_Odd,        <span class="comment">// 奇数</span></span><br><span class="line">    TMXStaggerIndex_Even,       <span class="comment">// 偶数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="TMXTiledMap系列"><a href="#TMXTiledMap系列" class="headerlink" title="TMXTiledMap系列"></a>TMXTiledMap系列</h4><p>TMXTiledMap负责解析并绘制TMX地图。</p>
+<ul>
+<li>每个图块层都被解析并创建为TMXLayer对象（一个SpriteBatchNode子类，若层被设置为不可见则不会被解析创建），可以在运行期间通过层名或层级（从0开始）获取TMXLayer对象。</li>
+<li>每个对象层都被解析并创建为TMXObjectGroup对象，可以在运行期间通过层名来获取TMXObjectGroup对象。</li>
+<li>每个属性都被存储为key-value键值对，每个对象都提供获取属性的方法。</li>
+</ul>
+<p>限制</p>
+<ul>
+<li>每个图块层只支持一个图块集</li>
+<li>不支持嵌入式图片</li>
+<li>仅支持XML格式（不支持JSON格式）</li>
+</ul>
+<p>TMXLayer代表TileMap的图块层对象</p>
+<ul>
+<li>是SpriteBatchNode子类，默认情况下使用TextureAtlas渲染图块</li>
+<li>如果在运行时修改图块，该图块会成为一个Sprite，否则不会创建Sprite对象<ul>
+<li>创建的Sprite可以支持旋转、放缩、移动等API</li>
+</ul>
+</li>
+<li>通过设置图块层不同属性来启用不同特性<ul>
+<li>cc_vertexz，OpenGL深度测试</li>
+<li>cc_alpha_func，OpenGL透明度测试</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4 id="FastTMXTiledMap系列"><a href="#FastTMXTiledMap系列" class="headerlink" title="FastTMXTiledMap系列"></a>FastTMXTiledMap系列</h4><p>大部分与TMXTiledMap差不多，主要区别在于FastTMXTiledMap系列的图块层对象并非继承自SpriteBatchNode，而是继承自Node；<br>老版TMXTiledMap借助于SpriteBatchNode对同图集图片合批做绘制优化处理，新版FastTMXTiledMap重写绘制方法，使用PrimitiveCommand渲染指令，在绘制时根据相机可见性，规划矩形区域，只对矩形区域内的顶点进行批量上传，从而节省了绘制的顶点数。<br>性能上，Draw Call是一样的，但是FastTMXTiledMap GL Verts（顶点数）更少，绘制效率更高。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> TMXLayer::draw(Renderer *renderer, <span class="keyword">const</span> Mat4&amp; transform, <span class="keyword">uint32_t</span> flags)</span><br><span class="line">&#123;</span><br><span class="line">    updateTotalQuads();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> isViewProjectionUpdated = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">auto</span> visitingCamera = Camera::getVisitingCamera();</span><br><span class="line">    <span class="keyword">auto</span> defaultCamera = Camera::getDefaultCamera();</span><br><span class="line">    <span class="keyword">if</span> (visitingCamera == defaultCamera) &#123;</span><br><span class="line">        isViewProjectionUpdated = visitingCamera-&gt;isViewProjectionUpdated();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>( flags != <span class="number">0</span> || _dirty || _quadsDirty || isViewProjectionUpdated)</span><br><span class="line">    &#123;</span><br><span class="line">        Size s = Director::getInstance()-&gt;getVisibleSize();</span><br><span class="line">        <span class="keyword">auto</span> rect = Rect(Camera::getVisitingCamera()-&gt;getPositionX(),</span><br><span class="line">                     Camera::getVisitingCamera()-&gt;getPositionY(),</span><br><span class="line">                     s.width,</span><br><span class="line">                     s.height);</span><br><span class="line">        </span><br><span class="line">        Mat4 inv = transform;</span><br><span class="line">        inv.inverse();</span><br><span class="line">        rect = RectApplyTransform(rect, inv);</span><br><span class="line">        </span><br><span class="line">        updateTiles(rect);</span><br><span class="line">        updateIndexBuffer();</span><br><span class="line">        updatePrimitives();</span><br><span class="line">        _dirty = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(_renderCommands.size() &lt; <span class="keyword">static_cast</span>&lt;<span class="keyword">size_t</span>&gt;(_primitives.size()))</span><br><span class="line">    &#123;</span><br><span class="line">        _renderCommands.resize(_primitives.size());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; iter : _primitives)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(iter.second-&gt;getCount() &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">auto</span>&amp; cmd = _renderCommands[index++];</span><br><span class="line">            cmd.init(iter.first, _texture-&gt;getName(), getGLProgramState(), BlendFunc::NORMAL, iter.second, _modelViewTransform, flags);</span><br><span class="line">            renderer-&gt;addCommand(&amp;cmd, <span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，在项目使用中，如果将地图挂载到3D相机上，会有裁剪问题，暂时未解决。</p>
+<p><br></p>
+<p><br></p>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><p>通过Tiled编辑器，可以导出TMX格式文件或XML文件，引擎直接对它解析。</p>
+<p>但依旧有一些不足</p>
+<ul>
+<li>并非会解析所有字段<ul>
+<li>比如，对象旋转后的属性是无法解析出来的</li>
+</ul>
+</li>
+<li>对对象层数据只解析不处理</li>
+</ul>
+<p>在实际使用时，为了性能优化与业务需求，在导出TMX文件，又通过python脚本，进行二次加工。</p>
+<p>通过python脚本，主要处理：</p>
+<ul>
+<li>修改GID，所用到的图片都放在一个图集中，然后修改映射关系</li>
+<li>计算对象在引擎显示的屏幕坐标（空间换时间，这样就不需要在使用时计算了）</li>
+<li>属性转移<ul>
+<li>有些属性 旋转、翻转 等，不会被引擎解析</li>
+<li>将这些属性转为自定义属性，便于解析</li>
+</ul>
+</li>
+</ul>
+<p>还有一些想法，还未实施</p>
+<ul>
+<li>分离图块层与对象层<ul>
+<li>原因：<ul>
+<li>Tiled编辑器，可以导出lua格式文件</li>
+<li>cocos2d引擎解析对象层数据，但不绘制，浪费解析性能</li>
+</ul>
+</li>
+<li>方案：<ul>
+<li>Tiled编辑器导出tmx文件，只包含图块层，给引擎解析与绘制</li>
+<li>Tiled编辑器导出lua文件，只包含对象层，给业务代码解析与绘制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br> </p>
+<h3 id="Unity"><a href="#Unity" class="headerlink" title="Unity"></a>Unity</h3><p>之前Unity不支持使用Tiled，通过插件来支持</p>
+<ul>
+<li><a href="seanba.com/tiled2unity">Tiled2Unity</a></li>
+<li><a href="https://seanba.com/supertiled2unity.html" target="_blank" rel="noopener">SuperTiled2Unity</a></li>
+</ul>
+<p>后来，Unity官方支持了 <a href="https://docs.unity3d.com/cn/2020.3/Manual/class-Tilemap.html" target="_blank" rel="noopener">瓦片地图</a> 相关功能</p>
+<ol>
+<li>Unity 2017.2 版中添加了瓦片地图</li>
+<li>Unity 2018.2 中添加了六边形瓦片地图 (Hexagonal Tilemap) 功能</li>
+<li>Unity 2018.3 中添加了等距瓦片地图 (Isometric Tilemap) 功能</li>
+<li>Unity 2020.1 2D Tilemap Editor 不再随 Editor 安装过程一起安装，而是必须从 Package Manager 下载</li>
+</ol>
+<p>推荐教程：<br><a href="https://edu.csdn.net/course/detail/18616" target="_blank" rel="noopener">Unity Tilemap模块全攻略</a></p>
+<p><br></p>
+<p><br></p>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>默认文件是tmx格式，tmx实际上就是xml格式文件，可以当成xml进行解析。</p>
+<p>标签类型</p>
+<ul>
+<li>map，存储tilemap的主要信息，朝向、宽高、格子数及大小等</li>
+<li>tileset，存储tilemap的图片资源信息，图片资源ID(GID)的映射关系</li>
+<li>layer，图块层<ul>
+<li>data，图块层内图块位置及GID对应信息，可以被压缩</li>
+</ul>
+</li>
+<li>objectgroup，对象层<ul>
+<li>ojbect，每个对象的属性信息键值对</li>
+</ul>
+</li>
+<li>imagelayer，图像层</li>
+</ul>
+<p>TMX样例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">map</span> <span class="attr">version</span>=<span class="string">"1.2"</span> <span class="attr">tiledversion</span>=<span class="string">"1.3.3"</span> <span class="attr">orientation</span>=<span class="string">"hexagonal"</span> <span class="attr">renderorder</span>=<span class="string">"right-down"</span> <span class="attr">width</span>=<span class="string">"40"</span> <span class="attr">height</span>=<span class="string">"20"</span> <span class="attr">tilewidth</span>=<span class="string">"92"</span> <span class="attr">tileheight</span>=<span class="string">"75"</span> <span class="attr">infinite</span>=<span class="string">"0"</span> <span class="attr">hexsidelength</span>=<span class="string">"46"</span> <span class="attr">staggeraxis</span>=<span class="string">"x"</span> <span class="attr">staggerindex</span>=<span class="string">"odd"</span> <span class="attr">nextlayerid</span>=<span class="string">"6"</span> <span class="attr">nextobjectid</span>=<span class="string">"12"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">tileset</span> <span class="attr">firstgid</span>=<span class="string">"1"</span> <span class="attr">name</span>=<span class="string">"tile1"</span> <span class="attr">tilewidth</span>=<span class="string">"92"</span> <span class="attr">tileheight</span>=<span class="string">"75"</span> <span class="attr">tilecount</span>=<span class="string">"1"</span> <span class="attr">columns</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span> <span class="attr">source</span>=<span class="string">"guandu/tile1.png"</span> <span class="attr">width</span>=<span class="string">"92"</span> <span class="attr">height</span>=<span class="string">"75"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">tileset</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">tileset</span> <span class="attr">firstgid</span>=<span class="string">"2"</span> <span class="attr">name</span>=<span class="string">"daying"</span> <span class="attr">tilewidth</span>=<span class="string">"173"</span> <span class="attr">tileheight</span>=<span class="string">"114"</span> <span class="attr">tilecount</span>=<span class="string">"1"</span> <span class="attr">columns</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span> <span class="attr">source</span>=<span class="string">"guandu/daying.png"</span> <span class="attr">width</span>=<span class="string">"173"</span> <span class="attr">height</span>=<span class="string">"114"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">tileset</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">tileset</span> <span class="attr">firstgid</span>=<span class="string">"3"</span> <span class="attr">name</span>=<span class="string">"jianta2"</span> <span class="attr">tilewidth</span>=<span class="string">"81"</span> <span class="attr">tileheight</span>=<span class="string">"156"</span> <span class="attr">tilecount</span>=<span class="string">"1"</span> <span class="attr">columns</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span> <span class="attr">source</span>=<span class="string">"guandu/jianta2.png"</span> <span class="attr">width</span>=<span class="string">"81"</span> <span class="attr">height</span>=<span class="string">"156"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">tileset</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">imagelayer</span> <span class="attr">id</span>=<span class="string">"3"</span> <span class="attr">name</span>=<span class="string">"图像图层 1"</span> <span class="attr">offsetx</span>=<span class="string">"-500"</span> <span class="attr">offsety</span>=<span class="string">"-250"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span> <span class="attr">source</span>=<span class="string">"guandu/stratagem_img_bg.jpg"</span> <span class="attr">width</span>=<span class="string">"2048"</span> <span class="attr">height</span>=<span class="string">"2048"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">imagelayer</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">imagelayer</span> <span class="attr">id</span>=<span class="string">"5"</span> <span class="attr">name</span>=<span class="string">"图像图层 2"</span> <span class="attr">offsetx</span>=<span class="string">"1548"</span> <span class="attr">offsety</span>=<span class="string">"-250"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span> <span class="attr">source</span>=<span class="string">"guandu/stratagem_img_bg.jpg"</span> <span class="attr">width</span>=<span class="string">"2048"</span> <span class="attr">height</span>=<span class="string">"2048"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">imagelayer</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">layer</span> <span class="attr">id</span>=<span class="string">"1"</span> <span class="attr">name</span>=<span class="string">"base_layer"</span> <span class="attr">width</span>=<span class="string">"40"</span> <span class="attr">height</span>=<span class="string">"20"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">data</span> <span class="attr">encoding</span>=<span class="string">"base64"</span> <span class="attr">compression</span>=<span class="string">"zlib"</span>&gt;</span></span><br><span class="line">   eJztw0ENAAAMA6Grf9NzsRckrJqqqurDA5vdAyE=</span><br><span class="line">  <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">layer</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">objectgroup</span> <span class="attr">id</span>=<span class="string">"2"</span> <span class="attr">name</span>=<span class="string">"object_bottom_1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">object</span> <span class="attr">id</span>=<span class="string">"4"</span> <span class="attr">gid</span>=<span class="string">"3"</span> <span class="attr">x</span>=<span class="string">"733.333"</span> <span class="attr">y</span>=<span class="string">"508"</span> <span class="attr">width</span>=<span class="string">"81"</span> <span class="attr">height</span>=<span class="string">"156"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"png"</span> <span class="attr">value</span>=<span class="string">"jianta2"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">object</span> <span class="attr">id</span>=<span class="string">"7"</span> <span class="attr">gid</span>=<span class="string">"2"</span> <span class="attr">x</span>=<span class="string">"1004"</span> <span class="attr">y</span>=<span class="string">"609"</span> <span class="attr">width</span>=<span class="string">"173"</span> <span class="attr">height</span>=<span class="string">"114"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">object</span> <span class="attr">id</span>=<span class="string">"11"</span> <span class="attr">gid</span>=<span class="string">"3"</span> <span class="attr">x</span>=<span class="string">"1318"</span> <span class="attr">y</span>=<span class="string">"534"</span> <span class="attr">width</span>=<span class="string">"81"</span> <span class="attr">height</span>=<span class="string">"156"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">objectgroup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Tiled编辑器也支持导出为json格式，方便服务器解析。<br>标签同xml的差不多，也就格式上会有些变化。</p>
+<p>JSON样例<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="attr">"compressionlevel"</span>:<span class="number">-1</span>,</span><br><span class="line"> <span class="attr">"height"</span>:<span class="number">20</span>,</span><br><span class="line"> <span class="attr">"hexsidelength"</span>:<span class="number">46</span>,</span><br><span class="line"> <span class="attr">"infinite"</span>:<span class="literal">false</span>,</span><br><span class="line"> <span class="attr">"layers"</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"id"</span>:<span class="number">3</span>,</span><br><span class="line">         <span class="attr">"image"</span>:<span class="string">"guandu\/stratagem_img_bg.jpg"</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"\u56fe\u50cf\u56fe\u5c42 1"</span>,</span><br><span class="line">         <span class="attr">"offsetx"</span>:<span class="number">-500</span>,</span><br><span class="line">         <span class="attr">"offsety"</span>:<span class="number">-250</span>,</span><br><span class="line">         <span class="attr">"opacity"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"type"</span>:<span class="string">"imagelayer"</span>,</span><br><span class="line">         <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">         <span class="attr">"x"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"y"</span>:<span class="number">0</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"id"</span>:<span class="number">5</span>,</span><br><span class="line">         <span class="attr">"image"</span>:<span class="string">"guandu\/stratagem_img_bg.jpg"</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"\u56fe\u50cf\u56fe\u5c42 2"</span>,</span><br><span class="line">         <span class="attr">"offsetx"</span>:<span class="number">1548</span>,</span><br><span class="line">         <span class="attr">"offsety"</span>:<span class="number">-250</span>,</span><br><span class="line">         <span class="attr">"opacity"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"type"</span>:<span class="string">"imagelayer"</span>,</span><br><span class="line">         <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">         <span class="attr">"x"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"y"</span>:<span class="number">0</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"compression"</span>:<span class="string">"zlib"</span>,</span><br><span class="line">         <span class="attr">"data"</span>:<span class="string">"eJztw0ENAAAMA6Grf9NzsRckrJqqqurDA5vdAyE="</span>,</span><br><span class="line">         <span class="attr">"encoding"</span>:<span class="string">"base64"</span>,</span><br><span class="line">         <span class="attr">"height"</span>:<span class="number">20</span>,</span><br><span class="line">         <span class="attr">"id"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"base_layer"</span>,</span><br><span class="line">         <span class="attr">"opacity"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"type"</span>:<span class="string">"tilelayer"</span>,</span><br><span class="line">         <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">         <span class="attr">"width"</span>:<span class="number">40</span>,</span><br><span class="line">         <span class="attr">"x"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"y"</span>:<span class="number">0</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"draworder"</span>:<span class="string">"topdown"</span>,</span><br><span class="line">         <span class="attr">"id"</span>:<span class="number">2</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"object_bottom_1"</span>,</span><br><span class="line">         <span class="attr">"objects"</span>:[</span><br><span class="line">                &#123;</span><br><span class="line">                 <span class="attr">"gid"</span>:<span class="number">3</span>,</span><br><span class="line">                 <span class="attr">"height"</span>:<span class="number">156</span>,</span><br><span class="line">                 <span class="attr">"id"</span>:<span class="number">4</span>,</span><br><span class="line">                 <span class="attr">"name"</span>:<span class="string">""</span>,</span><br><span class="line">                 <span class="attr">"properties"</span>:[</span><br><span class="line">                        &#123;</span><br><span class="line">                         <span class="attr">"name"</span>:<span class="string">"png"</span>,</span><br><span class="line">                         <span class="attr">"type"</span>:<span class="string">"string"</span>,</span><br><span class="line">                         <span class="attr">"value"</span>:<span class="string">"jianta2"</span></span><br><span class="line">                        &#125;],</span><br><span class="line">                 <span class="attr">"rotation"</span>:<span class="number">0</span>,</span><br><span class="line">                 <span class="attr">"type"</span>:<span class="string">""</span>,</span><br><span class="line">                 <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">                 <span class="attr">"width"</span>:<span class="number">81</span>,</span><br><span class="line">                 <span class="attr">"x"</span>:<span class="number">733.333</span>,</span><br><span class="line">                 <span class="attr">"y"</span>:<span class="number">508</span></span><br><span class="line">                &#125;, </span><br><span class="line">                &#123;</span><br><span class="line">                 <span class="attr">"gid"</span>:<span class="number">2</span>,</span><br><span class="line">                 <span class="attr">"height"</span>:<span class="number">114</span>,</span><br><span class="line">                 <span class="attr">"id"</span>:<span class="number">7</span>,</span><br><span class="line">                 <span class="attr">"name"</span>:<span class="string">""</span>,</span><br><span class="line">                 <span class="attr">"rotation"</span>:<span class="number">0</span>,</span><br><span class="line">                 <span class="attr">"type"</span>:<span class="string">""</span>,</span><br><span class="line">                 <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">                 <span class="attr">"width"</span>:<span class="number">173</span>,</span><br><span class="line">                 <span class="attr">"x"</span>:<span class="number">1004</span>,</span><br><span class="line">                 <span class="attr">"y"</span>:<span class="number">609</span></span><br><span class="line">                &#125;, </span><br><span class="line">                &#123;</span><br><span class="line">                 <span class="attr">"gid"</span>:<span class="number">3</span>,</span><br><span class="line">                 <span class="attr">"height"</span>:<span class="number">156</span>,</span><br><span class="line">                 <span class="attr">"id"</span>:<span class="number">11</span>,</span><br><span class="line">                 <span class="attr">"name"</span>:<span class="string">""</span>,</span><br><span class="line">                 <span class="attr">"rotation"</span>:<span class="number">0</span>,</span><br><span class="line">                 <span class="attr">"type"</span>:<span class="string">""</span>,</span><br><span class="line">                 <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">                 <span class="attr">"width"</span>:<span class="number">81</span>,</span><br><span class="line">                 <span class="attr">"x"</span>:<span class="number">1318</span>,</span><br><span class="line">                 <span class="attr">"y"</span>:<span class="number">534</span></span><br><span class="line">                &#125;],</span><br><span class="line">         <span class="attr">"opacity"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"type"</span>:<span class="string">"objectgroup"</span>,</span><br><span class="line">         <span class="attr">"visible"</span>:<span class="literal">true</span>,</span><br><span class="line">         <span class="attr">"x"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"y"</span>:<span class="number">0</span></span><br><span class="line">        &#125;],</span><br><span class="line"> <span class="attr">"nextlayerid"</span>:<span class="number">6</span>,</span><br><span class="line"> <span class="attr">"nextobjectid"</span>:<span class="number">12</span>,</span><br><span class="line"> <span class="attr">"orientation"</span>:<span class="string">"hexagonal"</span>,</span><br><span class="line"> <span class="attr">"renderorder"</span>:<span class="string">"right-down"</span>,</span><br><span class="line"> <span class="attr">"staggeraxis"</span>:<span class="string">"x"</span>,</span><br><span class="line"> <span class="attr">"staggerindex"</span>:<span class="string">"odd"</span>,</span><br><span class="line"> <span class="attr">"tiledversion"</span>:<span class="string">"1.3.3"</span>,</span><br><span class="line"> <span class="attr">"tileheight"</span>:<span class="number">75</span>,</span><br><span class="line"> <span class="attr">"tilesets"</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"columns"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"firstgid"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"image"</span>:<span class="string">"guandu\/tile1.png"</span>,</span><br><span class="line">         <span class="attr">"imageheight"</span>:<span class="number">75</span>,</span><br><span class="line">         <span class="attr">"imagewidth"</span>:<span class="number">92</span>,</span><br><span class="line">         <span class="attr">"margin"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"tile1"</span>,</span><br><span class="line">         <span class="attr">"spacing"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"tilecount"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"tileheight"</span>:<span class="number">75</span>,</span><br><span class="line">         <span class="attr">"tilewidth"</span>:<span class="number">92</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"columns"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"firstgid"</span>:<span class="number">2</span>,</span><br><span class="line">         <span class="attr">"image"</span>:<span class="string">"guandu\/daying.png"</span>,</span><br><span class="line">         <span class="attr">"imageheight"</span>:<span class="number">114</span>,</span><br><span class="line">         <span class="attr">"imagewidth"</span>:<span class="number">173</span>,</span><br><span class="line">         <span class="attr">"margin"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"daying"</span>,</span><br><span class="line">         <span class="attr">"spacing"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"tilecount"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"tileheight"</span>:<span class="number">114</span>,</span><br><span class="line">         <span class="attr">"tilewidth"</span>:<span class="number">173</span></span><br><span class="line">        &#125;, </span><br><span class="line">        &#123;</span><br><span class="line">         <span class="attr">"columns"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"firstgid"</span>:<span class="number">3</span>,</span><br><span class="line">         <span class="attr">"image"</span>:<span class="string">"guandu\/jianta2.png"</span>,</span><br><span class="line">         <span class="attr">"imageheight"</span>:<span class="number">156</span>,</span><br><span class="line">         <span class="attr">"imagewidth"</span>:<span class="number">81</span>,</span><br><span class="line">         <span class="attr">"margin"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"name"</span>:<span class="string">"jianta2"</span>,</span><br><span class="line">         <span class="attr">"spacing"</span>:<span class="number">0</span>,</span><br><span class="line">         <span class="attr">"tilecount"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="attr">"tileheight"</span>:<span class="number">156</span>,</span><br><span class="line">         <span class="attr">"tilewidth"</span>:<span class="number">81</span></span><br><span class="line">        &#125;],</span><br><span class="line"> <span class="attr">"tilewidth"</span>:<span class="number">92</span>,</span><br><span class="line"> <span class="attr">"type"</span>:<span class="string">"map"</span>,</span><br><span class="line"> <span class="attr">"version"</span>:<span class="number">1.2</span>,</span><br><span class="line"> <span class="attr">"width"</span>:<span class="number">40</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="主流大地形渲染"><a href="#主流大地形渲染" class="headerlink" title="主流大地形渲染"></a>主流大地形渲染</h2><h3 id="TileMap"><a href="#TileMap" class="headerlink" title="TileMap"></a>TileMap</h3><p>利用一些小图片拼出一个大地图</p>
+<p>优点</p>
+<ul>
+<li>结构简单，方便优化</li>
+<li>加载整个TileMap，图片都在一个图集中，可以批量绘制，地图加载压力轻</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>只能满足特定视距下LOD的细节程度</li>
+<li>重复感很强，不容易做大结构和氛围</li>
+</ul>
+<p>游戏</p>
+<ul>
+<li>率土之滨</li>
+<li>文明6移动版</li>
+</ul>
+<p><br></p>
+<h3 id="多层纹理混合"><a href="#多层纹理混合" class="headerlink" title="多层纹理混合"></a>多层纹理混合</h3><p>利用一张Mask图的多通道，控制多张贴图进行纹理混合</p>
+<p><a href="https://zhuanlan.zhihu.com/p/26383778" target="_blank" rel="noopener">基于高度的纹理混合shader</a></p>
+<p>优点</p>
+<ul>
+<li>制作简单，性能压力小</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>可混合的通道及贴图数有限，难以做出丰富的效果</li>
+</ul>
+<p>游戏</p>
+<ul>
+<li>万国觉醒</li>
+</ul>
+<p><br></p>
+<h3 id="Virtual-Texture"><a href="#Virtual-Texture" class="headerlink" title="Virtual Texture"></a>Virtual Texture</h3><p>通过 Indirection Map，将贴图载入Physical Texture。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/138484024" target="_blank" rel="noopener">浅谈Virtual Texture</a></p>
+<p>优点</p>
+<ul>
+<li>效果细节丰富</li>
+<li>美术自由度高</li>
+<li>内存和DrawCall可控</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>手机端效果不明确</li>
+</ul>
+<p>游戏</p>
+<ul>
+<li>一些端游</li>
+<li>一些主机游戏</li>
+</ul>
+<p><br></p>
+<h3 id="Texture-Array"><a href="#Texture-Array" class="headerlink" title="Texture Array"></a>Texture Array</h3><p>存储一个数组，每个元素是一张图</p>
+<p>优点</p>
+<ul>
+<li>减少bind次数</li>
+<li>适合层与层之间的颜色混合</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>严格要求尺寸、格式</li>
+<li>OpenGL ES 3.0以上才支持</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="程序化工具选型"><a href="#程序化工具选型" class="headerlink" title="程序化工具选型"></a>程序化工具选型</h2><h3 id="Substance"><a href="#Substance" class="headerlink" title="Substance"></a>Substance</h3><p>程序化贴图常用工具<br>可在一定程度上满足贴图需求，但无法生成模型、数据表等资源，需要第三方工具</p>
+<p><br></p>
+<h3 id="Houdini"><a href="#Houdini" class="headerlink" title="Houdini"></a>Houdini</h3><p>行业程序化流程常用工具，移动游戏上 吃鸡类游戏、《原神》等都有所使用。</p>
+<p>特点</p>
+<ul>
+<li>基于节点</li>
+<li>非破坏式流程，快速迭代</li>
+<li>操作属性，可将任意信息存储在几何中</li>
+<li>定制化程度高，可以单靠编程完成整个流程</li>
+<li>处理数据流，外部仅关心数据输入与输出</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="大地图技术"><a href="#大地图技术" class="headerlink" title="大地图技术"></a>大地图技术</h2><p>除了上面的渲染技术与工具，还有一些大地图数据处理上的一些技术。<br>比如：</p>
+<ul>
+<li>精度问题处理<ul>
+<li>区域划分</li>
+<li>节点中转</li>
+<li>坐标转换</li>
+</ul>
+</li>
+<li>LOD（level of detail）</li>
+<li>Streaming</li>
+<li>Caching</li>
+<li>AOI（Area Of Interest）</li>
+</ul>
+<p>更详细内容，可跳转知乎：<a href="https://www.zhihu.com/question/26538198" target="_blank" rel="noopener">开放世界游戏中的大地图背后有哪些实现技术？</a></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<hr>
+<p>参考资料：</p>
+<ul>
+<li><a href="doc.mapeditor.org/en/stable/">Tiled文档(English)</a></li>
+<li><a href="https://discourse.mapeditor.org/" target="_blank" rel="noopener">Tiled论坛</a></li>
+<li><a href="https://www.cnblogs.com/stratrail/p/5050703.html" target="_blank" rel="noopener">cocos2dx - tmx地图分层移动处理</a></li>
+<li><a href="seanba.com/tiled2unity">Tiled2Unity</a></li>
+<li><a href="https://seanba.com/supertiled2unity.html" target="_blank" rel="noopener">SuperTiled2Unity</a></li>
+<li><a href="https://edu.csdn.net/course/detail/18616" target="_blank" rel="noopener">Unity Tilemap模块全攻略</a></li>
+<li><a href="https://docs.unity3d.com/cn/2020.3/Manual/class-Tilemap.html" target="_blank" rel="noopener">瓦片地图</a></li>
+<li><a href="https://blog.csdn.net/OnafioO/article/details/49151109" target="_blank" rel="noopener">像素填充率，纹理填充率，显存带宽</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26383778" target="_blank" rel="noopener">基于高度的纹理混合shader</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/138484024" target="_blank" rel="noopener">浅谈Virtual Texture</a></li>
+<li><a href="https://www.zhihu.com/question/26538198" target="_blank" rel="noopener">开放世界游戏中的大地图背后有哪些实现技术？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/miOnAB9wervyBGe7ep1MRQ" target="_blank" rel="noopener">天美F1引擎专家：如何利用PCG技术加速大世界地形生产？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/TxYzQksrQgsLZEprNIgumg" target="_blank" rel="noopener">揭秘《鸿图之下》的场景技术</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/162892899" target="_blank" rel="noopener">技术分析 探讨大世界游戏的制作流程及技术——大场景制作技术概况篇</a></li>
+</ul>
+<p><br><br><br><br><br><br><br><br><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2022/02/20/大地图探索，由Tiled出发/" title="大地图探索，由Tiled出发">http://www.lt-tree.com/2022/02/20/大地图探索，由Tiled出发/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多总结/" rel="tag"><i class="fa fa-tag"></i> 多总结</a>
+          
+            <a href="/tags/多实践/" rel="tag"><i class="fa fa-tag"></i> 多实践</a>
+          
+            <a href="/tags/Cocos2d/" rel="tag"><i class="fa fa-tag"></i> Cocos2d</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/22/2021年结之多点开花/" rel="next" title="2021年结之多点开花">
+                <i class="fa fa-chevron-left"></i> 2021年结之多点开花
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tiled"><span class="nav-number">2.</span> <span class="nav-text">Tiled</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标准"><span class="nav-number">2.1.</span> <span class="nav-text">标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持"><span class="nav-number">2.3.</span> <span class="nav-text">支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cocos2d"><span class="nav-number">2.3.1.</span> <span class="nav-text">Cocos2d</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TMXTiledMap系列"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">TMXTiledMap系列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FastTMXTiledMap系列"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">FastTMXTiledMap系列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unity"><span class="nav-number">2.3.2.</span> <span class="nav-text">Unity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器"><span class="nav-number">2.3.3.</span> <span class="nav-text">服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展"><span class="nav-number">3.</span> <span class="nav-text">拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主流大地形渲染"><span class="nav-number">3.1.</span> <span class="nav-text">主流大地形渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TileMap"><span class="nav-number">3.1.1.</span> <span class="nav-text">TileMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多层纹理混合"><span class="nav-number">3.1.2.</span> <span class="nav-text">多层纹理混合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual-Texture"><span class="nav-number">3.1.3.</span> <span class="nav-text">Virtual Texture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Texture-Array"><span class="nav-number">3.1.4.</span> <span class="nav-text">Texture Array</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序化工具选型"><span class="nav-number">3.2.</span> <span class="nav-text">程序化工具选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Substance"><span class="nav-number">3.2.1.</span> <span class="nav-text">Substance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Houdini"><span class="nav-number">3.2.2.</span> <span class="nav-text">Houdini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大地图技术"><span class="nav-number">3.3.</span> <span class="nav-text">大地图技术</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022-02-20</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/xvexiaoban.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
