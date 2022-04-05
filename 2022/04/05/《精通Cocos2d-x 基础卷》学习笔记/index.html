@@ -1,0 +1,3349 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多学习," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tree House" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="生活中，所有事情都有最后一次。你会最后一次出门，最后一次吃你最喜欢的菜，最后一次听一首歌，或者最后一次呼吸。但是在那之前，你有很多机会做所有这些事情，珍惜你做的每一次。">
+<meta name="keywords" content="多学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《精通Cocos2d-x 基础卷》学习笔记">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/index.html">
+<meta property="og:site_name" content="Tree House">
+<meta property="og:description" content="生活中，所有事情都有最后一次。你会最后一次出门，最后一次吃你最喜欢的菜，最后一次听一首歌，或者最后一次呼吸。但是在那之前，你有很多机会做所有这些事情，珍惜你做的每一次。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/技术架构.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/tree.jpg">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/skew_rotationskew.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/Layer系列.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/IME流程图.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/手机上的XYZ轴.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/Menu与MenuItem.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/Action框架.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/Action运行流程.png">
+<meta property="og:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/触摸输入流程.png">
+<meta property="og:updated_time" content="2022-04-05T15:33:05.536Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《精通Cocos2d-x 基础卷》学习笔记">
+<meta name="twitter:description" content="生活中，所有事情都有最后一次。你会最后一次出门，最后一次吃你最喜欢的菜，最后一次听一首歌，或者最后一次呼吸。但是在那之前，你有很多机会做所有这些事情，珍惜你做的每一次。">
+<meta name="twitter:image" content="http://yoursite.com/2022/04/05/《精通Cocos2d-x%20基础卷》学习笔记/技术架构.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/"/>
+
+
+
+
+
+  <title>《精通Cocos2d-x 基础卷》学习笔记 | Tree House</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tree House</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不如自挂东南枝</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ltree98">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.lt-tree.com/assets/img/ltree98.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tree House">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《精通Cocos2d-x 基础卷》学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T21:00:00+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/" class="leancloud_visitors" data-flag-title="《精通Cocos2d-x 基础卷》学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  17,012 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  64 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>生活中，所有事情都有最后一次。你会最后一次出门，最后一次吃你最喜欢的菜，最后一次听一首歌，或者最后一次呼吸。但是在那之前，你有很多机会做所有这些事情，珍惜你做的每一次。</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>本文是在团队内组织共读会，所做的读书笔记。</p>
+<p>选择这本书，也是带领团队成员更深刻了解自己平常所使用的的控件在引擎层的实现，对以后排查问题，以及了解整个游戏框架引擎层面，找到自己未来更感兴趣的发展方向都有很大的价值。</p>
+<p><br></p>
+<p><br></p>
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><h2 id="启航"><a href="#启航" class="headerlink" title="启航"></a>启航</h2><p>Cocos2d-x是一款开源的手机游戏开发框架。</p>
+<p>核心使用C++编写，支持C++、Lua、JavaScript三种编程语言接口，支持开发跨平台的游戏。</p>
+<p>主要优点</p>
+<ul>
+<li>跨平台</li>
+<li>高性能</li>
+<li>高兼容性</li>
+<li>可热更新</li>
+<li>可定制</li>
+<li>易用性</li>
+</ul>
+<p>主要应用在 手机游戏、儿童教育软件、网络多媒体UI解决方案等交互性的图形化应用。</p>
+<p>较为流行版本 Cocos2d-x v3.3 / v3.10 / v3.17</p>
+<p><img src="技术架构.png" alt="技术架构"></p>
+<h3 id="游戏开发框架"><a href="#游戏开发框架" class="headerlink" title="游戏开发框架"></a>游戏开发框架</h3><p>游戏开发框架实现了各个平台相关的封装，提供了图像渲染、UI系统、输入交互、文件操作、动作动画、消息系统、时间调度、音乐音效、物理引擎、脚本绑定等一系列基础功能，让开发者无需从最基础去封装实现，而是以现有的方案去快速开发产品，并且可对所需要的部分进行优化修改。</p>
+<h3 id="类比"><a href="#类比" class="headerlink" title="类比"></a>类比</h3><p>Unity</p>
+<p>Unreal Engine</p>
+<h3 id="v4"><a href="#v4" class="headerlink" title="v4"></a>v4</h3><p>现在常用的都是 v3版本，例如 v3.3 与 v3.10；然后各项目组在这基础上进行本项目的定制化优化改造。</p>
+<p>官方最新的版本是 v4；v4版本最大的变动是在苹果系统使用Metal替代OpenGL ES作为渲染引擎；并且删除对JS部分的支持。</p>
+<p>v4版本仅仅适用于支持 Metal 的 iOS/Mac设备。</p>
+<p><em>目前OpenGL &amp; DirectX 的组合，逐渐在被 Vulkan &amp; Metal 替代。</em> </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>OpenGL</th>
+<th>OpenGL ES</th>
+<th>Direct3D</th>
+<th>Vulkan</th>
+<th>Metal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平台支持</td>
+<td>Windows, MacOS, Linux</td>
+<td>Android, iOS</td>
+<td>Windows, Xbox</td>
+<td>Windows, Linux, Android,</td>
+<td>iOS, MacOS</td>
+</tr>
+<tr>
+<td>学习门槛</td>
+<td>低</td>
+<td>低</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<h2 id="Cocos2d-x-主逻辑"><a href="#Cocos2d-x-主逻辑" class="headerlink" title="Cocos2d-x 主逻辑"></a>Cocos2d-x 主逻辑</h2><p>轻量级引擎主逻辑</p>
+<ol>
+<li>初始化场景等</li>
+<li>主循环每帧调用<ul>
+<li>update，处理逻辑</li>
+<li>draw，处理绘制</li>
+</ul>
+</li>
+<li>达到退出条件，销毁场景等</li>
+</ol>
+<p>Cocos2d-x主逻辑同那些相同；不过有场景树来组织管理所有节点。</p>
+<ol>
+<li>初始化导演类及视图并绑定<ul>
+<li>Director初始化、OpenGL视图初始化</li>
+</ul>
+</li>
+<li>设定分辨率等参数并刷新帧率与刷新方法</li>
+<li>场景初始化，并让导演类运行（加入到场景树）<ul>
+<li>调用各种虚函数刷新方法</li>
+</ul>
+</li>
+</ol>
+<p>处理逻辑的三个入口</p>
+<ul>
+<li>初始化或销毁时，被自动调用的虚函数方法。<ul>
+<li>例如：init、onEnter、onExit</li>
+</ul>
+</li>
+<li>使用定时器定时执行的方法<ul>
+<li>例如：注册在scheduleUpdate后，定时执行的update方法</li>
+</ul>
+</li>
+<li>指定事件发生后的回调方法<ul>
+<li>例如：UI按钮的点击回调</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><p>引用计数</p>
+<ul>
+<li>引用计数的处理，如果创建出节点后，若没有绑定到某个已加入场景树的节点上，就会在本帧结束后释放掉。</li>
+<li>刚创建出的节点，引用计数为1，在创建的时候加入到autorelease池中，在本帧结束时引用计数自动-1，会变为0，然后被释放掉；</li>
+<li>节点通过retain引用计数+1，release引用计数-1，当引用计数为0时，节点会被立即释放掉。</li>
+</ul>
+<p>create与init（二阶段构造机制）</p>
+<ul>
+<li>将初始化放在init而非create中，是因为在init初始化时候若报错，可以在create中捕获错误，并处理。</li>
+</ul>
+<p>警示</p>
+<ul>
+<li>using导入命名空间的代码，放在源文件中，而非头文件中</li>
+<li>若两个类之间互相包含时，在各自类前加向前声明，以便通过编译</li>
+<li>使用平台相关API时，注意添加平台预处理判定</li>
+</ul>
+<p><br><br><br></p>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>任何指针，本质都是存储地址，不因指针类型而改变。</p>
+<p>经典问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// * 前是指针的类型，* 后是对指针的修饰</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// const指针，指针指向的内容不能修改</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p1;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指向const对象的指针，指针指向不能修改</span></span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指向const对象的const指针</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p3;</span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
+<h2 id="C-11"><a href="#C-11" class="headerlink" title="C++11"></a>C++11</h2><p>类型推导</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// auto，根据右值，识别类型</span></span><br><span class="line"><span class="keyword">auto</span> temp = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// decltype，根据指定变量，识别变量类型</span></span><br><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">decltype</span>(a) b = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<p>智能指针</p>
+<ul>
+<li>shared_ptr，引用计数指针；只有在已经没有任何其他shared_ptr指向其原本指向的对象时，才会销毁对象</li>
+<li>weak_ptr，弱指针；并不指向对象，因此不会影响对象销毁</li>
+</ul>
+<p>空指针（nullptr）</p>
+<ul>
+<li>解决NULL二义性问题，NULL可以代表0，也可以代表空指针</li>
+<li>nullptr不能隐式转换为整数，也不能和整数作比较</li>
+</ul>
+<p>Lambda特性</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[函数外部对象参数](函数参数)-&gt;返回值类型 &#123; 函数体 &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>[] 中的函数外部对象参数，允许在函数体内直接调用函数外部的参数</li>
+<li>() 中的函数参数，同正常的函数参数无异，是每次函数调用传入的变量</li>
+<li>-&gt; 后面跟着函数返回值的类型</li>
+<li>{} 中可以编写逻辑，并使用 [] 和 () 中传入的参数</li>
+</ul>
+<p>定义在lambda函数相同作用域的参数引用也可以被使用，这种参数集合一般被称为闭包。</p>
+<p>在 [] 中可以填写下面几种类型参数，将定义lambda函数作用域内的变量传入函数体中</p>
+<ul>
+<li>[] 没有任何参数，代表 不传入外部参数</li>
+<li>[a, &amp;b] ，代表传入变量a的值与变量b的引用</li>
+<li>[&amp;]，代表以引用的方式将所有作用域内变量传入</li>
+<li>[=]，代表以值专递的方式将所有作用域内变量传入</li>
+<li>[&amp;, a]，代表除了a用值传递的方式，其他所有作用域内变量使用引用方式传入</li>
+<li>[=, &amp;a]，代表除了a用引用的方式，其他所有作用域内变量使用值传递方式传入</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="基础框架"><a href="#基础框架" class="headerlink" title="基础框架"></a>基础框架</h1><h2 id="控件"><a href="#控件" class="headerlink" title="控件"></a>控件</h2><h3 id="节点系统，Node"><a href="#节点系统，Node" class="headerlink" title="节点系统，Node"></a>节点系统，Node</h3><h4 id="Node，CCNode-h-amp-CCNode-cpp"><a href="#Node，CCNode-h-amp-CCNode-cpp" class="headerlink" title="Node，CCNode.h &amp; CCNode.cpp"></a>Node，CCNode.h &amp; CCNode.cpp</h4><p>Node是场景图的基础元素；场景图所有节点必须是Node类或Node的派生类。</p>
+<p><img src="tree.jpg" alt="场景图"></p>
+<p>Node类主要特性有：</p>
+<ul>
+<li>可以包含其他Node对象</li>
+<li>可以设置定时器回调</li>
+<li>可以使用动作系统</li>
+</ul>
+<p>Node类重点属性：</p>
+<ul>
+<li>position: 坐标；默认(x = 0, y = 0)</li>
+<li>scale: 放缩系数；默认(1)</li>
+<li>rotation: 旋转系数（顺时针方向角度）；默认(0)</li>
+<li>anchor point: 锚点；默认(x = 0, y = 0)</li>
+<li>contentSize: 大小；默认(width = 0, height = 0)</li>
+<li>visible: 可见性；默认(true)</li>
+</ul>
+<p>Node绘制流程: Visit &amp; Draw</p>
+<p>遍历：</p>
+<ol>
+<li>[Node:visit] 开始遍历节点</li>
+<li>判断可见性</li>
+<li>计算当前节点的 flags</li>
+<li>压入并加载模型矩阵</li>
+<li>对所有子节点排序</li>
+<li>遍历所有 ZOrder小于0 的子节点</li>
+<li>绘制自己</li>
+<li>遍历所有 ZOrder大于0 的子节点</li>
+<li>弹出模型矩阵</li>
+</ol>
+<p>绘制：</p>
+<ol>
+<li>[Node:draw] 开始绘制节点</li>
+</ol>
+<p>方法列表_基础：</p>
+<ul>
+<li>create: 创建</li>
+<li>addChild: 添加节点</li>
+<li>get ChildByTag/ChildByName: 根据tag/name获取节点</li>
+<li>enumerateChildren: 根据正则匹配名字获取节点</li>
+<li>getChildren: 获取所有节点数组</li>
+<li>getChildrenCount: 获取所有节点数量</li>
+<li>set/get Parent: 设置/获取 父节点</li>
+<li>removeFromParent/removeFromParentAndCleanup: 将自己从父节点移除，根据参数决定是否停止所有动作及回调</li>
+<li>removeChild/removeChildByTag/removeChildByName: 移除自己的单个子节点</li>
+<li>removeAllChildren/removeAllChildrenWithCleanup: 移除自己的所有子节点</li>
+<li>isRunning: 正在运行中</li>
+<li>onEnter: Node出现时回调的方法，若存在变换，则在变换开始时调用</li>
+<li>onEnterTransitionDidFinish: Node出现时回调的方法，若存在变换，则在变换结束时调用</li>
+<li>onExit: Node退出时回调的方法，若存在变换，则在变换结束时调用</li>
+<li>onExitTransitionDidStart: Node退出时回调的方法，若存在变换，则在变换开始时调用</li>
+<li>cleanup: 停止所有动作及定时器</li>
+<li>draw: 具体的绘制方法，如何绘制</li>
+<li>visit: 遍历节点，递归调用绘制</li>
+<li>update: 每帧更新</li>
+</ul>
+<p>方法列表_支持：</p>
+<ul>
+<li>getAttachedNodeCount: 获取当前Node所在场景树的Node数量</li>
+<li>getDescription: 详细信息，方便Debug</li>
+<li>set/get LocalZOrder(ZOrder): 设置/获取 局部ZOrder</li>
+<li>set/get GlobalZOrder: 设置/获取 全局ZOrder</li>
+<li>updateOrderOfArrival: 当ZOrder相同时，设置到达顺序（方便确定唯一遍历顺序），仅供内部使用</li>
+<li>set/get ScaleX: 设置/获取 X轴放缩系数</li>
+<li>set/get ScaleY: 设置/获取 Y轴放缩系数</li>
+<li>set/get ScaleZ: 设置/获取 Z轴放缩系数</li>
+<li>set/get Scale: 设置/获取 X轴与Y轴放缩系数</li>
+<li>set/get PositionX: 设置/获取 X轴坐标</li>
+<li>set/get PositionY: 设置/获取 Y轴坐标</li>
+<li>set/get Position: 设置/获取 2D坐标，vec2(x, y)</li>
+<li>set/get PositionZ(VertexZ): 设置/获取 Z轴坐标 </li>
+<li>set/get Position3D: 设置/获取 3D坐标，vec3(x, y, z)</li>
+<li>set/get PositionNormalized(NormalizedPosition): 设置/获取 归一化坐标，范围[0, 1]</li>
+<li>set/get SkewX: 设置/获取 X轴倾斜角度</li>
+<li>set/get SkewY: 设置/获取 Y轴倾斜角度</li>
+<li>set/get AnchorPoint: 设置/获取 锚点坐标，vec2(x, y)</li>
+<li>getAnchorPointInPoints: 返回锚点的绝对像素值，返回值不再是[0, 1]范围内</li>
+<li>set/get ContentSize: 设置/获取 宽高，Size(width, height)</li>
+<li>set/is Visible: 设置/获取 可见性</li>
+<li>set/get Rotation: 设置/获取 旋转角度，正数为顺时针方向、负数为逆时针方向</li>
+<li>set/get Rotation3D: 设置/获取 3D旋转角度，vec3(x, y, z)</li>
+<li>set/get RotationQuat: 设置/获取 四元数（归一化的）旋转角度，Quaternion(x, y, z, w)</li>
+<li>set/get RotationSkewX(RotationX): X轴旋转倾斜</li>
+<li>set/get RotationSkewY(RotationY): Y轴旋转倾斜</li>
+<li>set/is IgnoreAnchorPointForPosition: 设置/获取 忽略坐标锚点；仅限内部使用，一般针对Scene与Layer</li>
+<li>reorderChild: 修改已加入节点的ZOrder，并重新排序</li>
+<li>sortAllChildren: 在绘制前，根据ZOrder对所有子节点排序</li>
+<li>set/get Tag: 设置/获取 标记；一个数字，通常用来分辨节点（人为定义，非强制唯一）</li>
+<li>set/get Name: 设置/获取 名称；一个字符串，通常用来分辨节点（认为定义，非强制唯一）</li>
+<li>set/get UserData/UserObject: 设置/获取 自定义用户数据指针</li>
+<li>set/get GLProgram/ShaderProgram: 设置/获取 节点的着色器程序</li>
+<li>set/get GLProgramState: 设置/获取 节点着色器程序状态</li>
+<li>scheduleUpdateWithPriorityLua: 定时更新Lua脚本</li>
+<li>getScene: 获取节点所在场景</li>
+<li>getBoundingBox/boundingBox: 获取节点所在父节点坐标系统的包含框</li>
+<li>set/get EventDispatcher: 设置/获取 场景的事件派发器</li>
+<li>set/get ActionManager: 设置/获取 动作管理器</li>
+<li>runAction: 执行动作</li>
+<li>stopAllActions: 停止所有动作</li>
+<li>stopAction: 停止某个动作</li>
+<li>stopActionByTag/stopAllActionByTag: 根据tag停止部分动作</li>
+<li>getActionByTag: 获取某tag的动作</li>
+<li>getNumberOfRunningActions: 获取节点正在执行的动作数量</li>
+<li>getNumberOfRunningActionsByTag: 获取节点正在执行的指定tag的动作数量</li>
+<li>set/get Scheduler: 设置/获取 定时器对象</li>
+<li>isScheduled: 指定定时器是否执行中</li>
+<li>scheduleUpdate: 每帧执行定时器，默认优先级为0的</li>
+<li>scheduleUpdateWithPriority: 自定义优先级执行定时器</li>
+<li>unscheduleUpdate: 停止每帧执行的定时器</li>
+<li>schedule: 执行某个定时器，可配参数：间隔时间、重复次数(-1永远重复）、延迟时间</li>
+<li>scheduleOnce: 执行一次某个定时器，可配参数：延迟时间</li>
+<li>unschedule: 停止执行某个定时器</li>
+<li>pause/resume: 暂停/恢复 所有定时器、动作和事件监听</li>
+<li>pause/resume SchedulerAndActions: 暂停/恢复 所有定时器、动作</li>
+<li>updateTransform: 更新变换</li>
+<li>setAdditionalTransform: 为节点设置一个额外的变换矩阵</li>
+<li>set/get NodeToParentTransform: 返回Node本地空间坐标转换为父节点空间坐标的像素矩阵</li>
+<li>getNodeToParentAffineTransform: 返回Node本地空间坐标转换为父节点空间坐标的仿射变换像素矩阵</li>
+<li>getParentToNodeTransform: 返回父节点空间坐标转换为Node本地空间坐标的像素矩阵</li>
+<li>getParentToNodeAffineTransform: 返回父节点空间坐标转换为Node本地空间坐标的仿射变换像素矩阵</li>
+<li>getNodeToWorldTransform: 返回世界像素矩阵</li>
+<li>getNodeToWorldAffineTransform: 返回世界仿射变换像素矩阵</li>
+<li>getWorldToNodeTransform: 返回逆世界像素矩阵</li>
+<li>getWorldToNodeAffineTransform: 返回逆世界仿射变换像素矩阵</li>
+<li>convertToNodeSpace: 世界坐标转换为节点坐标 </li>
+<li>convertToNodeSpaceAR: 世界坐标转换为节点坐标，考虑锚点</li>
+<li>convertToWorldSpace: 节点坐标转换为世界坐标</li>
+<li>convertToWorldSpaceAR: 节点坐标转换为世界坐标，考虑锚点</li>
+<li>convertTouchToNodeSpace: 将触摸坐标转换为节点坐标</li>
+<li>convertTouchToNodeSpaceAR: 将触摸坐标转换为节点坐标，考虑锚点</li>
+<li>add/get/remove Component: 新增/获取/移除 组件</li>
+<li>set/get Opacity: 设置/获取 透明度</li>
+<li>getDisplayedOpacity: 获取显示透明度</li>
+<li>updateDisplayedOpacity: 根据父节点透明度，更新显示透明度</li>
+<li>set/is CascadeOpacityEnabled: 是否开启子节点透明度随父节点透明度变化</li>
+<li>set/get Color: 设置/获取 颜色</li>
+<li>getDisplayedColor: 获取显示颜色</li>
+<li>updateDisplayedColor: 根据父节点颜色更新显示颜色</li>
+<li>set/is CascadeColorEnabled: 是否开启子节点颜色随父节点颜色变化</li>
+<li>set/is OpacityModifyRGB: 是否开启透明度影响颜色</li>
+<li>set/get CameraMask: 相机遮罩</li>
+</ul>
+<h5 id="GLProgram-与-GLProgramState"><a href="#GLProgram-与-GLProgramState" class="headerlink" title="GLProgram 与 GLProgramState"></a>GLProgram 与 GLProgramState</h5><p>简单来说，一个GLProgram就是着色器程序；<br>抽离出GLProgramState是为了便于GLProgram重用；</p>
+<ul>
+<li>比如，对于置灰Shader，灰度色值可能由外部传入；但是仅仅色值的改变就要创建多个GLProgram就比较繁琐</li>
+<li>于是，整个置灰的Shader着色器程序是可重用的，配置变量的部分，抽离成GLProgramState，来定制化使用</li>
+</ul>
+<h5 id="Skew-与-RotationSkew"><a href="#Skew-与-RotationSkew" class="headerlink" title="Skew 与 RotationSkew"></a>Skew 与 RotationSkew</h5><p>RotationSkew与Skew区别</p>
+<ul>
+<li>RotationSkew，模拟Flash的倾斜功能</li>
+<li>Skew，真正的倾斜</li>
+</ul>
+<p><a href="https://www.youtube.com/watch?v=G6DfZr0zYnw" target="_blank" rel="noopener">YouTube演示</a></p>
+<p><img src="skew_rotationskew.png" alt="效果"></p>
+<p><br></p>
+<h4 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h4><p>文件：</p>
+<ul>
+<li>CCComponent.h &amp; CCComponent.cpp</li>
+<li>CCComponentContainer.h &amp; CCComponentContainer.cpp</li>
+<li>CCComponentLua.h &amp; CCComponentLua.cpp</li>
+<li>CCComponentJS.h &amp; CCComponentJS.cpp</li>
+</ul>
+<p>Component 方法列表</p>
+<ul>
+<li>create: 创建</li>
+<li>init: 初始化</li>
+<li>update: 更新</li>
+<li>set/is Enabled: 设置/获取 启用</li>
+<li>set/get Name: 设置/获取 名称</li>
+<li>set/get Owner: 设置/获取 自己的拥有者（Node对象）</li>
+<li>serialize: 序列化</li>
+<li>onEnter: 进入回调</li>
+<li>onExit: 退出回调</li>
+<li>onAdd: 添加回调</li>
+<li>onRemove: 移除回调</li>
+</ul>
+<p>ComponentContainer 方法列表</p>
+<ul>
+<li>get: 根据名称获取Component</li>
+<li>add: 添加Component</li>
+<li>remove: 根据名称移除Component</li>
+<li>removeAll: 移除所有Component</li>
+<li>visit: 遍历方法；调用所有Component的update方法</li>
+<li>onEnter: 调用所有Component:onEnter</li>
+<li>onExit: 调用所有Component:onExit</li>
+</ul>
+<p><br></p>
+<h3 id="Scene，场景"><a href="#Scene，场景" class="headerlink" title="Scene，场景"></a>Scene，场景</h3><p>Scene是Node类派生类，通常仅仅用来作为一个抽象的概念。<br>同时只能存在一个场景，各场景间互斥；创建场景时默认会创建一个相机。</p>
+<p>绘制方法 [Scene::render]</p>
+<ul>
+<li>遍历所有相机</li>
+<li>重置默认相机 CameraFlag::DEFAULT</li>
+<li>遍历多视图<ul>
+<li>设置相机的额外变换与投影矩阵</li>
+<li>压入并加载投影矩阵</li>
+</ul>
+</li>
+<li>应用相机FBO、RenderTargets、viewport</li>
+<li>清空相机背景</li>
+<li>遍历本场景所有内容 [Scene::visit]</li>
+<li>开始绘制</li>
+<li>恢复相机FBO、RenderTargets、viewport</li>
+<li>遍历多视图<ul>
+<li>弹出投影矩阵</li>
+</ul>
+</li>
+</ul>
+<p>方法列表</p>
+<ul>
+<li>create/createWithSize: 创建/创建指定大小场景</li>
+<li>getDiscription: debug描述</li>
+<li>getCameras: 获取所有相机</li>
+<li>getDefaultCamera: 获取默认相机</li>
+<li>getLights: 获取所有灯光</li>
+<li>render: 绘制</li>
+</ul>
+<p><br></p>
+<h3 id="Layer，层"><a href="#Layer，层" class="headerlink" title="Layer，层"></a>Layer，层</h3><p>Layer是Node类的派生类，它支持触摸接口。<br>除了Node的所有特性，Layer还支持接收触摸与重力感应输入。<br>一个场景中可以存在多个Layer，它们之间并不互斥。</p>
+<p>Layer及其相关类：</p>
+<ul>
+<li>Layer, 继承自Node</li>
+<li>LayerColor, 继承自Layer与BlendProtocol；扩展RGBA接口，调整色值及透明度，还可以设置颜色混合</li>
+<li>【弃】<strong>LayerRGBA，继承自Layer与</strong>RGBAProtocol；扩展了RGBA接口，调整色值及透明度</li>
+<li>LayerGradient，继承自LayerColor；支持绘制渐变色背景</li>
+<li>LayerRadialGradient，继承自Layer；支持绘制径向渐变背景</li>
+<li>LayerMultiplex，继承自Layer；可管理多个Layer，但同时只有一个可被激活</li>
+</ul>
+<p><img src="Layer系列.png" alt="Layer系列"></p>
+<p>Layer方法列表</p>
+<ul>
+<li>create: 创建</li>
+<li>onTouchBegan: 触摸开始回调</li>
+<li>onTouchMoved: 触摸移动回调</li>
+<li>onTouchEnded: 触摸结束回调</li>
+<li>onTouchCancelled: 触摸取消回调</li>
+<li>onAcceleration: 重力加速器回调</li>
+<li>onKeyPressed: 键盘输入按压回调</li>
+<li>onKeyReleased: 键盘输入释放回调</li>
+</ul>
+<p><br></p>
+<h3 id="Sprite，精灵"><a href="#Sprite，精灵" class="headerlink" title="Sprite，精灵"></a>Sprite，精灵</h3><p>Sprite是一个2D图像，可以通过一个图像或者图像的某个矩形区域创建。</p>
+<p>优化Sprite绘制准则：</p>
+<ul>
+<li>将所有图像放在一张图集上</li>
+<li>对所有图像使用同样的混合方式</li>
+</ul>
+<p>Sprite的四种绘制模式</p>
+<ul>
+<li>QUAD；使用2个三角形绘制；占用内存少，但会绘制一些空像素（慢）</li>
+<li>POLYGON；使用多个三角形绘制；占用内存多，但绘制空像素少（快）</li>
+<li>SLICE9；使用18个三角形绘制；用于放缩的按钮和矩形精灵（9宫格）</li>
+<li>QUAD_BATCHNODE；通过静态批次的2个三角形绘制；有一定局限性（给SpriteBatchNode使用）<ul>
+<li>局限性<ul>
+<li>无法给每个Sprite单独设置Alias/Antialias属性，该属性设置在SpriteBatchNode上，对其所有Sprite生效</li>
+<li>无法给每个Sprite单独设置混合函数</li>
+<li>不支持 ParallaxNode，但是可以用 proxy sprite 模拟</li>
+<li>Sprite只能挂载其他Sprite节点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Sprite创建流程</p>
+<ul>
+<li>使用文件名，PolygonInfo，文件名&amp;矩形区域，纹理，SpriteFrame</li>
+</ul>
+<p>Sprite方法列表</p>
+<ul>
+<li>create/createWithTexture/createWithSpriteFrame， 创建</li>
+<li>updateTransform，根据旋转、坐标、缩放值更新四边形；仅支持QUAD_BATCHNODE</li>
+<li>set/get BatchNode，设置/获取 SpriteBatchNode</li>
+<li>set/get Texture，设置/获取 纹理</li>
+<li>setTextureRect，更新纹理坐标与矩形顶点信息</li>
+<li>setVertexRect，设置矩形顶点信息</li>
+<li>set/get CenterRect，设置九宫格区域，像素坐标</li>
+<li>set/get CenterRectNormalized，设置九宫格区域，归一化坐标</li>
+<li>set/get SpriteFrame，设置/获取 精灵</li>
+<li>isFrameDisplayed，精灵是否在显示中</li>
+<li>setDisplayFrameWithAnimationName，使用动画名称和索引修改显示帧</li>
+<li>set/is Dirty，设置脏标记</li>
+<li>getQuad，获取 顶点坐标、纹理坐标、色值信息</li>
+<li>isTextureRectRotated，纹理矩形是否被旋转</li>
+<li>set/get AtlasIndex，设置/获取 纹理索引</li>
+<li>set/get TextureAtlas，设置/获取 纹理图集</li>
+<li>getOffsetPosition，获取偏移坐标</li>
+<li>set/is FlippedX，设置/获取 X轴翻转</li>
+<li>set/is FlippedY，设置/获取 Y轴翻转</li>
+<li>set/get PolygonInfo，设置/获取 Polygon信息</li>
+<li>set/is StretchEnabled，设置/获取 拉伸信息</li>
+<li>set/get BlendFunc，设置/获取 颜色混合</li>
+<li>set/get Position，设置/获取 坐标</li>
+<li>set/get Scale/ScaleX/ScaleY，设置/获取 放缩值/横向放缩值/纵向放缩值</li>
+<li>set/get Rotation，设置/获取 旋转值</li>
+<li>set/get SkewX/SkewY，设置/获取 横向倾斜/纵向倾斜</li>
+<li>setIgnoreAnchorPointForPosition，设置忽略坐标锚点</li>
+</ul>
+<h4 id="SpriteBatchNode"><a href="#SpriteBatchNode" class="headerlink" title="SpriteBatchNode"></a>SpriteBatchNode</h4><p>SpriteBatchNode是一个批处理节点，它可以将自己的节点在一个OpenGL批次内绘制完。</p>
+<p>一个SpriteBatchNode只可以关联一张纹理，并且只有Sprite可以作为其子节点，SpriteBatchNode下所有精灵都是用同一种抗锯齿、纹理混合等。</p>
+<p>方法列表：</p>
+<ul>
+<li>create/createWithTexture，创建</li>
+<li>set/get Texture，设置/获取 纹理</li>
+<li>set/get TextureAtlas，设置/获取 纹理</li>
+<li>getDescendants，获取子节点数组（SpriteBatchNode特殊方法，其他控件请使用getChildren）</li>
+<li>increaseAtlasCapacity，增加纹理容量</li>
+<li>appendChild，添加一个Sprite</li>
+<li>removeChildAtIndex，移除某索引位置子节点</li>
+<li>removeSpriteFromAtlas，从图集中移除Sprite</li>
+<li>rebuildIndexInOrder，根据层级重新构建索引</li>
+<li>lowest/hightest AtlasIndexInChild，在所有图集中获取 最小/最大 索引</li>
+<li>atlasIndexForChild，获取某层级附近的索引</li>
+<li>reorderBatch，对子节点排序，禁止手动调用</li>
+<li>set/get BlendFunc，设置/获取 颜色混合</li>
+<li>insertQuadFromSprite，在指定索引处插入一个四边形Sprite；该Sprite不会加入到子节点数组中，只会在处理大图集且其中Sprite不刷新时调用，如瓦片地图与大量字符的LabelBMFont</li>
+<li>addSpriteWithoutQuad，将Sprite添加到子节点数组，但并不更新纹理数据</li>
+<li>reserveCapacity，检查容量，当容量不足时，分配新容量</li>
+</ul>
+<h4 id="SpriteFrame"><a href="#SpriteFrame" class="headerlink" title="SpriteFrame"></a>SpriteFrame</h4><p>实际显示的图片纹理<br>一个SpriteFrame包含</p>
+<ul>
+<li>纹理：给Sprite使用的Textrue2D纹理</li>
+<li>矩形区域：纹理的矩形区域</li>
+</ul>
+<p>创建方式：</p>
+<ul>
+<li>文件名<ul>
+<li>参数<ul>
+<li>string 文件名 &amp; Rect 矩形</li>
+<li>string 文件名 &amp; Rect 矩形 &amp; bool 旋转 &amp; Vec2 偏移 &amp; Size 宽高</li>
+</ul>
+</li>
+<li>流程<ul>
+<li>赋值<ul>
+<li>纹理</li>
+<li>矩形（像素单位 &amp; 点单位）</li>
+<li>偏移（像素单位 &amp; 点单位）</li>
+<li>初始大小（像素单位 &amp; 点单位）</li>
+<li>旋转</li>
+<li>锚点</li>
+<li>中心矩形区域</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>纹理<ul>
+<li>参数<ul>
+<li>Texture2D 纹理 &amp; Rect 矩形</li>
+<li>Texutre2D 纹理 &amp; Rect 矩形 &amp; bool 旋转 &amp; Vec2 偏移 &amp; Size 宽高</li>
+</ul>
+</li>
+<li>流程<ul>
+<li>赋值<ul>
+<li>纹理名</li>
+<li>矩形（像素单位 &amp; 点单位）</li>
+<li>偏移（像素单位 &amp; 点单位）</li>
+<li>初始大小（像素单位 &amp; 点单位）</li>
+<li>旋转</li>
+<li>锚点</li>
+<li>中心矩形区域</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>九宫格图片</p>
+<ul>
+<li>图片被切成3X3格子（共9个）</li>
+<li>四个角（左上、左下、右上、右下）的格子不会变化</li>
+<li>上、中、下，三个格子在放缩时，进行水平放缩</li>
+<li>左、中、右，三个格子在放缩时，进行垂直放缩</li>
+</ul>
+<p>方法列表：</p>
+<ul>
+<li>create/createWithTexture，创建</li>
+<li>set/get RectInPixels，设置/获取 像素单位的矩形区域</li>
+<li>set/is Rotated，设置/获取 是否旋转</li>
+<li>set/get Rect，设置/获取 矩形区域</li>
+<li>set/has CenterRect，设置/获取 中心矩形区域（针对九宫格）</li>
+<li>set CenterRectInPixels，设置 像素中心矩形区域</li>
+<li>set/get OffsetInPixels，设置/获取 像素偏移</li>
+<li>set/get Offset，设置/获取 偏移</li>
+<li>set/get OriginalSizeInPixels，设置/获取 初始像素大小</li>
+<li>set/get OriginalSize，设置/获取 初始大小</li>
+<li>set/get Texture，设置/获取 纹理</li>
+<li>set/get/has AnchorPoint，设置/获取/检测 锚点坐标</li>
+<li>set/get/has PolygonInfo，设置/获取/检测 多边形信息</li>
+</ul>
+<h4 id="SpriteFrameCache"><a href="#SpriteFrameCache" class="headerlink" title="SpriteFrameCache"></a>SpriteFrameCache</h4><p>缓存SpriteFrame的单例类</p>
+<p>SpriteFrameCache通过解析plist文件及对应图片来加载SpriteFrame</p>
+<p>一个 plist 文件，包含如下信息</p>
+<ul>
+<li>frames<ul>
+<li>所有图片映射，key是图片名字，value是一个包含图片信息的字典结构</li>
+<li>图片信息包含<ul>
+<li>spriteOffset，修剪图片与原始图片的中心偏移值</li>
+<li>spriteSize，修剪图片大小</li>
+<li>spriteSourceSize，原始图片大小</li>
+<li>textureRect，图片在图集内矩形区域</li>
+<li>textureRotated，图片是否旋转</li>
+<li>anchor，锚点</li>
+</ul>
+</li>
+<li>当使用多边形描边时的信息<ul>
+<li>triangles，每个三角形的三个索引，指向顶点信息与顶点UV信息</li>
+<li>vertices，图片的顶点坐标，由x与y组成</li>
+<li>verticesUV，图片图集的顶点信息，由x与y组成</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>metadata<ul>
+<li>关于图片图集其他信息</li>
+<li>信息包含<ul>
+<li>format，plist文件格式</li>
+<li>size，纹理大小</li>
+<li>pixelFormat，像素格式</li>
+<li>textureFileName，对应图集名称</li>
+<li>premultiplyAlpha，是否预处理alpha</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>plist文件样例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>frames<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>bind_sign1.png<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>aliases<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">array</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteOffset<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;0,0&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;52,58&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSourceSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;52,58&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRect<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;&#123;0,170&#125;,&#123;52,58&#125;&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRotated<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>bind_sign2.png<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>aliases<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">array</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteOffset<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;0,0&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;28,36&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSourceSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;28,36&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRect<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;&#123;410,170&#125;,&#123;28,36&#125;&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRotated<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>bind_title1.png<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>aliases<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">array</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteOffset<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;0,0&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;526,168&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSourceSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;526,168&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRect<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;&#123;0,0&#125;,&#123;526,168&#125;&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRotated<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>bind_title2.png<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>aliases<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">array</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteOffset<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;0,0&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;348,40&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>spriteSourceSize<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;348,40&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRect<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;&#123;60,170&#125;,&#123;348,40&#125;&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureRotated<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>metadata<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>format<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">integer</span>&gt;</span>3<span class="tag">&lt;/<span class="name">integer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>pixelFormat<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>RGBA8888<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>premultiplyAlpha<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>realTextureFileName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>activityBinding.png<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>size<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>&#123;526,222&#125;<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span>&gt;</span>textureFileName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">string</span>&gt;</span>activityBinding.png<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>PlistFramesCache类，主要处理 plist，frame，SpriteFrame的关联对应关系</p>
+<ul>
+<li>1个plist对应n个frame</li>
+<li>1个frame对应1个plist</li>
+<li>1个frame对应1个SpriteFrame</li>
+</ul>
+<p>PlistFramesCache 方法列表</p>
+<ul>
+<li>insertFrame，关联 plist、frame、SpriteFrame</li>
+<li>eraseFrame，移除一个frame</li>
+<li>eraseFrames，移除一批frames</li>
+<li>erasePlistIndex，移除一个plist</li>
+<li>clear，清空所有容器</li>
+<li>hasFrame，查看frame是否存在</li>
+<li>isPlistUsed，查看plist是否使用</li>
+<li>at，获取frame对应的SpriteFrame</li>
+<li>getSpriteFrames，获取所有SpriteFrame</li>
+<li>markPlistFull，标记plist状态</li>
+<li>isPlistFull，获取plist状态</li>
+</ul>
+<p>SpriteFrameCache 方法列表</p>
+<ul>
+<li>addSpriteFramesWithFile，</li>
+<li>addSpriteFramesWithFileContent，</li>
+<li>addSpriteFrame，</li>
+<li>removeSpriteFrames，</li>
+<li>isSpriteFramesWithFileLoaded，</li>
+<li>removeUnusedSpriteFrames，</li>
+<li>removeSpriteFrameByName，</li>
+<li>removeSpriteFramesFromFile，</li>
+<li>removeSpriteFramesFromFileContent，</li>
+<li>removeSpriteFramesFromTexture，</li>
+<li>getSpriteFrameByName，</li>
+<li>reloadTexture，</li>
+</ul>
+<p><br></p>
+<h3 id="Label，文本"><a href="#Label，文本" class="headerlink" title="Label，文本"></a>Label，文本</h3><p>引擎使用Label系列节点来实现文字显示的功能。</p>
+<p>Label通过FontAtlas来渲染字体，每个字体根据Label类型对应不同字体类，每个字体类都要提供创建FontAtlas的方法，FontAtlas会存储于FontAtlasCache中，方便重用。</p>
+<p>旧版类型</p>
+<ul>
+<li>LabelTTF<ul>
+<li>最容易创建的文本，不需要额外资源，使用系统字实现</li>
+<li>资源：TTF文件</li>
+<li>优点：创建方便，支持系统字体（节省资源），可显示内容丰富</li>
+<li>缺点：创建效率低，文字更新效率低，文字效果简陋</li>
+</ul>
+</li>
+<li>LabelBMFont<ul>
+<li>使用FNT配置文件+图片来显示的文本标签</li>
+<li>资源：FNT配置文件 与 对应图集</li>
+<li>优点：效率高于LabelTTF，可以对要显示的字体做定制化美化</li>
+<li>缺点：只能显示图片中的字符</li>
+</ul>
+</li>
+<li>LabelAtlas<ul>
+<li>常用于显示数字</li>
+<li>资源：单图集 或 plist+图集</li>
+<li>优点：效率高</li>
+<li>缺点：只能显示有限的ASCII字符，功能简陋</li>
+</ul>
+</li>
+</ul>
+<p>引擎在3.x版本起，保留之前的Label系列类，并且新建Label类来管理所有类型文本。</p>
+<p>新版本文本类型</p>
+<ul>
+<li>TTF<ul>
+<li>使用TTF字体文件创建，并使用FontAtlas中的图集渲染，借助于FreeType2库</li>
+</ul>
+</li>
+<li>BMFONT<ul>
+<li>使用FNT配置文件与图集创建，使用FontAtlas中图集渲染</li>
+</ul>
+</li>
+<li>CHARMAP<ul>
+<li>使用单图集或plist+图集，使用FontAtlas中图集渲染</li>
+</ul>
+</li>
+<li>STRING_TEXTURE<ul>
+<li>默认系统字，每次更新重新创建纹理</li>
+</ul>
+</li>
+</ul>
+<p>Label可支持的特效（仅支持 STRING_TEXTURE 和 TTF）</p>
+<ul>
+<li>阴影</li>
+<li>发光</li>
+<li>描边</li>
+</ul>
+<p><br></p>
+<h3 id="TextFieldTTF，文本输入框"><a href="#TextFieldTTF，文本输入框" class="headerlink" title="TextFieldTTF，文本输入框"></a>TextFieldTTF，文本输入框</h3><p>主要包含两部分</p>
+<ul>
+<li>TextFieldDelegate，文本输入框所需支持的接口<ul>
+<li>用来实现软键盘、输入文本、删除文本、显示的控制</li>
+</ul>
+</li>
+<li>TextFieldTTF，使用TTF字体实现的简单的文本输入框<ul>
+<li>继承Label，用来实现文本处理</li>
+<li>继承IMEDelegete，提供文字输入相关虚函数</li>
+</ul>
+</li>
+</ul>
+<p>关于IME</p>
+<ul>
+<li>由 IMEDelegate 和 IMEDispatcher 组成，IMEDispatcher调用IMEDelegate，IMEDelegate提供文本输入相关虚函数</li>
+</ul>
+<p><img src="IME流程图.png" alt=""></p>
+<p><br></p>
+<h3 id="物理按键-amp-重力感应"><a href="#物理按键-amp-重力感应" class="headerlink" title="物理按键 &amp; 重力感应"></a>物理按键 &amp; 重力感应</h3><p>物理按键</p>
+<ul>
+<li>使用EventListenerKeyboard来实现物理按键回调与PC键盘消息</li>
+<li>EventKeyboard::KeyCode中定义所有可用按键信息</li>
+<li>提供按下（onKeyPressed）、松开（onKeyReleased），两种事件回调</li>
+</ul>
+<p>重力感应</p>
+<ul>
+<li>使用EventListenerAcceleration来实现重力感应，但要调用 Device::setAccelerometerEnabled(true) 开启</li>
+<li>可以注册多个Event</li>
+<li>重力感应消息并不是当重力发生变化的时候才发送，而是不断发送</li>
+<li>重力值的极限并非是1，数值会根据力量而增加</li>
+</ul>
+<p>Acceleration，记录玩家当前倾斜手机的详细信息，结构如下</p>
+<ul>
+<li>X轴表示手机左右倾斜的值，范围[-1, 1]，代表由左到右</li>
+<li>Y轴表示手机上下倾斜的值，范围[-1, 1]，代表由下到上</li>
+<li>Z轴表示手机朝向，范围[-1, 1]<ul>
+<li>正面朝下为-1</li>
+<li>正面朝上为1</li>
+<li>垂直放置为0</li>
+</ul>
+</li>
+</ul>
+<p><img src="手机上的XYZ轴.png" alt=""></p>
+<p><br></p>
+<h3 id="Menu-amp-MenuItem"><a href="#Menu-amp-MenuItem" class="headerlink" title="Menu &amp; MenuItem"></a>Menu &amp; MenuItem</h3><p>Menu的子节点必须都是MenuItem对象或其子类对象，Menu负责管理MenuItem状态、布局、回调等，MenuItem只负责显示及绑定回调。</p>
+<p><img src="Menu与MenuItem.png" alt="结构关系"></p>
+<p><br></p>
+<p><br></p>
+<h2 id="配件"><a href="#配件" class="headerlink" title="配件"></a>配件</h2><h3 id="Director，导演"><a href="#Director，导演" class="headerlink" title="Director，导演"></a>Director，导演</h3><p>负责创建和处理游戏窗口，并且管理如何执行场景。<br>导演类主要职责还有：</p>
+<ul>
+<li>初始化OpneGL上下文</li>
+<li>设置OpenGL深度缓存</li>
+<li>设置投影</li>
+</ul>
+<p>导演类关联的机制</p>
+<ul>
+<li>PoolManager</li>
+<li>Scheduler</li>
+<li>ActionManager</li>
+<li>EventDispatcher</li>
+<li>GLView</li>
+<li>TextureCache</li>
+<li>Renderer</li>
+<li>Console</li>
+</ul>
+<hr>
+<p>mainloop，主循环</p>
+<ul>
+<li>导演类要被释放<ul>
+<li>调用释放方法 Director::purgeDirector</li>
+</ul>
+</li>
+<li>导演类要重启<ul>
+<li>调用重启方法 Director::restartDirector</li>
+</ul>
+</li>
+<li>导演类合法<ul>
+<li>调用绘制方法 Director::drawScene<ul>
+<li>计算间隔时间，Director::calculateDeltaTime</li>
+<li></li>
+</ul>
+</li>
+<li>清空引用计数池 PoolManager::clear</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>一些定义</p>
+<ul>
+<li>导演类触发的事件<ul>
+<li>EVENT_BEFORE_SET_NEXT_SCENE：设置下个场景之前</li>
+<li>EVENT_AFTER_SET_NEXT_SCENE：设置下个场景之后</li>
+<li>EVENT_PROJECTION_CHANGED：投影变化时</li>
+<li>EVENT_BEFORE_UPDATE：定时器的update触发时</li>
+<li>EVENT_AFTER_UPDATE：定时器update触发后</li>
+<li>EVENT_RESET：重置导演类</li>
+<li>EVENT_AFTER_VISIT：场景的绘制触发时</li>
+<li>EVENT_AFTER_DRAW：场景绘制后，数据送到GPU时</li>
+<li>EVENT_BEFORE_DRAW：场景绘制前，清空时</li>
+</ul>
+</li>
+</ul>
+<p>一些枚举<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 矩阵类型</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">MATRIX_STACK_TYPE</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  MATRIX_STACK_MODELVIEW,     <span class="comment">// 模型矩阵</span></span><br><span class="line">  MATRIX_STACK_PROJECTION,    <span class="comment">// 投影矩阵</span></span><br><span class="line">  MATRIX_STACK_TEXTURE,       <span class="comment">// 纹理矩阵</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 投影</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Projection</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  _2D,              <span class="comment">// 2D投影 (正交投影)</span></span><br><span class="line">  _3D,              <span class="comment">// 3D投影 (fovy=60, znear=0.5, zfar=1500)</span></span><br><span class="line">  CUSTOM,           <span class="comment">// 投影时，调用 updateProjection 方法</span></span><br><span class="line">  DEFAULT = _3D,    <span class="comment">// 默认投影</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>方法列表：</p>
+<ul>
+<li>getInstance: 获取导演类，单例类</li>
+<li>getRunningScene: 获取当前正在运行的场景</li>
+<li>set/get AnimationInterval: 获取动画间隔（FPS）</li>
+<li>set/is DisplayStats: 设置/获取 左下角FPS相关显示</li>
+<li>getSecondsPerFrame: 获取绘制每帧秒数</li>
+<li>set/get OpenGLView: 设置/获取 OpenGL视图</li>
+<li>getTextureCache: 获取纹理缓存</li>
+<li>set/is NextDeltaTimeZero: 设置/获取 当前帧到下一帧时间间隔，只会影响一次</li>
+<li>isPaused: 是否暂停</li>
+<li>getTotalFrames: 获取自从导演类开始起的总帧数</li>
+<li>set/get Projection: 设置/获取 OpenGL投影</li>
+<li>setViewport: 设置OpenGL视图</li>
+<li>isSendCleanupToScene: 更换场景后是否收到cleanup消息</li>
+<li>set/get NotificationNode: 设置/获取 通知节点；通知节点在场景visit后被调用，通知节点需要定制visit方法，可以作为钩子使用</li>
+<li>getWinSize/getWinSizeInPixels: 获得OpenGL视图宽高</li>
+<li>getVisibleSize: 获取可见宽高</li>
+<li>getVisibleOrigin: 获取可见原点坐标</li>
+<li>getSafeAreaRect: 获取OpenGL视图安全区域</li>
+<li>convertToGL: 将屏幕坐标转换为OpenGL坐标</li>
+<li>convertToUI: 将OpenGL坐标转换为屏幕坐标</li>
+<li>getZEye: 获取相机与最近裁剪帧距离</li>
+<li>restart: 重新开启导演类</li>
+<li>start/stop Animation: 开始/停止 动画</li>
+<li>drawScene: 绘制场景，每帧自动调用</li>
+<li>purgeCachedData: 清除所有缓存数据，包括 TextureCache、SpriteFrameCache、LabelBMFont cache</li>
+<li>setDefaultValue: 根据配置信息，设置默认值</li>
+<li>setGLDefaultValues: 根据配置信息，设置OpenGL相关默认值</li>
+<li>setAlphaBlending: 设置 是否开启OpenGL的透明度测试</li>
+<li>set/get ClearColor: 设置/获取 清空颜色缓冲区的颜色</li>
+<li>setDepthTest: 设置 是否开启OpenGL深度测试</li>
+<li>mainLoop: 主循环</li>
+<li>set/get ContentScaleFactor: 设置/获取 内容缩放比，做适配等</li>
+<li>set/get Scheduler: 设置/获取 定时器</li>
+<li>set/get ActionManager: 设置/获取 动作管理器</li>
+<li>set/get EventDispatcher: 设置/获取 事件派发器</li>
+<li>getRenderer: 获取渲染器</li>
+<li>getConsole: 获取控制台</li>
+<li>getDeltaTime: 获取mainloop调用间隔</li>
+<li>getFrameRate: 获取帧率</li>
+<li>pushMatrix: 将指定类型矩阵栈顶元素克隆一份，压入指定类型矩阵栈</li>
+<li>pushProjectionMatrix: 将投影矩阵栈顶元素克隆一份，压入投影矩阵栈</li>
+<li>loadMatrix: 将指定矩阵压入指定类型矩阵栈</li>
+<li>popMatrix: 将指定类型矩阵栈顶元素弹出</li>
+<li>getMatrix: 获取指定类型矩阵栈顶元素</li>
+<li>loadProjectionMatrix: 将指定矩阵压入投影矩阵栈</li>
+<li>popProjectionMatrix: 将投影矩阵栈顶元素弹出</li>
+<li>getProjectionMatrix: 获取投影矩阵栈顶元素</li>
+<li>loadIdentityMatrix: 将指定类型的矩阵栈顶元素改为 Mat4::IDENTITY</li>
+<li>loadProjectionIdentityMatrix：将投影矩阵栈顶元素改为 Mat4::IDENTITY</li>
+<li>multiplyMatrix: 将指定类型矩阵栈顶元素与给定矩阵点乘</li>
+<li>multiplyProjectionMatrix: 将投影矩阵栈顶元素与给定矩阵点乘</li>
+<li>resetMatrixStack: 清空所有类型矩阵栈，并将 Mat4::IDENTITY 矩阵压入各矩阵栈</li>
+<li>initProjectionMatrixStack: 初始化投影矩阵栈，压入 Mat4::IDENTITY</li>
+<li>getProjectionMatrixStackSize: 获取投影矩阵栈数量</li>
+<li>getCocos2dThreadId: 获取cocos2d线程id</li>
+<li>isValid: 当前导演类是否合法</li>
+</ul>
+<p>场景管理</p>
+<ul>
+<li>runWithScene: 执行场景；仅在执行第一个场景时使用</li>
+<li>pushScene: 压入场景；仅在已有运行的场景时使用</li>
+<li>popScene: 弹出场景；仅在已有运行的场景时使用</li>
+<li>popToRootScene: 弹出到根场景</li>
+<li>popToSceneStackLevel: 弹出道指定层级的场景</li>
+<li>replaceScene: 替换场景</li>
+<li>end: 结束并释放运行的场景</li>
+<li>pause/resume: 暂停/恢复 当前运行的场景</li>
+</ul>
+<p><br></p>
+<h3 id="Camera，相机"><a href="#Camera，相机" class="headerlink" title="Camera，相机"></a>Camera，相机</h3><p><br></p>
+<h3 id="Action，动作系统"><a href="#Action，动作系统" class="headerlink" title="Action，动作系统"></a>Action，动作系统</h3><p>框架</p>
+<ul>
+<li>Node: Node执行Action，将Acion交由ActionManager管理</li>
+<li>Action: Action操作Node，每个Action只能操作一个Node</li>
+<li>ActionManager: 管理所有Action执行</li>
+<li>Schedule: 驱动ActionManger执行；定时器的加速减速、暂停恢复会影响所有Action</li>
+</ul>
+<p><img src="Action框架.png" alt="Action框架"></p>
+<p>runAction特性</p>
+<ul>
+<li>多次调用runAction，会同步执行多个Action</li>
+<li>一个Action对象只能被执行一次，多个对象无法执行同一个Action，需要创建多个Action分别给多个对象使用</li>
+<li>只有当对象被加到场景中，才能执行Action</li>
+<li>当对象被从场景中移除，cleanup参数将决定是否销毁Action</li>
+</ul>
+<p>Action执行流程</p>
+<ol>
+<li>Node执行runAction，将Action添加到 ActionManager中</li>
+<li>ActionManager调用Action执行，Action操作Node</li>
+<li>Scheduler驱动ActionManager:update，ActionManger调用所有执行中的Action的update</li>
+<li>Action执行完毕后，调用stop并同步给ActionManager</li>
+</ol>
+<p><img src="Action运行流程.png" alt="Action运行流程"></p>
+<p>Action 分类（不代表继承关系）</p>
+<ul>
+<li>Speed，有速度变化的动作</li>
+<li>Follow，跟随节点的动作</li>
+<li>ActionInstant，瞬时动作<ul>
+<li>Show，显示</li>
+<li>Hide，隐藏</li>
+<li>ToggleVisibility，切换可见性</li>
+<li>RemoveSelf，将自己从父节点移除</li>
+<li>FlipX，X轴翻转</li>
+<li>FlipY，Y轴翻转</li>
+<li>Place，放到某一位置</li>
+</ul>
+</li>
+<li>ActionInterval，持续动作（To 从当前状态变化到指定的状态，是一个绝对的变化；不支持 reverse Action；By 是变化一定的量；支持reverse Action）<ul>
+<li>RotateTo/RotateBy，旋转到某值/旋转某值</li>
+<li>MoveTo/MoveBy，移动到某值/移动某值</li>
+<li>SkewTo/SkewBy，倾斜到某个值/倾斜某个值</li>
+<li>ResizeTo/ResizeBy，调整大小到某值，调整大小某值</li>
+<li>JumpTo/JumpBy，跳跃到某点，跳跃某点</li>
+<li>BezierTo/BezierBy，贝塞尔曲线到某值，贝塞尔曲线某值</li>
+<li>ScaleTo/ScaleBy，放缩到某值，放缩某值</li>
+<li>Blink，闪烁几次</li>
+<li>FadeTo，设置透明度到某值</li>
+<li>FadeIn/FadeOut，渐显/渐隐</li>
+<li>TintTo/TintBy，调整色值到某值，调整某些色值</li>
+</ul>
+</li>
+<li>组合动作<ul>
+<li>Sequence，依次执行</li>
+<li>Repeat，重复N次执行</li>
+<li>RepeatForever，永远重复执行</li>
+<li>Spawn，同时执行</li>
+</ul>
+</li>
+<li>变速动作（In 由慢到快，Out 由快到慢）<ul>
+<li>Ease In/Out/InOut，线性变换</li>
+<li>EaseExponential In/Out/InOut，指数级变换</li>
+<li>EaseSine In/Out/InOut，正弦曲线变换</li>
+<li>EaseElastic In/Out/InOut，弹性变换</li>
+<li>EaseBounce In/Out/InOut，反弹变换</li>
+<li>EaseBack In/Out/InOut，可以到负</li>
+</ul>
+</li>
+<li>扩展动作<ul>
+<li>Animate，播放帧动画</li>
+<li>TargetedAction，目标动作</li>
+<li>ReverseTime，时间翻转，update时候，传入1-time（默认是 time）</li>
+<li>DelayTime，延迟时间</li>
+<li>CallFunc，函数动作<ul>
+<li>CallFunc，调用函数</li>
+<li>CallFuncN，以Node为第一参数调用函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特效动作<ul>
+<li>OrbitCamera，摄像机环绕特效</li>
+<li>Waves3D，3D旗帜翻滚特效</li>
+<li>FlipX3D/FlipY3D，3D翻转</li>
+<li>Lens3D，3D透镜</li>
+<li>Ripple3D，3D涟漪</li>
+<li>Shaky3D，3D摇晃</li>
+<li>Liquid，流体效果</li>
+<li>Waves2D，波浪效果</li>
+<li>Twirl，旋转扭曲</li>
+<li>PageTurn3D，3D翻页</li>
+<li>ShakyTiles3D，3D瓦片抖动</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="Animation，动画系统"><a href="#Animation，动画系统" class="headerlink" title="Animation，动画系统"></a>Animation，动画系统</h3><p>动画技术</p>
+<ul>
+<li>帧动画<ul>
+<li>使用一系列图片，播放的时候轮流切换图片</li>
+<li>使用和制作简单，但消耗资源量较大；在制作时要确保图片大小一致且制定好锚点</li>
+<li>支持播放到某一帧时回调；所有播放到这一帧动画的对象，都会触发事件，需要通过target和userInfo信息进行辨别</li>
+</ul>
+</li>
+<li>骨骼动画<ul>
+<li>仿照真实骨骼结构，建立节点数，每个节点算作骨骼的关节，在关节上指定关键帧，通过计算生成中间帧</li>
+<li>节省资源，方便维护，但制作复杂</li>
+</ul>
+</li>
+</ul>
+<h4 id="帧动画"><a href="#帧动画" class="headerlink" title="帧动画"></a>帧动画</h4><p>帧动画 创建流程</p>
+<ol>
+<li>加载所有用到的图片，存到数组中</li>
+<li>根据数组，创建Animation对象，保存帧动画动画信息</li>
+<li>根据Animation对象，创建Animate动作</li>
+<li>创建Sprite对象，执行Animate动作</li>
+</ol>
+<p>Sprite可以运行多个Animate，但Animate间会有冲突，当多个Animate动作同时执行时会相互覆盖。<br>每个Animate需要一个Animation对象，但一个Animation可以被多个Animate对象重用，使用AnimationCache可以避免Animation的创建和销毁。</p>
+<h4 id="进度动画"><a href="#进度动画" class="headerlink" title="进度动画"></a>进度动画</h4><p>进度动画是随着进度更新Sprite，将一个Sprite逐渐显示完整的动画，适合用来做进度更新与CD更新。<br>进度动画主要由Sprite节点、Progress动作和ProgressTimer节点组成。</p>
+<p>类型</p>
+<ul>
+<li>半径扫描</li>
+<li>水平扫描</li>
+<li>垂直扫描</li>
+<li>四边扩散/收缩</li>
+</ul>
+<p><br></p>
+<h3 id="Schedule"><a href="#Schedule" class="headerlink" title="Schedule"></a>Schedule</h3><p>Schedule职责是按照设定的事件执行指定的回调，引擎中所有计时相关内容，都由Schedule实现。</p>
+<p>主要有 Schedule 和 Timer 构成</p>
+<ul>
+<li>Timer<ul>
+<li>负责将一个回调封装为对象，管理回调的计时、触发、保存回调的状态</li>
+<li>类型<ul>
+<li>TimerTargetSelector，封装对象回调</li>
+<li>TimerTargetCallback，封装函数回调</li>
+<li>TimerScriptHandler，封装脚本回调</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Schedule<ul>
+<li>管理大量Timer，负责注册、注销、驱动执行回调等工作</li>
+</ul>
+</li>
+</ul>
+<p>特点</p>
+<ul>
+<li>支持全局时间放缩、暂停、恢复</li>
+<li>优先级<ul>
+<li>只有update回调有优先级的概念，优先级按照数值从小到大的顺序执行，值越小优先级越高，默认优先级为0</li>
+</ul>
+</li>
+<li>线程安全<ul>
+<li>3.0开始，提供线程安全的定时器功能 performFuncionInCocosThread</li>
+</ul>
+</li>
+</ul>
+<p>更新顺序</p>
+<ol>
+<li>处理时间缩放</li>
+<li>遍历update回调（优先级从低到高）</li>
+<li>遍历对象回调与函数回调</li>
+<li>清理注销update回调</li>
+<li>遍历脚本回调</li>
+<li>遍历执行回调</li>
+</ol>
+<p>生效规则</p>
+<ul>
+<li>顺序先的注册顺序后的回调，本帧执行；顺序后的注册顺序先的回调，下一帧执行；同类型的回调注册看具体回调<ul>
+<li>在脚本回调中注册，当前帧生效，因为脚本回调时直接插入脚本列表尾部</li>
+<li>在函数回调和对象回调中注册其他对象的回调，生效时间不确定，根据哈希便利的规则而定，若注册自身回调，当前帧生效</li>
+<li>在update回调中注册，如果要注册的回调优先级低于等于当前回调的优先级，则该帧生效，否则下一帧生效</li>
+</ul>
+</li>
+<li>例如<ul>
+<li>Node回调中注册添加的所有计时回调，都会在下一帧开始生效</li>
+<li>单击回调注册添加的所有计时回调，会在当前帧开始生效</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>程序员可操作的内存区域，一般称之为堆栈。<br>C++内存</p>
+<ul>
+<li>栈<ul>
+<li>程序调用函数时系统自动创建的内存空间，在函数返回时释放</li>
+<li>使用栈空间很高效但栈空间容量有限</li>
+</ul>
+</li>
+<li>堆<ul>
+<li>程序运行时，开发者动态创建和管理的内存空间，一般使用new&amp;malloc请求，delete&amp;free回收</li>
+</ul>
+</li>
+<li>常量存储区<ul>
+<li>程序启动时，自动创建的只读内存空间；主要用来存储const常量及写在代码中的字符串</li>
+</ul>
+</li>
+<li>静态存储区<ul>
+<li>程序启动时，自动创建的内存空间；用来存储静态变量和全局变量，可读可写，但不能动态创建</li>
+</ul>
+</li>
+<li>程序代码区<ul>
+<li>存储程序代码二进制内容的只读空间</li>
+</ul>
+</li>
+</ul>
+<p>堆与栈：需要更好地控制对象的生命周期，则必须用堆；需要分配大块的或者动态大小的内存，倾向于用堆；其他情况下尽量用栈，保证安全高效，无内存碎片及内存泄漏。</p>
+<p>内存泄漏：</p>
+<ul>
+<li>是什么：当一块堆上的内存，不再被用到却没有被释放，称之为内存泄漏。</li>
+<li>为什么：<ul>
+<li>函数内动态创建内存，提前return</li>
+<li>多处引用内存，释放内存责任归属</li>
+</ul>
+</li>
+</ul>
+<p>野指针：</p>
+<ul>
+<li>是什么：使用已经被释放了的指针</li>
+<li>为什么：<ul>
+<li>释放指针，并没有手动设置为NULL</li>
+<li>内存泄漏导致</li>
+</ul>
+</li>
+</ul>
+<p>Cocos2d-x的引用计数机制</p>
+<ul>
+<li>实现方法<ul>
+<li>构造函数中，设置为1</li>
+<li>通过retain，计数+1</li>
+<li>通过release，计数-1</li>
+<li>通过autorelease，下一帧-1</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>autorelease优势<ul>
+<li>一次设定后，无须再担心内存泄漏问题</li>
+<li>完美应对，多处使用对象时，释放内存责任归属问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>容器对象的内存管理<br>对每个添加进来的对象执行一次retian操作，对每个从容器中删除的对象，执行一次release操作</p>
+<ul>
+<li>CCArray/Vector，数组<ul>
+<li>优点：遍历操作高效，使用下标进行随机访问高效，占用连续的内存空间，push_back操作高效</li>
+<li>缺点：在内部进行插入和删除的效率低，插入的内容超出容量大小时，会有额外消耗</li>
+</ul>
+</li>
+<li>CCDictionary/Map，key-value 关联容器<ul>
+<li>优点：查找效率高，插入删除效率高</li>
+<li>缺点：不适合存储非键值对的对象</li>
+</ul>
+</li>
+<li>CCSet/Set，对STL的set简单封装（主要是retain与release调用）<ul>
+<li>优点：查找效率高，插入删除效率高，可以快速得到两个set之间交集、并集、差集</li>
+<li>缺点：插入和删除效率低于list，遍历效率低于vector</li>
+</ul>
+</li>
+</ul>
+<p>为什么用copy函数来拷贝对象，而不用赋值方法：使用赋值无法执行retain/release操作，易造成内存泄漏。</p>
+<p>内存优化方法</p>
+<ul>
+<li>使用内存池，管理分配、回收内存；控制内存重用、分配适量内存，回收空闲内存</li>
+</ul>
+<h4 id="引擎内存管理"><a href="#引擎内存管理" class="headerlink" title="引擎内存管理"></a>引擎内存管理</h4><h5 id="Ref，CCRef-h-amp-CCRef-cpp"><a href="#Ref，CCRef-h-amp-CCRef-cpp" class="headerlink" title="Ref，CCRef.h &amp; CCRef.cpp"></a>Ref，CCRef.h &amp; CCRef.cpp</h5><p>Ref类用来管理引用计数，所有Ref类的派生类可以方便的被不同地方调用而不担心内存泄漏。</p>
+<p>方法列表</p>
+<ul>
+<li>retain: 引用计数+1</li>
+<li>release: 引用计数-1</li>
+<li>autorelease: 引用计数+1，在下一帧自动-1</li>
+<li>getReferenceCount: 获取当前引用计数值</li>
+</ul>
+<h5 id="PoolManager，CCAutoreleasePool-h-amp-CCAutoreleasePool-cpp"><a href="#PoolManager，CCAutoreleasePool-h-amp-CCAutoreleasePool-cpp" class="headerlink" title="PoolManager，CCAutoreleasePool.h &amp; CCAutoreleasePool.cpp"></a>PoolManager，CCAutoreleasePool.h &amp; CCAutoreleasePool.cpp</h5><p>AutoreleasePool：管理autorelease对象池</p>
+<p>AutoreleasePool方法列表：</p>
+<ul>
+<li>AutoreleasePool: 构造方法，可以简单创建，也可以指定名称；请在栈中创建而不是在堆中</li>
+<li>addObject: 添加Ref对象到池中；同一个对象被多次添加，会调用多次release（不会去重）</li>
+<li>clear: 清空池；将调用所有池中对象的relase方法</li>
+<li>contains: 检测池中是否有指定对象</li>
+<li>dump: 输出所有池中对象（debug用）</li>
+</ul>
+<p>PoolManager<br>引擎中可以有多个autorelease池，管理所有的autorelase池</p>
+<p>PoolManager方法列表</p>
+<ul>
+<li>sharedPoolManager: 创建，单例类，全局唯一</li>
+<li>purgePoolManager: 释放</li>
+<li>getCurrentPool: 获得当前autorelease池；引擎中至少存在1个，可以创建自定义的autorelease池</li>
+<li>isObjectInPools: 检测某个对象是否在池中；会遍历所有的池</li>
+<li>[private]push: 压入autorelease池</li>
+<li>[private]pop: 弹出autorelease池</li>
+</ul>
+<p><br></p>
+<h3 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h3><p>纹理是加载到内存中，用于渲染的一组图像数据。<br>将一个纹理应用到一个图元表面的操作，称之为纹理贴图。<br>图片往往占据一个游戏中大部分内存和安装包的体积，纹理加载和渲染也是影响游戏运行效率的因素。</p>
+<p>纹理可分为</p>
+<ul>
+<li>1D纹理；一条线</li>
+<li>2D纹理；一个面</li>
+<li>3D纹理；一个体</li>
+</ul>
+<p>纹素是纹理元素的简称，是纹理空间的基本单位；图像由像素排列而成，纹理由纹素排列而成，使用图片生成纹理之后，像素转换成了纹素。</p>
+<ul>
+<li>像素转换成纹素后，依旧保存着颜色数据</li>
+<li>像素是一个测量单位，纹素存在于一个虚拟无尺寸的数学坐标系中，无论纹理对应图像尺寸是多少，纹理尺寸永远是 [0, 1]</li>
+<li>纹理坐标系中，S、T、R 三个轴分别对应三维坐标系的 X、Y、Z 三个轴</li>
+</ul>
+<h4 id="引擎的纹理"><a href="#引擎的纹理" class="headerlink" title="引擎的纹理"></a>引擎的纹理</h4><p>在Cocos2d引擎中，纹理被封装到了Texture2D中，Texture2D是Sprite以及一切可显示对象的基础，出了基础图元，其他一切可显示对象最底层都是基于 Texture2D。</p>
+<p>Texture2D主要提供</p>
+<ul>
+<li>图片解析</li>
+<li>纹理生成</li>
+<li>纹理渲染</li>
+</ul>
+<p>Texture2D 初始化途径</p>
+<ul>
+<li>initWithData，根据加载到内存中的二进制数据初始化</li>
+<li>initWithMipMaps，最终都会调用到此方法初始化</li>
+<li>initWithImage，根据加载到内存的Image图像初始化</li>
+<li>initWithString，根据字符串初始化</li>
+</ul>
+<p>纹理初始化考虑的问题：</p>
+<ul>
+<li>MipMap；<ul>
+<li>意味着该纹理有多张图片，并且是多张内容一样但是尺寸不一样的图片，也称为LOD技术，目的是提高渲染质量与效率，但会增加额外的内存</li>
+<li>如果纹理使用了MipMap，Texture2D将不支持转换该纹理格式</li>
+</ul>
+</li>
+<li>纹理压缩<ul>
+<li>对于被压缩的纹理，Texture2D调用不同的OpenGL接口来处理</li>
+<li>压缩的纹理和MipMap不冲突</li>
+</ul>
+</li>
+<li>纹理格式<ul>
+<li>纹理格式转换会发生在普通纹理上</li>
+<li>从格式A转换到格式B时，Texture2D会分配额外大块内存来存储转换后的纹理，在加载完毕后释放</li>
+</ul>
+</li>
+</ul>
+<p>引擎使用TextureCache来管理纹理</p>
+<ul>
+<li>TextureCache中以纹理名字为key，纹理对象为value</li>
+<li>当纹理加载到TextureCache后，除非明确的调用删除纹理，否则，纹理会在程序结束时候由引擎释放</li>
+<li>纹理支持异步加载</li>
+</ul>
+<p>引擎使用SpriteFrameCache来管理帧信息</p>
+<ul>
+<li>SpriteFrameCache中以plist文件名为key，SpriteFrame为value</li>
+<li>SpriteFrameCache支持加载与写在plist图集，图集对应的纹理，存在TextureCache中</li>
+<li>SpriteFrame不支持异步加载</li>
+</ul>
+<p>异步加载纹理流程</p>
+<ol>
+<li>判断纹理是否已经加载好<ul>
+<li>是；则直接调用回调函数并返回</li>
+</ul>
+</li>
+<li>判断加载队列是否为空<ul>
+<li>是；创建队列以及线程，并Schedule自己的addImageAsyncCallBack方法</li>
+</ul>
+</li>
+<li>将要加载的纹理插入到队列尾部，线程会开始加载</li>
+<li>在线程中，依次加载队列中的纹理，如果纹理加载好则跳过加载步骤</li>
+<li>所有纹理加载好后，清空释放队列，结束线程</li>
+<li>在主线程的addImageAsyncCallBack回调中，根据加载完的Image创建Texture2D并执行回调</li>
+<li>当所有纹理加载完后，addImageAsyncCallBack会注销自己</li>
+</ol>
+<h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><p>POT（Power Of Two） &amp; NPOT（Non Power Of Two）</p>
+<ul>
+<li>POT表示图片的宽高都是2的幂，NPOT表示图片的宽高不必是2的幂</li>
+<li>原因：<ul>
+<li>早期设备要求渲染的图片宽高必须是POT（iPhone 3GS之前不支持NPOT，Android设备无不支持）</li>
+<li>由于字节对齐，可能给纹理渲染带来一点效率提升</li>
+</ul>
+</li>
+</ul>
+<p>纹理混合 </p>
+<ul>
+<li>决定在同一个位置，叠加渲染多种颜色时的最终颜色。正常情况下，任何绘制操作只会被丢弃或完全覆盖。</li>
+<li>OpenGL在渲染时，会将颜色值放道OpenGL的颜色缓冲区，并将每个片段的深度值放道OpenGL的深度缓冲区中<ul>
+<li>关闭深度测试时，颜色会直接被替换</li>
+<li>开启深度测试时，离摄像机更近的片段的颜色会覆盖原先的颜色</li>
+<li>颜色混合开启时，将要渲染的颜色会和颜色缓冲区当前的颜色进行一次混合运算，并将运算后的最终值存入颜色缓冲区中</li>
+</ul>
+</li>
+</ul>
+<p>颜色混合公式</p>
+<ul>
+<li>最终颜色 = 源颜色 <em> 源颜色混合系数 + 目标颜色 </em> 目标颜色混合系数</li>
+</ul>
+<p>Alpha混合公式</p>
+<ul>
+<li>最终颜色 = 颜色 * Alpha；</li>
+</ul>
+<p>Alpha预乘</p>
+<ul>
+<li>在导出图片资源时，已经计算过Alpha值，不必再运行时计算。</li>
+</ul>
+<p>纹理过滤</p>
+<ul>
+<li>根据一个拉伸或收缩的纹理贴图计算颜色片段的过程；OpenGL使用放大过滤器来处理纹理拉伸、缩小过滤器来处理纹理收缩</li>
+<li>过滤类型<ul>
+<li>GL_LINEAR，线性过滤，少许额外开销，效果会好很多</li>
+<li>GL_NEAREST，最邻近过滤，快速，但效果差</li>
+<li>各向异性过滤，极大提高纹理过滤质量（一般3D）</li>
+</ul>
+</li>
+</ul>
+<p>纹理环绕</p>
+<ul>
+<li>正常情况下，纹理坐标范围是 [0, 1]，当指定的纹理坐标在范围之外时，OpenGL会根据当前纹理环绕模式来处理</li>
+<li>使用纹理环绕时，要指定哪个方向的纹理环绕，坐标系为 S、T、R（对应 X、Y、Z）</li>
+<li>环绕类型<ul>
+<li>GL_REPEAT，重复环绕，使用一小块纹理重复绘制一大片内容，平铺一个几何面</li>
+<li>GL_CLAMP，截取环绕，对范围外的纹理坐标使用边界纹理单元和边界像素融合后的值</li>
+<li>GL_CLAMP_TO_EDGE，截取到边缘环绕，强制对范围外的纹理坐标使用边界像素（沿着合法的纹理单元最后一行或最后一列进行采样）</li>
+<li>GL_CLAMP_TO_BORDER，截取到边框环绕，对范围外的纹理只使用边界纹理单元</li>
+</ul>
+</li>
+</ul>
+<p>Mip贴图</p>
+<ul>
+<li>使用Mip贴图可以提高渲染性能以及渲染效果，主要解决纹理进行缩放时的闪烁效果，以及提高纹理缩放时的纹理过滤效率。</li>
+<li>Mip贴图使用多张不同分辨率的纹理（分为多隔层），根据当前纹理在屏幕上的实际尺寸来决定使用哪个版本。</li>
+<li>在Mip贴图的纹理过滤中，只有使用Mip贴图的过滤模式，Mip贴图才会生效<ul>
+<li>GL_NEAREST，在Mip基层执行最邻近过滤</li>
+<li>GL_LINEAR，在Mip基层执行线性过滤</li>
+<li>GL_NEAREST_MIPMAP_NEAREST，选择最邻近的Mip层，执行最邻近过滤</li>
+<li>GL_NEAREST_MIPMAP_LINEAR，在Mip层之间执行线性插补，并执行最邻近过滤</li>
+<li>GL_LINEAR_MIPMAP_NEAREST，选择最邻近的Mip层，执行线性过滤</li>
+<li>GL_LINEAR_MIPMAP_LINEAR，在Mip层之间执行线性插补，并执行线性过滤</li>
+</ul>
+</li>
+</ul>
+<h4 id="纹理格式"><a href="#纹理格式" class="headerlink" title="纹理格式"></a>纹理格式</h4><p>图片文件的存储格式</p>
+<ul>
+<li>类型<ul>
+<li>JPG<ul>
+<li>优点：压缩率高，占用空间小</li>
+<li>缺点：有损压缩，显示效果差，不支持透明通道，解压时间久，需要占用大量额外内存，加载到内存时与PNG占用同样内存但效果远低于PNG</li>
+</ul>
+</li>
+<li>PNG<ul>
+<li>优点：无损压缩，支持透明通道，显示效果好</li>
+<li>缺点：压缩率低</li>
+</ul>
+</li>
+<li>TIFF<ul>
+<li>常用语印刷和扫描</li>
+</ul>
+</li>
+<li>TGA<ul>
+<li>无损压缩，用于存储高质量图像，支持透明通道</li>
+</ul>
+</li>
+<li>Webp<ul>
+<li>Google用来替代PNG的格式，有损压缩，同质量比JPG体积小40%，编码压缩时间比JPG长8倍</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关心问题<ul>
+<li>图片文件占用磁盘空间大小</li>
+<li>图片品质的高低</li>
+<li>加载该图片文件的速度</li>
+<li>引擎是否支持解析文件</li>
+</ul>
+</li>
+</ul>
+<p>纹理在内存中的存储格式</p>
+<ul>
+<li>类型<ul>
+<li>BGRA8888 32位纹理，效果非常好，兼容性高</li>
+<li>RGBA8888 32位纹理，效果非常好，兼容性比较差</li>
+<li>RGB888 24位纹理，效果非常好，不支持透明通道</li>
+<li>RGB565 16位纹理，效果较好，不支持透明通道</li>
+<li>RGBA4444 16位纹理，色彩比RGB5A1略差，但半透明效果良好</li>
+<li>RGBA5A1 16位纹理，色彩较好，但半透明效果差，透明通道仅用于镂空</li>
+</ul>
+</li>
+<li>关心问题<ul>
+<li>占用内存的大小</li>
+</ul>
+</li>
+</ul>
+<p>决定图片占用内存的因素</p>
+<ul>
+<li>图片的尺寸</li>
+<li>图片的像素格式</li>
+</ul>
+<p>决定图片存储空间大小因素</p>
+<ul>
+<li>图片的文件格式</li>
+<li>图片内容丰富成都</li>
+</ul>
+<h4 id="纹理压缩"><a href="#纹理压缩" class="headerlink" title="纹理压缩"></a>纹理压缩</h4><p>纹理压缩是一种专门为在计算机图形渲染系统中存储纹理而使用的图像压缩技术，与普通图形压缩算法的不同之处在于，纹理压缩算法为纹素的随机存取做了优化。</p>
+<p>纹理压缩的特点是 解压速度快。</p>
+<p>纹理压缩的目的是 节省内存，纹理压缩可以让更多的纹理装入图形硬件中（即显卡）。</p>
+<p>纹理压缩图片只与压缩格式以及图片尺寸相关，与内容丰富度无关。即512x512大小图片，通过ETC压缩，大小恒定128KB。</p>
+<p>纹理压缩格式对比</p>
+<ul>
+<li>PVRTC<ul>
+<li>PowerVR系列GPU支持，移动平台上主要用于 iOS，压缩率最高，图像质量好，但图片必须是POT纹理</li>
+</ul>
+</li>
+<li>ATITC<ul>
+<li>高通Adreno系列GPU支持，来自以前的ATI，排他性较强，压缩率和质量也没有特别出色的地方</li>
+</ul>
+</li>
+<li>DXTC/S3TC<ul>
+<li>NVIDIA Tegra系列、VivanteGC系列，DXTC和S3TC是同一种压缩格式，是在DirectX和OpenGL中的两个称呼，具有不错的压缩率，主要用于PC与WinPhone</li>
+</ul>
+</li>
+<li>ETC1<ul>
+<li>ARM的Mali系列GPU支持，前面四个也支持，是OpenGL ES图形标准的一部分，安卓平台广泛支持ETC压缩的GPU加速，但不支持Alpha通道，部分显卡不支持NPOT，所以，尽量使用POT纹理</li>
+</ul>
+</li>
+<li>ETC2<ul>
+<li>向下兼容ETC1，比ETC1质量更好，且支持alpha的单通道和双通道的模式；但需要OpenGL ES 3.0版本以上</li>
+</ul>
+</li>
+<li>ASTC<ul>
+<li>ASTC支持RGBA，且支持NPOT，它的压缩质量好，容量小，性能优；但需要OpenGL ES 3.1版本以上，部分 OpenGL ES 3.0 的GPU也支持；目前基本都支持ASTC了，可以应用起来</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br></p>
+<h3 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h3><p>Cocos2d的运行流程主要封装到 Application 和 Director </p>
+<ul>
+<li>Application，关注程序如何在不同平台运行<ul>
+<li>封装操作系统的细节（当前系统语言、资源搜索路径、应用程序的主循环）</li>
+<li>主要控制的时机<ul>
+<li>程序启动</li>
+<li>程序更新</li>
+<li>程序切换到后台</li>
+<li>程序从后台切换回前台</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Director，关注游戏内部逻辑的执行<ul>
+<li>游戏的主循环控制、管理资源、设置定时器、管理触摸、重力感应等</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h4 id="Cocos2d在Windows平台运行流程"><a href="#Cocos2d在Windows平台运行流程" class="headerlink" title="Cocos2d在Windows平台运行流程"></a>Cocos2d在Windows平台运行流程</h4><p>在WinMain函数中，创建Appliaction，在Appliaction:run方法中，执行AppDelegate的启动方法，实现游戏的主循环及游戏退出；对于Windows下OpenGL窗口创建和窗口消息，都是由GLFW提供的支持，并在处理窗口消息的回调中，将消息翻译并转发给Cocos2d程序。</p>
+<p>Windows平台将应用程序分为控制台程序和窗口应用程序两种，两者入口函数不同，Cocos2d程序属于窗口应用程序，入口函数为 winMain</p>
+<p>在main.cpp中启动Cocos2d应用程序，实例化AppDelegate对象，并调用run方法</p>
+<ol>
+<li>设置OpenGL属性</li>
+<li>回调 程序启动（创建OpenGL窗口等）</li>
+<li>循环调用，直到OpenGL窗口即将关闭</li>
+<li>在循环中对帧率进行控制，执行 Director:mainLoop 和 GLView:pollEvents</li>
+<li>如果强制关闭窗口，调用 Director:end 和 Director:mainLoop 来完成清理工作（正常关闭是 Director:end）</li>
+</ol>
+<p>GLFW提供很多回调支持<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CCGLViewImpl-desktop.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// GLFW callbacks</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWError</span><span class="params">(<span class="keyword">int</span> errorID, <span class="keyword">const</span> <span class="keyword">char</span>* errorDesc)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWMouseCallBack</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> button, <span class="keyword">int</span> action, <span class="keyword">int</span> modify)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWMouseMoveCallBack</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWMouseScrollCallback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWKeyCallback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> key, <span class="keyword">int</span> scancode, <span class="keyword">int</span> action, <span class="keyword">int</span> mods)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWCharCallback</span><span class="params">(GLFWwindow* window, <span class="keyword">unsigned</span> <span class="keyword">int</span> character)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWWindowPosCallback</span><span class="params">(GLFWwindow* windows, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWframebuffersize</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> w, <span class="keyword">int</span> h)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWWindowSizeFunCallback</span><span class="params">(GLFWwindow *window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWWindowIconifyCallback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> iconified)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onGLFWWindowFocusCallback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> focused)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Cocos2d在Android平台运行流程"><a href="#Cocos2d在Android平台运行流程" class="headerlink" title="Cocos2d在Android平台运行流程"></a>Cocos2d在Android平台运行流程</h4><p>Android程序主要使用Java进行开发，使用JNI技术实现C++与Java语言的互相调用，从而让Cocos2d引擎的C++代码能够在Android下执行。</p>
+<p>Android程序的入口是一个Activity，一个应用程序可以有多个Activity，入口Activity是AndroidMainfest.xml的第一个Activity。<br>Cocos2d引擎 3.x版本中，统一生成AppActivity，设置为程序入口。<br>在AndroidMainfest.xml配置文件中，还有一些其他重要的配置项。</p>
+<p>自动生成的Activity（也就是AppActivity）继承与Cocos2dxActivity</p>
+<ol>
+<li>Android程序启动，创建AppActivity:onCreate</li>
+<li>加载C++逻辑代码，编译一个so动态链接库</li>
+<li>Android加载so动态链接库，加载完后可以在Java中通过JNI调用C++的native函数</li>
+<li>Cocos2dxActivity初始化<ul>
+<li>初始化Cocos2dxHandler、Cocos2dxHelper、Cocos2dxVideoHelper等</li>
+<li>创建OpenGL视图</li>
+</ul>
+</li>
+<li>各种初始化回调后，调用到Application:run，并进入主循环</li>
+<li>游戏的逻辑由Cocos2dxRenderer:onDrawFrame驱动</li>
+</ol>
+<p>相对于Windows是GLFW来支持各种回调，在Android中是通过 Cocos2dxGLSurfaceView来捕获消息，并回调引擎方法。</p>
+<h4 id="Cocos2d在iOS平台运行流程"><a href="#Cocos2d在iOS平台运行流程" class="headerlink" title="Cocos2d在iOS平台运行流程"></a>Cocos2d在iOS平台运行流程</h4><p>iOS程序使用Object-C语言进行开发，不同于JAVA需要借助于JNI，Object-C语言可以直接调用C++语言。</p>
+<p>在Mac上使用Cocoa架构来编写程序，在iOS上使用Cocoa Touch架构运行，两者关系如同 OpenGL 与 OpenGL ES。</p>
+<ul>
+<li>Cocos2d-x引擎也是从Cocoa架构发展而来的，该架构中包含几大框架（类库）<ul>
+<li>Foundation，通用基础类库，提供NSString、NSDictionary、NSArray这种基础容器</li>
+<li>AppKit（Cocoa），用于开发Mac程序，实现窗口界面及交互功能</li>
+<li>UIKit（Cocoa Touch），开发iOS程序，实现窗口界面及交互功能</li>
+</ul>
+</li>
+<li>Cocoa架构使用MVC模式，开发者使用各种Controller操纵程序视图及模型</li>
+</ul>
+<p>启动流程</p>
+<ol>
+<li>UIAppliacation启动后，调用AppController方法</li>
+<li>初始化OpenGL配置参数，创建全屏UIWindows显示</li>
+<li>创建OpenGL视图CCEAGLView，实现渲染，并处理UI交互逻辑</li>
+<li>使用CCEAGLView创建出iOS下的GLViewImpl对象，并将其设置为显示视图</li>
+<li>执行Application:run，进入游戏主循环</li>
+<li>CCEAGLView创建的CCES2Renderer执行渲染</li>
+</ol>
+<p>对应于WindowGLFW的监听与Android的Cocos2dxGLSurfaceView的捕获，iOS的CCEAGLView继承于UIView，它本身可以监听玩家触摸及键盘弹出关闭消息，重力感应则有单独的CCAccelerometerDispatcher处理。</p>
+<p><br></p>
+<h3 id="渲染机制"><a href="#渲染机制" class="headerlink" title="渲染机制"></a>渲染机制</h3><p>所有的渲染功能都由专门的Renderer来处理，降低耦合度，通过自动合并渲染批次更是极大的提升了渲染效率。</p>
+<p>合批限制</p>
+<ul>
+<li>一次只能渲染一张纹理</li>
+<li>使用统一的混合方式</li>
+<li>使用同一个Shader，且该Shader不可使用uniform</li>
+<li>当前待渲染的定点数量没超过指定值（65536）</li>
+<li>如果使用SpriteBatchNode合批，子节点必须是Sprite</li>
+</ul>
+<p>渲染流程</p>
+<ol>
+<li>遍历节点 Node:visit<ol>
+<li>先遍历节点ZOrder小于0的节点 Node:visit</li>
+<li>调用节点渲染方法，向Renderer添加渲染命令 Node:draw</li>
+<li>再遍历节点ZOrder大于0的节点 Node:visit</li>
+</ol>
+</li>
+<li>调用Renderer，开始渲染</li>
+</ol>
+<p>Renderer</p>
+<ul>
+<li>职责<ul>
+<li>管理RenderQueue</li>
+<li>执行RenderCommand</li>
+</ul>
+</li>
+<li>渲染顺序<ol>
+<li>2D Z轴小于0的物体：根据设置决定是否开启深度测试</li>
+<li>3D 不透明物体：开启深度测试</li>
+<li>3D 透明物体：关闭深度测试</li>
+<li>2D Z轴等于0的物体：根据设置决定是否开启深度测试</li>
+<li>2D Z轴大于0的物体：根据设置决定是否开启深度测试</li>
+</ol>
+</li>
+</ul>
+<p>RenderQueue</p>
+<ul>
+<li>管理RenderCommand，设置优先级</li>
+<li>类型<ul>
+<li>普通的 RenderQueue，会根据RenderCommand的Z值（大于0，小于0，等于0），分成三个列表</li>
+<li>专门负责 3D透明渲染的 TransparentRenderQueue，只有一个列表</li>
+</ul>
+</li>
+</ul>
+<p>RenderCommand</p>
+<ul>
+<li>渲染架构中最小单元，描述渲染所需基础信息，并实现渲染操作</li>
+<li>类型<ul>
+<li>TrianglesCommand<ul>
+<li>渲染一系列三角形，根据glProgram、textureID、BlendFunc生成材质ID</li>
+<li>初始化：<ul>
+<li>globalOrder，全局Z轴坐标</li>
+<li>textureID，纹理ID</li>
+<li>GLProgramState，Shader</li>
+<li>BlendFunc，颜色混合</li>
+<li>Triangles，一系列三角形顶点信息</li>
+<li>Mat4，模型视图矩阵</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>QuadCommand<ul>
+<li>继承自TrianglesCommand，渲染一个四边形图元</li>
+<li>初始化：<ul>
+<li>globalOrder，全局Z轴坐标</li>
+<li>textureID，纹理ID</li>
+<li>GLProgramState，Shader</li>
+<li>BlendFunc，颜色混合</li>
+<li>V3F_C4B_T2F_Quad*，一系列顶点信息</li>
+<li>MAat4，模型视图矩阵</li>
+</ul>
+</li>
+<li>例如：Sprite、AtlasNode、Skin、ParticlesSystemQuad等</li>
+</ul>
+</li>
+<li>MeshCommand<ul>
+<li>渲染3D模型，包含大量关于Shader设置、灯光、材质、裁剪、深度测试渲染相关方法</li>
+</ul>
+</li>
+<li>GroupCommand<ul>
+<li>辅助渲染命令，用于命令的分组，内部只有一个groupId，ID对应Renderer中的某个RenderQueue</li>
+<li>流程<ol>
+<li>创建并初始化GroupCommand，生成一个GroupID</li>
+<li>将GroupCommand添加到Renderer中</li>
+<li>调用Renderer的pushGroup，切换当前RenderQueue</li>
+<li>接下来所有addCommand都添加到当前RenderQueue中</li>
+<li>调用Renderer的popGroup，切换回之前的RenderQueue</li>
+</ol>
+</li>
+<li>例如：Armature、NodeGrid、RenderTexture、ClippingNode等 </li>
+</ul>
+</li>
+<li>PrimitiveCommand<ul>
+<li>用于渲染点、直线、曲线、三角形、圆形、四边形等基础图元</li>
+<li>初始化：<ul>
+<li>globalOrder，全局Z轴坐标</li>
+<li>textureID，纹理ID</li>
+<li>GLProgramState，Shader</li>
+<li>BlendFunc，颜色混合</li>
+<li>Mat4，模型视图矩阵</li>
+<li>Primitive，图元顶点信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BatchCommand<ul>
+<li>每个BatchCommand都会执行一次DrawCall，且该DrawCall不会合批</li>
+</ul>
+</li>
+<li>CustomCommand<ul>
+<li>实现自定义渲染，手动调用OpenGL代码进行绘制</li>
+<li>流程<ol>
+<li>实现CustomCommand渲染方法并设置为CustomCommand的渲染回调</li>
+<li>将渲染命令添加到Renderer中</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="消息机制"><a href="#消息机制" class="headerlink" title="消息机制"></a>消息机制</h3><p>事件通知机制是使用观察者模式实现的将事件传递给多个监听对象的机制。</p>
+<p>引擎通过EventDispatcher系列来实现事件通知机制。</p>
+<ul>
+<li>EventListener，监听并实现事件触发后的回调</li>
+<li>Event，记录事件内容</li>
+<li>EventDispatcher，管理、触发事件</li>
+</ul>
+<p>EventDispatcher使用流程</p>
+<ol>
+<li>创建EventListener，指定要监听的消息及监听到消息后触发的回调</li>
+<li>将创建的EventListener注册到EventDispatcher中</li>
+<li>任意地方需要触发事件，调用 Director::getInstance()-&gt;getEventDispatcher()-&gt;dispatchEvent(event)</li>
+<li>不需要监听时间时，将监听器移除，Director::getInstance()-&gt;getEventDispatcher()-&gt;removeEventListener(listener)</li>
+</ol>
+<p>EventDispatcher缺点</p>
+<ul>
+<li>内部实现复杂，将各种监听、节点顺序都集合到类中不合理，职责不单一</li>
+<li>代码冗余度高，可读性差</li>
+</ul>
+<h4 id="EventListenerTouch，触摸"><a href="#EventListenerTouch，触摸" class="headerlink" title="EventListenerTouch，触摸"></a>EventListenerTouch，触摸</h4><p>类型有</p>
+<ul>
+<li>TOUCH_ONE_BY_ONE，EventListenerTouchOneByOne，单点触摸<ul>
+<li>可设置吞噬触摸，独占触摸事件，先后由优先级来指定</li>
+</ul>
+</li>
+<li>TOUCH_ALL_AT_ONCE，EventListenerTouchAllAtOnce，多点触摸</li>
+</ul>
+<p>优先级</p>
+<ul>
+<li>触摸监听优先级整合到EventDispatcher中</li>
+<li>方法<ul>
+<li>addEventListenerWithSceneGraphPriority，局部优先级，使用指定节点的遮挡顺序来作为优先级，全局优先级默认都为0</li>
+<li>addEventListenerWithFixedPriority，全局优先级，自定义优先级，不能为0</li>
+</ul>
+</li>
+</ul>
+<p>引擎内触摸流程</p>
+<ol>
+<li>开始，手指按下<ul>
+<li>onTouchBegan &amp; onTouchesBegan</li>
+</ul>
+</li>
+<li>移动，手指移动<ul>
+<li>onTouchMove &amp; onTouchesMove</li>
+</ul>
+</li>
+<li>结束，手指抬起<ul>
+<li>onTouchEnded &amp; onTouchesEnded</li>
+</ul>
+</li>
+<li>中断，被其他系统进程切换（如来电、短信、闹钟等）<ul>
+<li>onTouchCancelled &amp; onTouchesCancelled</li>
+</ul>
+</li>
+</ol>
+<p>全局触摸流程</p>
+<ol>
+<li>用户输入<ul>
+<li>按下、移动、抬起</li>
+</ul>
+</li>
+<li>操作系统收集到用户输入<ul>
+<li>Android、iOS、Windows等</li>
+</ul>
+</li>
+<li>操作系统调用引擎接口<ul>
+<li>GLViewImpl、handleTouchesXXX、EvnetDispatcher</li>
+</ul>
+</li>
+<li>消息机制派发触摸事件<ol>
+<li>对单点触摸监听列表与多点触摸监听列表进行排序</li>
+<li>拷贝两份触摸点列表，一份给单点触摸用，一份给多点触摸用</li>
+<li>处理单点触摸监听列表<ul>
+<li>如果触发的是开始触摸事件，则判定是否吞噬触摸，若吞噬则将触摸点从多点触摸列表中移除</li>
+</ul>
+</li>
+<li>处理多点触摸监听列表</li>
+</ol>
+</li>
+<li>调用具体的监听回调<ul>
+<li>EventListenerTouchOneByOne</li>
+<li>EventListenerTouchAllAtOnce</li>
+</ul>
+</li>
+</ol>
+<p><img src="触摸输入流程.png" alt=""></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<h1 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h1><p>GUI（Graphical User Interface）图形用户界面，是指采用图形方式显示的计算机操作用户界面。<br>替代以前，在代码中create创建，setPosition设置位置，让开发者用可视化方式去创建，更加快捷方便。</p>
+<p>Cocos2d引擎常配套的工具</p>
+<ul>
+<li>CocosStudio</li>
+<li>CocosBuilder</li>
+</ul>
+<p>Cocos2d引擎GUI框架结构</p>
+<ul>
+<li>所有控件基础，UIWidget</li>
+<li>所有容器基础（容器也算控件一种，即也继承自UIWidget），UILayout</li>
+<li>操作UI工具方法，UIHelper<ul>
+<li>支持对Widget遍历</li>
+<li>支持辅助布局的功能</li>
+</ul>
+</li>
+<li>九宫格缩放，Scale9Sprite<ul>
+<li>定义：用一小块图片将其放大来绘制大范围区域而不失真的技术；用井字分割图片，四个角图片不变，中间和四条边拉伸（被拉伸图片要尽量简单）</li>
+<li>目的：<ol>
+<li>保证图片缩放时的边角不会出现变形和锯齿</li>
+<li>节省图片资源</li>
+</ol>
+</li>
+<li>实现：创建9个Sprite对象，每个对应九宫格一部分，通过setCapInsets传入Rect对象来设置九宫图中间格子位置和尺寸</li>
+</ul>
+</li>
+</ul>
+<h2 id="UIWidget-与-UILayout"><a href="#UIWidget-与-UILayout" class="headerlink" title="UIWidget 与 UILayout"></a>UIWidget 与 UILayout</h2><p>UIWidget</p>
+<ul>
+<li>ProcetedNode<ul>
+<li>保护节点，保证节点结构完整性，避免通过removeAllChildren等方法误删所有节点</li>
+<li>有两个容器，_children容器来处理一般节点， _protectedChildren来处理保护节点</li>
+</ul>
+</li>
+<li>LayoutParameterProtocol<ul>
+<li>提供布局参数对象 LayoutParameter，处理布局相关</li>
+<li>LayoutParameter，存储控件的布局方式与Margin边距<ul>
+<li>LinearLayoutParameter，线性布局</li>
+<li>RelativeLayoutParameter，相对布局</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 线性布局类型</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">LinearGravity</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    NONE,</span><br><span class="line">    LEFT,</span><br><span class="line">    TOP,</span><br><span class="line">    RIGHT,</span><br><span class="line">    BOTTOM,</span><br><span class="line">    CENTER_VERTICAL,</span><br><span class="line">    CENTER_HORIZONTAL</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相对布局类型</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">RelativeAlign</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    NONE,</span><br><span class="line">    PARENT_TOP_LEFT,</span><br><span class="line">    PARENT_TOP_CENTER_HORIZONTAL,</span><br><span class="line">    PARENT_TOP_RIGHT,</span><br><span class="line">    PARENT_LEFT_CENTER_VERTICAL,</span><br><span class="line">    </span><br><span class="line">    CENTER_IN_PARENT,</span><br><span class="line">    </span><br><span class="line">    PARENT_RIGHT_CENTER_VERTICAL,</span><br><span class="line">    PARENT_LEFT_BOTTOM,</span><br><span class="line">    PARENT_BOTTOM_CENTER_HORIZONTAL,</span><br><span class="line">    PARENT_RIGHT_BOTTOM,</span><br><span class="line">    </span><br><span class="line">    LOCATION_ABOVE_LEFTALIGN,</span><br><span class="line">    LOCATION_ABOVE_CENTER,</span><br><span class="line">    LOCATION_ABOVE_RIGHTALIGN,</span><br><span class="line">    LOCATION_LEFT_OF_TOPALIGN,</span><br><span class="line">    LOCATION_LEFT_OF_CENTER,</span><br><span class="line">    LOCATION_LEFT_OF_BOTTOMALIGN,</span><br><span class="line">    LOCATION_RIGHT_OF_TOPALIGN,</span><br><span class="line">    LOCATION_RIGHT_OF_CENTER,</span><br><span class="line">    LOCATION_RIGHT_OF_BOTTOMALIGN,</span><br><span class="line">    LOCATION_BELOW_LEFTALIGN,</span><br><span class="line">    LOCATION_BELOW_CENTER,</span><br><span class="line">    LOCATION_BELOW_RIGHTALIGN</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>设置控件位置与大小，也提供两种模式</p>
+<ul>
+<li>绝对坐标</li>
+<li>相对父节点的百分比</li>
+</ul>
+<p>控件的触摸判断</p>
+<ul>
+<li>isVisible，自己是否可见</li>
+<li>isEnabled，自己是否激活</li>
+<li>isAncestorsVisible，递归检查父节点是否都可见</li>
+<li>isAncestorsEnabled，递归检查父节点是否都激活</li>
+<li>hitTest，触摸落在自己触摸范围内</li>
+</ul>
+<p>创建自定义Widget</p>
+<ul>
+<li>onSizeChanged，控件改变尺寸时的回调，默认通知所有子节点调整位置</li>
+<li>initRenderer，初始化控件时回调，用于初始化控件的渲染对象</li>
+<li>createCloneInstance，控件调用clone时回调</li>
+<li>copySpecialProperties，克隆的控件有自定义属性需要被复制时，在此处处理</li>
+<li>copyClonedWidgetChildren，若不想克隆某些子节点，就调整</li>
+</ul>
+<p><br></p>
+<p>UILayout</p>
+<ul>
+<li>对应Layer，作为容器使用，支持各种背景支持、裁剪、Layout布局等</li>
+<li>背景支持<ul>
+<li>图片</li>
+<li>纯色</li>
+<li>渐变色</li>
+</ul>
+</li>
+<li>裁剪<ul>
+<li>STENCIL<ul>
+<li>创建一个DrawNode并渲染，根据裁剪大小绘制一个矩形，使用OpenGL模板实现裁剪（显示在裁剪范围内的部分）</li>
+</ul>
+</li>
+<li>SCISSOR<ul>
+<li>调用glScissor对显示在裁剪范围外的部分进行裁剪</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Layout布局<ul>
+<li>类型<ul>
+<li>绝对布局，以左下角为原点，不论分辨率如何变化，都按照绝对坐标位置排列</li>
+<li>相对布局，基于父节点或兄弟节点，以 上 下 左 右 左上 左下 右上 右下 8个方向为停靠点的相对布局，在分辨率变化时保持相对停靠</li>
+<li>线性横向，相对布局的简化版，去掉上中下的相对设置</li>
+<li>线性纵向，相对布局的简化版，去掉左中右的相对设置</li>
+</ul>
+</li>
+<li>流程<ol>
+<li>每个Layout下的控件，会被设置对应的LayoutParameter</li>
+<li>在visit函数中，Layout调用doLayout进行布局<ol>
+<li>对子节点排序</li>
+<li>根据当前布局类型创建LayoutManager</li>
+<li>调用LayoutManager的doLayout对Layout进行布局</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意<ul>
+<li>在创建完后，有所变化，需要手动调用 requestDoLayout 请求刷新布局</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="控件-1"><a href="#控件-1" class="headerlink" title="控件"></a>控件</h2><p>对UIWidget对象处理Shader无效，需要通过 getVirtualRenderer 来获取对应的渲染节点，然后进行设置。</p>
+<p>UIButton</p>
+<ul>
+<li>组成<ul>
+<li>3个Scale9Sprite节点，通过getVirtualRenderer获取渲染节点</li>
+<li>1个Label节点，通过getTitleRenderer获取Label节点</li>
+</ul>
+</li>
+<li>按钮上的图片支持9宫格放缩</li>
+</ul>
+<p>UICheckBox</p>
+<ul>
+<li>组成<ul>
+<li>5个Sprite节点<ul>
+<li>未选态背景图片</li>
+<li>选中态背景图片</li>
+<li>禁用态背景图片</li>
+<li>选中态前景图片</li>
+<li>禁用态前景图片</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>UIImageView</p>
+<ul>
+<li>组成<ul>
+<li>1个Scale9Sprite节点</li>
+</ul>
+</li>
+</ul>
+<p>UILoadingBar</p>
+<ul>
+<li>组成<ul>
+<li>1个Scale9Sprite节点</li>
+</ul>
+</li>
+<li>支持方向<ul>
+<li>左到右</li>
+<li>右到左</li>
+</ul>
+</li>
+</ul>
+<p>UISlider</p>
+<ul>
+<li>组成<ul>
+<li>2个Scale9Sprite节点<ul>
+<li>进度条背景</li>
+<li>进度条前景</li>
+</ul>
+</li>
+<li>3个Sprite节点<ul>
+<li>滑钮正常态</li>
+<li>滑钮选中态</li>
+<li>滑钮禁用态</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>文本控件</p>
+<ul>
+<li>通过 getVirtualRenderer 获取Label节点</li>
+<li>类型<ul>
+<li>UIText，对应 LabelType:: / LabelType::STRING_TEXTURE</li>
+<li>UITextAtlas，对应 LabelType::CHARMAP</li>
+<li>UITextBMFont，对应 LabelType::BMFONT</li>
+</ul>
+</li>
+</ul>
+<p>UIRichText</p>
+<ul>
+<li>RichText<ul>
+<li>insertElement&amp;pushBackElement 添加节点</li>
+<li>removeElement 删除节点</li>
+</ul>
+</li>
+<li>RichElement<ul>
+<li>RichElementText，仅支持SystemFont和TTF</li>
+<li>RichElementImage</li>
+<li>RichElementCustomNode</li>
+</ul>
+</li>
+</ul>
+<p>UITextField</p>
+<ul>
+<li>对TextFieldTTF的封装，自动化处理点击判断，支持自动换行和对齐，设置长度限制，设置密码模式等</li>
+</ul>
+<p>UIEditBox</p>
+<ul>
+<li>TextField升级版，不同平台有不同表现，调用平台接口来获取输入</li>
+<li>支持丰富的输入模式与输入背景框</li>
+</ul>
+<p>UIScrollView</p>
+<ul>
+<li>处理视图的滚动拖拽以及视口裁剪</li>
+<li>组成：1个innerContainer的Layout，一个ScrollViewBar</li>
+</ul>
+<p>UIListView</p>
+<ul>
+<li>提供方法管理Item，除了增删改查，还支持设置DefaultItem；创建时除了ListView大小，还要指定item大小</li>
+</ul>
+<p>UIPageView</p>
+<ul>
+<li>左右拖动实现翻页</li>
+</ul>
+<p>UIWebView</p>
+<ul>
+<li>浏览网页，底层直接使用操作系统的WebView控件</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="CocosStudio"><a href="#CocosStudio" class="headerlink" title="CocosStudio"></a>CocosStudio</h3><p>文件类型</p>
+<ul>
+<li>场景，用于编辑场景，需要嵌套其他csd文件，场景大小根据项目分辨率来设置，根节点为Node</li>
+<li>图层，类似于场景，但有固定大小并且根节点为LayerRGBA</li>
+<li>节点，编辑节点，可以嵌套其他csd文件，根节点为Node</li>
+<li>合图，等同于TexturePacker导出的Plist图集，文件后缀为csi</li>
+<li>3D场景，用于编辑3D场景，可添加相机、节点、3D例子和模型</li>
+</ul>
+<p>加载解析csb文件</p>
+<ol>
+<li>[BaseView:__widgetFromJsonFile] ccCSLoader:getInstance():createNodeWithFlatBuffersFile</li>
+<li>doLayout(Helper, self._widget)</li>
+<li>BaseEvent:L10N_Text</li>
+</ol>
+<p>分辨率适配</p>
+<ul>
+<li>布局设置，上下左右图钉</li>
+<li>百分比位置</li>
+<li>等比缩放</li>
+</ul>
+<p>高级特性</p>
+<ul>
+<li>回调特性</li>
+<li>帧事件</li>
+<li>自定义数据</li>
+<li>骨骼动画</li>
+</ul>
+<p><br></p>
+<h3 id="CocosBuilder"><a href="#CocosBuilder" class="headerlink" title="CocosBuilder"></a>CocosBuilder</h3><p>只有Mac版本，不支持Windows</p>
+<p>工作流程</p>
+<ol>
+<li>CocosBuilder编辑界面</li>
+<li>发布项目，生成ccbi</li>
+<li>将ccbi文件和相关图片资源导入项目中</li>
+<li>若在CocosBuilder中添加了自定义类，需要在项目中为自定义类编写代码</li>
+<li>在需要创建界面的地方调用CocosBuilder库的函数创建它们，并添加到游戏场景中</li>
+</ol>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ltree98
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.lt-tree.com/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/" title="《精通Cocos2d-x 基础卷》学习笔记">http://www.lt-tree.com/2022/04/05/《精通Cocos2d-x 基础卷》学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多学习/" rel="tag"><i class="fa fa-tag"></i> 多学习</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/02/20/大地图探索，由Tiled出发/" rel="next" title="大地图探索，由Tiled出发">
+                <i class="fa fa-chevron-left"></i> 大地图探索，由Tiled出发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/全球化处理之时间/" rel="prev" title="全球化处理之时间">
+                全球化处理之时间 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://www.lt-tree.com/assets/img/ltree98.png"
+                alt="ltree98" />
+            
+              <p class="site-author-name" itemprop="name">ltree98</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lt-tree" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lttree" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:thetree_linxu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/5117681734/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.yangyingming.com/" title="呓语" target="_blank">呓语</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://svtter.cn/" title="Svtter" target="_blank">Svtter</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#入门"><span class="nav-number">2.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启航"><span class="nav-number">2.1.</span> <span class="nav-text">启航</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#游戏开发框架"><span class="nav-number">2.1.1.</span> <span class="nav-text">游戏开发框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类比"><span class="nav-number">2.1.2.</span> <span class="nav-text">类比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v4"><span class="nav-number">2.1.3.</span> <span class="nav-text">v4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cocos2d-x-主逻辑"><span class="nav-number">2.2.</span> <span class="nav-text">Cocos2d-x 主逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误"><span class="nav-number">2.3.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">2.4.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-11"><span class="nav-number">2.5.</span> <span class="nav-text">C++11</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础框架"><span class="nav-number">3.</span> <span class="nav-text">基础框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#控件"><span class="nav-number">3.1.</span> <span class="nav-text">控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点系统，Node"><span class="nav-number">3.1.1.</span> <span class="nav-text">节点系统，Node</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node，CCNode-h-amp-CCNode-cpp"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Node，CCNode.h &amp; CCNode.cpp</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GLProgram-与-GLProgramState"><span class="nav-number">3.1.1.1.1.</span> <span class="nav-text">GLProgram 与 GLProgramState</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Skew-与-RotationSkew"><span class="nav-number">3.1.1.1.2.</span> <span class="nav-text">Skew 与 RotationSkew</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Component"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Component</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scene，场景"><span class="nav-number">3.1.2.</span> <span class="nav-text">Scene，场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layer，层"><span class="nav-number">3.1.3.</span> <span class="nav-text">Layer，层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sprite，精灵"><span class="nav-number">3.1.4.</span> <span class="nav-text">Sprite，精灵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpriteBatchNode"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">SpriteBatchNode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpriteFrame"><span class="nav-number">3.1.4.2.</span> <span class="nav-text">SpriteFrame</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpriteFrameCache"><span class="nav-number">3.1.4.3.</span> <span class="nav-text">SpriteFrameCache</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Label，文本"><span class="nav-number">3.1.5.</span> <span class="nav-text">Label，文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TextFieldTTF，文本输入框"><span class="nav-number">3.1.6.</span> <span class="nav-text">TextFieldTTF，文本输入框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理按键-amp-重力感应"><span class="nav-number">3.1.7.</span> <span class="nav-text">物理按键 &amp; 重力感应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Menu-amp-MenuItem"><span class="nav-number">3.1.8.</span> <span class="nav-text">Menu &amp; MenuItem</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配件"><span class="nav-number">3.2.</span> <span class="nav-text">配件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Director，导演"><span class="nav-number">3.2.1.</span> <span class="nav-text">Director，导演</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Camera，相机"><span class="nav-number">3.2.2.</span> <span class="nav-text">Camera，相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action，动作系统"><span class="nav-number">3.2.3.</span> <span class="nav-text">Action，动作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation，动画系统"><span class="nav-number">3.2.4.</span> <span class="nav-text">Animation，动画系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#帧动画"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">帧动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进度动画"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">进度动画</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Schedule"><span class="nav-number">3.2.5.</span> <span class="nav-text">Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机制"><span class="nav-number">3.3.</span> <span class="nav-text">机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存管理"><span class="nav-number">3.3.1.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引擎内存管理"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">引擎内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Ref，CCRef-h-amp-CCRef-cpp"><span class="nav-number">3.3.1.1.1.</span> <span class="nav-text">Ref，CCRef.h &amp; CCRef.cpp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PoolManager，CCAutoreleasePool-h-amp-CCAutoreleasePool-cpp"><span class="nav-number">3.3.1.1.2.</span> <span class="nav-text">PoolManager，CCAutoreleasePool.h &amp; CCAutoreleasePool.cpp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纹理"><span class="nav-number">3.3.2.</span> <span class="nav-text">纹理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引擎的纹理"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">引擎的纹理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#名词解释"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#纹理格式"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">纹理格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#纹理压缩"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">纹理压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行机制"><span class="nav-number">3.3.3.</span> <span class="nav-text">运行机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cocos2d在Windows平台运行流程"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">Cocos2d在Windows平台运行流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cocos2d在Android平台运行流程"><span class="nav-number">3.3.3.2.</span> <span class="nav-text">Cocos2d在Android平台运行流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cocos2d在iOS平台运行流程"><span class="nav-number">3.3.3.3.</span> <span class="nav-text">Cocos2d在iOS平台运行流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染机制"><span class="nav-number">3.3.4.</span> <span class="nav-text">渲染机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息机制"><span class="nav-number">3.3.5.</span> <span class="nav-text">消息机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EventListenerTouch，触摸"><span class="nav-number">3.3.5.1.</span> <span class="nav-text">EventListenerTouch，触摸</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GUI"><span class="nav-number">4.</span> <span class="nav-text">GUI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UIWidget-与-UILayout"><span class="nav-number">4.1.</span> <span class="nav-text">UIWidget 与 UILayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控件-1"><span class="nav-number">4.2.</span> <span class="nav-text">控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-number">4.3.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CocosStudio"><span class="nav-number">4.3.1.</span> <span class="nav-text">CocosStudio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CocosBuilder"><span class="nav-number">4.3.2.</span> <span class="nav-text">CocosBuilder</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022-04-05</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ltree98</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 添加网站运行时间 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/03/2016 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "日轮: "+dnum+" 轮 ";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ynsTV16RL4HPPYMBMOLrjAeA-gzGzoHsz',
+        appKey: 'JF7G0tptp4dzyWoiV4Mv9XHc',
+        placeholder: 'Help Me Help You!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("PKv3mG2gAwwxe4PwWco3RMav-gzGzoHsz", "2EaIEE0q7jAVEuWAGq70wIsi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/xvexiaoban.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
